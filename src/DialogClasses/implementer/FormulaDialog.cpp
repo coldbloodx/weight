@@ -141,7 +141,9 @@ BOOL CFormulaDialog::OnInitDialog()
 	initList();
 
 	m_FormulaAdd = new CButtonST;
+
 	m_FormulaDel	= new CButtonST;
+
 	m_FetchButton = new CButtonST;
 	
 	CRect wndRect((1024 - 960) / 2, (768 - 566) / 2, (1024 - 960) / 2 + 960, (768 - 566) / 2 + 580);
@@ -160,6 +162,9 @@ BOOL CFormulaDialog::OnInitDialog()
 		m_FormulaAdd->DrawTransparent(TRUE);
 		m_FormulaDel->DrawBorder(FALSE);
 		m_FormulaDel->DrawTransparent(TRUE);
+
+		m_FormulaAdd->SetWindowText("增加配方");
+		m_FormulaDel->SetWindowText("删除配方");
 		m_FormulaAdd->ShowWindow(SW_SHOW);
 		m_FormulaDel->ShowWindow(SW_SHOW);
 
