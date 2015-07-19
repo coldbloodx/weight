@@ -1058,30 +1058,7 @@ END
 
 IDB_SPLASH              BITMAP                  "res\\SPLASH.bmp"
 IDB_LOGINDIALOG         BITMAP                  "res\\LOGIN.bmp"
-IDB_MAINPAGE            BITMAP                  "res\\MainPage.bmp"
-IDB_MATERIALMANAGEMENT  BITMAP                  "res\\MaterialManagement.bmp"
-IDB_OTHERSETTINGS       BITMAP                  "res\\OtherSettings.bmp"
-IDB_USERMANAGEMENT      BITMAP                  "res\\UserManagement.bmp"
-IDB_PASSWORDCHANGE      BITMAP                  "res\\PasswordChange.bmp"
-IDB_QUERY               BITMAP                  "res\\query.bmp"
-IDB_FREEWEIGHT          BITMAP                  "res\\freeweight.bmp"
-IDB_STATISTIC           BITMAP                  "res\\statistic.bmp"
-IDB_FORMULAINPUT        BITMAP                  "res\\formulainput.bmp"
-IDB_FORMULASEPWEIGHT    BITMAP                  "res\\formulasepweight.bmp"
-IDB_FORMULAMANAGEMENT   BITMAP                  "res\\formulamanagement.bmp"
-IDB_FORMULAFETCH        BITMAP                  "res\\formulafetch.bmp"
-IDB_FETCHRECORD         BITMAP                  "res\\fetchrecord.bmp"
-IDB_FORMULAINDICATOR    BITMAP                  "res\\formulaindicator.bmp"
-IDB_WEIGHTBUTTON        BITMAP                  "res\\weightbutton.bmp"
-IDB_DIVIDE              BITMAP                  "res\\divide.bmp"
-IDB_FETCHAMOUNTINPUT    BITMAP                  "res\\fetchamount.bmp"
-IDB_STATISTICSADVANCEQUERY BITMAP                  "res\\statisticsadvancequery.bmp"
-IDB_FETCHADVANCEQUERY   BITMAP                  "res\\fetchadvancequery.bmp"
-IDB_FORMULAADD          BITMAP                  "res\\formulaadd.bmp"
-IDB_MATERIALCOUNTINPUT  BITMAP                  "res\\materialcountinput.bmp"
-IDB_MATERIALINPUTCOUNT  BITMAP                  "res\\materialinputcount.bmp"
-IDB_MAINSETTINGS        BITMAP                  "res\\mainsettings.bmp"
-IDB_WEIGHTSETTINGS      BITMAP                  "res\\weightsettings.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -1122,7 +1099,7 @@ END
 LANGUAGE 4, 2
 #pragma code_page(936)
 #endif //_WIN32
-#include "res\Weight.rc2"  // non-Microsoft Visual C++ edited resources
+//#include "res\Weight.rc2"  // non-Microsoft Visual C++ edited resources
 #include "l.chs\afxres.rc"          // Standard components
 #endif
 
