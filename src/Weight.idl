@@ -1,0 +1,19 @@
+
+	// Weight.idl : IDL source for Weight.exe
+//
+// This file will be processed by the MIDL tool to
+// produce the type library (Weight.tlb) and marshalling code.
+import "oaidl.idl";
+import "ocidl.idl";
+[
+	uuid(0144C1F6-69E8-4E8D-A197-64E7E87549B9),
+	version(1.0),
+	helpstring("Weight 1.0 Type Library")
+]
+library WeightLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+};
+
+	
