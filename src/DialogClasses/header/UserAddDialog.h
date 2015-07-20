@@ -12,7 +12,7 @@
 // CUserAddDialog dialog
 
 
-#include "..\..\CustomColorDialog.h"
+
 class CUserAddDialog : public CDialog
 {
 // Construction

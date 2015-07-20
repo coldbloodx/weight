@@ -10,8 +10,8 @@
 /////////////////////////////////////////////////////////////////////////////
 // CDetailRecordDialog dialog
 
-#include "..\..\CustomColorDialog.h"
-class CDetailRecordDialog : public CCustomColorDialog
+
+class CDetailRecordDialog : public CDialog
 {
 // Construction
 public:
@@ -55,8 +55,7 @@ protected:
 	afx_msg void OnPrint();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
-public:
-	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
+
 };
 
 //{{AFX_INSERT_LOCATION}}

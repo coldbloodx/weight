@@ -10,7 +10,7 @@
 /////////////////////////////////////////////////////////////////////////////
 // COtherSettingsDialog dialog
 
-#include "..\..\CustomColorDialog.h"
+
 #include "afxwin.h"
 
 class COtherSettingsDialog : public CDialog
@@ -52,7 +52,7 @@ protected:
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 public:
-	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
+	
 	CButton m_Back;
 	afx_msg void OnBnClickedBack();
 };

@@ -10,7 +10,7 @@
 /////////////////////////////////////////////////////////////////////////////
 // CFormulaDialog dialog
 
-#include "..\..\CustomColorDialog.h"
+
 class CFormulaDialog : public CDialog
 {
 // Construction

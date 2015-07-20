@@ -23,7 +23,7 @@ static char THIS_FILE[] = __FILE__;
 
 
 CUserManageDialog::CUserManageDialog(CWnd* pParent /*=NULL*/)
-	: CCustomColorDialog(CUserManageDialog::IDD, pParent)
+	:CDialog()
 {
 	//{{AFX_DATA_INIT(CUserManageDialog)
 		// NOTE: the ClassWizard will add member initialization here

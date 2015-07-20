@@ -356,13 +356,6 @@ BOOL CLoginDialog::OnInitDialog()
 		}
 	}
 
-
-	//for(size_t i = 0; i < buttonVector.size(); ++i)
-	//{
-	//	HelperFunctions::setButtonStyle(*buttonVector[i], RGB(55,71,158), SingletonHelper::getInstance()->simSong20);
-	//}
-	
-	
 	return TRUE;  // return TRUE unless you set the focus to a control
 				// EXCEPTION: OCX Property Pages should return FALSE
 }
@@ -383,16 +376,6 @@ BOOL CLoginDialog::OnCommand(WPARAM wParam, LPARAM lParam)
 	return CDialog::OnCommand(wParam, lParam);
 }
 
-HBRUSH CLoginDialog::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
-{
-	if (pWnd   ==   this)   
-	{   
-		return   m_brBk;   
-	}   
-	HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
-
-	return hbr;
-}
 
 int CLoginDialog::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {

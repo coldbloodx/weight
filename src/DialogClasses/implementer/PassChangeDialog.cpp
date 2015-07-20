@@ -19,7 +19,7 @@ static char THIS_FILE[] = __FILE__;
 
 
 CPassChangeDialog::CPassChangeDialog(CWnd* pParent /*=NULL*/)
-	: CCustomColorDialog(CPassChangeDialog::IDD, pParent)
+	: CDialog()
 {
 	//{{AFX_DATA_INIT(CPassChangeDialog)
 	//}}AFX_DATA_INIT

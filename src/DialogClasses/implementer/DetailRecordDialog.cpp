@@ -19,7 +19,7 @@ static char THIS_FILE[] = __FILE__;
 
 
 CDetailRecordDialog::CDetailRecordDialog(CWnd* pParent /*=NULL*/)
-: CCustomColorDialog(CDetailRecordDialog::IDD, pParent)
+: CDialog()
 {
 	//{{AFX_DATA_INIT(CDetailRecordDialog)
 	//}}AFX_DATA_INIT
@@ -266,12 +266,3 @@ void CDetailRecordDialog::OnPrint()
 	return;
 }
 
-HBRUSH CDetailRecordDialog::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
-{
-	HBRUSH hbr = CCustomColorDialog::OnCtlColor(pDC, pWnd, nCtlColor);
-
-	// TODO:  Change any attributes of the DC here
-
-	// TODO:  Return a different brush if the default is not desired
-	return hbr;
-}

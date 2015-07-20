@@ -10,7 +10,6 @@
 /////////////////////////////////////////////////////////////////////////////
 // CFetchAmountInputDialog dialog
 
-#include "..\..\CustomColorDialog.h"
 #include "afxwin.h"
 
 class CFetchAmountInputDialog : public CDialog

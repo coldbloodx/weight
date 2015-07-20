@@ -10,7 +10,7 @@
 /////////////////////////////////////////////////////////////////////////////
 // CWeighPerPackDialog dialog
 
-#include "..\..\CustomColorDialog.h"
+
 #include "afxwin.h"
 class CWeighPerPackDialog : public CDialog
 {

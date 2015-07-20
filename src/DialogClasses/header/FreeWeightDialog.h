@@ -10,7 +10,6 @@
 /////////////////////////////////////////////////////////////////////////////
 // CFreeWeightDialog dialog
 
-#include "..\..\CustomColorDialog.h"
 
 class CFreeWeightDialog : public CDialog
 {

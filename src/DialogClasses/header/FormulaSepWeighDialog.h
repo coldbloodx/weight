@@ -11,7 +11,7 @@
 // CFormulaSepWeighDialog dialog
 
 
-#include "..\..\CustomColorDialog.h"
+
 #include "afxwin.h"
 
 class CFormulaSepWeighDialog : public CDialog

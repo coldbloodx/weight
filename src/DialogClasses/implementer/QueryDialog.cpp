@@ -20,7 +20,7 @@ static char THIS_FILE[] = __FILE__;
 
 
 CQueryDialog::CQueryDialog(CWnd* pParent /*=NULL*/)
-	: CCustomColorDialog(CQueryDialog::IDD, pParent)
+	: CDialog()
 {
 	//{{AFX_DATA_INIT(CQueryDialog)
 		// NOTE: the ClassWizard will add member initialization here

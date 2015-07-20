@@ -10,10 +10,9 @@
 /////////////////////////////////////////////////////////////////////////////
 // CPassChangeDialog dialog
 
-#include "..\..\CustomColorDialog.h"
 #include "afxwin.h"
 
-class CPassChangeDialog : public CCustomColorDialog
+class CPassChangeDialog : public CDialog
 {
 // Construction
 public:

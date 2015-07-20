@@ -10,9 +10,9 @@
 /////////////////////////////////////////////////////////////////////////////
 // CUserManageDialog dialog
 
-#include "..\..\CustomColorDialog.h"
+
 #include "afxwin.h"
-class CUserManageDialog : public CCustomColorDialog
+class CUserManageDialog : public CDialog
 {
 // Construction
 public:

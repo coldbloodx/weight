@@ -168,23 +168,7 @@ COtherSettingsDialog::~COtherSettingsDialog()
 {
 
 }
-HBRUSH COtherSettingsDialog::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
-{
-	HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
 
-	if   (pWnd == this)   
-	{   
-		return m_brBk;   
-	}   
-	// TODO:  Change any attributes of the DC here
-	if   (nCtlColor   ==   CTLCOLOR_STATIC)   
-	{     
-		pDC->SetBkMode(TRANSPARENT);	//Í¸Ã÷   
-		return (HBRUSH)::GetStockObject(HOLLOW_BRUSH);   
-	}   
-	// TODO:  Return a different brush if the default is not desired
-	return hbr;
-}
 
 void COtherSettingsDialog::OnBnClickedBack()
 {

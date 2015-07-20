@@ -21,7 +21,7 @@
 #include "..\..\OtherClasses\DatabaseConnector.h"
 #include "..\..\OtherClasses\RecordSetPointer.h"
 #include "..\..\OtherClasses\PatternLoader.h"
-#include "..\..\CustomColorDialog.h"
+
 #include "..\..\MainSettingsDialog.h"
 #include "..\..\WeighManagementDialog.h"
 
@@ -185,6 +185,8 @@ BOOL CWeightDlg::OnInitDialog()
 	CLoginDialog loginDialog;
 	SingletonHelper::getInstance()->setPtrData((void*)this);
 
+
+	//cancel login
 	//点击cancel 直接退出程序
 	if (loginDialog.DoModal() == IDCANCEL)
 	{
@@ -468,21 +470,7 @@ void CWeightDlg::initButtons()
 }
 
 
-HBRUSH CWeightDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
-{
-	if   (pWnd == this)   
-	{   
-		return m_brBk;   
-	}   
-	if   (nCtlColor   ==   CTLCOLOR_STATIC)   
-	{     
-		pDC->SetBkMode(TRANSPARENT);	//透明   
-		return (HBRUSH)::GetStockObject(HOLLOW_BRUSH);   
-	}   
 
-	HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
-	return hbr;
-}
 
 int CWeightDlg::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {

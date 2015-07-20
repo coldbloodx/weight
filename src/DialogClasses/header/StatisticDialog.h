@@ -11,7 +11,7 @@
 // CStatisticDialog dialog
 
 
-#include "..\..\CustomColorDialog.h"
+
 class CStatisticDialog : public CDialog
 {
 // Construction

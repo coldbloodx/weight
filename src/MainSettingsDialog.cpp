@@ -6,7 +6,7 @@
 #include "MainSettingsDialog.h"
 #include "DialogClasses/header/OtherSettingsDialog.h"
 #include "DialogClasses/header/UserManageDialog.h"
-//#include "DialogClasses/header/"
+
 #include "DialogClasses/header/PassChangeDialog.h"
 #include "changeManufactureNameDialog.h"
 

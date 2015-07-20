@@ -9,7 +9,7 @@
 #endif // _MSC_VER > 1000
 
 #include "..\..\DialogClasses\header\FormulaDialog.h"
-#include "..\..\CustomColorDialog.h"
+
 /////////////////////////////////////////////////////////////////////////////
 // CWeightDlg dialog
 
@@ -76,7 +76,6 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 
-	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 };
 

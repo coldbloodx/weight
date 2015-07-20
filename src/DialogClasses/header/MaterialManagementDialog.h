@@ -9,7 +9,7 @@
 
 /////////////////////////////////////////////////////////////////////////////
 // CMaterialManagementDialog dialog
-#include "..\..\CustomColorDialog.h"
+
 #include "afxwin.h"
 
 class CMaterialManagementDialog : public CDialog

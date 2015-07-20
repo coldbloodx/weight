@@ -6,7 +6,7 @@
 #endif // _MSC_VER > 1000
 
 #include "MaterialManagementDialog.h"
-#include "..\..\CustomColorDialog.h"
+
 // MaterialAddDialgo.h : header file
 //
 

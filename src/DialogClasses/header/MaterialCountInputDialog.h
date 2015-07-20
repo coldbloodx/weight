@@ -9,7 +9,7 @@
 
 /////////////////////////////////////////////////////////////////////////////
 // CMaterialCountInputDialog dialog
-#include "..\..\CustomColorDialog.h"
+
 class CMaterialCountInputDialog : public CDialog
 {
 // Construction

@@ -10,8 +10,6 @@
 /////////////////////////////////////////////////////////////////////////////
 // CFetchRecordsAdvanceQueryDialog dialog
 
-#include "..\..\CustomColorDialog.h"
-
 class CFetchRecordsAdvanceQueryDialog : public CDialog
 {
 	// Construction

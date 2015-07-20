@@ -11,7 +11,6 @@
 // CFormulaSelectDialog dialog
 
 
-#include "..\..\CustomColorDialog.h"
 #include "afxwin.h"
 class CFormulaSelectDialog : public CDialog
 {

@@ -10,8 +10,8 @@
 /////////////////////////////////////////////////////////////////////////////
 // CQueryDialog dialog
 
-#include "..\..\CustomColorDialog.h"
-class CQueryDialog : public CCustomColorDialog
+
+class CQueryDialog : public CDialog
 {
 // Construction
 public:

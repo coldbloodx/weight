@@ -11,7 +11,6 @@
 // CFormulaAdvanceQueryDialog dialog
 
 
-#include "..\..\CustomColorDialog.h"
 
 class CFormulaAdvanceQueryDialog : public CDialog
 {

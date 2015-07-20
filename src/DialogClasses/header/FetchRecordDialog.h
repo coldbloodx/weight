@@ -10,7 +10,6 @@
 /////////////////////////////////////////////////////////////////////////////
 // CFetchRecordDialog dialog
 
-#include "..\..\CustomColorDialog.h"
 
 
 class CFetchRecordDialog : public CDialog
