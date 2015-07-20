@@ -10,7 +10,6 @@
 /////////////////////////////////////////////////////////////////////////////
 // CQueryDialog dialog
 
-#include "..\..\ExternClasses\header\BtnST.h"
 #include "..\..\CustomColorDialog.h"
 class CQueryDialog : public CCustomColorDialog
 {
@@ -33,16 +32,16 @@ public:
 	//{{AFX_DATA(CQueryDialog)
 	enum { IDD = IDD_QUERY_DIALOG };
 	CStatic	m_StatusStatic;
-	CButtonST	m_ButtonCancel;
-	CButtonST	m_Clear;
-	CButtonST	m_Query;
+	CButton	m_ButtonCancel;
+	CButton	m_Clear;
+	CButton	m_Query;
 	CListCtrl	m_ResultList;
 	CEdit	m_Keyword;
 	CComboBox	m_QueryIndex;
 	CComboBox	m_QueryTable;
 	//}}AFX_DATA
 
-	std::vector<CButtonST*> buttonVector;
+	std::vector<CButton*> buttonVector;
 
 CBrush   m_brBk;//在public中定义  
 

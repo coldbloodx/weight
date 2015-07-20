@@ -9,7 +9,7 @@
 
 /////////////////////////////////////////////////////////////////////////////
 // CFetchRecordDialog dialog
-#include "..\..\ExternClasses\header\BtnST.h"
+
 #include "..\..\CustomColorDialog.h"
 
 
@@ -27,12 +27,12 @@ public:
 
 	//}}AFX_DATA
 	CStatic	m_StatusStatic;
-	CButtonST	m_ButtonOK;
-	CButtonST	m_QueryButton;
-	CButtonST	m_PrintButton;
-	CButtonST	m_ClearButton;
-	CButtonST	m_AllButton;
-	CButtonST	m_ButtonAdvanceQuery;
+	CButton	m_ButtonOK;
+	CButton	m_QueryButton;
+	CButton	m_PrintButton;
+	CButton	m_ClearButton;
+	CButton	m_AllButton;
+	CButton	m_ButtonAdvanceQuery;
 	CEdit	m_Keyword;
 	CComboBox	m_Index;
 	CListCtrl	m_FetchRecordList;

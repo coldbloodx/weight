@@ -101,8 +101,7 @@ BOOL CFormulaWeighDialog::OnInitDialog()
 
 	CRect goBackRect(167, 554, 265, 585);
 	m_buttonGoBack.MoveWindow(goBackRect);
-	m_buttonGoBack.DrawBorder(FALSE);
-	m_buttonGoBack.DrawTransparent(TRUE);
+
 
 
 	HelperFunctions::ParseKeywords(
@@ -213,7 +212,7 @@ BOOL CFormulaWeighDialog::OnInitDialog()
 	{
 		CStatic* materialNameStatic = NULL;
 		CStatic* materialWeighStatic = NULL;
-		CButtonST* sepWeightButton = NULL;
+		CButton* sepWeightButton = NULL;
 		CStatic* weighedFlagStatic = NULL;
 		CEdit*   batchNumberEdit = NULL;
 		CEdit*   lineNumberEdit = NULL;
@@ -260,15 +259,13 @@ BOOL CFormulaWeighDialog::OnInitDialog()
 		//创建分次称量按钮
 		CRect buttonRect = rect;
 		buttonRect.top = buttonRect.top - 2;
-		sepWeightButton = new CButtonST;
+		sepWeightButton = new CButton;
 		sepWeightButton->Create("", 
 			BS_PUSHBUTTON | WS_VISIBLE | WS_CHILD | ES_CENTER, 
 			buttonRect, 
 			this,  
 			sepWeighButtonID++);
-		sepWeightButton->SetBitmaps(IDB_WEIGHTBUTTON, RGB(255, 255, 255));
-		sepWeightButton->DrawBorder(FALSE);
-		sepWeightButton->DrawTransparent(TRUE);
+
 
 		//HelperFunctions::setButtonStyle(*sepWeightButton, RGB(55,71,158), SingletonHelper::getInstance()->simSong20);
 		sepWeightButton->ShowWindow(SW_SHOW);
@@ -342,7 +339,7 @@ BOOL CFormulaWeighDialog::OnInitDialog()
 		rect.bottom += rowSpace + controlHeight;
 	}
 	
-	CButtonST* buttonArray[14] = {&m_Button1,&m_Button2,&m_Button3,&m_Button4,&m_Button5,&m_Button6,&m_Button7,
+	CButton* buttonArray[14] = {&m_Button1,&m_Button2,&m_Button3,&m_Button4,&m_Button5,&m_Button6,&m_Button7,
 		&m_Button8,&m_Button9,&m_Button0,&m_ButtonComma,&m_ButtonBack,&m_ButtonOK,&m_ButtonCancel};
 
 	int left = 312;
@@ -353,7 +350,7 @@ BOOL CFormulaWeighDialog::OnInitDialog()
 	int width = right - left;
 
 
-	std::vector<CButtonST*> numpadButtonVector(buttonArray, buttonArray + 12);
+	std::vector<CButton*> numpadButtonVector(buttonArray, buttonArray + 12);
 	for (size_t i = 0; i < numpadButtonVector.size(); ++i)
 	{
 		CRect numpadButtonRect(left, top, right, buttom);
@@ -363,13 +360,8 @@ BOOL CFormulaWeighDialog::OnInitDialog()
 	}
 
 
-	std::vector<CButtonST*> buttonVector(buttonArray, buttonArray+14);
-	for(size_t i = 0; i < buttonVector.size(); ++i)
-	{
-		buttonVector[i]->DrawBorder(FALSE);
-		buttonVector[i]->DrawTransparent(TRUE);
-	}
-	
+	std::vector<CButton*> buttonVector(buttonArray, buttonArray+14);
+
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// EXCEPTION: OCX Property Pages should return FALSE

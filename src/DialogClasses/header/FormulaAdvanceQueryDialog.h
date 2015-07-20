@@ -10,7 +10,7 @@
 /////////////////////////////////////////////////////////////////////////////
 // CFormulaAdvanceQueryDialog dialog
 
-#include "..\..\ExternClasses\header\BtnST.h"
+
 #include "..\..\CustomColorDialog.h"
 
 class CFormulaAdvanceQueryDialog : public CDialog
@@ -24,7 +24,7 @@ public:
 	enum { IDD = IDD_FORMULAADVANCEQUERY_DIALOG };
 	//CStatic	m_StatusStatic;
 	//}}AFX_DATA
-	CButtonST	m_ButtonOK;
+	CButton	m_ButtonOK;
 	CEdit	m_FormulaEdit;
 	CComboBox	m_UserCombo;
 	CComboBox	m_FormulaCombo;

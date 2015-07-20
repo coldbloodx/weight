@@ -11,7 +11,7 @@
 /////////////////////////////////////////////////////////////////////////////
 // CUserAddDialog dialog
 
-#include "..\..\ExternClasses\header\BtnST.h"
+
 #include "..\..\CustomColorDialog.h"
 class CUserAddDialog : public CDialog
 {
@@ -23,15 +23,15 @@ public:
 // Dialog Data
 	//{{AFX_DATA(CUserAddDialog)
 	enum { IDD = IDD_USERADD_DIALOG };
-	CButtonST	m_ButtonOK;
-	CButtonST	m_ButtonCancel;
+	CButton	m_ButtonOK;
+	CButton	m_ButtonCancel;
 	CComboBox	m_UserRight;
 	CEdit	m_UserName;
 	CEdit	m_UserID;
 	//}}AFX_DATA
 	CBrush   m_brBk;//在public中定义  
 
-	std::vector<CButtonST*> buttonVector;
+	std::vector<CButton*> buttonVector;
 
 // Overrides
 	// ClassWizard generated virtual function overrides

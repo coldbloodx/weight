@@ -5,7 +5,7 @@
 #include "Weight.h"
 #include "DialogClasses\header\WeightDlg.h"
 #include "OtherClasses\HelperClass.h"
-#include "DialogClasses\header\NavigatorPanel.h"
+
 #include "OtherClasses\DatabaseConnector.h"
 #include "OtherClasses\RecordSetPointer.h"
 #include "Splash.h"

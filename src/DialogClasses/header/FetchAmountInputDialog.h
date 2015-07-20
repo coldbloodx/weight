@@ -9,7 +9,7 @@
 
 /////////////////////////////////////////////////////////////////////////////
 // CFetchAmountInputDialog dialog
-#include "..\..\ExternClasses\header\BtnST.h"
+
 #include "..\..\CustomColorDialog.h"
 #include "afxwin.h"
 
@@ -24,24 +24,24 @@ public:
 	enum { IDD = IDD_FETCHAMOUNTINTPUT_DIALOG };
 	CButton	m_PrintCheck;
 	//CStatic	m_StatusStatic;
-	CButtonST	m_ButtonOK;
-	CButtonST	m_ButtonCancel;
-	CButtonST	m_Button9;
-	CButtonST	m_Button8;
-	CButtonST	m_Button7;
-	CButtonST	m_Button6;
-	CButtonST	m_Button5;
-	CButtonST	m_Button4;
-	CButtonST	m_Button3;
-	CButtonST	m_Button2;
-	CButtonST	m_Button1;
-	CButtonST	m_Button0;
-	CButtonST	m_ButtonComma;
-	CButtonST	m_ButtonBack;
+	CButton	m_ButtonOK;
+	CButton	m_ButtonCancel;
+	CButton	m_Button9;
+	CButton	m_Button8;
+	CButton	m_Button7;
+	CButton	m_Button6;
+	CButton	m_Button5;
+	CButton	m_Button4;
+	CButton	m_Button3;
+	CButton	m_Button2;
+	CButton	m_Button1;
+	CButton	m_Button0;
+	CButton	m_ButtonComma;
+	CButton	m_ButtonBack;
 	CEdit	m_FetchAmount;
 	CBrush   m_brBk;//在public中定义   
 	//}}AFX_DATA
-	std::vector<CButtonST*> buttonVector;
+	std::vector<CButton*> buttonVector;
 	std::vector<CString> printVector;
 
 // Overrides
@@ -77,7 +77,7 @@ public:
 	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 	afx_msg void OnBnClickedOk();
 	afx_msg void OnBnClickedGoback();
-	CButtonST m_GoBack;
+	CButton m_GoBack;
 };
 
 //{{AFX_INSERT_LOCATION}}

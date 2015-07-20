@@ -76,16 +76,15 @@ BOOL CMainSettingsDialog::OnInitDialog()
 	int horiSpacer = 535 - 490;
 	int vertSpacer = 365 - 340;
 
-	CButtonST* buttonArray[4] = {&m_OtherSettingsButton,&m_UserManagement,&m_ChangeNameButton,&m_ChangePassword};
-	std::vector<CButtonST*> buttonVector(buttonArray, buttonArray + 4);
+	CButton* buttonArray[4] = {&m_OtherSettingsButton,&m_UserManagement,&m_ChangeNameButton,&m_ChangePassword};
+	std::vector<CButton*> buttonVector(buttonArray, buttonArray + 4);
 
 
 	for (size_t i = 0; i < buttonVector.size(); ++i)
 	{
 		CRect startRect(left, top, left + width, top + height);
 		buttonVector[i]->MoveWindow(startRect, TRUE);
-		buttonVector[i]->DrawBorder(FALSE);
-		buttonVector[i]->DrawTransparent(TRUE);
+
 		if (((i + 1) % 2) == 0)
 		{
 			left = 200;
@@ -99,8 +98,7 @@ BOOL CMainSettingsDialog::OnInitDialog()
 
 	CRect rectBack(382, 578, 643, 640);
 	m_goBackButton.MoveWindow(rectBack);
-	m_goBackButton.DrawBorder(FALSE);
-	m_goBackButton.DrawTransparent(TRUE);
+
 
 
 	//make the dialog fullscreen

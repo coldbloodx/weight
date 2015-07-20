@@ -4,7 +4,6 @@
 #include "winspool.h"
 #include "..\ExternClasses\header\inifile.h"
 
-
 SingletonHelper* SingletonHelper::m_instance = NULL;
 
 SingletonHelper::~SingletonHelper(){}
@@ -456,14 +455,10 @@ void HelperFunctions::showStatus(CStatic& statusStatic)
 	statusStatic.GetParent()->InvalidateRect(&rect, TRUE);
 }
 
-void HelperFunctions::setButtonStyle(CButtonST& button, COLORREF bgColor, CFont* pFont, bool reDraw /* = TRUE  */, bool blFlat /* = FALSE */)
+void HelperFunctions::setButtonStyle(CButton& button, COLORREF bgColor, CFont* pFont, bool reDraw /* = TRUE  */, bool blFlat /* = FALSE */)
 {
-	button.SetFlat(blFlat);
 	button.SetFont(pFont, reDraw);
-	button.SetColor(CButtonST::BTNST_COLOR_BK_FOCUS,bgColor);
-	button.SetColor(CButtonST::BTNST_COLOR_BK_OUT, bgColor);
-	button.SetColor(CButtonST::BTNST_COLOR_FG_OUT, RGB(255,255,255));
-	button.SetColor(CButtonST::BTNST_COLOR_FG_IN, RGB(255,255,255));
+
 }
 
 CString HelperFunctions::getCurrentDate()

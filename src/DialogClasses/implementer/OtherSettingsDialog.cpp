@@ -79,34 +79,29 @@ BOOL COtherSettingsDialog::OnInitDialog()
 
 	CRect backRect(165, 470, 255, 490);
 	m_Back.MoveWindow(backRect);
-	m_Back.DrawBorder(FALSE);
-	m_Back.DrawTransparent(TRUE);
+
 
 
 	CRect okRect(505, 50, 622, 88);
 	m_ButtonOK.MoveWindow(okRect);
-	m_ButtonOK.DrawBorder(FALSE);
-	m_ButtonOK.DrawTransparent(TRUE);
+
 
 	CRect cancelRect(655, 50, 771, 88);
 	m_ButtonCancel.MoveWindow(cancelRect);
-	m_ButtonCancel.DrawBorder(FALSE);
-	m_ButtonCancel.DrawTransparent(TRUE);
+
 
 	CRect backupRect(503, 303, 620, 343);
 	m_Backup.MoveWindow(backupRect);
-	m_Backup.DrawBorder(FALSE);
-	m_Backup.DrawTransparent(TRUE);
+
 
 	CRect restoreRect(654, 303, 771, 343);
 	m_Restore.MoveWindow(restoreRect);
-	m_Restore.DrawBorder(FALSE);
-	m_Restore.DrawTransparent(TRUE);
 
 
 
-	//CButtonST* buttonArray[4] = {&m_ButtonOK,&m_ButtonCancel,&m_Backup,&m_Restore};
-	//std::vector<CButtonST*> buttonVector(buttonArray, buttonArray+4);
+
+	//CButton* buttonArray[4] = {&m_ButtonOK,&m_ButtonCancel,&m_Backup,&m_Restore};
+	//std::vector<CButton*> buttonVector(buttonArray, buttonArray+4);
 	//for(i = 0; i < buttonVector.size(); ++i)
 	//{
 	//	HelperFunctions::setButtonStyle(*buttonVector[i], RGB(55,71,158), SingletonHelper::getInstance()->simSong20);

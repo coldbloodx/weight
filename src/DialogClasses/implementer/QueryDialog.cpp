@@ -396,18 +396,15 @@ BOOL CQueryDialog::OnInitDialog()
 
 	CRect backRect(170, 455, 260, 480);
 	m_ButtonCancel.MoveWindow(backRect);
-	m_ButtonCancel.DrawBorder(FALSE);
-	m_ButtonCancel.DrawTransparent(TRUE);
+
 
 	CRect clearRect(740, 460, 870, 500);
 	m_Clear.MoveWindow(clearRect);
-	m_Clear.DrawBorder(FALSE);
-	m_Clear.DrawTransparent(TRUE);
+
 
 	CRect queryRect(530, 460, 660, 500);
 	m_Query.MoveWindow(queryRect);
-	m_Query.DrawBorder(FALSE);
-	m_Query.DrawTransparent(TRUE);
+
 
 	CRect listRect(260, 100, 920, 455);
 	m_ResultList.MoveWindow(listRect);

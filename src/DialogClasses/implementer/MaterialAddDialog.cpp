@@ -187,12 +187,9 @@ BOOL CMaterialAddDialog::OnInitDialog()
 	CRect cancelRect(520, 339, 618, 374);
 
 	m_ButtonOK.MoveWindow(okRect);
-	m_ButtonOK.DrawBorder(FALSE);
-	m_ButtonOK.DrawTransparent(TRUE);
 
 	m_ButtonCancel.MoveWindow(cancelRect);
-	m_ButtonCancel.DrawBorder(FALSE);
-	m_ButtonCancel.DrawTransparent(TRUE);
+
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE
 }

@@ -9,7 +9,7 @@
 
 /////////////////////////////////////////////////////////////////////////////
 // CUserManageDialog dialog
-#include "..\..\ExternClasses\header\BtnST.h"
+
 #include "..\..\CustomColorDialog.h"
 #include "afxwin.h"
 class CUserManageDialog : public CCustomColorDialog
@@ -23,9 +23,9 @@ public:
 	//{{AFX_DATA(CUserManageDialog)
 	enum { IDD = IDD_USERMANAGEMENT_DIALOG };
 	CStatic	m_StatusStatic;
-	CButtonST	m_ButtonOK;
-	CButtonST	m_Del;
-	CButtonST	m_Add;
+	CButton	m_ButtonOK;
+	CButton	m_Del;
+	CButton	m_Add;
 	CListCtrl	m_UserList;
 	//}}AFX_DATA
 	
@@ -54,7 +54,7 @@ protected:
 public:
 	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 	afx_msg void OnBnClickedBack();
-	CButtonST m_Back;
+	CButton m_Back;
 };
 
 //{{AFX_INSERT_LOCATION}}

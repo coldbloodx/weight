@@ -87,20 +87,17 @@ BOOL CUserManageDialog::OnInitDialog()
 	CRect listRect(260, 100, 918, 503);
 
 	m_Add.MoveWindow(addRect);
-	m_Add.DrawBorder(FALSE);
-	m_Add.DrawTransparent(TRUE);
+
 
 	m_Del.MoveWindow(delRect);
-	m_Del.DrawBorder(FALSE);
-	m_Del.DrawTransparent(TRUE);
+
 
 	m_Back.MoveWindow(backRect);
-	m_Back.DrawBorder(FALSE);
-	m_Back.DrawTransparent(TRUE);
+
 
 	m_UserList.MoveWindow(listRect);
-	//CButtonST* buttonArray[3] = {&m_Add,&m_Del,&m_ButtonOK};
-	//std::vector<CButtonST*> buttonVector(buttonArray, buttonArray+3);
+	//CButton* buttonArray[3] = {&m_Add,&m_Del,&m_ButtonOK};
+	//std::vector<CButton*> buttonVector(buttonArray, buttonArray+3);
 	//for(size_t i = 0; i < buttonVector.size(); ++i)
 	//{
 	//	HelperFunctions::setButtonStyle(*buttonVector[i], RGB(55,71,158), SingletonHelper::getInstance()->simSong20);

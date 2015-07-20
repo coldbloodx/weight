@@ -95,14 +95,10 @@ BOOL CStatisticDialog::OnInitDialog()
 	m_ButtonOK.MoveWindow(backRect);
 
 
-	CButtonST* buttonArray[6] = {&m_Clear,&m_ButtonOK,&m_Query,&m_Advance,&m_All,&m_Detail};
-	std::vector<CButtonST*> buttonVector(buttonArray, buttonArray+6);
+	CButton* buttonArray[6] = {&m_Clear,&m_ButtonOK,&m_Query,&m_Advance,&m_All,&m_Detail};
+	std::vector<CButton*> buttonVector(buttonArray, buttonArray+6);
 	
-	for(size_t i = 0; i < buttonVector.size(); ++i)
-	{
-		buttonVector[i]->DrawBorder(FALSE);
-		buttonVector[i]->DrawTransparent(TRUE);
-	}
+
 
 	CRect statisticRect(259, 99, 920, 454);
 	m_StatisticList.MoveWindow(statisticRect);

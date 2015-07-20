@@ -12,7 +12,6 @@
 
 /////////////////////////////////////////////////////////////////////////////
 // CMaterialAddDialog dialog
-#include "..\..\ExternClasses\header\BtnST.h"
 #include "afxwin.h"
 
 
@@ -25,15 +24,15 @@ public:
 // Dialog Data
 	//{{AFX_DATA(CMaterialAddDialog)
 	enum { IDD = IDD_MATERIALADD_DIALOG };
-	CButtonST	m_ButtonOK;
-	CButtonST	m_ButtonCancel;
+	CButton	m_ButtonOK;
+	CButton	m_ButtonCancel;
 	CEdit	m_MaterialName;
 	CEdit	m_MaterialID;
 	CMaterialManagementDialog* m_MaterialManageWindow;
 	//}}AFX_DATA
 	CBrush   m_brBk;//在public中定义  
 
-	std::vector<CButtonST*> buttonVector;
+	std::vector<CButton*> buttonVector;
 
 // Overrides
 	// ClassWizard generated virtual function overrides

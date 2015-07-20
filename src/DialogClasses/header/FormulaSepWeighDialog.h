@@ -10,7 +10,7 @@
 /////////////////////////////////////////////////////////////////////////////
 // CFormulaSepWeighDialog dialog
 
-#include "..\..\ExternClasses\header\BtnST.h"
+
 #include "..\..\CustomColorDialog.h"
 #include "afxwin.h"
 
@@ -28,14 +28,14 @@ public:
 	//}}AFX_DATA
 
 	enum { IDD = IDD_FORMULASEPWEIGH_DIALOG };
-	CButtonST	m_ButtonDivide;
-	//CButtonST	m_ButtonWeigh;
-	CButtonST	m_ButtonOK;
+	CButton	m_ButtonDivide;
+	//CButton	m_ButtonWeigh;
+	CButton	m_ButtonOK;
 	// //大称读数按钮
-	CButtonST m_PriButton;
+	CButton m_PriButton;
 	// //小称读数按钮
-	CButtonST m_SecButton;
-	CButtonST m_CancalButton;
+	CButton m_SecButton;
+	CButton m_CancalButton;
 
 	CListBox m_Com1DisplayList;
 	CListBox m_Com2DisplayList;

@@ -1,6 +1,6 @@
 #pragma once
 #include "afxwin.h"
-#include "ExternClasses/header/BtnST.h"
+
 
 
 // CMainSettingsDialog dialog
@@ -21,11 +21,11 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 public:
-	CButtonST m_goBackButton;
-	CButtonST m_ChangeNameButton;
-	CButtonST m_OtherSettingsButton;
-	CButtonST m_UserManagement;
-	CButtonST m_ChangePassword;
+	CButton m_goBackButton;
+	CButton m_ChangeNameButton;
+	CButton m_OtherSettingsButton;
+	CButton m_UserManagement;
+	CButton m_ChangePassword;
 	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 	virtual BOOL OnInitDialog();
 	afx_msg void OnBnClickedButton1();

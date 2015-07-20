@@ -330,11 +330,7 @@ BOOL CLoginDialog::OnInitDialog()
 	CRect rectCancel(313, 295, 477, 352);
 	m_ButtonOK.MoveWindow(rectOK, TRUE);
 	m_ButtonCancel.MoveWindow(rectCancel, TRUE);
-	m_ButtonOK.DrawTransparent(TRUE);
-	m_ButtonOK.DrawBorder(FALSE);
-	m_ButtonCancel.DrawTransparent(TRUE);
-	m_ButtonCancel.DrawBorder(FALSE);
-	
+
 	int left = 557;
 	int top = 35;
 	int width = 623 - 557;
@@ -348,8 +344,7 @@ BOOL CLoginDialog::OnInitDialog()
 	{
 		CRect startRect(left, top, left + width, top + height);
 		buttonVector[i]->MoveWindow(startRect, TRUE);
-		buttonVector[i]->DrawBorder(FALSE);
-		buttonVector[i]->DrawTransparent(TRUE);
+
 		if (((i + 1) % 3) == 0)
 		{
 			left = 557;

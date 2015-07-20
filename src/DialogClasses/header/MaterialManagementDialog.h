@@ -9,7 +9,6 @@
 
 /////////////////////////////////////////////////////////////////////////////
 // CMaterialManagementDialog dialog
-#include "..\..\ExternClasses\header\BtnST.h"
 #include "..\..\CustomColorDialog.h"
 #include "afxwin.h"
 
@@ -24,13 +23,13 @@ public:
 	//{{AFX_DATA(CMaterialManagementDialog)
 	enum { IDD = IDD_MATERIALMANAGEMENT_DIALOG };
 	CStatic	m_StatusStatic;
-	CButtonST	m_ButtonOK;
-	CButtonST	m_Del;
-	CButtonST	m_Add;
+	CButton	m_ButtonOK;
+	CButton	m_Del;
+	CButton	m_Add;
 	CListCtrl	m_MaterialList;
 	//}}AFX_DATA
 
-	std::vector<CButtonST*> buttonVector;
+	std::vector<CButton*> buttonVector;
 	CBrush m_brBk;
 // Overrides
 	// ClassWizard generated virtual function overrides
@@ -56,7 +55,7 @@ protected:
 	DECLARE_MESSAGE_MAP()
 	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 public:
-	CButtonST m_BatchNumberChange;
+	CButton m_BatchNumberChange;
 	afx_msg void OnBnClickedBatchnumberchange();
 };
 

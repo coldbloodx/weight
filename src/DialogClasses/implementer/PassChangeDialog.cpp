@@ -125,16 +125,11 @@ BOOL CPassChangeDialog::OnInitDialog()
 	CRect backRect(174, 465, 260, 490);
 	
 	m_ButtonOK.MoveWindow(okRect);
-	m_ButtonOK.DrawBorder(FALSE);
-	m_ButtonOK.DrawTransparent(TRUE);
 
 	m_ButtonCancel.MoveWindow(cancelRect);
-	m_ButtonCancel.DrawBorder(FALSE);
-	m_ButtonCancel.DrawTransparent(TRUE);
 
 	m_Back.MoveWindow(backRect);
-	m_Back.DrawBorder(FALSE);
-	m_Back.DrawTransparent(TRUE);
+
 
 
 

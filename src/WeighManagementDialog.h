@@ -1,6 +1,6 @@
 #pragma once
 #include "afxwin.h"
-#include "ExternClasses/header/BtnST.h"
+
 
 
 // CWeighManagementDialog dialog
@@ -21,12 +21,12 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 public:
-	CButtonST m_MaterialManagement;
-	CButtonST m_FormulaManagement;
-	CButtonST m_Query;
-	CButtonST m_Statistic;
+	CButton m_MaterialManagement;
+	CButton m_FormulaManagement;
+	CButton m_Query;
+	CButton m_Statistic;
 	afx_msg void OnBnClickedButton4();
-	CButtonST m_goBackButton;
+	CButton m_goBackButton;
 	CBrush   m_brBk;//在public中定义  
 
 	virtual BOOL OnInitDialog();

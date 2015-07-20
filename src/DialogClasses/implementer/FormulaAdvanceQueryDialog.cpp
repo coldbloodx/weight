@@ -85,8 +85,7 @@ BOOL CFormulaAdvanceQueryDialog::OnInitDialog()
 
 	CRect okRect(794, 636, 905, 675);
 	m_ButtonOK.MoveWindow(okRect);
-	m_ButtonOK.DrawBorder(FALSE);
-	m_ButtonOK.DrawTransparent(TRUE);
+
 	
 
 	//HelperFunctions::setButtonStyle(m_ButtonOK, RGB(55,71,158), SingletonHelper::getInstance()->simSong20);

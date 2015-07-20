@@ -140,11 +140,11 @@ BOOL CFormulaDialog::OnInitDialog()
 	initListHeader();
 	initList();
 
-	m_FormulaAdd = new CButtonST;
+	m_FormulaAdd = new CButton;
 
-	m_FormulaDel	= new CButtonST;
+	m_FormulaDel	= new CButton;
 
-	m_FetchButton = new CButtonST;
+	m_FetchButton = new CButton;
 	
 	CRect wndRect((1024 - 960) / 2, (768 - 566) / 2, (1024 - 960) / 2 + 960, (768 - 566) / 2 + 580);
 	this->MoveWindow(wndRect);
@@ -158,10 +158,7 @@ BOOL CFormulaDialog::OnInitDialog()
 
 		m_FormulaAdd->Create("", SW_HIDE, CRect(505,42,620,80), this, 1000);
 		m_FormulaDel->Create("", SW_HIDE, CRect(651,42,767,80), this, 2000);
-		m_FormulaAdd->DrawBorder(FALSE);
-		m_FormulaAdd->DrawTransparent(TRUE);
-		m_FormulaDel->DrawBorder(FALSE);
-		m_FormulaDel->DrawTransparent(TRUE);
+
 
 		m_FormulaAdd->SetWindowText("增加配方");
 		m_FormulaDel->SetWindowText("删除配方");
@@ -182,8 +179,7 @@ BOOL CFormulaDialog::OnInitDialog()
 		bmp.DeleteObject();   
 		this->SetWindowText("");
 		m_FetchButton->Create("", SW_HIDE, CRect(505,58,620,88), this,3000);
-		m_FetchButton->DrawBorder(FALSE);
-		m_FetchButton->DrawTransparent(TRUE);
+
 		m_FetchButton->ShowWindow(SW_SHOW);
 		//buttonVector.push_back(m_FetchButton);
 		CRect listRect(265, 107, 905, 497);
@@ -193,8 +189,7 @@ BOOL CFormulaDialog::OnInitDialog()
 
 	CRect backRect(170,450,260,475);
 	m_ButtonOK.MoveWindow(backRect);
-	m_ButtonOK.DrawBorder(FALSE);
-	m_ButtonOK.DrawTransparent(TRUE);
+
 
 
 	//buttonVector.push_back(&m_ButtonOK);

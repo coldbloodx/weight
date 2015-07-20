@@ -7,7 +7,6 @@
 // LoginDialog.h : header file
 //
 
-#include "..\..\ExternClasses\header\BtnST.h"
 /////////////////////////////////////////////////////////////////////////////
 // CLoginDialog dialog
 
@@ -20,25 +19,25 @@ public:
 // Dialog Data
 	//{{AFX_DATA(CLoginDialog)
 	enum { IDD = IDD_LOGIN_DIALOG };
-	CButtonST	m_ButtonOK;
-	CButtonST	m_ButtonCancel;
-	CButtonST	m_Button9;
-	CButtonST	m_Button8;
-	CButtonST	m_Button7;
-	CButtonST	m_Button6;
-	CButtonST	m_Button5;
-	CButtonST	m_Button4;
-	CButtonST	m_Button3;
-	CButtonST	m_Button2;
-	CButtonST	m_Button1;
-	CButtonST	m_Button0;
-	CButtonST	m_ButtonComma;
-	CButtonST	m_ButonBack;
+	CButton	m_ButtonOK;
+	CButton	m_ButtonCancel;
+	CButton	m_Button9;
+	CButton	m_Button8;
+	CButton	m_Button7;
+	CButton	m_Button6;
+	CButton	m_Button5;
+	CButton	m_Button4;
+	CButton	m_Button3;
+	CButton	m_Button2;
+	CButton	m_Button1;
+	CButton	m_Button0;
+	CButton	m_ButtonComma;
+	CButton	m_ButonBack;
 	CEdit	m_Password;
 	CEdit	m_UserName;
 	//}}AFX_DATA
 	int		tryTimes;
-	std::vector<CButtonST*> buttonVector;
+	std::vector<CButton*> buttonVector;
 	CBrush   m_brBk;//在public中定义   
 	int    m_FocusedID;
 

@@ -9,7 +9,7 @@
 
 /////////////////////////////////////////////////////////////////////////////
 // CFormulaDialog dialog
-#include "..\..\ExternClasses\header\BtnST.h"
+
 #include "..\..\CustomColorDialog.h"
 class CFormulaDialog : public CDialog
 {
@@ -23,11 +23,11 @@ public:
 	CStatic	m_StatusStatic;
 	//}}AFX_DATA
 	CListCtrl	m_FormulaListCtrl;
-	std::vector<CButtonST*> buttonVector;
-	CButtonST	m_ButtonOK;
-	CButtonST*	m_FetchButton;
-	CButtonST*	m_FormulaDel;
-	CButtonST*	m_FormulaAdd;
+	std::vector<CButton*> buttonVector;
+	CButton	m_ButtonOK;
+	CButton*	m_FetchButton;
+	CButton*	m_FormulaDel;
+	CButton*	m_FormulaAdd;
 
 	unsigned char	m_From;
 	CBrush   m_brBk;//在public中定义  

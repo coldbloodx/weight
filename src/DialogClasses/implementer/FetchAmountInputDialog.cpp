@@ -369,18 +369,15 @@ BOOL CFetchAmountInputDialog::OnInitDialog()
 
 	CRect okRect(504, 49, 622, 89);
 	m_ButtonOK.MoveWindow(okRect);
-	m_ButtonOK.DrawBorder(FALSE);
-	m_ButtonOK.DrawTransparent(TRUE);
+
 
 	CRect cancelRect(653, 49, 770, 89);
 	m_ButtonCancel.MoveWindow(cancelRect);
-	m_ButtonCancel.DrawBorder(FALSE);
-	m_ButtonCancel.DrawTransparent(TRUE);
+
 
 	CRect gobackRect(166, 465, 255, 490);
 	m_GoBack.MoveWindow(gobackRect);
-	m_GoBack.DrawBorder(FALSE);
-	m_GoBack.DrawTransparent(TRUE);
+
 
 	// TODO: Add extra initialization here
 	buttonVector.push_back(&m_Button1);
@@ -407,8 +404,7 @@ BOOL CFetchAmountInputDialog::OnInitDialog()
 	{
 		CRect startRect(left, top, left + width, top + height);
 		buttonVector[i]->MoveWindow(startRect, TRUE);
-		buttonVector[i]->DrawBorder(FALSE);
-		buttonVector[i]->DrawTransparent(TRUE);
+
 		if (((i + 1) % 3) == 0)
 		{
 			left = 650;

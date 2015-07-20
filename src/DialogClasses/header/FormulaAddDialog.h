@@ -9,7 +9,7 @@
 
 /////////////////////////////////////////////////////////////////////////////
 // CFormulaAddDialog dialog
-#include "..\..\ExternClasses\header\BtnST.h"
+
 #include "..\..\CustomColorDialog.h"
 
 class CFormulaAddDialog : public CDialog
@@ -27,13 +27,13 @@ public:
 
 	CBrush   m_brBk;//在public中定义  
 
-	CButtonST m_ButtonOK;
-	CButtonST m_ButtonCancel;
+	CButton m_ButtonOK;
+	CButton m_ButtonCancel;
 	CStatic	m_PercentageSecond;
 	CStatic	m_MaterialSecond;
 	CEdit	m_FormulaName;
 	CEdit	m_FormulaID;
-	std::vector<CButtonST*> buttonVector;
+	std::vector<CButton*> buttonVector;
 	int materialCount;
 	CComboBox testCombox;
 	CStatic   testStatic;

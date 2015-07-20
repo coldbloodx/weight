@@ -10,7 +10,7 @@
 /////////////////////////////////////////////////////////////////////////////
 // CStatisticDialog dialog
 
-#include "..\..\ExternClasses\header\BtnST.h"
+
 #include "..\..\CustomColorDialog.h"
 class CStatisticDialog : public CDialog
 {
@@ -24,12 +24,12 @@ public:
 	//{{AFX_DATA(CStatisticDialog)
 	enum { IDD = IDD_STATISTIC_DIALOG };
 	//CStatic	m_StatusStatic;
-	CButtonST	m_ButtonOK;
-	CButtonST	m_Query;
-	CButtonST	m_Detail;
-	CButtonST	m_Clear;
-	CButtonST	m_All;
-	CButtonST	m_Advance;
+	CButton	m_ButtonOK;
+	CButton	m_Query;
+	CButton	m_Detail;
+	CButton	m_Clear;
+	CButton	m_All;
+	CButton	m_Advance;
 	CEdit	m_Keyword;
 	CComboBox	m_Index;
 	CListCtrl	m_StatisticList;

@@ -9,7 +9,7 @@
 
 /////////////////////////////////////////////////////////////////////////////
 // CFormulaWeighDialog dialog
-#include "..\..\ExternClasses\header\BtnST.h"
+
 #include "..\..\CustomColorDialog.h"
 #include "afxwin.h"
 
@@ -22,7 +22,7 @@ public:
 
 	std::vector<CStatic*> materialNameVector;
 	std::vector<CStatic*> materialWeighVector;
-	std::vector<CButtonST*> sepWeightButtonVector;
+	std::vector<CButton*> sepWeightButtonVector;
 	std::vector<CEdit*>	  batchNumberEditVector;
 	std::vector<CEdit*>	  lineNumberEditVector;
 
@@ -38,20 +38,20 @@ public:
 // Dialog Data
 	//{{AFX_DATA(CFormulaWeighDialog)
 	enum { IDD = IDD_FORMULAWEIGH_DIALOG };
-	CButtonST	m_ButtonOK;
-	CButtonST	m_ButtonCancel;
-	CButtonST	m_Button9;
-	CButtonST	m_Button8;
-	CButtonST	m_Button7;
-	CButtonST	m_Button6;
-	CButtonST	m_Button5;
-	CButtonST	m_Button4;
-	CButtonST	m_Button3;
-	CButtonST	m_Button2;
-	CButtonST	m_Button1;
-	CButtonST	m_Button0;
-	CButtonST	m_ButtonComma;
-	CButtonST	m_ButtonBack;
+	CButton	m_ButtonOK;
+	CButton	m_ButtonCancel;
+	CButton	m_Button9;
+	CButton	m_Button8;
+	CButton	m_Button7;
+	CButton	m_Button6;
+	CButton	m_Button5;
+	CButton	m_Button4;
+	CButton	m_Button3;
+	CButton	m_Button2;
+	CButton	m_Button1;
+	CButton	m_Button0;
+	CButton	m_ButtonComma;
+	CButton	m_ButtonBack;
 	CStatic		m_MissionStatic;
 	//}}AFX_DATA
 	CBrush 	  m_brBk;   
@@ -91,7 +91,7 @@ protected:
 public:
 	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 	afx_msg void OnBnClickedOk();
-	CButtonST m_buttonGoBack;
+	CButton m_buttonGoBack;
 	afx_msg void OnBnClickedButtongoback();
 	CStatic m_WeightStatic;
 	CButton m_PrintCheck;

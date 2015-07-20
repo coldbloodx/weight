@@ -200,12 +200,7 @@ BOOL CFormulaAddDialog::OnInitDialog()
 	buttonVector.push_back(&m_ButtonCancel);
 	buttonVector.push_back(&m_ButtonOK);
 
-	for(size_t j = 0; j < buttonVector.size(); ++j)
-	{
-		//HelperFunctions::setButtonStyle(*buttonVector[j], RGB(55,71,158), SingletonHelper::getInstance()->simSong20);
-		buttonVector[j]->DrawBorder(FALSE);
-		buttonVector[j]->DrawTransparent(TRUE);
-	}
+
 	
 	queryMaterials();
 	

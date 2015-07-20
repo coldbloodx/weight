@@ -10,7 +10,6 @@
 /////////////////////////////////////////////////////////////////////////////
 // CFetchRecordsAdvanceQueryDialog dialog
 
-#include "..\..\ExternClasses\header\BtnST.h"
 #include "..\..\CustomColorDialog.h"
 
 class CFetchRecordsAdvanceQueryDialog : public CDialog
@@ -26,7 +25,7 @@ public:
 	//}}AFX_DATA
 	int    m_FocusedID;
 	//CStatic	m_StatusStatic;
-	CButtonST	m_ButtonOK;
+	CButton	m_ButtonOK;
 	CEdit	m_UserEdit;
 	CEdit	m_FormulaEdit;
 	CEdit	m_AmountFirstEdit;
@@ -41,18 +40,18 @@ public:
 	CFont* m_Font;
 	CString sqlState;
 	BOOL needAnd;
-	CButtonST	m_Button9;
-	CButtonST	m_Button8;
-	CButtonST	m_Button7;
-	CButtonST	m_Button6;
-	CButtonST	m_Button5;
-	CButtonST	m_Button4;
-	CButtonST	m_Button3;
-	CButtonST	m_Button2;
-	CButtonST	m_Button1;
-	CButtonST	m_Button0;
-	CButtonST	m_CommaButton;
-	CButtonST	m_BackButton;
+	CButton	m_Button9;
+	CButton	m_Button8;
+	CButton	m_Button7;
+	CButton	m_Button6;
+	CButton	m_Button5;
+	CButton	m_Button4;
+	CButton	m_Button3;
+	CButton	m_Button2;
+	CButton	m_Button1;
+	CButton	m_Button0;
+	CButton	m_CommaButton;
+	CButton	m_BackButton;
 	// Overrides
 	// ClassWizard generated virtual function overrides
 	//{{AFX_VIRTUAL(CFetchRecordsAdvanceQueryDialog)

@@ -9,7 +9,7 @@
 
 /////////////////////////////////////////////////////////////////////////////
 // CPassChangeDialog dialog
-#include "..\..\ExternClasses\header\BtnST.h"
+
 #include "..\..\CustomColorDialog.h"
 #include "afxwin.h"
 
@@ -22,13 +22,13 @@ public:
 // Dialog Data
 	//{{AFX_DATA(CPassChangeDialog)
 	enum { IDD = IDD_PASSCHANGE_DIALOG };
-	CButtonST	m_ButtonOK;
-	CButtonST	m_ButtonCancel;
+	CButton	m_ButtonOK;
+	CButton	m_ButtonCancel;
 	CEdit	m_OriginalPassEdit;
 	CEdit	m_NewPassEdit;
 	CEdit	m_NewPassConfirmEdit;
 	//}}AFX_DATA
-	std::vector<CButtonST*> buttonVector;
+	std::vector<CButton*> buttonVector;
 CBrush   m_brBk;//在public中定义 
 
 // Overrides
@@ -51,7 +51,7 @@ public:
 	afx_msg void OnBnClickedOk();
 	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 	afx_msg void OnBnClickedBack();
-	CButtonST m_Back;
+	CButton m_Back;
 };
 
 //{{AFX_INSERT_LOCATION}}

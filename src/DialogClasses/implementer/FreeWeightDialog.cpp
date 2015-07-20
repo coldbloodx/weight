@@ -77,8 +77,7 @@ BOOL CFreeWeightDialog::OnInitDialog()
 
 	CRect backRect(170, 470, 260, 490);
 	m_ButtonOK.MoveWindow(backRect);
-	m_ButtonOK.DrawBorder(FALSE);
-	m_ButtonOK.DrawTransparent(TRUE);
+
 
 	m_Com1DataStatic.SetWindowText("«Î…‘µ»...");
 	m_Com2DataStatic.SetWindowText("«Î…‘µ»...");

@@ -103,28 +103,23 @@ BOOL CFormulaSepWeighDialog::OnInitDialog()
 
 	CRect backRect(170, 490, 267, 517);
 	m_CancalButton.MoveWindow(backRect);
-	m_CancalButton.DrawBorder(FALSE);
-	m_CancalButton.DrawTransparent(TRUE);
+
 
 	CRect okRect(322, 569, 468, 612);
 	m_ButtonOK.MoveWindow(okRect);
-	m_ButtonOK.DrawBorder(FALSE);
-	m_ButtonOK.DrawTransparent(TRUE);
+
 
 	CRect sepRect(312, 126, 470, 167);
 	m_ButtonDivide.MoveWindow(sepRect);
-	m_ButtonDivide.DrawBorder(FALSE);
-	m_ButtonDivide.DrawTransparent(TRUE);
+
 
 	CRect priButton(550, 582, 707, 622);
 	m_PriButton.MoveWindow(priButton);
-	m_PriButton.DrawBorder(FALSE);
-	m_PriButton.DrawTransparent(TRUE);
+
 
 	CRect secButton(790, 582, 954, 622);
 	m_SecButton.MoveWindow(secButton);
-	m_SecButton.DrawBorder(FALSE);
-	m_SecButton.DrawTransparent(TRUE);
+
 
 	//set reader timer;
 	SetTimer(1,1000,NULL);

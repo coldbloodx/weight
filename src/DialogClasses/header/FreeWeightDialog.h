@@ -9,7 +9,7 @@
 
 /////////////////////////////////////////////////////////////////////////////
 // CFreeWeightDialog dialog
-#include "..\..\ExternClasses\header\BtnST.h"
+
 #include "..\..\CustomColorDialog.h"
 
 class CFreeWeightDialog : public CDialog
@@ -24,7 +24,7 @@ public:
 	//CStatic	m_StatusStatic;
 	CStatic	m_Com2DataStatic;
 	CStatic	m_Com1DataStatic;
-	CButtonST	m_ButtonOK;
+	CButton	m_ButtonOK;
 	//}}AFX_DATA
 	int com1;
 	int com2;

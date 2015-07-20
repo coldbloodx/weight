@@ -224,10 +224,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\ExternClasses\implementer\BtnST.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\ExternClasses\implementer\CeXDib.cpp"
 				>
 			</File>
@@ -316,10 +312,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\DialogClasses\implementer\NavigatorPanel.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\DialogClasses\implementer\OtherSettingsDialog.cpp"
 				>
 			</File>
@@ -337,10 +329,6 @@
 			</File>
 			<File
 				RelativePath=".\OtherClasses\RecordSetPointer.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\ExternClasses\implementer\ShadeButtonST.cpp"
 				>
 			</File>
 			<File
@@ -434,10 +422,6 @@
 				RelativePath=".\DialogClasses\implementer\WeightDlg.cpp"
 				>
 			</File>
-			<File
-				RelativePath=".\ExternClasses\implementer\WinXPButtonST.cpp"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Headers"
@@ -449,10 +433,6 @@
 			</File>
 			<File
 				RelativePath=".\ExternClasses\header\BCMenu.h"
-				>
-			</File>
-			<File
-				RelativePath=".\ExternClasses\header\BtnST.h"
 				>
 			</File>
 			<File
@@ -544,10 +524,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\DialogClasses\header\NavigatorPanel.h"
-				>
-			</File>
-			<File
 				RelativePath=".\DialogClasses\header\OtherSettingsDialog.h"
 				>
 			</File>
@@ -569,10 +545,6 @@
 			</File>
 			<File
 				RelativePath="Resource.h"
-				>
-			</File>
-			<File
-				RelativePath=".\ExternClasses\header\ShadeButtonST.h"
 				>
 			</File>
 			<File
@@ -629,10 +601,6 @@
 			</File>
 			<File
 				RelativePath=".\DialogClasses\header\weightdlg.h"
-				>
-			</File>
-			<File
-				RelativePath=".\ExternClasses\header\WinXPButtonST.h"
 				>
 			</File>
 		</Filter>

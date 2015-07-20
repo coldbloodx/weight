@@ -272,7 +272,7 @@ BOOL CWeighPerPackDialog::OnInitDialog()
 	CRect wndRect((1024 - 960) / 2, (768 - 580) / 2, (1024 - 960) / 2 + 960, (768 - 580) / 2 + 595) ;
 	this->MoveWindow(wndRect);
 	
-	CButtonST* buttonArray[] = {&m_Button1,&m_Button2,&m_Button3,&m_Button4,&m_Button5,&m_Button6,&m_Button7,
+	CButton* buttonArray[] = {&m_Button1,&m_Button2,&m_Button3,&m_Button4,&m_Button5,&m_Button6,&m_Button7,
 		&m_Button8,&m_Button9,&m_Button0,&m_ButtonComma,&m_ButtonBack};
 	
 	int left = 655;
@@ -282,14 +282,13 @@ BOOL CWeighPerPackDialog::OnInitDialog()
 	int horiSpacer = 725 - 714;
 	int vertSpacer = 231 - 220;
 
-	std::vector<CButtonST*> buttonVector(buttonArray, buttonArray + 12);
+	std::vector<CButton*> buttonVector(buttonArray, buttonArray + 12);
 
 	for (size_t i = 0; i < buttonVector.size(); ++i)
 	{
 		CRect startRect(left, top, left + width, top + height);
 		buttonVector[i]->MoveWindow(startRect, TRUE);
-		buttonVector[i]->DrawBorder(FALSE);
-		buttonVector[i]->DrawTransparent(TRUE);
+
 		if (((i + 1) % 3) == 0)
 		{
 			left = 655;
@@ -303,18 +302,15 @@ BOOL CWeighPerPackDialog::OnInitDialog()
 
 	CRect okRect(506, 43, 627, 84);
 	m_ButtonOK.MoveWindow(okRect);
-	m_ButtonOK.DrawBorder(FALSE);
-	m_ButtonOK.DrawTransparent(TRUE);
+
 
 	CRect cancelRect(658, 43, 778, 84);
 	m_ButtonCancel.MoveWindow(cancelRect);
-	m_ButtonCancel.DrawBorder(FALSE);
-	m_ButtonCancel.DrawTransparent(TRUE);
+
 	
 	CRect goBackRect(162, 467, 253, 492);
 	m_GoBack.MoveWindow(goBackRect);
-	m_GoBack.DrawBorder(FALSE);
-	m_GoBack.DrawTransparent(TRUE);
+
 
 	m_GrossWeight.SetWindowText("1");
 	/////////////////////

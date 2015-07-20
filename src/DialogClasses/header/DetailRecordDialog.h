@@ -9,7 +9,7 @@
 
 /////////////////////////////////////////////////////////////////////////////
 // CDetailRecordDialog dialog
-#include "..\..\ExternClasses\header\BtnSt.h"
+
 #include "..\..\CustomColorDialog.h"
 class CDetailRecordDialog : public CCustomColorDialog
 {
@@ -25,14 +25,14 @@ public:
 	//}}AFX_DATA
 	
 	CStatic	m_StatusStatic;
-	CButtonST m_ButtonOK;
+	CButton m_ButtonOK;
 	CStatic	m_Date;
 	CStatic	m_FormulaID;
 	CStatic	m_FormulaName;
 	CStatic	m_Time;
 	CStatic	m_UserName;
 	CStatic	m_UserID;
-	CButtonST	m_Print;
+	CButton	m_Print;
 	std::vector<CStatic*> materialNameVector;
 	std::vector<CStatic*> batchNumberVector;
 

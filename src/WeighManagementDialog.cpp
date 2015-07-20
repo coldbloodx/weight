@@ -69,16 +69,15 @@ BOOL CWeighManagementDialog::OnInitDialog()
 	int horiSpacer = 535 - 490;
 	int vertSpacer = 365 - 340;
 
-	CButtonST* buttonArray[4] = {&m_MaterialManagement,&m_FormulaManagement,&m_Query,&m_Statistic};
-	std::vector<CButtonST*> buttonVector(buttonArray, buttonArray + 4);
+	CButton* buttonArray[4] = {&m_MaterialManagement,&m_FormulaManagement,&m_Query,&m_Statistic};
+	std::vector<CButton*> buttonVector(buttonArray, buttonArray + 4);
 
 
 	for (size_t i = 0; i < buttonVector.size(); ++i)
 	{
 		CRect startRect(left, top, left + width, top + height);
 		buttonVector[i]->MoveWindow(startRect, TRUE);
-		buttonVector[i]->DrawBorder(FALSE);
-		buttonVector[i]->DrawTransparent(TRUE);
+
 		if (((i + 1) % 2) == 0)
 		{
 			left = 200;
@@ -92,8 +91,6 @@ BOOL CWeighManagementDialog::OnInitDialog()
 
 	CRect rectBack(382, 578, 643, 640);
 	m_goBackButton.MoveWindow(rectBack);
-	m_goBackButton.DrawBorder(FALSE);
-	m_goBackButton.DrawTransparent(TRUE);
 
 	// TODO:  Add extra initialization here
 	//make the dialog fullscreen

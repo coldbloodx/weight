@@ -101,15 +101,11 @@ BOOL CFetchRecordDialog::OnInitDialog()
 	m_FetchRecordList.MoveWindow(listRect);
 
 
-	CButtonST* buttonArray[6] = {&m_ButtonAdvanceQuery, &m_ClearButton, &m_AllButton, &m_QueryButton, &m_PrintButton, &m_ButtonOK};
+	CButton* buttonArray[6] = {&m_ButtonAdvanceQuery, &m_ClearButton, &m_AllButton, &m_QueryButton, &m_PrintButton, &m_ButtonOK};
 	
-	std::vector<CButtonST*> buttonVector(buttonArray, buttonArray + 6);
+	std::vector<CButton*> buttonVector(buttonArray, buttonArray + 6);
 
-	for(size_t i = 0; i < buttonVector.size(); ++i)
-	{
-		buttonVector[i]->DrawBorder(FALSE);
-		buttonVector[i]->DrawTransparent(TRUE);
-	}
+
 	
 	//HelperFunctions::showStatus(m_StatusStatic);
 	SetTimer(1000,1000,NULL);

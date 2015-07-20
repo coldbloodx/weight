@@ -77,43 +77,29 @@ BOOL CMaterialManagementDialog::OnInitDialog()
 	
 	CRect addRect(505, 42, 620, 80 );
 	m_Add.MoveWindow(addRect);
-	m_Add.DrawBorder(FALSE);
-	m_Add.DrawTransparent(TRUE);
+
 
 	//È¥µôÉ¾³ý°´Å¥£¡
 	//CRect delRect(650, 43, 765, 80);
 	CRect delRect(0, 0, 0, 0);
 	m_Del.MoveWindow(delRect);
-	m_Del.DrawBorder(FALSE);
-	m_Del.DrawTransparent(TRUE);
+
 
 	//CRect changeRect(792, 42, 905, 80);
 	CRect changeRect(650, 43, 765, 80);
 	m_BatchNumberChange.MoveWindow(changeRect);
-	m_BatchNumberChange.DrawBorder(FALSE);
-	m_BatchNumberChange.DrawTransparent(TRUE);
+
 
 
 	CRect backRect(175, 455, 262, 478);
 	m_ButtonOK.MoveWindow(backRect);
 
-	m_ButtonOK.DrawBorder(FALSE);
-	m_ButtonOK.DrawTransparent(TRUE);
+
 
 	CRect listRect(264, 96, 918, 494);
 	m_MaterialList.MoveWindow(listRect);
 
-	//buttonVector.push_back(&m_Add);
-	//buttonVector.push_back(&m_Del);
-	//buttonVector.push_back(&m_ButtonOK);
 
-	//for(size_t i = 0; i < buttonVector.size(); ++i)
-	//{
-	//	HelperFunctions::setButtonStyle(*buttonVector[i], RGB(55,71,158), SingletonHelper::getInstance()->simSong20);
-	//}
-	
-	//HelperFunctions::showStatus(m_StatusStatic);
-	//SetTimer(1000,1000,NULL);
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE
 }

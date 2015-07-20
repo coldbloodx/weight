@@ -149,12 +149,10 @@ BOOL CUserAddDialog::OnInitDialog()
 	CRect cancelRect(520, 339, 618, 374);
 
 	m_ButtonOK.MoveWindow(okRect);
-	m_ButtonOK.DrawBorder(FALSE);
-	m_ButtonOK.DrawTransparent(TRUE);
+
 
 	m_ButtonCancel.MoveWindow(cancelRect);
-	m_ButtonCancel.DrawBorder(FALSE);
-	m_ButtonCancel.DrawTransparent(TRUE);
+
 
 	/*buttonVector.push_back(&m_ButtonCancel);
 	buttonVector.push_back(&m_ButtonOK);

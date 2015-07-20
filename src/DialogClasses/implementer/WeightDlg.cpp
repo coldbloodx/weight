@@ -17,7 +17,7 @@
 #include "..\..\DialogClasses\header\PassChangeDialog.h"
 #include "..\..\DialogClasses\header\FetchRecordDialog.h"
 #include "..\..\OtherClasses\HelperClass.h"
-#include "..\..\DialogClasses\header\NavigatorPanel.h"
+
 #include "..\..\OtherClasses\DatabaseConnector.h"
 #include "..\..\OtherClasses\RecordSetPointer.h"
 #include "..\..\OtherClasses\PatternLoader.h"
@@ -34,7 +34,7 @@ static char THIS_FILE[] = __FILE__;
 /////////////////////////////////////////////////////////////////////////////
 // CAboutDlg dialog used for App About
 
-class CAboutDlg : public CCustomColorDialog
+class CAboutDlg : public CDialog
 {
 public:
 	CAboutDlg();
@@ -57,7 +57,7 @@ protected:
 	DECLARE_MESSAGE_MAP()
 };
 
-CAboutDlg::CAboutDlg() : CCustomColorDialog(CAboutDlg::IDD)
+CAboutDlg::CAboutDlg() : CDialog()
 {
 	//{{AFX_DATA_INIT(CAboutDlg)
 	//}}AFX_DATA_INIT
@@ -438,7 +438,7 @@ void CWeightDlg::OnCancel()
 
 void CWeightDlg::initButtons()
 {
-	CButtonST* buttonArray[6] = 
+	CButton* buttonArray[6] = 
 	{&m_WeighFreeButton,&m_FormulaWeighButton,&m_FormulaManagementButton,
 	&m_FetchStuffButton,&m_OtherSettingsButton,&m_PowerOffButton};
 	
@@ -449,13 +449,12 @@ void CWeightDlg::initButtons()
 	int horiSpacer = 365 - 320;
 	int vertSpacer = 400 - 355;
 	
-	std::vector<CButtonST*> buttonVector(buttonArray, buttonArray+6);
+	std::vector<CButton*> buttonVector(buttonArray, buttonArray+6);
 	for (size_t i = 0; i < buttonVector.size(); ++i)
 	{
 		CRect rect(left, top, left + width, top + height);
 		buttonVector[i]->MoveWindow(rect, TRUE);
-		buttonVector[i]->DrawBorder(FALSE);
-		buttonVector[i]->DrawTransparent(TRUE);
+
 		if (((i + 1) % 3) == 0)
 		{
 			left = 30;

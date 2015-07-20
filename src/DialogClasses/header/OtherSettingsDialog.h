@@ -9,7 +9,7 @@
 
 /////////////////////////////////////////////////////////////////////////////
 // COtherSettingsDialog dialog
-#include "..\..\ExternClasses\header\BtnST.h"
+
 #include "..\..\CustomColorDialog.h"
 #include "afxwin.h"
 
@@ -22,10 +22,10 @@ public:
 // Dialog Data
 	//{{AFX_DATA(COtherSettingsDialog)
 	enum { IDD = IDD_SETTINGS_DIALOG };
-	CButtonST	m_ButtonOK;
-	CButtonST	m_ButtonCancel;
-	CButtonST	m_Restore;
-	CButtonST	m_Backup;
+	CButton	m_ButtonOK;
+	CButton	m_ButtonCancel;
+	CButton	m_Restore;
+	CButton	m_Backup;
 	CComboBox	m_Com2Rate;
 	CComboBox	m_Com1Rate;
 	CString oldFileName;
@@ -53,7 +53,7 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
-	CButtonST m_Back;
+	CButton m_Back;
 	afx_msg void OnBnClickedBack();
 };
 

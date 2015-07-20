@@ -1,5 +1,5 @@
 //here puts some helper class and functions
-#include "..\ExternClasses\header\BtnST.h"
+
 #include "PatternLoader.h"
 
 //struct for material name and it's percentage
@@ -170,7 +170,7 @@ namespace HelperFunctions
 	CString doubleToCString(double aDouble);
 	CString intToCString(int aInt);
 	void showStatus(CStatic& statusStatic);
-	void setButtonStyle(CButtonST& button, COLORREF bgColor, CFont* pFont, bool reDraw = TRUE , bool blFlat = FALSE);
+	void setButtonStyle(CButton& button, COLORREF bgColor, CFont* pFont, bool reDraw = TRUE , bool blFlat = FALSE);
 
 	CString getCurrentDate();
 	CString getCurrentTime();

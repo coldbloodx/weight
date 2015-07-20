@@ -2,7 +2,7 @@
 
 
 // ChangeManufactureNameDialog dialog
-#include "ExternClasses/header/BtnST.h"
+
 #include "afxwin.h"
 
 class ChangeManufactureNameDialog : public CDialog
@@ -25,6 +25,6 @@ protected:
 public:
 	virtual BOOL OnInitDialog();
 	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
-	CButtonST m_ButtonOK;
-	CButtonST m_ButtonCancel;
+	CButton m_ButtonOK;
+	CButton m_ButtonCancel;
 };

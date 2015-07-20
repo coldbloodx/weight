@@ -9,7 +9,6 @@
 
 /////////////////////////////////////////////////////////////////////////////
 // CMaterialCountInputDialog dialog
-#include "..\..\ExternClasses\header\BtnST.h"
 #include "..\..\CustomColorDialog.h"
 class CMaterialCountInputDialog : public CDialog
 {
@@ -20,8 +19,8 @@ public:
 // Dialog Data
 	//{{AFX_DATA(CMaterialCountInputDialog)
 	enum { IDD = IDD_MATERIALCOUNTINPUT_DIALOG };
-	CButtonST	m_ButtonCancel;
-	CButtonST	m_ButtonOK;
+	CButton	m_ButtonCancel;
+	CButton	m_ButtonOK;
 	CEdit	m_MaterialCount;
 	//}}AFX_DATA
 	CBrush   m_brBk;//在public中定义  

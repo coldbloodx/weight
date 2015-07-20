@@ -88,12 +88,10 @@ BOOL CMaterialCountInputDialog::OnInitDialog()
 	CRect cancelRect(520, 190, 618, 224);
 
 	m_ButtonOK.MoveWindow(okRect);
-	m_ButtonOK.DrawBorder(FALSE);
-	m_ButtonOK.DrawTransparent(TRUE);
+
 
 	m_ButtonCancel.MoveWindow(cancelRect);
-	m_ButtonCancel.DrawBorder(FALSE);
-	m_ButtonCancel.DrawTransparent(TRUE);
+
 	// TODO: Add extra initialization here
 //	HelperFunctions::setButtonStyle(m_ButtonOK, RGB(55,71,158),SingletonHelper::getInstance()->simSong20)	;
 //	HelperFunctions::setButtonStyle(m_ButtonCancel, RGB(55,71,158),SingletonHelper::getInstance()->simSong20);

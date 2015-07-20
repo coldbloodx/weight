@@ -95,7 +95,7 @@ BOOL CFetchRecordsAdvanceQueryDialog::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 
-	CButtonST* buttonArray[13] = {&m_Button1,&m_Button2,&m_Button3,&m_Button4,&m_Button5,&m_Button6,
+	CButton* buttonArray[13] = {&m_Button1,&m_Button2,&m_Button3,&m_Button4,&m_Button5,&m_Button6,
 		&m_Button7,&m_Button8,&m_Button9,&m_Button0,&m_CommaButton,&m_BackButton};
 
 	CRect wndRect((1024 - 960) / 2, (768 - 644) / 2, (1024 - 960) / 2 + 960, (768 - 644) / 2 + 660);
@@ -113,13 +113,12 @@ BOOL CFetchRecordsAdvanceQueryDialog::OnInitDialog()
 	int horiSpacer = 91 - 83;
 	int width = right - left;
 
-	std::vector<CButtonST*> numpadButtonVector(buttonArray, buttonArray + 12);
+	std::vector<CButton*> numpadButtonVector(buttonArray, buttonArray + 12);
 	for (size_t i = 0; i < numpadButtonVector.size(); ++i)
 	{
 		CRect numpadButtonRect(left, top, right, buttom);
 		numpadButtonVector[i]->MoveWindow(numpadButtonRect);
-		numpadButtonVector[i]->DrawBorder(FALSE);
-		numpadButtonVector[i]->DrawTransparent(TRUE);
+
 		left += width +horiSpacer;
 		right += width + horiSpacer;
 	}
@@ -127,8 +126,7 @@ BOOL CFetchRecordsAdvanceQueryDialog::OnInitDialog()
 
 	CRect okRect(810, 580, 923, 620);
 	m_ButtonOK.MoveWindow(okRect);
-	m_ButtonOK.DrawBorder(FALSE);
-	m_ButtonOK.DrawTransparent(TRUE);
+
 
 	// TODO: Add extra initialization here
 	m_UserCombo.SetCurSel(0);

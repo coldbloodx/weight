@@ -174,7 +174,7 @@ BOOL CFormulaSelectDialog::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 
-	CButtonST* buttonArray[14] = {&m_Button1,&m_Button2,&m_Button3,&m_Button4,&m_Button5,&m_Button6,&m_Button7,
+	CButton* buttonArray[14] = {&m_Button1,&m_Button2,&m_Button3,&m_Button4,&m_Button5,&m_Button6,&m_Button7,
 		&m_Button8,&m_Button9,&m_Button0,&m_ButtonComma,&m_ButtonBack,&m_ButtonOK,&m_ButtonCancel};
 
 
@@ -196,8 +196,7 @@ BOOL CFormulaSelectDialog::OnInitDialog()
 
 	CRect goBackRect(171, 464, 261, 487);
 	m_GoBack.MoveWindow(goBackRect);
-	m_GoBack.DrawBorder(FALSE);
-	m_GoBack.DrawTransparent(TRUE);
+
 
 	int left = 650;
 	int top = 170;
@@ -207,13 +206,12 @@ BOOL CFormulaSelectDialog::OnInitDialog()
 	int vertSpacer = 236 - 224;
 
 
-	std::vector<CButtonST*> numpadButtonVector(buttonArray, buttonArray + 12);
+	std::vector<CButton*> numpadButtonVector(buttonArray, buttonArray + 12);
 	for (size_t i = 0; i < numpadButtonVector.size(); ++i)
 	{
 		CRect startRect(left, top, left + width, top + height);
 		numpadButtonVector[i]->MoveWindow(startRect, TRUE);
-		numpadButtonVector[i]->DrawBorder(FALSE);
-		numpadButtonVector[i]->DrawTransparent(TRUE);
+
 		if (((i + 1) % 3) == 0)
 		{
 			left = 650;
@@ -266,12 +264,8 @@ BOOL CFormulaSelectDialog::OnInitDialog()
 	}
 
 
-	std::vector<CButtonST*> buttonVector(buttonArray, buttonArray+14);
-	for(size_t i = 0; i < buttonVector.size(); ++i)
-	{
-		buttonVector[i]->DrawBorder(FALSE);
-		buttonVector[i]->DrawTransparent(TRUE);
-	}
+	std::vector<CButton*> buttonVector(buttonArray, buttonArray+14);
+
 	
 	/////////////////////
 	return TRUE;  // return TRUE unless you set the focus to a control

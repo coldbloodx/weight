@@ -9,7 +9,6 @@
 #endif // _MSC_VER > 1000
 
 #include "..\..\DialogClasses\header\FormulaDialog.h"
-#include "..\..\ExternClasses\header\BtnST.h"
 #include "..\..\CustomColorDialog.h"
 /////////////////////////////////////////////////////////////////////////////
 // CWeightDlg dialog
@@ -25,18 +24,18 @@ public:
 	//{{AFX_DATA(CWeightDlg)
 	enum { IDD = IDD_MAIN_DIALOG };
 	CStatic	m_StatusStatic;
-	CButtonST	m_FetchStuffButton;
-	CButtonST	m_QueryButton;
-	CButtonST	m_FormulaWeighButton;
-	CButtonST	m_WeighFreeButton;
-	CButtonST	m_FetchRecordButton;
-	CButtonST	m_StatisticButton;
-	CButtonST	m_OtherSettingsButton;
-	CButtonST	m_UserManagementButton;
-	CButtonST	m_PowerOffButton;
-	CButtonST	m_MaterialManagementButton;
-	CButtonST	m_FormulaManagementButton;
-	CButtonST	m_ChangePasswordButton;
+	CButton	m_FetchStuffButton;
+	CButton	m_QueryButton;
+	CButton	m_FormulaWeighButton;
+	CButton	m_WeighFreeButton;
+	CButton	m_FetchRecordButton;
+	CButton	m_StatisticButton;
+	CButton	m_OtherSettingsButton;
+	CButton	m_UserManagementButton;
+	CButton	m_PowerOffButton;
+	CButton	m_MaterialManagementButton;
+	CButton	m_FormulaManagementButton;
+	CButton	m_ChangePasswordButton;
 	//}}AFX_DATA
 
 	CBrush   m_brBk;//在public中定义  
