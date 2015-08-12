@@ -218,7 +218,7 @@ BOOL CWeightDlg::OnInitDialog()
 	//make the dialog fullscreen
 	ModifyStyleEx(0, WS_EX_APPWINDOW | WS_EX_CONTROLPARENT, SWP_NOSIZE);   
 	ModifyStyle(WS_BORDER | WS_DLGFRAME | WS_THICKFRAME, WS_POPUP, SWP_NOSIZE);  
-	CRect   newRect(0,0,::GetSystemMetrics(SM_CXSCREEN),::GetSystemMetrics(SM_CYSCREEN));     
+    CRect   newRect(0,0,1024,768);
 	MoveWindow(&newRect,false);   
 	
 	//update status
