@@ -26,13 +26,16 @@ CFreeWeightDialog::CFreeWeightDialog(CWnd* pParent /*=NULL*/)
 
 void CFreeWeightDialog::DoDataExchange(CDataExchange* pDX)
 {
-	CDialog::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CFreeWeightDialog)
-	//DDX_Control(pDX, IDC_STATUS_STATIC, m_StatusStatic);
-	DDX_Control(pDX, IDC_COM2DATA_STATIC, m_Com2DataStatic);
-	DDX_Control(pDX, IDC_COM1DATA_STATIC, m_Com1DataStatic);
-	DDX_Control(pDX, IDOK, m_ButtonOK);
-	//}}AFX_DATA_MAP
+    CDialog::DoDataExchange(pDX);
+    //{{AFX_DATA_MAP(CFreeWeightDialog)
+    //DDX_Control(pDX, IDC_STATUS_STATIC, m_StatusStatic);
+    DDX_Control(pDX, IDC_COM2DATA_STATIC, m_Com2DataStatic);
+    DDX_Control(pDX, IDC_COM1DATA_STATIC, m_Com1DataStatic);
+    DDX_Control(pDX, IDOK, m_ButtonOK);
+    //}}AFX_DATA_MAP
+    DDX_Control(pDX, IDC_BIG, fwBig);
+    DDX_Control(pDX, IDC_SMALL, fwSmall);
+    DDX_Control(pDX, IDC_FREEWEIGHT_LABEL, fwLabel);
 }
 
 
@@ -75,8 +78,8 @@ BOOL CFreeWeightDialog::OnInitDialog()
 	CRect wndRect((1024 - 960)  / 2, (768 - 566) / 2 , ((1024 - 960)  / 2 + 960), ((768 - 566) / 2) + 600);
 	this->MoveWindow(wndRect);
 
-	CRect backRect(170, 470, 260, 490);
-	m_ButtonOK.MoveWindow(backRect);
+	//CRect backRect(170, 470, 260, 490);
+	//m_ButtonOK.MoveWindow(backRect);
 
 
 	m_Com1DataStatic.SetWindowText("ÇëÉÔµÈ...");
@@ -97,14 +100,14 @@ BOOL CFreeWeightDialog::OnInitDialog()
 	}
 	SetTimer(1,1000,NULL);
 	
-	m_Com1DataStatic.SetFont(SingletonHelper::getInstance()->simhei80, TRUE);
-	m_Com2DataStatic.SetFont(SingletonHelper::getInstance()->simhei80, TRUE);
-	
-	//HelperFunctions::setButtonStyle(m_ButtonOK, RGB(55,71,158), SingletonHelper::getInstance()->simSong20);
 
+    CStatic* sArray[5] = {&m_Com1DataStatic, &m_Com2DataStatic, &fwLabel, &fwBig, &fwSmall};
+    for(int i = 0; i < 5; ++i){
+        sArray[i]->SetFont(SingletonHelper::getInstance()->simhei80, TRUE);
+    }
 
 	return TRUE;  // return TRUE unless you set the focus to a control
-	// EXCEPTION: OCX Property Pages should return FALSE
+
 }
 
 CFreeWeightDialog::~CFreeWeightDialog()
@@ -151,23 +154,7 @@ void CFreeWeightDialog::OnTimer(UINT nIDEvent)
 	CDialog::OnTimer(nIDEvent);
 }
 
-HBRUSH CFreeWeightDialog::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
-{
-	HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
 
-	// TODO:  Change any attributes of the DC here
-	if(pWnd == this)   
-	{   
-		return m_brBk;   
-	}   
-	if   (nCtlColor   ==   CTLCOLOR_STATIC)   
-	{     
-		pDC->SetBkMode(TRANSPARENT);	//Í¸Ã÷   
-		return (HBRUSH)::GetStockObject(HOLLOW_BRUSH);   
-	} 
-	// TODO:  Return a different brush if the default is not desired
-	return hbr;
-}
 
 void CFreeWeightDialog::OnDestroy()
 {

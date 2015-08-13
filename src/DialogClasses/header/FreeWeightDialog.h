@@ -1,3 +1,4 @@
+#include "afxwin.h"
 #if !defined(AFX_FREEWEIGHTDIALOG_H__FE5C39E4_F2C4_49F7_96D5_612B2A759BE0__INCLUDED_)
 #define AFX_FREEWEIGHTDIALOG_H__FE5C39E4_F2C4_49F7_96D5_612B2A759BE0__INCLUDED_
 
@@ -23,6 +24,9 @@ public:
 	//CStatic	m_StatusStatic;
 	CStatic	m_Com2DataStatic;
 	CStatic	m_Com1DataStatic;
+    CStatic fwBig;
+    CStatic fwSmall;
+    CStatic fwLabel;
 	CButton	m_ButtonOK;
 	//}}AFX_DATA
 	int com1;
@@ -45,8 +49,9 @@ protected:
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 public:
-	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
+
 	afx_msg void OnDestroy();
+
 };
 
 //{{AFX_INSERT_LOCATION}}
