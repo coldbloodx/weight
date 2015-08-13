@@ -48,3 +48,22 @@ void uiFunctions::clearList(CListCtrl& listCtrl)
 	listCtrl.DeleteAllItems();
 	return;
 }
+
+void uiFunctions::setdlgsize(CDialog* pdlg, bool hasBorder)
+{
+	if(hasBorder)
+	{
+		pdlg->ModifyStyleEx(0, WS_EX_APPWINDOW | WS_EX_CONTROLPARENT, SWP_NOSIZE);
+		pdlg->ModifyStyle(WS_BORDER | WS_DLGFRAME | WS_THICKFRAME, WS_POPUP, SWP_NOSIZE);  
+	}
+
+	int width = GetSystemMetrics(SM_CXSCREEN);
+	int height = GetSystemMetrics(SM_CYSCREEN);
+	int wndWidth = 1024;
+	int wndHeight = 768;
+	int xstart = ((width - wndWidth) / 2) + 1;
+	int ystart = ((height - wndHeight) / 2) + 1;
+
+	CRect   newRect(xstart, ystart, xstart + wndWidth, ystart + wndHeight);
+	pdlg->MoveWindow(&newRect,false);   
+}

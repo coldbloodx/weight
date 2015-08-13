@@ -143,6 +143,9 @@ public:
 	COLORREF textColor;
 	COLORREF buttonColor;
 
+	const static int screenWidth = 1024;
+	const static int screenHeight = 768;
+
 	void initFonts();
 
 private:

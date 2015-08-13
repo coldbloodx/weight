@@ -1,3 +1,4 @@
+#include "afxwin.h"
 #if !defined(AFX_FREEWEIGHTDIALOG_H__FE5C39E4_F2C4_49F7_96D5_612B2A759BE0__INCLUDED_)
 #define AFX_FREEWEIGHTDIALOG_H__FE5C39E4_F2C4_49F7_96D5_612B2A759BE0__INCLUDED_
 
@@ -47,6 +48,9 @@ protected:
 public:
 	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 	afx_msg void OnDestroy();
+	CStatic fwLabel;
+	CStatic fwBig;
+	CStatic fwSmall;
 };
 
 //{{AFX_INSERT_LOCATION}}

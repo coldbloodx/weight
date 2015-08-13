@@ -24,6 +24,8 @@
 
 #include "..\..\MainSettingsDialog.h"
 #include "..\..\WeighManagementDialog.h"
+#include "..\..\OtherClasses\helperclass.h"
+#include "..\..\OtherClasses\uiFunctions.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -193,6 +195,12 @@ BOOL CWeightDlg::OnInitDialog()
 		return TRUE;
 	}
 
+	//skip login
+	//SingletonHelper::getInstance()->setUserID("1001");
+	//SingletonHelper::getInstance()->setUserPass(CString("1001"));
+	//SingletonHelper::getInstance()->setUserRight(CString("¹ÜÀíÔ±"));
+	//SingletonHelper::getInstance()->setUserName(CString("admin"));
+
 //	CSplashWnd *pShowDld = new CSplashWnd();
 	CSplashWnd::ShowSplashScreen(this);
 //	delete pShowDld;
@@ -216,10 +224,8 @@ BOOL CWeightDlg::OnInitDialog()
 
 	
 	//make the dialog fullscreen
-	ModifyStyleEx(0, WS_EX_APPWINDOW | WS_EX_CONTROLPARENT, SWP_NOSIZE);   
-	ModifyStyle(WS_BORDER | WS_DLGFRAME | WS_THICKFRAME, WS_POPUP, SWP_NOSIZE);  
-	CRect   newRect(0,0,::GetSystemMetrics(SM_CXSCREEN),::GetSystemMetrics(SM_CYSCREEN));     
-	MoveWindow(&newRect,false);   
+
+	uiFunctions::setdlgsize(this, false);   
 	
 	//update status
 	HelperFunctions::showStatus(m_StatusStatic);

@@ -162,20 +162,20 @@
 #define IDC_NEWPASSCONFIRM_EDIT         1134
 #define IDC_FORMULAID_COMBO             1135
 #define IDC_FORMULAMODIFY_BUTTON        1136
-#define IDC_FORMULANAME  1138
-#define IDC_FORMULAWEIGH 1139
-#define IDC_MATERIALNAME 1140
-#define IDC_WEIGHPERPACK 1142
+#define IDC_FORMULANAME                 1138
+#define IDC_FORMULAWEIGH                1139
+#define IDC_MATERIALNAME                1140
+#define IDC_WEIGHPERPACK                1142
 #define IDC_MATERIALWEIGHNEEDDISPLAY_STATIC 1143
-#define IDC_PACKWEIGHT                       1143
+#define IDC_PACKWEIGHT                  1143
 #define IDC_PACKSNEED_STATIC            1144
-#define IDC_PACKSNEED    1145
-#define IDC_ISMULTIPACKNEEDED      1146
-#define IDC_MATERIALTOTAL 1147
+#define IDC_PACKSNEED                   1145
+#define IDC_ISMULTIPACKNEEDED           1146
+#define IDC_MATERIALTOTAL               1147
 #define IDC_MULTITIMES_NEEDED           1148
-#define IDC_ALREADYWEIGHED        1149
+#define IDC_ALREADYWEIGHED              1149
 #define IDC_PERCENTAGESECOND_STATIC     1150
-#define IDC_WEIGHNEEDED               1150
+#define IDC_WEIGHNEEDED                 1150
 #define IDC_DATE_STATIC                 1152
 #define IDC_TIME_STATIC                 1153
 #define IDC_CLEAR_BUTTON                1154
@@ -242,8 +242,11 @@
 #define IDC_PRIBUTTON                   1240
 #define IDC_SECBUTTON                   1241
 #define IDC_CANCEL                      1243
-#define IDC_RESTNEEDED           1244
+#define IDC_RESTNEEDED                  1244
 #define IDC_EDIT1                       1245
+#define IDC_FWLABEL                     1246
+#define IDC_FWBIGLABEL                  1247
+#define IDC_FWSMALLLABEL                1248
 
 // Next default values for new objects
 // 
@@ -251,7 +254,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        204
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1246
+#define _APS_NEXT_CONTROL_VALUE         1249
 #define _APS_NEXT_SYMED_VALUE           104
 #endif
 #endif

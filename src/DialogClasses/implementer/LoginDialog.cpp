@@ -8,6 +8,7 @@
 #include "..\..\OtherClasses\HelperClass.h"
 #include "..\..\OtherClasses\DatabaseConnector.h"
 #include "..\..\OtherClasses\RecordSetPointer.h"
+#include "..\..\OtherClasses\uiFunctions.h"
 #include "..\..\Splash.h"
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -337,7 +338,8 @@ BOOL CLoginDialog::OnInitDialog()
 	int height = 101 - 35;
 	int horiSpacer = 635 - 623;
 	int vertSpacer = 115 - 101;
-
+	
+	uiFunctions::setdlgsize(this);
 
 		
 	for (size_t i = 0; i < buttonVector.size(); ++i)

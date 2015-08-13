@@ -5,6 +5,10 @@
 #include "..\..\Weight.h"
 #include "..\..\DialogClasses\header\FreeWeightDialog.h"
 #include "..\..\OtherClasses\HelperClass.h"
+#include "..\..\OtherClasses\uiFunctions.h"
+#include <iterator>
+#include <vector>
+using std::vector;
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -33,6 +37,9 @@ void CFreeWeightDialog::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_COM1DATA_STATIC, m_Com1DataStatic);
 	DDX_Control(pDX, IDOK, m_ButtonOK);
 	//}}AFX_DATA_MAP
+	DDX_Control(pDX, IDC_FWLABEL, fwLabel);
+	DDX_Control(pDX, IDC_FWBIGLABEL, fwBig);
+	DDX_Control(pDX, IDC_FWSMALLLABEL, fwSmall);
 }
 
 
@@ -72,11 +79,7 @@ BOOL CFreeWeightDialog::OnInitDialog()
 	m_brBk.CreatePatternBrush(&bmp); 
 	bmp.DeleteObject();   
 
-	CRect wndRect((1024 - 960)  / 2, (768 - 566) / 2 , ((1024 - 960)  / 2 + 960), ((768 - 566) / 2) + 600);
-	this->MoveWindow(wndRect);
-
-	CRect backRect(170, 470, 260, 490);
-	m_ButtonOK.MoveWindow(backRect);
+	uiFunctions::setdlgsize(this);
 
 
 	m_Com1DataStatic.SetWindowText("ÇëÉÔµÈ...");
@@ -97,11 +100,15 @@ BOOL CFreeWeightDialog::OnInitDialog()
 	}
 	SetTimer(1,1000,NULL);
 	
-	m_Com1DataStatic.SetFont(SingletonHelper::getInstance()->simhei80, TRUE);
-	m_Com2DataStatic.SetFont(SingletonHelper::getInstance()->simhei80, TRUE);
-	
-	//HelperFunctions::setButtonStyle(m_ButtonOK, RGB(55,71,158), SingletonHelper::getInstance()->simSong20);
 
+	CStatic* sarray[4] = {&m_Com1DataStatic, &m_Com2DataStatic, 
+				 &fwBig, &fwSmall};
+	
+	for (int i = 0; i < 4; ++i)
+	{
+		sarray[i]->SetFont(SingletonHelper::getInstance()->simhei80, TRUE);
+	}
+	fwLabel.SetFont(SingletonHelper::getInstance()->simHei40, TRUE);
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// EXCEPTION: OCX Property Pages should return FALSE

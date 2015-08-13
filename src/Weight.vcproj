@@ -220,19 +220,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\ExternClasses\implementer\BCMenu.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\ExternClasses\implementer\CeXDib.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\ChangeManufactureNameDialog.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\CustomColorDialog.cpp.bak"
 				>
 			</File>
 			<File
@@ -432,19 +420,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\ExternClasses\header\BCMenu.h"
-				>
-			</File>
-			<File
-				RelativePath=".\ExternClasses\header\CeXDib.h"
-				>
-			</File>
-			<File
 				RelativePath=".\ChangeManufactureNameDialog.h"
-				>
-			</File>
-			<File
-				RelativePath=".\CustomColorDialog.h.bak"
 				>
 			</File>
 			<File
