@@ -30,6 +30,7 @@ CFreeWeightDialog::CFreeWeightDialog(CWnd* pParent /*=NULL*/)
 
 void CFreeWeightDialog::DoDataExchange(CDataExchange* pDX)
 {
+
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CFreeWeightDialog)
 	//DDX_Control(pDX, IDC_STATUS_STATIC, m_StatusStatic);
@@ -38,8 +39,9 @@ void CFreeWeightDialog::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDOK, m_ButtonOK);
 	//}}AFX_DATA_MAP
 	DDX_Control(pDX, IDC_FWLABEL, fwLabel);
-	DDX_Control(pDX, IDC_FWBIGLABEL, fwBig);
-	DDX_Control(pDX, IDC_FWSMALLLABEL, fwSmall);
+	DDX_Control(pDX, IDC_FWBIG, fwBig);
+	DDX_Control(pDX, IDC_FWSMALL, fwSmall);
+
 }
 
 
@@ -79,6 +81,7 @@ BOOL CFreeWeightDialog::OnInitDialog()
 	m_brBk.CreatePatternBrush(&bmp); 
 	bmp.DeleteObject();   
 
+
 	uiFunctions::setdlgsize(this);
 
 
@@ -101,6 +104,7 @@ BOOL CFreeWeightDialog::OnInitDialog()
 	SetTimer(1,1000,NULL);
 	
 
+
 	CStatic* sarray[4] = {&m_Com1DataStatic, &m_Com2DataStatic, 
 				 &fwBig, &fwSmall};
 	
@@ -110,8 +114,9 @@ BOOL CFreeWeightDialog::OnInitDialog()
 	}
 	fwLabel.SetFont(SingletonHelper::getInstance()->simHei40, TRUE);
 
+
 	return TRUE;  // return TRUE unless you set the focus to a control
-	// EXCEPTION: OCX Property Pages should return FALSE
+
 }
 
 CFreeWeightDialog::~CFreeWeightDialog()
@@ -158,23 +163,7 @@ void CFreeWeightDialog::OnTimer(UINT nIDEvent)
 	CDialog::OnTimer(nIDEvent);
 }
 
-HBRUSH CFreeWeightDialog::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
-{
-	HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
 
-	// TODO:  Change any attributes of the DC here
-	if(pWnd == this)   
-	{   
-		return m_brBk;   
-	}   
-	if   (nCtlColor   ==   CTLCOLOR_STATIC)   
-	{     
-		pDC->SetBkMode(TRANSPARENT);	//Í¸Ã÷   
-		return (HBRUSH)::GetStockObject(HOLLOW_BRUSH);   
-	} 
-	// TODO:  Return a different brush if the default is not desired
-	return hbr;
-}
 
 void CFreeWeightDialog::OnDestroy()
 {

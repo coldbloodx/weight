@@ -225,7 +225,9 @@ BOOL CWeightDlg::OnInitDialog()
 	
 	//make the dialog fullscreen
 
+
 	uiFunctions::setdlgsize(this, false);   
+
 	
 	//update status
 	HelperFunctions::showStatus(m_StatusStatic);

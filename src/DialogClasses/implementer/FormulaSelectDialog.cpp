@@ -8,6 +8,7 @@
 #include "..\..\DialogClasses\header\FormulaWeighDialog.h"
 #include "..\..\OtherClasses\DatabaseConnector.h"
 #include "..\..\OtherClasses\RecordSetPointer.h"
+#include "..\..\OtherClasses\uifunctions.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -265,6 +266,8 @@ BOOL CFormulaSelectDialog::OnInitDialog()
 
 
 	std::vector<CButton*> buttonVector(buttonArray, buttonArray+14);
+	
+	uiFunctions::setdlgsize(this);
 
 	
 	/////////////////////

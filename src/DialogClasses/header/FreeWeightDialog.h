@@ -24,6 +24,9 @@ public:
 	//CStatic	m_StatusStatic;
 	CStatic	m_Com2DataStatic;
 	CStatic	m_Com1DataStatic;
+    CStatic fwBig;
+    CStatic fwSmall;
+    CStatic fwLabel;
 	CButton	m_ButtonOK;
 	//}}AFX_DATA
 	int com1;
@@ -46,11 +49,10 @@ protected:
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 public:
-	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
+
 	afx_msg void OnDestroy();
-	CStatic fwLabel;
-	CStatic fwBig;
-	CStatic fwSmall;
+
+
 };
 
 //{{AFX_INSERT_LOCATION}}

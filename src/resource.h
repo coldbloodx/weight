@@ -244,9 +244,12 @@
 #define IDC_CANCEL                      1243
 #define IDC_RESTNEEDED                  1244
 #define IDC_EDIT1                       1245
-#define IDC_FWLABEL                     1246
-#define IDC_FWBIGLABEL                  1247
-#define IDC_FWSMALLLABEL                1248
+#define IDC_BIG                         1246
+#define IDC_FWBIG                       1246
+#define IDC_SMALL                       1247
+#define IDC_FWSMALL                     1247
+#define IDC_FREEWEIGHT_LABEL            1248
+#define IDC_FWLABEL                     1248
 
 // Next default values for new objects
 // 

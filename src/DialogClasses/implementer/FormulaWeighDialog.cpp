@@ -7,7 +7,7 @@
 #include "..\..\OtherClasses\HelperClass.h"
 #include "..\..\OtherClasses\DatabaseConnector.h"
 #include "..\..\OtherClasses\RecordSetPointer.h"
-
+#include "..\..\OtherClasses\uiFunctions.h"
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
@@ -361,7 +361,7 @@ BOOL CFormulaWeighDialog::OnInitDialog()
 
 
 	std::vector<CButton*> buttonVector(buttonArray, buttonArray+14);
-
+	uiFunctions::setdlgsize(this);
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// EXCEPTION: OCX Property Pages should return FALSE
