@@ -7,6 +7,7 @@
 #include "..\..\OtherClasses\HelperClass.h"
 #include "..\..\OtherClasses\DatabaseConnector.h"
 #include "..\..\OtherClasses\RecordSetPointer.h"
+#include "..\..\OtherClasses\uifunctions.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -214,6 +215,7 @@ BOOL CDetailRecordDialog::OnInitDialog()
 
 
 	HelperFunctions::showStatus(m_StatusStatic);
+    uiFunctions::setdlgsize(this);
 	SetTimer(1000, 1000, NULL);
 	return TRUE;  
 	// return TRUE unless you set the focus to a control

@@ -105,7 +105,7 @@ BOOL CFetchRecordDialog::OnInitDialog()
 	
 	std::vector<CButton*> buttonVector(buttonArray, buttonArray + 6);
 
-
+    uiFunctions::setdlgsize(this);
 	
 	//HelperFunctions::showStatus(m_StatusStatic);
 	SetTimer(1000,1000,NULL);

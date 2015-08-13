@@ -122,6 +122,7 @@ void CFormulaDialog::initList()
 	std::vector<CString> headerList(headerArray, headerArray + 4);
 
 	uiFunctions::updateList(m_pRecordset, m_FormulaListCtrl, headerList);
+    uiFunctions::setdlgsize(this);
 }
 
 
@@ -146,15 +147,11 @@ BOOL CFormulaDialog::OnInitDialog()
 
 	m_FetchButton = new CButton;
 	
-	CRect wndRect((1024 - 960) / 2, (768 - 566) / 2, (1024 - 960) / 2 + 960, (768 - 566) / 2 + 580);
-	this->MoveWindow(wndRect);
+    uiFunctions::setdlgsize(this);
 
 	if (m_From == 1)
 	{
-		CBitmap   bmp;   
-		bmp.LoadBitmap(IDB_FORMULAMANAGEMENT);//ÔØÈëÍ¼Æ¬   
-		m_brBk.CreatePatternBrush(&bmp); 
-		bmp.DeleteObject();   
+ 
 
 		m_FormulaAdd->Create("", SW_HIDE, CRect(505,42,620,80), this, 1000);
 		m_FormulaDel->Create("", SW_HIDE, CRect(651,42,767,80), this, 2000);
@@ -173,10 +170,7 @@ BOOL CFormulaDialog::OnInitDialog()
 
 	if (m_From == 0)
 	{
-		CBitmap   bmp;   
-		bmp.LoadBitmap(IDB_FORMULAFETCH);//ÔØÈëÍ¼Æ¬   
-		m_brBk.CreatePatternBrush(&bmp); 
-		bmp.DeleteObject();   
+ 
 		this->SetWindowText("");
 		m_FetchButton->Create("", SW_HIDE, CRect(505,58,620,88), this,3000);
 

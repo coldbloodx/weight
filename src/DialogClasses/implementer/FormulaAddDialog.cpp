@@ -183,13 +183,9 @@ BOOL CFormulaAddDialog::OnInitDialog()
 	//HelperFunctions::showStatus(m_StatusStatic);
 	SetTimer(1000,1000,NULL);
 	
-	CBitmap   bmp;   
-	bmp.LoadBitmap(IDB_FORMULAADD);//ÔØÈëÍ¼Æ¬   
-	m_brBk.CreatePatternBrush(&bmp); 
-	bmp.DeleteObject();   
 
-	CRect wndRect((1024 - 960) / 2, (768 - 695) / 2, (1024 - 960) / 2 + 960, (768 - 695) / 2 + 710);
-	this->MoveWindow(wndRect);
+
+    uiFunctions::setdlgsize(this);
 
 	CRect okRect(681, 643,783, 679);
 	CRect cancelRect(801, 643, 903, 679);

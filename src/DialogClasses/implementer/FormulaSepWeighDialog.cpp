@@ -7,7 +7,7 @@
 #include "..\..\OtherClasses\HelperClass.h"
 #include "..\..\DialogClasses\header\FormulaWeighDialog.h"
 #include "..\..\DialogClasses\header\WeighPerPackDialog.h"
-
+#include "..\..\OtherClasses\uifunctions.h"
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
@@ -185,6 +185,7 @@ BOOL CFormulaSepWeighDialog::OnInitDialog()
 
 	m_Com1Value.SetFont(SingletonHelper::getInstance()->simHei40, TRUE);
 	m_Com2Value.SetFont(SingletonHelper::getInstance()->simHei40, TRUE);
+    uiFunctions::setdlgsize(this);
 
 	return TRUE;  
 }

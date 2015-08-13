@@ -5,6 +5,7 @@
 #include "..\..\Weight.h"
 #include "..\..\DialogClasses\header\WeighPerPackDialog.h"
 #include "..\..\OtherClasses\HelperClass.h"
+#include "..\..\OtherClasses\uifunctions.h"
 #include "..\..\DialogClasses\header\FormulaSepWeighDialog.h"
 
 #ifdef _DEBUG

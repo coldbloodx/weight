@@ -386,13 +386,7 @@ BOOL CQueryDialog::OnInitDialog()
 	//load background
 	CBitmap   bmp;   
 
-	bmp.LoadBitmap(IDB_QUERY);//ÔØÈëÍ¼Æ¬   
-	m_brBk.CreatePatternBrush(&bmp);   
-	bmp.DeleteObject();  
-	
-	CRect wndRect((1024 - 960) / 2, (768 - 566) / 2, (1024 - 960) / 2 + 960, (768 - 566) / 2 + 580);
-	this->MoveWindow(wndRect);
-
+    uiFunctions::setdlgsize(this);
 
 	CRect backRect(170, 455, 260, 480);
 	m_ButtonCancel.MoveWindow(backRect);

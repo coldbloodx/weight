@@ -138,6 +138,7 @@ BOOL CFetchRecordsAdvanceQueryDialog::OnInitDialog()
 
 	//HelperFunctions::showStatus(m_StatusStatic);
 	//SetTimer(1000,1000,NULL);
+    uiFunctions::setdlgsize(this);
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// EXCEPTION: OCX Property Pages should return FALSE
 }

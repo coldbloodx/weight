@@ -97,6 +97,7 @@ BOOL CFormulaAdvanceQueryDialog::OnInitDialog()
 	m_DateCombo.SetCurSel(0);
 	m_AmountSecondEdit.EnableWindow(FALSE);
 	m_DateSecond.EnableWindow(FALSE);
+    uiFunctions::setdlgsize(this);
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// EXCEPTION: OCX Property Pages should return FALSE
 }

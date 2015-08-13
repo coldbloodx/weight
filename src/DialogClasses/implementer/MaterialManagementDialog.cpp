@@ -13,6 +13,7 @@
 #include "..\..\OtherClasses\uiFunctions.h"
 #include "..\..\BatchNumberChange.h"
 
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
@@ -66,15 +67,8 @@ BOOL CMaterialManagementDialog::OnInitDialog()
 	// TODO: Add extra initialization here
 	CBitmap   bmp;   
 
-	bmp.LoadBitmap(IDB_MATERIALMANAGEMENT);//ÔØÈëÍ¼Æ¬   
+        uiFunctions::setdlgsize(this);
 
-	m_brBk.CreatePatternBrush(&bmp);   
-
-	bmp.DeleteObject(); 
-
-	CRect wndRect((1024 - 960) / 2, (768 - 551) / 2 , (1024 - 960) / 2 + 960 , (768 - 551) / 2 + 570);
-	this->MoveWindow(wndRect);
-	
 	CRect addRect(505, 42, 620, 80 );
 	m_Add.MoveWindow(addRect);
 
@@ -99,6 +93,7 @@ BOOL CMaterialManagementDialog::OnInitDialog()
 	CRect listRect(264, 96, 918, 494);
 	m_MaterialList.MoveWindow(listRect);
 
+    uiFunctions::setdlgsize(this);
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE

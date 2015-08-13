@@ -9,6 +9,7 @@
 #include "DialogClasses/header/QueryDialog.h"
 #include "DialogClasses/header/MaterialManagementDialog.h"
 #include "OtherClasses/helperclass.h"
+#include "OtherClasses/uifunctions.h"
 
 
 // CWeighManagementDialog dialog
@@ -95,13 +96,7 @@ BOOL CWeighManagementDialog::OnInitDialog()
 
 	// TODO:  Add extra initialization here
 	//make the dialog fullscreen
-	ModifyStyleEx(0, WS_EX_APPWINDOW | WS_EX_CONTROLPARENT, SWP_NOSIZE);   
-	ModifyStyle(WS_BORDER | WS_DLGFRAME | WS_THICKFRAME, WS_POPUP, SWP_NOSIZE);  
-	CRect   newRect(0,0,
-		SingletonHelper::getInstance()->screenWidth, 
-		SingletonHelper::getInstance()->screenHeight);     
-	MoveWindow(&newRect,false);   
-
+    uiFunctions::setdlgsize(this);
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// EXCEPTION: OCX Property Pages should return FALSE
 }

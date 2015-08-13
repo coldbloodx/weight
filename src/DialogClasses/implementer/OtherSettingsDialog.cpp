@@ -5,6 +5,7 @@
 #include "..\..\Weight.h"
 #include "..\..\DialogClasses\header\OtherSettingsDialog.h"
 #include "..\..\OtherClasses\HelperClass.h"
+#include "..\..\OtherClasses\uifunctions.h"
 #include "..\..\OtherClasses\PatternLoader.h"
 
 #ifdef _DEBUG
@@ -97,15 +98,7 @@ BOOL COtherSettingsDialog::OnInitDialog()
 	CRect restoreRect(654, 303, 771, 343);
 	m_Restore.MoveWindow(restoreRect);
 
-
-
-
-	//CButton* buttonArray[4] = {&m_ButtonOK,&m_ButtonCancel,&m_Backup,&m_Restore};
-	//std::vector<CButton*> buttonVector(buttonArray, buttonArray+4);
-	//for(i = 0; i < buttonVector.size(); ++i)
-	//{
-	//	HelperFunctions::setButtonStyle(*buttonVector[i], RGB(55,71,158), SingletonHelper::getInstance()->simSong20);
-	//}
+    uiFunctions::setdlgsize(this);
 	
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// EXCEPTION: OCX Property Pages should return FALSE
