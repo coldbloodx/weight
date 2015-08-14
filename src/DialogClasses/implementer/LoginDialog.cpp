@@ -301,62 +301,9 @@ BOOL CLoginDialog::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 	
-	CBitmap   bmp;   
-
-	bmp.LoadBitmap(IDB_LOGINDIALOG);//ÔØÈëÍ¼Æ¬   
-
-	m_brBk.CreatePatternBrush(&bmp);   
-
-	bmp.DeleteObject();  
-
-	CRect testRect(100,200,900,594);
-	this->MoveWindow(&testRect,TRUE);
-
-	// TODO: Add extra initialization here
-	buttonVector.push_back(&m_Button1);
-	buttonVector.push_back(&m_Button2);
-	buttonVector.push_back(&m_Button3);
-	buttonVector.push_back(&m_Button4);
-	buttonVector.push_back(&m_Button5);	
-	buttonVector.push_back(&m_Button6);
-	buttonVector.push_back(&m_Button7);	
-	buttonVector.push_back(&m_Button8);
-	buttonVector.push_back(&m_Button9);
-	buttonVector.push_back(&m_Button0);
-	buttonVector.push_back(&m_ButtonComma);
-	buttonVector.push_back(&m_ButonBack);
-
-	
-	CRect rectOK(93, 295, 256, 352);
-	CRect rectCancel(313, 295, 477, 352);
-	m_ButtonOK.MoveWindow(rectOK, TRUE);
-	m_ButtonCancel.MoveWindow(rectCancel, TRUE);
-
-	int left = 557;
-	int top = 35;
-	int width = 623 - 557;
-	int height = 101 - 35;
-	int horiSpacer = 635 - 623;
-	int vertSpacer = 115 - 101;
 	
 	uiFunctions::setdlgsize(this);
 
-		
-	for (size_t i = 0; i < buttonVector.size(); ++i)
-	{
-		CRect startRect(left, top, left + width, top + height);
-		buttonVector[i]->MoveWindow(startRect, TRUE);
-
-		if (((i + 1) % 3) == 0)
-		{
-			left = 557;
-			top = startRect.bottom + vertSpacer;
-		}
-		else
-		{
-			left = startRect.right + horiSpacer;
-		}
-	}
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 				// EXCEPTION: OCX Property Pages should return FALSE
