@@ -71,43 +71,13 @@ BOOL CStatisticDialog::OnInitDialog()
 	initListHeader();
 	refreshList();
 
-	CBitmap   bmp;   
-	bmp.LoadBitmap(IDB_STATISTIC);//ÔØÈëÍ¼Æ¬   
-	m_brBk.CreatePatternBrush(&bmp); 
-	bmp.DeleteObject();   
-
-	CRect wndRect((1024 - 960) / 2, (768 - 577) / 2, (1024 - 960) / 2 + 960, (768 - 577) / 2 + 590);
-	this->MoveWindow(wndRect);
-
-	CRect queryRect(280, 460, 413, 498);
-	m_Query.MoveWindow(queryRect);
-
-	CRect advanceRect(438, 460, 570, 498);
-	m_Advance.MoveWindow(advanceRect);
-
-	CRect clearRect(595, 460, 727, 498);
-	m_Clear.MoveWindow(clearRect);
-
-	CRect allRect(752, 460, 884, 498);
-	m_All.MoveWindow(allRect);
-
-	CRect backRect(170, 452, 259, 477);
-	m_ButtonOK.MoveWindow(backRect);
-
-
 	CButton* buttonArray[6] = {&m_Clear,&m_ButtonOK,&m_Query,&m_Advance,&m_All,&m_Detail};
 	std::vector<CButton*> buttonVector(buttonArray, buttonArray+6);
-	
-
-
-	CRect statisticRect(259, 99, 920, 454);
-	m_StatisticList.MoveWindow(statisticRect);
 
 	
-	m_Detail.SetWindowText("");
-	m_Detail.EnableWindow(FALSE);
 
-	//SetTimer(1000,1000,NULL);
+
+	uiFunctions::setdlgsize(this, &m_ButtonOK);
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE
