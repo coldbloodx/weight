@@ -93,33 +93,8 @@ BOOL CFormulaSepWeighDialog::OnInitDialog()
 	CDialog::OnInitDialog();
 
 	// TODO: Add extra initialization here
-	CBitmap   bmp;   
-	bmp.LoadBitmap(IDB_FORMULASEPWEIGHT);//ÔØÈëÍ¼Æ¬   
-	m_brBk.CreatePatternBrush(&bmp); 
-	bmp.DeleteObject();   
 
-	CRect wndRect(0, 20, 1024, 768 - 50);
-	this->MoveWindow(wndRect);
-
-	CRect backRect(170, 490, 267, 517);
-	m_CancalButton.MoveWindow(backRect);
-
-
-	CRect okRect(322, 569, 468, 612);
-	m_ButtonOK.MoveWindow(okRect);
-
-
-	CRect sepRect(312, 126, 470, 167);
-	m_ButtonDivide.MoveWindow(sepRect);
-
-
-	CRect priButton(550, 582, 707, 622);
-	m_PriButton.MoveWindow(priButton);
-
-
-	CRect secButton(790, 582, 954, 622);
-	m_SecButton.MoveWindow(secButton);
-
+    
 
 	//set reader timer;
 	SetTimer(1,1000,NULL);

@@ -45,7 +45,6 @@ void CFormulaWeighDialog::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_BUTTON0, m_Button0);
 	DDX_Control(pDX, IDC_BUTTON_COMMA, m_ButtonComma);
 	DDX_Control(pDX, IDC_BUTTON_BACK, m_ButtonBack);
-	DDX_Control(pDX, IDC_BUTTONGOBACK, m_buttonGoBack);
 	DDX_Control(pDX, IDC_WEIGHT_STATIC, m_WeightStatic);
 	DDX_Control(pDX, IDC_PRINTERCHECK, m_PrintCheck);
 }
@@ -69,7 +68,6 @@ BEGIN_MESSAGE_MAP(CFormulaWeighDialog, CDialog)
 	//}}AFX_MSG_MAP
 	ON_WM_CTLCOLOR()
 	ON_BN_CLICKED(IDOK, &CFormulaWeighDialog::OnBnClickedOk)
-	ON_BN_CLICKED(IDC_BUTTONGOBACK, &CFormulaWeighDialog::OnBnClickedButtongoback)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -83,26 +81,6 @@ BOOL CFormulaWeighDialog::OnInitDialog()
 	// TODO: Add extra initialization here
 	std::vector<std::string> materialVector;
 	std::string separator(",;");
-	
-	CBitmap   bmp;   
-	bmp.LoadBitmap(IDB_FORMULAINDICATOR);//载入图片   
-	m_brBk.CreatePatternBrush(&bmp);   
-	bmp.DeleteObject();  
-
-
-	CRect wndRect(0, 20, 1024, 755);
-	this->MoveWindow(wndRect);
-	
-	CRect okRect(592, 594, 740, 638);
-	m_ButtonOK.MoveWindow(okRect);
-
-	CRect cancelRect(827, 594, 976, 638);
-	m_ButtonCancel.MoveWindow(cancelRect);
-
-	CRect goBackRect(167, 554, 265, 585);
-	m_buttonGoBack.MoveWindow(goBackRect);
-
-
 
 	HelperFunctions::ParseKeywords(
 	SingletonHelper::getInstance()->getMaterials(),
@@ -112,13 +90,10 @@ BOOL CFormulaWeighDialog::OnInitDialog()
 	
 	totalWeigh = atof(SingletonHelper::getInstance()->getFormulaWeigh().GetBuffer(SingletonHelper::getInstance()->getFormulaWeigh().GetLength()));
 	
-	CRect missionRect(670, 50, 760, 70);
-	m_MissionStatic.MoveWindow(missionRect);
-
 	m_MissionStatic.SetWindowText(SingletonHelper::getInstance()->getFormulaName());
-	
-	CRect weightRect(868, 50, 995, 70 );
-	m_WeightStatic.MoveWindow(weightRect);
+
+
+
 	m_WeightStatic.SetWindowText(SingletonHelper::getInstance()->getFormulaWeigh() + "公斤");
 
 	composition *tempComposition = NULL;
@@ -195,17 +170,18 @@ BOOL CFormulaWeighDialog::OnInitDialog()
 	int batchNumberEditID = 60000;
 	int lineNumberEditID = 61000;
 	
-	int controlTop = 138;
-	int controlLeft = 268;
+	int controlTop = 150;
+	int controlLeft = 80;
 	int controlWidth = 150;
 	int controlHeight = 25;
 	int rowSpace = 10;
-
-	int nameWidth = 378 - 268;
-	int weightWidth = 528 - 388;
-	int buttonWidth = 660 - 543;
-	int flagWidth = 747 - 674;
-	int editWidth = 1000 - 756;
+    
+	int nameWidth = 50;
+	int weightWidth = 120;
+	int buttonWidth = 60;
+	int flagWidth = 90;
+	int editWidth = 250;
+    int splitorWidth = 3;
 	
 	CRect rect(controlLeft, controlTop, (controlLeft + nameWidth), (controlTop + controlHeight) );
 	for (size_t j = 0; j < SingletonHelper::getInstance()->compositions.size(); ++j)
@@ -234,8 +210,8 @@ BOOL CFormulaWeighDialog::OnInitDialog()
 		materialNameVector.push_back(materialNameStatic);
 		
 		//调整控件位置
-		rect.left = 381 + 3;
-		rect.right = rect.left + weightWidth + 3;
+		rect.left = controlLeft + nameWidth + splitorWidth;
+		rect.right = rect.left + weightWidth + splitorWidth;
 		
 
 		//创建材料重量static控件
@@ -253,12 +229,12 @@ BOOL CFormulaWeighDialog::OnInitDialog()
 		materialWeighVector.push_back(materialWeighStatic);
 		
 		//调整控件位置
-		rect.left = 540 + 2;
-		rect.right = rect.left + buttonWidth + 2;
+		rect.left = rect.right + 2;
+		rect.right = rect.left + buttonWidth + splitorWidth;
 		
 		//创建分次称量按钮
 		CRect buttonRect = rect;
-		buttonRect.top = buttonRect.top - 2;
+
 		sepWeightButton = new CButton;
 		sepWeightButton->Create("", 
 			BS_PUSHBUTTON | WS_VISIBLE | WS_CHILD | ES_CENTER, 
@@ -268,12 +244,13 @@ BOOL CFormulaWeighDialog::OnInitDialog()
 
 
 		//HelperFunctions::setButtonStyle(*sepWeightButton, RGB(55,71,158), SingletonHelper::getInstance()->simSong20);
+        sepWeightButton->SetWindowText("称重");
 		sepWeightButton->ShowWindow(SW_SHOW);
 		sepWeightButtonVector.push_back(sepWeightButton);
 		
 		//调整控件位置
-		rect.left = 675 + 2;
-		rect.right =  rect.left  + flagWidth + 2;
+		rect.left = rect.right + splitorWidth;
+		rect.right =  rect.left  + flagWidth + splitorWidth;
 		
 		//创建称量标志
 		weighedFlagStatic = new CStatic;
@@ -295,8 +272,8 @@ BOOL CFormulaWeighDialog::OnInitDialog()
 		weighedFlagVector.push_back(weighedFlagStatic);
 		
 		//调整控件位置
-		rect.left = 758 ;
-		rect.right = rect.left + editWidth / 2 - 4;
+		rect.left = rect.right + splitorWidth ;
+		rect.right = rect.left + editWidth / 2 - splitorWidth;
 		
 		//创建批号输入editbox
 		CRect batchNumerRect(rect);
@@ -314,8 +291,8 @@ BOOL CFormulaWeighDialog::OnInitDialog()
 		batchNumberEditVector.push_back(batchNumberEdit);
 		
 		//创建条码输入editbox
-		rect.left = rect.right + 6;
-		rect.right = rect.left + editWidth / 2 - 4;
+		rect.left = rect.right + splitorWidth;
+		rect.right = rect.left + editWidth / 2 ;
 		
 		CRect lineNumerRect(rect);
 		//batchNumerRect.right += 150;
@@ -342,26 +319,9 @@ BOOL CFormulaWeighDialog::OnInitDialog()
 	CButton* buttonArray[14] = {&m_Button1,&m_Button2,&m_Button3,&m_Button4,&m_Button5,&m_Button6,&m_Button7,
 		&m_Button8,&m_Button9,&m_Button0,&m_ButtonComma,&m_ButtonBack,&m_ButtonOK,&m_ButtonCancel};
 
-	int left = 312;
-	int top = 535;
-	int right = 359;
-	int buttom = 582;
-	int horiSpacer = 367 - 359 + 1;
-	int width = right - left;
-
-
-	std::vector<CButton*> numpadButtonVector(buttonArray, buttonArray + 12);
-	for (size_t i = 0; i < numpadButtonVector.size(); ++i)
-	{
-		CRect numpadButtonRect(left, top, right, buttom);
-		numpadButtonVector[i]->MoveWindow(numpadButtonRect);
-		left += width +horiSpacer;
-		right += width + horiSpacer;
-	}
-
 
 	std::vector<CButton*> buttonVector(buttonArray, buttonArray+14);
-	uiFunctions::setdlgsize(this);
+	uiFunctions::setdlgsize(this, &m_ButtonCancel, &m_ButtonOK);
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// EXCEPTION: OCX Property Pages should return FALSE
@@ -797,8 +757,3 @@ void CFormulaWeighDialog::OnBnClickedOk()
 	OnOK();
 }
 
-void CFormulaWeighDialog::OnBnClickedButtongoback()
-{
-	// TODO: Add your control notification handler code here
-	this->OnCancel();
-}

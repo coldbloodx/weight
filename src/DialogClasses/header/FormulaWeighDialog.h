@@ -90,8 +90,6 @@ protected:
 public:
 	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 	afx_msg void OnBnClickedOk();
-	CButton m_buttonGoBack;
-	afx_msg void OnBnClickedButtongoback();
 	CStatic m_WeightStatic;
 	CButton m_PrintCheck;
 };
