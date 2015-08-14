@@ -70,6 +70,7 @@ protected:
 	afx_msg void OnButton0();
 	afx_msg void OnButtonComma();
 	afx_msg void OnButtonBack();
+
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 public:

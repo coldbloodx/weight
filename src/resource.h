@@ -32,7 +32,6 @@
 #define IDD_FORMULAADVANCEQUERY_DIALOG  157
 #define IDD_NAVIGATOR_PANEL             159
 #define IDB_SPLASH                      161
-#define IDD_COLORDIALOG                 162
 #define IDR_MAINFRAME                   166
 #define IDB_LOGINDIALOG                 167
 #define IDB_MAINPAGE                    168

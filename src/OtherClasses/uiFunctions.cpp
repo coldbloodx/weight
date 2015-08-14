@@ -49,12 +49,32 @@ void uiFunctions::clearList(CListCtrl& listCtrl)
 	return;
 }
 
-void uiFunctions::setdlgsize(CDialog* pdlg, bool hasBorder)
+void uiFunctions::setdlgsize(CDialog* pdlg, CButton* pback, CButton* pok, bool hasBorder)
 {
 	if(hasBorder)
 	{
 		pdlg->ModifyStyleEx(0, WS_EX_APPWINDOW | WS_EX_CONTROLPARENT, SWP_NOSIZE);
 		pdlg->ModifyStyle(WS_BORDER | WS_DLGFRAME | WS_THICKFRAME, WS_POPUP, SWP_NOSIZE);  
+	}
+
+	if(pback)
+	{
+		int bxstart = 768;
+		int bystart = 650;
+		int bwidth  = 200;
+		int bheight = 60;
+		CRect brect(bxstart, bystart, bxstart + bwidth, bystart + bheight);
+		pback->MoveWindow(&brect, false);
+	}
+
+	if(pok)
+	{
+		int bxstart = 768 - 200 - 20;
+		int bystart = 650;
+		int bwidth = 200;
+		int bheight = 60;
+		CRect brect(bxstart, bystart, bxstart + bwidth, bystart + bheight);
+		pok->MoveWindow(&brect, false);
 	}
 
 	int width = GetSystemMetrics(SM_CXSCREEN);

@@ -55,7 +55,7 @@ void CFormulaSelectDialog::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_BUTTON_COMMA, m_ButtonComma);
 	DDX_Control(pDX, IDC_BUTTON_BACK, m_ButtonBack);
 	//}}AFX_DATA_MAP
-	DDX_Control(pDX, IDC_GOBACK, m_GoBack);
+
 }
 
 
@@ -74,10 +74,12 @@ BEGIN_MESSAGE_MAP(CFormulaSelectDialog, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON0, OnButton0)
 	ON_BN_CLICKED(IDC_BUTTON_COMMA, OnButtonComma)
 	ON_BN_CLICKED(IDC_BUTTON_BACK, OnButtonBack)
+
+
 	//}}AFX_MSG_MAP
 	ON_BN_CLICKED(IDOK, &CFormulaSelectDialog::OnBnClickedOk)
 	ON_WM_CTLCOLOR()
-	ON_BN_CLICKED(IDC_GOBACK, &CFormulaSelectDialog::OnBnClickedGoback)
+
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -175,55 +177,8 @@ BOOL CFormulaSelectDialog::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 
-	CButton* buttonArray[14] = {&m_Button1,&m_Button2,&m_Button3,&m_Button4,&m_Button5,&m_Button6,&m_Button7,
-		&m_Button8,&m_Button9,&m_Button0,&m_ButtonComma,&m_ButtonBack,&m_ButtonOK,&m_ButtonCancel};
-
-
 	CString sqlState = "SELECT NAME FROM FORMULAS";
 	
-	CBitmap   bmp;   
-	bmp.LoadBitmap(IDB_FORMULAINPUT);//ÔØÈëÍ¼Æ¬   
-	m_brBk.CreatePatternBrush(&bmp); 
-	bmp.DeleteObject(); 
-
-	CRect wndRect((1024 -960) / 2, (768 - 607) / 2, (1024 -960) / 2 + 960, (768 - 607) / 2 + 620);
-	this->MoveWindow(wndRect);
-
-	CRect okRect(505, 55, 622, 93);
-	m_ButtonOK.MoveWindow(okRect);
-
-	CRect cancelRect(652, 55, 767, 93);
-	m_ButtonCancel.MoveWindow(cancelRect);
-
-	CRect goBackRect(171, 464, 261, 487);
-	m_GoBack.MoveWindow(goBackRect);
-
-
-	int left = 650;
-	int top = 170;
-	int width = 705 - 650;
-	int height = 225 - 170;
-	int horiSpacer = 716 - 705;
-	int vertSpacer = 236 - 224;
-
-
-	std::vector<CButton*> numpadButtonVector(buttonArray, buttonArray + 12);
-	for (size_t i = 0; i < numpadButtonVector.size(); ++i)
-	{
-		CRect startRect(left, top, left + width, top + height);
-		numpadButtonVector[i]->MoveWindow(startRect, TRUE);
-
-		if (((i + 1) % 3) == 0)
-		{
-			left = 650;
-			top = startRect.bottom + vertSpacer;
-		}
-		else
-		{
-			left = startRect.right + horiSpacer;
-		}
-	}
-
 	//init recordset pointer
 	RecordSetPointer::getInstanceRef().setSqlState(sqlState);
 
@@ -263,11 +218,8 @@ BOOL CFormulaSelectDialog::OnInitDialog()
 	{
 		AfxMessageBox(e.Description());
 	}
-
-
-	std::vector<CButton*> buttonVector(buttonArray, buttonArray+14);
 	
-	uiFunctions::setdlgsize(this);
+	uiFunctions::setdlgsize(this, &m_ButtonCancel, &m_ButtonOK);
 
 	
 	/////////////////////
@@ -324,6 +276,20 @@ void CFormulaSelectDialog::OnSelchangeFormulaselectCombo()
 	}
 	m_FormulaIDCombo.SetCurSel(0);
 }
+
+void CFormulaSelectDialog::OnButtonBack() 
+{
+		// TODO: Add your control notification handler code here
+			if (m_FocusedID != IDC_WEIGH_EDIT)
+			{
+					return;
+				}
+		CWnd * pWnd = GetDlgItem(m_FocusedID);
+		::SetFocus(pWnd->GetSafeHwnd());
+		keybd_event(VK_BACK, 0, 0, 0);
+	}
+
+
 
 void CFormulaSelectDialog::OnButton1() 
 {
@@ -449,17 +415,6 @@ void CFormulaSelectDialog::OnButtonComma()
 	keybd_event(190, 0, 0, 0);
 }
 
-void CFormulaSelectDialog::OnButtonBack() 
-{
-	// TODO: Add your control notification handler code here
-	if (m_FocusedID != IDC_WEIGH_EDIT)
-	{
-		return;
-	}
-	CWnd * pWnd = GetDlgItem(m_FocusedID);
-	::SetFocus(pWnd->GetSafeHwnd());
-	keybd_event(VK_BACK, 0, 0, 0);
-}
 
 BOOL CFormulaSelectDialog::OnCommand(WPARAM wParam, LPARAM lParam) 
 {

@@ -75,15 +75,8 @@ BOOL CFreeWeightDialog::OnInitDialog()
 	com1 = HelperFunctions::initCom(SingletonHelper::getInstance()->com1,
 		CString("COM1"),
 		comRate);
-	
-	CBitmap   bmp;   
-	bmp.LoadBitmap(IDB_FREEWEIGHT);//‘ÿ»ÎÕº∆¨   
-	m_brBk.CreatePatternBrush(&bmp); 
-	bmp.DeleteObject();   
 
-
-	uiFunctions::setdlgsize(this);
-
+	uiFunctions::setdlgsize(this, &m_ButtonOK);
 
 	m_Com1DataStatic.SetWindowText("«Î…‘µ»...");
 	m_Com2DataStatic.SetWindowText("«Î…‘µ»...");
@@ -105,8 +98,7 @@ BOOL CFreeWeightDialog::OnInitDialog()
 	
 
 
-	CStatic* sarray[4] = {&m_Com1DataStatic, &m_Com2DataStatic, 
-				 &fwBig, &fwSmall};
+	CStatic* sarray[4] = {&m_Com1DataStatic, &m_Com2DataStatic, &fwBig, &fwSmall};
 	
 	for (int i = 0; i < 4; ++i)
 	{
