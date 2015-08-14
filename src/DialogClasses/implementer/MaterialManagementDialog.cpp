@@ -67,33 +67,12 @@ BOOL CMaterialManagementDialog::OnInitDialog()
 	// TODO: Add extra initialization here
 	CBitmap   bmp;   
 
-        uiFunctions::setdlgsize(this);
-
-	CRect addRect(505, 42, 620, 80 );
-	m_Add.MoveWindow(addRect);
-
-
 	//È¥µôÉ¾³ý°´Å¥£¡
 	//CRect delRect(650, 43, 765, 80);
-	CRect delRect(0, 0, 0, 0);
-	m_Del.MoveWindow(delRect);
+	//CRect delRect(0, 0, 0, 0);
+	//m_Del.MoveWindow(delRect);
 
-
-	//CRect changeRect(792, 42, 905, 80);
-	CRect changeRect(650, 43, 765, 80);
-	m_BatchNumberChange.MoveWindow(changeRect);
-
-
-
-	CRect backRect(175, 455, 262, 478);
-	m_ButtonOK.MoveWindow(backRect);
-
-
-
-	CRect listRect(264, 96, 918, 494);
-	m_MaterialList.MoveWindow(listRect);
-
-    uiFunctions::setdlgsize(this);
+    uiFunctions::setdlgsize(this, &m_ButtonOK);
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE

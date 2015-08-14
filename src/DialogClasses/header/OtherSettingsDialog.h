@@ -53,8 +53,6 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	
-	CButton m_Back;
-	afx_msg void OnBnClickedBack();
 };
 
 //{{AFX_INSERT_LOCATION}}

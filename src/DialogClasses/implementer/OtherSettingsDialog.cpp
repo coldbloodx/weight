@@ -37,7 +37,6 @@ void COtherSettingsDialog::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_COM2RATE_COMBO, m_Com2Rate);
 	DDX_Control(pDX, IDC_COM1RATE_COMBO, m_Com1Rate);
 	//}}AFX_DATA_MAP
-	DDX_Control(pDX, IDC_BACK, m_Back);
 }
 
 
@@ -47,7 +46,6 @@ BEGIN_MESSAGE_MAP(COtherSettingsDialog, CDialog)
 	ON_BN_CLICKED(IDC_RESTOREDATABASE, OnRestoredatabase)
 	//}}AFX_MSG_MAP
 	ON_WM_CTLCOLOR()
-	ON_BN_CLICKED(IDC_BACK, &COtherSettingsDialog::OnBnClickedBack)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -75,30 +73,7 @@ BOOL COtherSettingsDialog::OnInitDialog()
 	filePath = buffer;
 	oldFileName = filePath + "\\" + fileName;
 
-	CRect wndRect((1024 -960) / 2, (768 - 571) / 2, (1024 -960) / 2 + 960,  (768 - 571) / 2 + 595);
-	this->MoveWindow(wndRect);
-
-	CRect backRect(165, 470, 255, 490);
-	m_Back.MoveWindow(backRect);
-
-
-
-	CRect okRect(505, 50, 622, 88);
-	m_ButtonOK.MoveWindow(okRect);
-
-
-	CRect cancelRect(655, 50, 771, 88);
-	m_ButtonCancel.MoveWindow(cancelRect);
-
-
-	CRect backupRect(503, 303, 620, 343);
-	m_Backup.MoveWindow(backupRect);
-
-
-	CRect restoreRect(654, 303, 771, 343);
-	m_Restore.MoveWindow(restoreRect);
-
-    uiFunctions::setdlgsize(this);
+    uiFunctions::setdlgsize(this, &m_ButtonCancel, &m_ButtonOK);
 	
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// EXCEPTION: OCX Property Pages should return FALSE
@@ -162,9 +137,3 @@ COtherSettingsDialog::~COtherSettingsDialog()
 
 }
 
-
-void COtherSettingsDialog::OnBnClickedBack()
-{
-	// TODO: Add your control notification handler code here
-	CDialog::OnCancel();
-}

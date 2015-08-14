@@ -122,7 +122,6 @@ void CFormulaDialog::initList()
 	std::vector<CString> headerList(headerArray, headerArray + 4);
 
 	uiFunctions::updateList(m_pRecordset, m_FormulaListCtrl, headerList);
-    uiFunctions::setdlgsize(this);
 }
 
 
@@ -142,57 +141,27 @@ BOOL CFormulaDialog::OnInitDialog()
 	initList();
 
 	m_FormulaAdd = new CButton;
-
 	m_FormulaDel	= new CButton;
-
 	m_FetchButton = new CButton;
 	
     uiFunctions::setdlgsize(this);
 
 	if (m_From == 1)
 	{
- 
-
-		m_FormulaAdd->Create("", SW_HIDE, CRect(505,42,620,80), this, 1000);
-		m_FormulaDel->Create("", SW_HIDE, CRect(651,42,767,80), this, 2000);
-
-
-		m_FormulaAdd->SetWindowText("增加配方");
-		m_FormulaDel->SetWindowText("删除配方");
+		m_FormulaAdd->Create("增加配方", SW_HIDE, CRect(574 - 30, 650, 574 - 30 + 200, 650 + 60), this, 1000);
 		m_FormulaAdd->ShowWindow(SW_SHOW);
+		m_FormulaDel->Create("删除配方", SW_HIDE, CRect(322, 650, 322 + 200, 650 + 60), this, 2000);
 		m_FormulaDel->ShowWindow(SW_SHOW);
-
-		CRect listRect(261, 95, 921, 497);
-		m_FormulaListCtrl.MoveWindow(listRect);
-		//buttonVector.push_back(m_FormulaAdd);
-		//buttonVector.push_back(m_FormulaDel);
+		
 	}
 
 	if (m_From == 0)
 	{
- 
-		this->SetWindowText("");
-		m_FetchButton->Create("", SW_HIDE, CRect(505,58,620,88), this,3000);
-
+		m_FetchButton->Create("成品领取", SW_HIDE, CRect(574 - 30, 650, 574 - 30 + 200, 650 + 60), this, 3000);
 		m_FetchButton->ShowWindow(SW_SHOW);
-		//buttonVector.push_back(m_FetchButton);
-		CRect listRect(265, 107, 905, 497);
-		m_FormulaListCtrl.MoveWindow(listRect);
 	}
 
-
-	CRect backRect(170,450,260,475);
-	m_ButtonOK.MoveWindow(backRect);
-
-
-
-	//buttonVector.push_back(&m_ButtonOK);
-
-	//for(size_t i = 0; i < buttonVector.size(); ++i)
-	//{
-	//	HelperFunctions::setButtonStyle(*buttonVector[i], RGB(55,71,158), SingletonHelper::getInstance()->simSong20);
-	//}
-
+	uiFunctions::setdlgsize(this, &m_ButtonOK);
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// EXCEPTION: OCX Property Pages should return FALSE
 }

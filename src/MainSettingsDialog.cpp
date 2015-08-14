@@ -65,10 +65,7 @@ HBRUSH CMainSettingsDialog::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 BOOL CMainSettingsDialog::OnInitDialog()
 {
 	CDialog::OnInitDialog();
-	CBitmap   bmp;   
-	bmp.LoadBitmap(IDB_MAINSETTINGS);//‘ÿ»ÎÕº∆¨   
-	m_brBk.CreatePatternBrush(&bmp); 
-	bmp.DeleteObject();   
+
 	// TODO:  Add extra initialization here
 	int left = 200;
 	int top = 160;
@@ -96,11 +93,6 @@ BOOL CMainSettingsDialog::OnInitDialog()
 			left = startRect.right + horiSpacer;
 		}
 	}
-
-	CRect rectBack(382, 578, 643, 640);
-	m_goBackButton.MoveWindow(rectBack);
-
-
 
 	//make the dialog fullscreen
     uiFunctions::setdlgsize(this);  
