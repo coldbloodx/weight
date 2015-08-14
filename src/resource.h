@@ -30,7 +30,6 @@
 #define IDD_FETCHRECORD_DIALOG          153
 #define IDD_FETCHRECORDADVANCEQUERY_DIALOG 155
 #define IDD_FORMULAADVANCEQUERY_DIALOG  157
-#define IDD_NAVIGATOR_PANEL             159
 #define IDB_SPLASH                      161
 #define IDR_MAINFRAME                   166
 #define IDB_LOGINDIALOG                 167
@@ -223,14 +222,6 @@
 #define IDC_PRINT_CHECK                 1220
 #define IDC_MISSION_STATIC              1221
 #define IDC_WEIGHT_STATIC               1222
-#define IDC_CURRENT_TIME_STATIC         1223
-#define IDC_CURRENT_DATE_STATIC         1224
-#define IDC_CURRENT_USER_STATIC         1225
-#define IDC_CURRENTJOB_STATIC           1226
-#define IDC_DATE_DYNAMIC                1227
-#define IDC_TIME_DYNAMIC                1228
-#define IDC_USER_DYNAMIC                1229
-#define IDC_JOB_DYNAMIC                 1230
 #define IDC_BACK                        1232
 #define IDC_GOBACK                      1233
 #define IDC_BUTTONGOBACK                1234

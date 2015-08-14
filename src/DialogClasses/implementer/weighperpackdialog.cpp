@@ -53,7 +53,6 @@ void CWeighPerPackDialog::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_WEIGHPERPACK_EDIT, m_WeighPerPack);
 	//}}AFX_DATA_MAP
 	DDX_Control(pDX, IDC_GROSSWEIGHT, m_GrossWeight);
-	DDX_Control(pDX, IDC_GOBACKBUTTON, m_GoBack);
 }
 
 
@@ -75,7 +74,6 @@ BEGIN_MESSAGE_MAP(CWeighPerPackDialog, CDialog)
 	//}}AFX_MSG_MAP
 	ON_BN_CLICKED(IDOK, &CWeighPerPackDialog::OnBnClickedOk)
 	ON_WM_CTLCOLOR()
-	ON_BN_CLICKED(IDC_GOBACKBUTTON, &CWeighPerPackDialog::OnBnClickedGobackbutton)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -261,58 +259,7 @@ BOOL CWeighPerPackDialog::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 	
-	//HelperFunctions::showStatus(m_StatusStatic);
-	
-	//prepare for ui
-
-	CBitmap   bmp;   
-	bmp.LoadBitmap(IDB_DIVIDE);//ÔØÈëÍ¼Æ¬   
-	m_brBk.CreatePatternBrush(&bmp);   
-	bmp.DeleteObject();  
-	
-	CRect wndRect((1024 - 960) / 2, (768 - 580) / 2, (1024 - 960) / 2 + 960, (768 - 580) / 2 + 595) ;
-	this->MoveWindow(wndRect);
-	
-	CButton* buttonArray[] = {&m_Button1,&m_Button2,&m_Button3,&m_Button4,&m_Button5,&m_Button6,&m_Button7,
-		&m_Button8,&m_Button9,&m_Button0,&m_ButtonComma,&m_ButtonBack};
-	
-	int left = 655;
-	int top = 161;
-	int width = 714 - 655;
-	int height = 220 - 161;
-	int horiSpacer = 725 - 714;
-	int vertSpacer = 231 - 220;
-
-	std::vector<CButton*> buttonVector(buttonArray, buttonArray + 12);
-
-	for (size_t i = 0; i < buttonVector.size(); ++i)
-	{
-		CRect startRect(left, top, left + width, top + height);
-		buttonVector[i]->MoveWindow(startRect, TRUE);
-
-		if (((i + 1) % 3) == 0)
-		{
-			left = 655;
-			top = startRect.bottom + vertSpacer;
-		}
-		else
-		{
-			left = startRect.right + horiSpacer;
-		}
-	}
-
-	CRect okRect(506, 43, 627, 84);
-	m_ButtonOK.MoveWindow(okRect);
-
-
-	CRect cancelRect(658, 43, 778, 84);
-	m_ButtonCancel.MoveWindow(cancelRect);
-
-	
-	CRect goBackRect(162, 467, 253, 492);
-	m_GoBack.MoveWindow(goBackRect);
-
-
+    uiFunctions::setdlgsize(this, &m_ButtonCancel, &m_ButtonOK);
 	m_GrossWeight.SetWindowText("1");
 	/////////////////////
 	return TRUE;  // return TRUE unless you set the focus to a control
@@ -346,11 +293,6 @@ HBRUSH CWeighPerPackDialog::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 	return hbr;
 }
 
-void CWeighPerPackDialog::OnBnClickedGobackbutton()
-{
-	CDialog::OnCancel();
-	// TODO: Add your control notification handler code here
-}
 
 BOOL CWeighPerPackDialog::OnCommand(WPARAM wParam, LPARAM lParam)
 {

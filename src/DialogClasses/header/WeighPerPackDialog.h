@@ -74,8 +74,7 @@ public:
 	afx_msg void OnBnClickedOk();
 	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 	CEdit m_GrossWeight;
-	CButton m_GoBack;
-	afx_msg void OnBnClickedGobackbutton();
+
 protected:
 	virtual BOOL OnCommand(WPARAM wParam, LPARAM lParam);
 };
