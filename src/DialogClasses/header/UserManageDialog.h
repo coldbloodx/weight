@@ -48,13 +48,9 @@ protected:
 	virtual BOOL OnInitDialog();
 	afx_msg void OnUseradd();
 	afx_msg void OnUserdel();
-	afx_msg void OnTimer(UINT nIDEvent);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
-public:
-	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
-	afx_msg void OnBnClickedBack();
-	CButton m_Back;
+
 };
 
 //{{AFX_INSERT_LOCATION}}

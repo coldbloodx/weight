@@ -59,10 +59,6 @@ BOOL CWeighManagementDialog::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 
-	CBitmap   bmp;   
-	bmp.LoadBitmap(IDB_WEIGHTSETTINGS);//‘ÿ»ÎÕº∆¨   
-	m_brBk.CreatePatternBrush(&bmp); 
-	bmp.DeleteObject();   
 
 	int left = 200;
 	int top = 160;

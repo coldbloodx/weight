@@ -95,6 +95,9 @@ BOOL CMainSettingsDialog::OnInitDialog()
 	}
 
 	//make the dialog fullscreen
+	CRect rectBack(382, 578, 643, 640);
+	m_goBackButton.MoveWindow(rectBack);
+
     uiFunctions::setdlgsize(this);  
 
 	return TRUE;  // return TRUE unless you set the focus to a control

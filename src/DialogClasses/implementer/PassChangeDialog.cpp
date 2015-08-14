@@ -7,7 +7,7 @@
 #include "..\..\OtherClasses\HelperClass.h"
 #include "..\..\OtherClasses\DatabaseConnector.h"
 #include "..\..\OtherClasses\RecordSetPointer.h"
-
+#include "..\..\OtherClasses\uiFunctions.h"
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
@@ -19,7 +19,7 @@ static char THIS_FILE[] = __FILE__;
 
 
 CPassChangeDialog::CPassChangeDialog(CWnd* pParent /*=NULL*/)
-	: CDialog()
+: CDialog(CPassChangeDialog::IDD, pParent)
 {
 	//{{AFX_DATA_INIT(CPassChangeDialog)
 	//}}AFX_DATA_INIT
@@ -40,7 +40,7 @@ void CPassChangeDialog::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_NEWPASS_EDIT, m_NewPassEdit);
 	DDX_Control(pDX, IDC_NEWPASSCONFIRM_EDIT, m_NewPassConfirmEdit);
 	//}}AFX_DATA_MAP
-	DDX_Control(pDX, IDC_BACK, m_Back);
+
 }
 
 
@@ -48,8 +48,7 @@ BEGIN_MESSAGE_MAP(CPassChangeDialog, CDialog)
 	//{{AFX_MSG_MAP(CPassChangeDialog)
 	//}}AFX_MSG_MAP
 	ON_BN_CLICKED(IDOK, &CPassChangeDialog::OnBnClickedOk)
-	ON_WM_CTLCOLOR()
-	ON_BN_CLICKED(IDC_BACK, &CPassChangeDialog::OnBnClickedBack)
+
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -111,35 +110,9 @@ BOOL CPassChangeDialog::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 	
-	CBitmap   bmp;   
-
-	bmp.LoadBitmap(IDB_PASSWORDCHANGE);//ÔØÈëÍ¼Æ¬   
-	m_brBk.CreatePatternBrush(&bmp);   
-	bmp.DeleteObject();   
-
-	CRect wndRect((1024 - 960) / 2, (768 - 583) / 2, (1024 - 960) / 2 + 960, (768 - 583) / 2 + 590);
-	this->MoveWindow(wndRect);
-
-	CRect okRect(500, 60, 615, 100);
-	CRect cancelRect(645, 60, 760, 100);
-	CRect backRect(174, 465, 260, 490);
-	
-	m_ButtonOK.MoveWindow(okRect);
-
-	m_ButtonCancel.MoveWindow(cancelRect);
-
-	m_Back.MoveWindow(backRect);
 
 
-
-
-	// TODO: Add extra initialization here
-	//buttonVector.push_back(&m_ButtonCancel);
-	//buttonVector.push_back(&m_ButtonOK);
-	//for(size_t i = 0; i < buttonVector.size(); ++i)
-	//{
-	//	HelperFunctions::setButtonStyle(*buttonVector[i], RGB(55,71,158), SingletonHelper::getInstance()->simSong20);
-	//}
+	uiFunctions::setdlgsize(this, &m_ButtonCancel, &m_ButtonOK);
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// EXCEPTION: OCX Property Pages should return FALSE
 }
@@ -150,24 +123,3 @@ void CPassChangeDialog::OnBnClickedOk()
 	OnOK();
 }
 
-HBRUSH CPassChangeDialog::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
-{
-	if   (pWnd == this)   
-	{   
-		return m_brBk;   
-	}   
-	if   (nCtlColor   ==   CTLCOLOR_STATIC)   
-	{     
-		pDC->SetBkMode(TRANSPARENT);	//Í¸Ã÷   
-		return (HBRUSH)::GetStockObject(HOLLOW_BRUSH);   
-	}   
-
-	HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
-	return hbr;
-}
-
-void CPassChangeDialog::OnBnClickedBack()
-{
-	// TODO: Add your control notification handler code here
-	CDialog::OnCancel();
-}

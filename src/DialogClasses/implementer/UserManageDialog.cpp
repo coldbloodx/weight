@@ -23,11 +23,8 @@ static char THIS_FILE[] = __FILE__;
 
 
 CUserManageDialog::CUserManageDialog(CWnd* pParent /*=NULL*/)
-	:CDialog()
+:CDialog(CUserManageDialog::IDD, pParent)
 {
-	//{{AFX_DATA_INIT(CUserManageDialog)
-		// NOTE: the ClassWizard will add member initialization here
-	//}}AFX_DATA_INIT
 }
 
 
@@ -35,13 +32,11 @@ void CUserManageDialog::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CUserManageDialog)
-	DDX_Control(pDX, IDC_STATUS_STATIC, m_StatusStatic);
 	DDX_Control(pDX, IDOK, m_ButtonOK);
 	DDX_Control(pDX, IDC_USERDEL, m_Del);
 	DDX_Control(pDX, IDC_USERADD, m_Add);
 	DDX_Control(pDX, IDC_USERLIST, m_UserList);
 	//}}AFX_DATA_MAP
-	DDX_Control(pDX, IDC_BACK, m_Back);
 }
 
 
@@ -51,8 +46,6 @@ BEGIN_MESSAGE_MAP(CUserManageDialog, CDialog)
 	ON_BN_CLICKED(IDC_USERDEL, OnUserdel)
 	ON_WM_TIMER()
 	//}}AFX_MSG_MAP
-	ON_WM_CTLCOLOR()
-	ON_BN_CLICKED(IDC_BACK, &CUserManageDialog::OnBnClickedBack)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -67,42 +60,12 @@ CUserManageDialog::~CUserManageDialog()
 BOOL CUserManageDialog::OnInitDialog() 
 {
 	CDialog::OnInitDialog();
-	HelperFunctions::showStatus(m_StatusStatic);
 
 	// TODO: Add extra initialization here
 	initListHeader();
 	initList();
-
-	CBitmap   bmp;   
-	bmp.LoadBitmap(IDB_USERMANAGEMENT);//ÔØÈëÍ¼Æ¬   
-	m_brBk.CreatePatternBrush(&bmp);   
-	bmp.DeleteObject();   
-
-	CRect wndRect((1024 - 960) / 2, (768 - 566) / 2, (1024 - 960) / 2 + 960, (768 - 566) / 2 + 580);
-	this->MoveWindow(wndRect);
-
-	CRect addRect(503, 48, 618, 86);
-	CRect delRect(649, 48, 763, 86);
-	CRect backRect(175, 460, 260, 480);;
-	CRect listRect(260, 100, 918, 503);
-
-	m_Add.MoveWindow(addRect);
-
-
-	m_Del.MoveWindow(delRect);
-
-
-	m_Back.MoveWindow(backRect);
-
-
-	m_UserList.MoveWindow(listRect);
-	//CButton* buttonArray[3] = {&m_Add,&m_Del,&m_ButtonOK};
-	//std::vector<CButton*> buttonVector(buttonArray, buttonArray+3);
-	//for(size_t i = 0; i < buttonVector.size(); ++i)
-	//{
-	//	HelperFunctions::setButtonStyle(*buttonVector[i], RGB(55,71,158), SingletonHelper::getInstance()->simSong20);
-	//}
-	//SetTimer(1000,1000, NULL);
+	
+	uiFunctions::setdlgsize(this, &m_ButtonOK);
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// EXCEPTION: OCX Property Pages should return FALSE
 }
@@ -209,33 +172,4 @@ void CUserManageDialog::OnUserdel()
 	
 	m_UserList.DeleteAllItems();
 	initList();
-}
-
-void CUserManageDialog::OnTimer(UINT nIDEvent) 
-{
-	// TODO: Add your message handler code here and/or call default
-	HelperFunctions::showStatus(m_StatusStatic);
-	CDialog::OnTimer(nIDEvent);
-}
-
-HBRUSH CUserManageDialog::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
-{
-	if   (pWnd == this)   
-	{   
-		return m_brBk;   
-	}   
-	if   (nCtlColor   ==   CTLCOLOR_STATIC)   
-	{     
-		pDC->SetBkMode(TRANSPARENT);	//Í¸Ã÷   
-		return (HBRUSH)::GetStockObject(HOLLOW_BRUSH);   
-	}   
-
-	HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
-	return hbr;
-}
-
-void CUserManageDialog::OnBnClickedBack()
-{
-	// TODO: Add your control notification handler code here
-	CDialog::OnCancel();
 }

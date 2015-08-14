@@ -20,11 +20,9 @@ static char THIS_FILE[] = __FILE__;
 
 
 CQueryDialog::CQueryDialog(CWnd* pParent /*=NULL*/)
-	: CDialog()
+: CDialog(CQueryDialog::IDD ,pParent)
 {
-	//{{AFX_DATA_INIT(CQueryDialog)
-		// NOTE: the ClassWizard will add member initialization here
-	//}}AFX_DATA_INIT
+	int my = 1;
 }
 
 
@@ -32,7 +30,6 @@ void CQueryDialog::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CQueryDialog)
-	DDX_Control(pDX, IDC_STATUS_STATIC, m_StatusStatic);
 	DDX_Control(pDX, IDCANCEL, m_ButtonCancel);
 	DDX_Control(pDX, IDC_CLEARRESULT_BUTTON, m_Clear);
 	DDX_Control(pDX, ID_QUERY, m_Query);
@@ -49,9 +46,7 @@ BEGIN_MESSAGE_MAP(CQueryDialog, CDialog)
 	ON_BN_CLICKED(ID_QUERY, OnQuery)
 	ON_CBN_SELCHANGE(IDC_QUERYTABLE_COMBO, OnSelchangeQuerytableCombo)
 	ON_BN_CLICKED(IDC_CLEARRESULT_BUTTON, OnClearresultButton)
-	ON_WM_TIMER()
 	//}}AFX_MSG_MAP
-	ON_WM_CTLCOLOR()
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -381,39 +376,8 @@ void CQueryDialog::OnClearresultButton()
 BOOL CQueryDialog::OnInitDialog() 
 {
 	CDialog::OnInitDialog();
-	HelperFunctions::showStatus(m_StatusStatic);
-	// TODO: Add extra initialization here
-	//load background
-	CBitmap   bmp;   
 
-    uiFunctions::setdlgsize(this);
-
-	CRect backRect(170, 455, 260, 480);
-	m_ButtonCancel.MoveWindow(backRect);
-
-
-	CRect clearRect(740, 460, 870, 500);
-	m_Clear.MoveWindow(clearRect);
-
-
-	CRect queryRect(530, 460, 660, 500);
-	m_Query.MoveWindow(queryRect);
-
-
-	CRect listRect(260, 100, 920, 455);
-	m_ResultList.MoveWindow(listRect);
-
-
-
-	//buttonVector.push_back(&m_Query);
-	//buttonVector.push_back(&m_ButtonCancel);
-	//buttonVector.push_back(&m_Clear);
-	//for(size_t i = 0; i < buttonVector.size(); ++i)
-	//{
-	//	HelperFunctions::setButtonStyle(*buttonVector[i], RGB(55,71,158), SingletonHelper::getInstance()->simSong20);
-	//}
-	//
-	SetTimer(1000,1000,NULL);
+	uiFunctions::setdlgsize(this, &m_ButtonCancel);
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE
 }
@@ -423,26 +387,4 @@ CQueryDialog::~CQueryDialog()
 
 }
 
-void CQueryDialog::OnTimer(UINT nIDEvent) 
-{
-	// TODO: Add your message handler code here and/or call default
-	HelperFunctions::showStatus(m_StatusStatic);
-	CDialog::OnTimer(nIDEvent);
-}
 
-
-HBRUSH CQueryDialog::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
-{
-	if   (pWnd == this)   
-	{   
-		return m_brBk;   
-	}   
-	if   (nCtlColor   ==   CTLCOLOR_STATIC)   
-	{     
-		pDC->SetBkMode(TRANSPARENT);	//Í¸Ã÷   
-		return (HBRUSH)::GetStockObject(HOLLOW_BRUSH);   
-	}   
-
-	HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
-	return hbr;
-}

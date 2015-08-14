@@ -31,7 +31,7 @@ public:
 // Dialog Data
 	//{{AFX_DATA(CQueryDialog)
 	enum { IDD = IDD_QUERY_DIALOG };
-	CStatic	m_StatusStatic;
+
 	CButton	m_ButtonCancel;
 	CButton	m_Clear;
 	CButton	m_Query;
@@ -63,11 +63,9 @@ protected:
 	afx_msg void OnSelchangeQuerytableCombo();
 	afx_msg void OnClearresultButton();
 	virtual BOOL OnInitDialog();
-	afx_msg void OnTimer(UINT nIDEvent);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
-public:
-	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
+
 };
 
 //{{AFX_INSERT_LOCATION}}
