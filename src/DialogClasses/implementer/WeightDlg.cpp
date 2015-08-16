@@ -274,7 +274,18 @@ void CWeightDlg::OnPaint()
 	}
 	else
 	{
-		CDialog::OnPaint();
+        CPaintDC dc(this);
+        CRect rc;
+        GetClientRect(&rc);
+        CDC dcMem;
+        dcMem.CreateCompatibleDC(&dc);
+        CBitmap bmpBackground;
+        bmpBackground.LoadBitmap(IDB_SPLASH);
+
+        BITMAP bitmap;
+        bmpBackground.GetBitmap(&bitmap);
+        CBitmap* pbmpPri = dcMem.SelectObject(&bmpBackground);
+        dc.StretchBlt(0,0,rc.Width(), rc.Height(), &dcMem,0,0,bitmap.bmWidth, bitmap.bmHeight, SRCCOPY);
 	}
 }
 
