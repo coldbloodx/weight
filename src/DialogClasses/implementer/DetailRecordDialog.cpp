@@ -20,7 +20,7 @@ static char THIS_FILE[] = __FILE__;
 
 
 CDetailRecordDialog::CDetailRecordDialog(CWnd* pParent /*=NULL*/)
-: CDialog()
+: CDialog(CDetailRecordDialog::IDD, pParent)
 {
 	//{{AFX_DATA_INIT(CDetailRecordDialog)
 	//}}AFX_DATA_INIT
