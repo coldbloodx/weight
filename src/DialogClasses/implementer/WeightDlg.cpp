@@ -22,10 +22,10 @@
 #include "..\..\OtherClasses\RecordSetPointer.h"
 #include "..\..\OtherClasses\PatternLoader.h"
 
-#include "..\..\MainSettingsDialog.h"
-#include "..\..\WeighManagementDialog.h"
-#include "..\..\OtherClasses\helperclass.h"
-#include "..\..\OtherClasses\uiFunctions.h"
+#include "BasicSettingsDialog.h"
+#include "WeighManagementDialog.h"
+#include "helperclass.h"
+#include "uiFunctions.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -274,18 +274,7 @@ void CWeightDlg::OnPaint()
 	}
 	else
 	{
-        CPaintDC dc(this);
-        CRect rc;
-        GetClientRect(&rc);
-        CDC dcMem;
-        dcMem.CreateCompatibleDC(&dc);
-        CBitmap bmpBackground;
-        bmpBackground.LoadBitmap(IDB_SPLASH);
-
-        BITMAP bitmap;
-        bmpBackground.GetBitmap(&bitmap);
-        CBitmap* pbmpPri = dcMem.SelectObject(&bmpBackground);
-        dc.StretchBlt(0,0,rc.Width(), rc.Height(), &dcMem,0,0,bitmap.bmWidth, bitmap.bmHeight, SRCCOPY);
+        uiFunctions::drawDlgBg(this, IDB_MAINPAGE);
 	}
 }
 
@@ -370,7 +359,7 @@ void CWeightDlg::OnMaterialmanagementButton()
 void CWeightDlg::OnOthersettingsbutton() 
 {
 	// TODO: Add your control notification handler code here
-	CMainSettingsDialog otherSettingsDialog;
+	CBasicSettingsDialog otherSettingsDialog;
 	otherSettingsDialog.DoModal();
 }
 

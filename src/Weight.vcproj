@@ -144,6 +144,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
+				AdditionalIncludeDirectories="E:\git\weight\src;E:\git\weight\src\DialogClasses\header;E:\git\weight\src\OtherClasses"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -216,11 +217,15 @@
 			Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
 			>
 			<File
-				RelativePath=".\BatchNumberChange.cpp"
+				RelativePath=".\DialogClasses\implementer\BasicSettingsDialog.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ChangeManufactureNameDialog.cpp"
+				RelativePath=".\DialogClasses\implementer\BatchNumberChange.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\DialogClasses\implementer\ChangeManufactureNameDialog.cpp"
 				>
 			</File>
 			<File
@@ -277,10 +282,6 @@
 			</File>
 			<File
 				RelativePath=".\DialogClasses\implementer\LoginDialog.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\MainSettingsDialog.cpp"
 				>
 			</File>
 			<File
@@ -379,7 +380,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\WeighManagementDialog.cpp"
+				RelativePath=".\DialogClasses\implementer\WeighManagementDialog.cpp"
 				>
 			</File>
 			<File
@@ -416,11 +417,15 @@
 			Filter="h;hpp;hxx;hm;inl"
 			>
 			<File
-				RelativePath=".\BatchNumberChange.h"
+				RelativePath=".\DialogClasses\header\BasicSettingsDialog.h"
 				>
 			</File>
 			<File
-				RelativePath=".\ChangeManufactureNameDialog.h"
+				RelativePath=".\DialogClasses\header\BatchNumberChange.h"
+				>
+			</File>
+			<File
+				RelativePath=".\DialogClasses\header\ChangeManufactureNameDialog.h"
 				>
 			</File>
 			<File
@@ -477,10 +482,6 @@
 			</File>
 			<File
 				RelativePath=".\DialogClasses\header\LoginDialog.h"
-				>
-			</File>
-			<File
-				RelativePath=".\MainSettingsDialog.h"
 				>
 			</File>
 			<File
@@ -564,10 +565,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\WeighManagementDialog.h"
-				>
-			</File>
-			<File
 				RelativePath=".\DialogClasses\header\WeighPerPackDialog.h"
 				>
 			</File>
@@ -585,7 +582,19 @@
 			Filter="ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"
 			>
 			<File
+				RelativePath=".\res\dbgbmp.bmp"
+				>
+			</File>
+			<File
 				RelativePath=".\res\LOGIN.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\res\loginbg.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\res\mbgbmp.bmp"
 				>
 			</File>
 			<File

@@ -8,5 +8,6 @@ namespace uiFunctions
 	void updateList(_RecordsetPtr& pRecordset, CListCtrl& listCtrl, std::vector<CString>& headerList);
 	void clearList(CListCtrl& listCtrl);
 	void setdlgsize(CDialog* pdlg, CButton* pback = NULL, CButton* pok = NULL, bool hasborder = false);
+    void drawDlgBg(CDialog* pDlg, int bmpId);
 };
 #endif

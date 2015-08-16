@@ -76,6 +76,7 @@ BEGIN_MESSAGE_MAP(CLoginDialog, CDialog)
 	//}}AFX_MSG_MAP
 	ON_WM_CTLCOLOR()
 	ON_WM_CREATE()
+    ON_WM_PAINT()
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -331,4 +332,9 @@ int CLoginDialog::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	if (CDialog::OnCreate(lpCreateStruct) == -1)
 		return -1;
 	return 0;
+}
+
+void CLoginDialog::OnPaint()
+{
+    uiFunctions::drawDlgBg(this, IDB_MAINPAGE);
 }

@@ -87,3 +87,20 @@ void uiFunctions::setdlgsize(CDialog* pdlg, CButton* pback, CButton* pok, bool h
 	CRect   newRect(xstart, ystart, xstart + wndWidth, ystart + wndHeight);
 	pdlg->MoveWindow(&newRect,false);   
 }
+
+
+void uiFunctions::drawDlgBg(CDialog* pDlg, int bmpId)
+{
+    CPaintDC dc(pDlg);
+    CRect rc;
+    pDlg->GetClientRect(&rc);
+    CDC dcMem;
+    dcMem.CreateCompatibleDC(&dc);
+    CBitmap bmpBackground;
+    bmpBackground.LoadBitmap(bmpId);
+
+    BITMAP bitmap;
+    bmpBackground.GetBitmap(&bitmap);
+    CBitmap* pbmpPri = dcMem.SelectObject(&bmpBackground);
+    dc.StretchBlt(0,0,rc.Width(), rc.Height(), &dcMem,0,0,bitmap.bmWidth, bitmap.bmHeight, SRCCOPY);
+}

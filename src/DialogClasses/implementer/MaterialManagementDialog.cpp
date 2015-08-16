@@ -11,7 +11,7 @@
 #include "..\..\OtherClasses\DatabaseConnector.h"
 #include "..\..\OtherClasses\RecordSetPointer.h"
 #include "..\..\OtherClasses\uiFunctions.h"
-#include "..\..\BatchNumberChange.h"
+#include "BatchNumberChange.h"
 
 
 #ifdef _DEBUG

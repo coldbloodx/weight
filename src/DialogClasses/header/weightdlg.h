@@ -57,7 +57,10 @@ protected:
 	virtual BOOL PreTranslateMessage(MSG* pMsg);
 	afx_msg void OnSysCommand(UINT nID, LPARAM lParam);
 	afx_msg void OnPaint();
-	afx_msg HCURSOR OnQueryDragIcon();
+
+
+
+    afx_msg HCURSOR OnQueryDragIcon();
 	afx_msg void OnPowerOff();
 	afx_msg void OnFormulaManagement();
 	afx_msg void OnUsermanagement();

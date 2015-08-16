@@ -32,7 +32,6 @@
 #define IDD_FORMULAADVANCEQUERY_DIALOG  157
 #define IDB_SPLASH                      161
 #define IDR_MAINFRAME                   166
-#define IDB_LOGINDIALOG                 167
 #define IDB_MAINPAGE                    168
 #define IDB_MATERIALMANAGEMENT          169
 #define IDB_OTHERSETTINGS               172
@@ -57,10 +56,14 @@
 #define IDB_MATERIALINPUTCOUNT          197
 #define IDD_BATCHNUMBERCHANGE           198
 #define IDD_MAINSETTINGSDIALOG          199
+#define IDD_BASIC_SETTINGS              199
 #define IDD_WEIGHMANAGEMENT             200
 #define IDB_MAINSETTINGS                201
 #define IDB_WEIGHTSETTINGS              202
 #define IDD_CHANGEMANUFACTURENAME       203
+#define IDB_DLGBG                       206
+#define IDB_BITMAP1                     209
+#define IDB_LOGINBG                     209
 #define IDC_WEIGHFREE_BUTTON            1003
 #define IDC_STATISTIC_BUTTON            1005
 #define IDC_QUERY_BUTTON                1006
@@ -245,7 +248,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        204
+#define _APS_NEXT_RESOURCE_VALUE        210
 #define _APS_NEXT_COMMAND_VALUE         32771
 #define _APS_NEXT_CONTROL_VALUE         1249
 #define _APS_NEXT_SYMED_VALUE           104
