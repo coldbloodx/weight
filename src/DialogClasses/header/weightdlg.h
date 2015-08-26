@@ -8,7 +8,7 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
-#include "..\..\DialogClasses\header\FormulaDialog.h"
+#include "FormulaDialog.h"
 
 /////////////////////////////////////////////////////////////////////////////
 // CWeightDlg dialog

@@ -4,10 +4,10 @@
 #include "stdafx.h"
 #include "Weight.h"
 #include "BatchNumberChange.h"
-#include "OtherClasses\HelperClass.h"
-#include "OtherClasses\DatabaseConnector.h"
-#include "OtherClasses\RecordSetPointer.h"
-#include "DialogClasses\header\MaterialManagementDialog.h"
+#include "HelperClass.h"
+#include "DatabaseConnector.h"
+#include "RecordSetPointer.h"
+#include "MaterialManagementDialog.h"
 // CBatchNumberChage dialog
 
 IMPLEMENT_DYNAMIC(CBatchNumberChage, CDialog)

@@ -1,13 +1,13 @@
 // For mulaWeighDialog.cpp : implementation file
 
 #include "stdafx.h"
-#include "..\..\Weight.h"
-#include "..\..\DialogClasses\header\FormulaWeighDialog.h"
-#include "..\..\DialogClasses\header\FormulaSepWeighDialog.h"
-#include "..\..\OtherClasses\HelperClass.h"
-#include "..\..\OtherClasses\DatabaseConnector.h"
-#include "..\..\OtherClasses\RecordSetPointer.h"
-#include "..\..\OtherClasses\uiFunctions.h"
+#include "Weight.h"
+#include "FormulaWeighDialog.h"
+#include "FormulaSepWeighDialog.h"
+#include "HelperClass.h"
+#include "DatabaseConnector.h"
+#include "RecordSetPointer.h"
+#include "uiFunctions.h"
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE

@@ -2,12 +2,12 @@
 //
 
 #include "stdafx.h"
-#include "..\..\Weight.h"
-#include "..\..\DialogClasses\header\UserAddDialog.h"
-#include "..\..\DialogClasses\header\UserManageDialog.h"
-#include "..\..\OtherClasses\HelperClass.h"
-#include "..\..\OtherClasses\DatabaseConnector.h"
-#include "..\..\OtherClasses\RecordSetPointer.h"
+#include "Weight.h"
+#include "UserAddDialog.h"
+#include "UserManageDialog.h"
+#include "HelperClass.h"
+#include "DatabaseConnector.h"
+#include "RecordSetPointer.h"
 
 
 #ifdef _DEBUG

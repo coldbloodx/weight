@@ -2,13 +2,13 @@
 //
 
 #include "stdafx.h"
-#include "..\..\Weight.h"
-#include "..\..\DialogClasses\header\FormulaSelectDialog.h"
-#include "..\..\OtherClasses\HelperClass.h"
-#include "..\..\DialogClasses\header\FormulaWeighDialog.h"
-#include "..\..\OtherClasses\DatabaseConnector.h"
-#include "..\..\OtherClasses\RecordSetPointer.h"
-#include "..\..\OtherClasses\uifunctions.h"
+#include "Weight.h"
+#include "FormulaSelectDialog.h"
+#include "HelperClass.h"
+#include "FormulaWeighDialog.h"
+#include "DatabaseConnector.h"
+#include "RecordSetPointer.h"
+#include "uifunctions.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW

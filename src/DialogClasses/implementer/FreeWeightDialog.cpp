@@ -2,10 +2,10 @@
 //
 
 #include "stdafx.h"
-#include "..\..\Weight.h"
-#include "..\..\DialogClasses\header\FreeWeightDialog.h"
-#include "..\..\OtherClasses\HelperClass.h"
-#include "..\..\OtherClasses\uiFunctions.h"
+#include "Weight.h"
+#include "FreeWeightDialog.h"
+#include "HelperClass.h"
+#include "uiFunctions.h"
 #include <iterator>
 #include <vector>
 using std::vector;

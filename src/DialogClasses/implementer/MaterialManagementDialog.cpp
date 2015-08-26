@@ -2,15 +2,15 @@
 //
 
 #include "stdafx.h"
-#include "..\..\Weight.h"
-#include "..\..\DialogClasses\header\MaterialManagementDialog.h"
+#include "Weight.h"
+#include "MaterialManagementDialog.h"
 #include <string>
 #include <vector>
-#include "..\..\DialogClasses\header\MaterialAddDialog.h"
-#include "..\..\OtherClasses\HelperClass.h"
-#include "..\..\OtherClasses\DatabaseConnector.h"
-#include "..\..\OtherClasses\RecordSetPointer.h"
-#include "..\..\OtherClasses\uiFunctions.h"
+#include "MaterialAddDialog.h"
+#include "HelperClass.h"
+#include "DatabaseConnector.h"
+#include "RecordSetPointer.h"
+#include "uiFunctions.h"
 #include "BatchNumberChange.h"
 
 

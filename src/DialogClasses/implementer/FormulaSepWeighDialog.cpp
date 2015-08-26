@@ -2,12 +2,12 @@
 //
 
 #include "stdafx.h"
-#include "..\..\Weight.h"
-#include "..\..\DialogClasses\header\FormulaSepWeighDialog.h"
-#include "..\..\OtherClasses\HelperClass.h"
-#include "..\..\DialogClasses\header\FormulaWeighDialog.h"
-#include "..\..\DialogClasses\header\WeighPerPackDialog.h"
-#include "..\..\OtherClasses\uifunctions.h"
+#include "Weight.h"
+#include "FormulaSepWeighDialog.h"
+#include "HelperClass.h"
+#include "FormulaWeighDialog.h"
+#include "WeighPerPackDialog.h"
+#include "uifunctions.h"
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE

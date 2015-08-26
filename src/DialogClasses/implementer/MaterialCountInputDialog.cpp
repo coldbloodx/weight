@@ -2,10 +2,10 @@
 //
 
 #include "stdafx.h"
-#include "..\..\Weight.h"
-#include "..\..\DialogClasses\header\MaterialCountInputDialog.h"
-#include "..\..\DialogClasses\header\FormulaAddDialog.h"
-#include "..\..\OtherClasses\HelperClass.h"
+#include "Weight.h"
+#include "MaterialCountInputDialog.h"
+#include "FormulaAddDialog.h"
+#include "HelperClass.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW

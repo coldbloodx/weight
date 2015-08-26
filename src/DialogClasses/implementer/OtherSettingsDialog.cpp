@@ -2,11 +2,11 @@
 //
 
 #include "stdafx.h"
-#include "..\..\Weight.h"
-#include "..\..\DialogClasses\header\OtherSettingsDialog.h"
-#include "..\..\OtherClasses\HelperClass.h"
-#include "..\..\OtherClasses\uifunctions.h"
-#include "..\..\OtherClasses\PatternLoader.h"
+#include "Weight.h"
+#include "OtherSettingsDialog.h"
+#include "HelperClass.h"
+#include "uifunctions.h"
+#include "PatternLoader.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW

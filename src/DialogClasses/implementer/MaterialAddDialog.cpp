@@ -2,12 +2,12 @@
 //
 
 #include "stdafx.h"
-#include "..\..\Weight.h"
-#include "..\..\DialogClasses\header\MaterialAddDialog.h"
-#include "..\..\DialogClasses\header\MaterialManagementDialog.h"
-#include "..\..\OtherClasses\HelperClass.h"
-#include "..\..\OtherClasses\DatabaseConnector.h"
-#include "..\..\OtherClasses\RecordSetPointer.h"
+#include "Weight.h"
+#include "MaterialAddDialog.h"
+#include "MaterialManagementDialog.h"
+#include "HelperClass.h"
+#include "DatabaseConnector.h"
+#include "RecordSetPointer.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW

@@ -4,12 +4,12 @@
 #include "stdafx.h"
 #include "Weight.h"
 #include "WeighManagementDialog.h"
-#include "DialogClasses/header/formuladialog.h"
-#include "DialogClasses/header/StatisticDialog.h"
-#include "DialogClasses/header/QueryDialog.h"
-#include "DialogClasses/header/MaterialManagementDialog.h"
-#include "OtherClasses/helperclass.h"
-#include "OtherClasses/uifunctions.h"
+#include "formuladialog.h"
+#include "StatisticDialog.h"
+#include "QueryDialog.h"
+#include "MaterialManagementDialog.h"
+#include "helperclass.h"
+#include "uifunctions.h"
 
 
 // CWeighManagementDialog dialog

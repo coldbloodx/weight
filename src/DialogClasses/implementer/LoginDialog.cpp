@@ -2,14 +2,14 @@
 //
 
 #include "stdafx.h"
-#include "..\..\Weight.h"
-#include "..\..\DialogClasses\header\WeightDlg.h"
-#include "..\..\DialogClasses\header\LoginDialog.h"
-#include "..\..\OtherClasses\HelperClass.h"
-#include "..\..\OtherClasses\DatabaseConnector.h"
-#include "..\..\OtherClasses\RecordSetPointer.h"
-#include "..\..\OtherClasses\uiFunctions.h"
-#include "..\..\Splash.h"
+#include "Weight.h"
+#include "WeightDlg.h"
+#include "LoginDialog.h"
+#include "HelperClass.h"
+#include "DatabaseConnector.h"
+#include "RecordSetPointer.h"
+#include "uiFunctions.h"
+#include "Splash.h"
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE

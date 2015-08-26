@@ -4,13 +4,13 @@
 #include "stdafx.h"
 #include "Weight.h"
 #include "BasicSettingsDialog.h"
-#include "DialogClasses/header/OtherSettingsDialog.h"
-#include "DialogClasses/header/UserManageDialog.h"
+#include "OtherSettingsDialog.h"
+#include "UserManageDialog.h"
 
-#include "DialogClasses/header/PassChangeDialog.h"
+#include "PassChangeDialog.h"
 #include "changeManufactureNameDialog.h"
-#include "OtherClasses/helperclass.h"
-#include "OtherClasses/uifunctions.h"
+#include "helperclass.h"
+#include "uifunctions.h"
 
 // CMainSettingsDialog dialog
 
