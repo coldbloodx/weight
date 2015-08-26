@@ -55,6 +55,7 @@ void uiFunctions::setdlgsize(CDialog* pdlg, CButton* pback, CButton* pok, bool h
 	{
 		pdlg->ModifyStyleEx(0, WS_EX_APPWINDOW | WS_EX_CONTROLPARENT, SWP_NOSIZE);
 		pdlg->ModifyStyle(WS_BORDER | WS_DLGFRAME | WS_THICKFRAME, WS_POPUP, SWP_NOSIZE);  
+
 	}
 
 	if(pback)

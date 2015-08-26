@@ -97,9 +97,7 @@ BOOL CWeightApp::InitInstance()
 	{
 
 		// 设置对话框默认皮肤
-
 		SetDialogSkin("Dialog");
-
 
 	}
 

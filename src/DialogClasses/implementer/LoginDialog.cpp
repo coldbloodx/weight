@@ -10,6 +10,7 @@
 #include "RecordSetPointer.h"
 #include "uiFunctions.h"
 #include "Splash.h"
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
@@ -72,11 +73,9 @@ BEGIN_MESSAGE_MAP(CLoginDialog, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON_COMMA, OnButtonComma)
 	ON_BN_CLICKED(IDC_BUTTON_BACK, OnButtonBack)
 	ON_WM_TIMER()
-//	ON_WM_CANCELMODE()
-	//}}AFX_MSG_MAP
-	ON_WM_CTLCOLOR()
 	ON_WM_CREATE()
     ON_WM_PAINT()
+	ON_WM_ERASEBKGND()
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -301,10 +300,7 @@ void CLoginDialog::OnButtonBack()
 BOOL CLoginDialog::OnInitDialog() 
 {
 	CDialog::OnInitDialog();
-	
-	
 	uiFunctions::setdlgsize(this);
-
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 				// EXCEPTION: OCX Property Pages should return FALSE
@@ -338,3 +334,5 @@ void CLoginDialog::OnPaint()
 {
     uiFunctions::drawDlgBg(this, IDB_MAINPAGE);
 }
+
+
