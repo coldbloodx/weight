@@ -70,7 +70,7 @@ BOOL CWeightApp::InitInstance()
 	//CNavigatorPanel::getNavigatorPanelPtr();
 	try
 	{
-		DatabaseConnector::getInstanceRef().openDatabaseConnection();
+		DBConnector::getInstanceRef().openDatabaseConnection();
 	}
 	catch(_com_error& e)
 	{
@@ -185,7 +185,7 @@ CWeightApp::~CWeightApp()
 	//handle exception when close database
 	try
 	{
-		DatabaseConnector::getInstanceRef().closeDatabaseConnection();
+		DBConnector::getInstanceRef().closeDatabaseConnection();
 	}
 	catch (_com_error& e)
 	{
@@ -197,7 +197,7 @@ CWeightApp::~CWeightApp()
 
 
 
-	DatabaseConnector::RemoveInstance();
+	DBConnector::RemoveInstance();
 	RecordSetPointer::RemoveInstance();
 	if (m_bATLInited)
 	{

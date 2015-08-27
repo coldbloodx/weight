@@ -24,6 +24,7 @@
 #include <iterator>
 #include <algorithm>
 #include "OtherClasses\SingletonTemplateBase.h"
+using std::vector;
 
 #import "c:\program files\common files\system\ado\msado15.dll" no_namespace rename("EOF","adoEOF")
 

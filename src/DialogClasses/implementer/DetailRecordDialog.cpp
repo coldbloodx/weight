@@ -61,7 +61,7 @@ BOOL CDetailRecordDialog::OnInitDialog()
 	CString sqlState("SELECT ID, FORMULAID, FORMULANAME, USERID, USERNAME, AMOUNT, DATE, TIME, COMMENT FROM weight WHERE ID = ");
 	sqlState += SingletonHelper::getInstance()->getRecordID();
 	
-	RecordSetPointer::getInstanceRef().setDatabaseConnection(DatabaseConnector::getInstanceRef().getDatabaseConnection());
+	RecordSetPointer::getInstanceRef().setDatabaseConnection(DBConnector::getInstanceRef().getdbcon());
 	RecordSetPointer::getInstanceRef().setSqlState(sqlState);
 
 	//exec SQL state

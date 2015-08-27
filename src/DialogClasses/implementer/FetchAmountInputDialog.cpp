@@ -101,7 +101,7 @@ void CFetchAmountInputDialog::OnOK()
 	sqlState += SingletonHelper::getInstance()->getFormulaID();
 
 	//init recordset pointer
-	RecordSetPointer::getInstanceRef().setDatabaseConnection(DatabaseConnector::getInstanceRef().getDatabaseConnection());
+	RecordSetPointer::getInstanceRef().setDatabaseConnection(DBConnector::getInstanceRef().getdbcon());
 	RecordSetPointer::getInstanceRef().setSqlState(sqlState);
 
 	//exec SQL state

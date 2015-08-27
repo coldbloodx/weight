@@ -1,4 +1,4 @@
-#include "../StdAfx.h"
+#include "StdAfx.h"
 #include <cassert>
 
 #ifndef _SINGLETON_HEADER_

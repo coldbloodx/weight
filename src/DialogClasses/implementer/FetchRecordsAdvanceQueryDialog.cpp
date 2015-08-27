@@ -361,7 +361,7 @@ void CFetchRecordsAdvanceQueryDialog::OnOK()
 	fetchRecordDialog->m_FetchRecordList.DeleteAllItems();
 
 	//init recordset pointer
-	RecordSetPointer::getInstanceRef().setDatabaseConnection(DatabaseConnector::getInstanceRef().getDatabaseConnection());
+	RecordSetPointer::getInstanceRef().setDatabaseConnection(DBConnector::getInstanceRef().getdbcon());
 	RecordSetPointer::getInstanceRef().setSqlState(sqlHeader + sqlState);
 
 	//exec SQL state

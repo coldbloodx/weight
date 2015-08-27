@@ -1,10 +1,10 @@
-#include "..\StdAfx.h"
+#include "StdAfx.h"
 
-class DatabaseConnector : public SingletonTemplateBase<DatabaseConnector>
+class DBConnector : public SingletonTemplateBase<DBConnector>
 {
 public:
-	DatabaseConnector();
-	_ConnectionPtr& getDatabaseConnection();
+	DBConnector();
+	_ConnectionPtr& getdbcon();
 	void openDatabaseConnection() ;
 	void closeDatabaseConnection();
 	void setConnectString(std::string& connectString);

@@ -105,3 +105,31 @@ void uiFunctions::drawDlgBg(CDialog* pDlg, int bmpId)
     CBitmap* pbmpPri = dcMem.SelectObject(&bmpBackground);
     dc.StretchBlt(0,0,rc.Width(), rc.Height(), &dcMem,0,0,bitmap.bmWidth, bitmap.bmHeight, SRCCOPY);
 }
+
+void uiFunctions::init6Buttons(vector<CButton*>& buttonvec)
+{
+
+
+    int left = 30;
+    int top = 180;
+    int width = 320 - left;
+    int height = 355 - top;
+    int horiSpacer = 365 - 320;
+    int vertSpacer = 400 - 355;
+
+    for (size_t i = 0; i < buttonvec.size(); ++i)
+    {
+        CRect rect(left, top, left + width, top + height);
+        buttonvec[i]->MoveWindow(rect, TRUE);
+
+        if (((i + 1) % 3) == 0)
+        {
+            left = 30;
+            top = rect.bottom + vertSpacer;
+        }
+        else
+        {
+            left = rect.right + horiSpacer;
+        }
+    }
+}

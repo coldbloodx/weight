@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "..\..\ExternClasses\header\inifile.h"
+#include "inifile.h"
 #include <algorithm>
 #include <iostream>
 #include <fstream>

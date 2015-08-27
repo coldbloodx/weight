@@ -195,37 +195,26 @@ BOOL CWeightDlg::OnInitDialog()
 		return TRUE;
 	}
 
-	//skip login
-	//SingletonHelper::getInstance()->setUserID("1001");
-	//SingletonHelper::getInstance()->setUserPass(CString("1001"));
-	//SingletonHelper::getInstance()->setUserRight(CString("管理员"));
-	//SingletonHelper::getInstance()->setUserName(CString("admin"));
 
-//	CSplashWnd *pShowDld = new CSplashWnd();
 	CSplashWnd::ShowSplashScreen(this);
-//	delete pShowDld;
-//	pShowDld = NULL;
-	
 
-	//sleep for 1 sec to wait the splash screen...
 	::Sleep(1500);
 	//load background
 	CSplashWnd::CloseSplashScreen();
 	this->Invalidate();
 
-	//CBitmap   bmp;   
-	//bmp.LoadBitmap(IDB_MAINPAGE);//载入图片   
-	//m_brBk.CreatePatternBrush(&bmp); 
-	//bmp.DeleteObject();   
-
 	//update main window buttons
-	initButtons();
+
+    CButton* buttonArray[6] = 
+    {&m_WeighFreeButton,&m_FormulaWeighButton,&m_FormulaManagementButton,
+    &m_FetchStuffButton,&m_OtherSettingsButton,&m_PowerOffButton};
+    vector<CButton*> buttonvec(buttonArray, buttonArray+6);
+
+    uiFunctions::init6Buttons(buttonvec);
 	this->UpdateData(TRUE);
 
 	
 	//make the dialog fullscreen
-
-
 	uiFunctions::setdlgsize(this, false);   
 
 	
@@ -338,7 +327,7 @@ void CWeightDlg::OnPowerOff()
 
 void CWeightDlg::OnFormulaManagement() 
 {
-	CWeighManagementDialog weighManagementDialog;
+	CMainSettings weighManagementDialog;
 	weighManagementDialog.DoModal();
 }
 
@@ -445,39 +434,6 @@ void CWeightDlg::OnCancel()
 	}
 	
 }
-
-void CWeightDlg::initButtons()
-{
-	CButton* buttonArray[6] = 
-	{&m_WeighFreeButton,&m_FormulaWeighButton,&m_FormulaManagementButton,
-	&m_FetchStuffButton,&m_OtherSettingsButton,&m_PowerOffButton};
-	
-	int left = 30;
-	int top = 180;
-	int width = 320 - left;
-	int height = 355 - top;
-	int horiSpacer = 365 - 320;
-	int vertSpacer = 400 - 355;
-	
-	std::vector<CButton*> buttonVector(buttonArray, buttonArray+6);
-	for (size_t i = 0; i < buttonVector.size(); ++i)
-	{
-		CRect rect(left, top, left + width, top + height);
-		buttonVector[i]->MoveWindow(rect, TRUE);
-
-		if (((i + 1) % 3) == 0)
-		{
-			left = 30;
-			top = rect.bottom + vertSpacer;
-		}
-		else
-		{
-			left = rect.right + horiSpacer;
-		}
-	}
-}
-
-
 
 
 int CWeightDlg::OnCreate(LPCREATESTRUCT lpCreateStruct)

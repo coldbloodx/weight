@@ -24,24 +24,15 @@ static char THIS_FILE[] = __FILE__;
 
 CFormulaDialog::CFormulaDialog(CWnd* pParent /*=NULL*/)
 : CDialog(CFormulaDialog::IDD, pParent),m_FormulaAdd(NULL),m_FormulaDel(NULL), m_FetchButton(NULL), m_From(0)
-{
-	//{{AFX_DATA_INIT(CFormulaDialog)
-	// NOTE: the ClassWizard will add member initialization here
-	//}}AFX_DATA_INIT	
+{	
 }
 
 
 void CFormulaDialog::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CFormulaDialog)
-	//DDX_Control(pDX, IDC_STATIC6, m_StatusStatic);
 	DDX_Control(pDX, IDOK, m_ButtonOK);
-	//	DDX_Control(pDX, IDC_FORMULAFETCH_BUTTON, m_FetchButton);
-	//	DDX_Control(pDX, IDC_FORMULA_DEL, m_FormulaDel);
-	//	DDX_Control(pDX, IDC_FORMULA_ADD, m_FormulaAdd);
 	DDX_Control(pDX, IDC_FORMULA_LISTCTRL, m_FormulaListCtrl);
-	//}}AFX_DATA_MAP
 }
 
 
@@ -271,16 +262,4 @@ BOOL CFormulaDialog::OnCommand(WPARAM wParam, LPARAM lParam)
 		OnFormulaFetch();
 	}
 	return CDialog::OnCommand(wParam, lParam);
-}
-
-HBRUSH CFormulaDialog::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
-{
-	HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
-
-	if   (pWnd == this)   
-	{   
-		return m_brBk;   
-	}  
-	// TODO:  Return a different brush if the default is not desired
-	return hbr;
 }

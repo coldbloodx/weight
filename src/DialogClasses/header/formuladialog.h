@@ -30,7 +30,6 @@ public:
 	CButton*	m_FormulaAdd;
 
 	unsigned char	m_From;
-	CBrush   m_brBk;//在public中定义  
 public:
 	void initListHeader();
 	void initList();
@@ -55,13 +54,9 @@ protected:
 	afx_msg	void OnFormulaFetch();
 	virtual BOOL OnInitDialog();
 	afx_msg void OnTimer(UINT nIDEvent);
-	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 private:
 
-
-public:
-	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 };
 
 //{{AFX_INSERT_LOCATION}}

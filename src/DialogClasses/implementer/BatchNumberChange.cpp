@@ -8,21 +8,22 @@
 #include "DatabaseConnector.h"
 #include "RecordSetPointer.h"
 #include "MaterialManagementDialog.h"
+#include "uiFunctions.h"
 // CBatchNumberChage dialog
 
-IMPLEMENT_DYNAMIC(CBatchNumberChage, CDialog)
+IMPLEMENT_DYNAMIC(CBatchNumberChange, CDialog)
 
-CBatchNumberChage::CBatchNumberChage(CWnd* pParent /*=NULL*/)
-	: CDialog(CBatchNumberChage::IDD, pParent)
+CBatchNumberChange::CBatchNumberChange(CWnd* pParent /*=NULL*/)
+	: CDialog(CBatchNumberChange::IDD, pParent)
 {
 
 }
 
-CBatchNumberChage::~CBatchNumberChage()
+CBatchNumberChange::~CBatchNumberChange()
 {
 }
 
-void CBatchNumberChage::DoDataExchange(CDataExchange* pDX)
+void CBatchNumberChange::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	DDX_Control(pDX, IDOK, m_ButtonOK);
@@ -31,15 +32,14 @@ void CBatchNumberChage::DoDataExchange(CDataExchange* pDX)
 }
 
 
-BEGIN_MESSAGE_MAP(CBatchNumberChage, CDialog)
-	ON_BN_CLICKED(IDOK, &CBatchNumberChage::OnBnClickedOk)
-	ON_WM_CTLCOLOR()
+BEGIN_MESSAGE_MAP(CBatchNumberChange, CDialog)
+	ON_BN_CLICKED(IDOK, &CBatchNumberChange::OnBnClickedOk)
 END_MESSAGE_MAP()
 
 
 // CBatchNumberChage message handlers
 
-void CBatchNumberChage::OnBnClickedOk()
+void CBatchNumberChange::OnBnClickedOk()
 {
 	// TODO: Add your control notification handler code here
 	CString batchNumber, manufacture;
@@ -58,7 +58,7 @@ void CBatchNumberChage::OnBnClickedOk()
 	//查询出生产厂家
 	CString sqlState ("SELECT MANUFACTURE FROM MANUFACTURES WHERE BATCHNUMBER = '");
 	sqlState += batchNumber + "'";
-	RecordSetPointer::getInstanceRef().setDatabaseConnection(DatabaseConnector::getInstanceRef().getDatabaseConnection());
+	RecordSetPointer::getInstanceRef().setDatabaseConnection(DBConnector::getInstanceRef().getdbcon());
 	RecordSetPointer::getInstanceRef().setSqlState(sqlState);
 
 	try
@@ -98,7 +98,7 @@ void CBatchNumberChage::OnBnClickedOk()
 	sqlState += batchNumber + ", MANUFACTURE = '" + manufacture + "' " ;
 	sqlState += (" WHERE ID = ") + materialID;
 
-	RecordSetPointer::getInstanceRef().setDatabaseConnection(DatabaseConnector::getInstanceRef().getDatabaseConnection());
+	RecordSetPointer::getInstanceRef().setDatabaseConnection(DBConnector::getInstanceRef().getdbcon());
 	RecordSetPointer::getInstanceRef().setSqlState(sqlState);
 
 	//exec SQL state
@@ -123,45 +123,12 @@ void CBatchNumberChage::OnBnClickedOk()
 	OnOK();
 }
 
-BOOL CBatchNumberChage::OnInitDialog()
+BOOL CBatchNumberChange::OnInitDialog()
 {
 	CDialog::OnInitDialog();
-	CBitmap   bmp;   
-	bmp.LoadBitmap(IDB_MATERIALINPUTCOUNT);//载入图片   
-	m_brBk.CreatePatternBrush(&bmp); 
-	bmp.DeleteObject();   
 
-	CRect wndRect((1024 - 640) / 2, (768 - 236) / 2, (1024 - 640) / 2 + 640, (768 - 236) / 2 + 250);
-	this->MoveWindow(wndRect);
-
-	CRect okRect(404, 190, 503, 224);
-	CRect cancelRect(520, 190, 618, 224);
-
-	m_ButtonOK.MoveWindow(okRect);
-
-
-	m_ButtonCancel.MoveWindow(cancelRect);
-
-	// TODO:  Add extra initialization here
+    uiFunctions::setdlgsize(this, &m_ButtonCancel, &m_ButtonOK);
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// EXCEPTION: OCX Property Pages should return FALSE
-}
-
-HBRUSH CBatchNumberChage::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
-{
-	HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
-
-	// TODO:  Change any attributes of the DC here
-	if   (pWnd == this)   
-	{   
-		return m_brBk;   
-	}   
-	if   (nCtlColor   ==   CTLCOLOR_STATIC)   
-	{     
-		pDC->SetBkMode(TRANSPARENT);	//透明   
-		return (HBRUSH)::GetStockObject(HOLLOW_BRUSH);   
-	}   
-	// TODO:  Return a different brush if the default is not desired
-	return hbr;
 }

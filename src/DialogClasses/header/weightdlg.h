@@ -45,8 +45,6 @@ public:
 	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV support
 	//}}AFX_VIRTUAL
 	HICON m_hIcon;
-protected:
-	void initButtons();
 // Implementation
 protected:
 

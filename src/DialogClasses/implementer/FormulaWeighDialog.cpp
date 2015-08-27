@@ -108,7 +108,7 @@ BOOL CFormulaWeighDialog::OnInitDialog()
 		CString sqlState("SELECT BATCHNUMBER,MANUFACTURE FROM MATERIALS WHERE NAME = '");
 		sqlState += tempMaterialName + "'";
 		
-		RecordSetPointer::getInstanceRef().setDatabaseConnection(DatabaseConnector::getInstanceRef().getDatabaseConnection());
+		RecordSetPointer::getInstanceRef().setDatabaseConnection(DBConnector::getInstanceRef().getdbcon());
 		RecordSetPointer::getInstanceRef().setSqlState(sqlState);
 
 		CString oldLineNumber;

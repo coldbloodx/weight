@@ -1,4 +1,4 @@
-#include "..\StdAfx.h"
+#include "StdAfx.h"
 
 
 class RecordSetPointer :public SingletonTemplateBase<RecordSetPointer>
@@ -10,9 +10,12 @@ public:
 	void setDatabaseConnection(_ConnectionPtr& connection);
 	void closeRecordSet();
 	_RecordsetPtr& getRecordPtr();
+
+    _RecordsetPtr& execquery(CString sqlstr);
+
 private:
-	_RecordsetPtr m_RecordPointer;
-	CString m_SqlSate;
-	_ConnectionPtr m_DatabaseConnection;
+	_RecordsetPtr resultptr;
+	CString sqlstr;
+	_ConnectionPtr dbcon;
 
 };

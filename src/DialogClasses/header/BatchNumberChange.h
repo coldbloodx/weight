@@ -2,16 +2,13 @@
 #include "afxwin.h"
 
 
-// CBatchNumberChage dialog
-
-
-class CBatchNumberChage : public CDialog
+class CBatchNumberChange : public CDialog
 {
-	DECLARE_DYNAMIC(CBatchNumberChage)
+	DECLARE_DYNAMIC(CBatchNumberChange)
 
 public:
-	CBatchNumberChage(CWnd* pParent = NULL);   // standard constructor
-	virtual ~CBatchNumberChage();
+	CBatchNumberChange(CWnd* pParent = NULL);   // standard constructor
+	virtual ~CBatchNumberChange();
 
 // Dialog Data
 	enum { IDD = IDD_BATCHNUMBERCHANGE };
@@ -27,6 +24,5 @@ public:
 	afx_msg void OnBnClickedOk();
 	virtual BOOL OnInitDialog();
 
-	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 	CEdit m_BatchNumber;
 };

@@ -120,7 +120,7 @@ void CFetchRecordDialog::initList()
 	CString sqlState = "SELECT * FROM FETCHRECORDS";
 
 	//init recordset pointer
-	RecordSetPointer::getInstanceRef().setDatabaseConnection(DatabaseConnector::getInstanceRef().getDatabaseConnection());
+	RecordSetPointer::getInstanceRef().setDatabaseConnection(DBConnector::getInstanceRef().getdbcon());
 	RecordSetPointer::getInstanceRef().setSqlState(sqlState);
 
 	//exec SQL state
@@ -173,7 +173,7 @@ void CFetchRecordDialog::OnPrintButton()
 	CString sqlState = "SELECT * FROM FETCHRECORDS WHERE ID = " + ID;
 
 	//init recordset pointer
-	RecordSetPointer::getInstanceRef().setDatabaseConnection(DatabaseConnector::getInstanceRef().getDatabaseConnection());
+	RecordSetPointer::getInstanceRef().setDatabaseConnection(DBConnector::getInstanceRef().getdbcon());
 	RecordSetPointer::getInstanceRef().setSqlState(sqlState);
 
 	//exec SQL state
@@ -258,7 +258,7 @@ void CFetchRecordDialog::OnQueryButton()
 	}
 
 	//init recordset pointer
-	RecordSetPointer::getInstanceRef().setDatabaseConnection(DatabaseConnector::getInstanceRef().getDatabaseConnection());
+	RecordSetPointer::getInstanceRef().setDatabaseConnection(DBConnector::getInstanceRef().getdbcon());
 	RecordSetPointer::getInstanceRef().setSqlState(sqlState);
 
 	//exec SQL state

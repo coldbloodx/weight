@@ -1,12 +1,12 @@
 #include "stdafx.h"
 #include "DatabaseConnector.h"
 
-DatabaseConnector::DatabaseConnector():m_ConnectString("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=weight.mdb")
+DBConnector::DBConnector():m_ConnectString("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=weight.mdb")
 {
 	//empty constructor
 }
 
-void DatabaseConnector::closeDatabaseConnection()
+void DBConnector::closeDatabaseConnection()
 {
 	if (m_ConnectionPtr == NULL)
 	{
@@ -25,7 +25,7 @@ void DatabaseConnector::closeDatabaseConnection()
 
 }
 
-void DatabaseConnector::openDatabaseConnection()
+void DBConnector::openDatabaseConnection()
 {
 	try
 	{
@@ -40,12 +40,12 @@ void DatabaseConnector::openDatabaseConnection()
 	return;
 }
 
-_ConnectionPtr& DatabaseConnector::getDatabaseConnection()
+_ConnectionPtr& DBConnector::getdbcon()
 {
 	return this->m_ConnectionPtr;
 }
 
-void DatabaseConnector::setConnectString(std::string& connectString)
+void DBConnector::setConnectString(std::string& connectString)
 {
 	this->m_ConnectString = connectString;
 	return;

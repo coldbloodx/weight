@@ -1,17 +1,15 @@
 #pragma once
 #include "afxwin.h"
 
-
-
 // CWeighManagementDialog dialog
 
-class CWeighManagementDialog : public CDialog
+class CMainSettings : public CDialog
 {
-	DECLARE_DYNAMIC(CWeighManagementDialog)
+	DECLARE_DYNAMIC(CMainSettings)
 
 public:
-	CWeighManagementDialog(CWnd* pParent = NULL);   // standard constructor
-	virtual ~CWeighManagementDialog();
+	CMainSettings(CWnd* pParent = NULL);   // standard constructor
+	virtual ~CMainSettings();
 
 // Dialog Data
 	enum { IDD = IDD_WEIGHMANAGEMENT };
@@ -25,14 +23,15 @@ public:
 	CButton m_FormulaManagement;
 	CButton m_Query;
 	CButton m_Statistic;
-	afx_msg void OnBnClickedButton4();
-	CButton m_goBackButton;
-	CBrush   m_brBk;//在public中定义  
-
+    CButton m_goBackButton;
+    CButton m_barcodeManagement;
 	virtual BOOL OnInitDialog();
-	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
+
 	afx_msg void OnBnClickedButton1();
 	afx_msg void OnBnClickedButton2();
 	afx_msg void OnBnClickedButton3();
+    afx_msg void OnBnClickedButton4();
+    afx_msg void OnBnClickedGoBack();
+    afx_msg void OnBnClickedBarcodeManagement();
     afx_msg void OnPaint();
 };

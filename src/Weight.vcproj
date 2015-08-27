@@ -217,6 +217,14 @@
 			Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
 			>
 			<File
+				RelativePath=".\BarcodeManagementDlg.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\BarcodeUpdateDlg.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\DialogClasses\implementer\BasicSettingsDialog.cpp"
 				>
 			</File>
@@ -420,6 +428,14 @@
 			Name="Headers"
 			Filter="h;hpp;hxx;hm;inl"
 			>
+			<File
+				RelativePath=".\BarcodeManagementDlg.h"
+				>
+			</File>
+			<File
+				RelativePath=".\BarcodeUpdateDlg.h"
+				>
+			</File>
 			<File
 				RelativePath=".\DialogClasses\header\BasicSettingsDialog.h"
 				>

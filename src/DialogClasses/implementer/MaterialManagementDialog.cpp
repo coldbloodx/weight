@@ -231,6 +231,6 @@ void CMaterialManagementDialog::OnBnClickedBatchnumberchange()
 	
 	SingletonHelper::getInstance()->setFormulaID(ID);
 	SingletonHelper::getInstance()->setPtrData((void*)this);
-	CBatchNumberChage batchNumberchange;
+	CBatchNumberChange batchNumberchange;
 	batchNumberchange.DoModal();
 }

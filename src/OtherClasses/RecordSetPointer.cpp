@@ -1,23 +1,24 @@
 #include "stdafx.h"
 #include "RecordSetPointer.h"
+#include "DatabaseConnector.h"
 
 
-RecordSetPointer::RecordSetPointer():m_SqlSate("")
+RecordSetPointer::RecordSetPointer():sqlstr("")
 {
 	//init m_SqlSate as empty
 }
 
 void RecordSetPointer::closeRecordSet()
 {
-	if (m_RecordPointer == NULL)
+	if (resultptr == NULL)
 	{
 		return;
 	}
-	ASSERT(m_RecordPointer);
+	ASSERT(resultptr);
 	try
 	{
-		m_RecordPointer->Close();
-		m_RecordPointer = NULL;
+		resultptr->Close();
+		resultptr = NULL;
 	}
 	catch (_com_error& e)
 	{
@@ -28,13 +29,35 @@ void RecordSetPointer::closeRecordSet()
 	return;
 }
 
+_RecordsetPtr& RecordSetPointer::execquery(CString sqlstr)
+{
+    this->dbcon = DBConnector::getInstanceRef().getdbcon();
+
+    try
+    {
+        resultptr.CreateInstance("ADODB.Recordset");
+        resultptr->Open(_variant_t(sqlstr),
+            _variant_t((IDispatch*)dbcon,true),
+            adOpenStatic,
+            adLockOptimistic,
+            adCmdText);
+    }
+    catch(_com_error &e)
+    {
+        throw e;
+    }
+
+    return this->resultptr;
+}
+
 void RecordSetPointer::execSQL()
 {
+
 	try
 	{
-		m_RecordPointer.CreateInstance("ADODB.Recordset");
-		m_RecordPointer->Open(_variant_t(m_SqlSate),
-			_variant_t((IDispatch*)m_DatabaseConnection,true),
+		resultptr.CreateInstance("ADODB.Recordset");
+		resultptr->Open(_variant_t(sqlstr),
+			_variant_t((IDispatch*)dbcon,true),
 			adOpenStatic,
 			adLockOptimistic,
 			adCmdText);
@@ -48,16 +71,16 @@ void RecordSetPointer::execSQL()
 
 void RecordSetPointer::setSqlState(CString& sqlState)
 {
-	this->m_SqlSate = sqlState;
+	this->sqlstr = sqlState;
 	return;
 }
 
 void RecordSetPointer::setDatabaseConnection(_ConnectionPtr& connection)
 {
-	this->m_DatabaseConnection = connection;
+	this->dbcon = connection;
 }
 
 _RecordsetPtr& RecordSetPointer::getRecordPtr()
 {
-	return m_RecordPointer;
+	return resultptr;
 }

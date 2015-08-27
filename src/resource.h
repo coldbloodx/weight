@@ -64,6 +64,8 @@
 #define IDB_DLGBG                       206
 #define IDB_BITMAP1                     209
 #define IDB_LOGINBG                     209
+#define IDD_BARCODE_UPDATE              210
+#define IDD_BARCODE_MANAGEMENT          212
 #define IDC_WEIGHFREE_BUTTON            1003
 #define IDC_STATISTIC_BUTTON            1005
 #define IDC_QUERY_BUTTON                1006
@@ -201,7 +203,9 @@
 #define IDC_AMOUNTSECOND_EDIT           1195
 #define IDC_BUTTON1                     1200
 #define IDC_FETCHSTUFF_BUTTON           1201
+#define IDC_BUTTON10                    1201
 #define IDC_COM1DATA_STATIC             1202
+#define IDC_BUTTON11                    1202
 #define IDC_BUTTON2                     1203
 #define IDC_COM2DATA_STATIC             1203
 #define IDC_BUTTON3                     1204
@@ -243,14 +247,17 @@
 #define IDC_FWSMALL                     1247
 #define IDC_FREEWEIGHT_LABEL            1248
 #define IDC_FWLABEL                     1248
+#define IDC_EDIT2                       1249
+#define IDC_BARCODE_UPDATE              1250
+#define IDC_LIST2                       1251
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        210
+#define _APS_NEXT_RESOURCE_VALUE        213
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1249
+#define _APS_NEXT_CONTROL_VALUE         1252
 #define _APS_NEXT_SYMED_VALUE           104
 #endif
 #endif
