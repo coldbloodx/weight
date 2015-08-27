@@ -1,4 +1,5 @@
 #pragma once
+#include "afxwin.h"
 
 
 // CBarcodemanagementDlg dialog
@@ -19,4 +20,18 @@ protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
     virtual BOOL OnInitDialog();
 	DECLARE_MESSAGE_MAP()
+public:
+
+	afx_msg void OnBnClickedOk();
+	afx_msg void OnBnClickedCancel();
+	CButton m_ButtonOK;
+	CButton m_ButtonCancel;
+	BOOL bAddFlag;
+	CEdit barcode;
+	CEdit manufacture;
+	CString origBarcode;
 };
+#pragma once
+
+#pragma once
+

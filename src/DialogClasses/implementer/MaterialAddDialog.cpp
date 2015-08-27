@@ -8,6 +8,7 @@
 #include "HelperClass.h"
 #include "DatabaseConnector.h"
 #include "RecordSetPointer.h"
+#include "uiFunctions.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -30,22 +31,17 @@ CMaterialAddDialog::CMaterialAddDialog(CWnd* pParent /*=NULL*/)
 void CMaterialAddDialog::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CMaterialAddDialog)
 	DDX_Control(pDX, IDOK, m_ButtonOK);
 	DDX_Control(pDX, IDCANCEL, m_ButtonCancel);
 	DDX_Control(pDX, IDC_MATERIALNAME_EDIT, m_MaterialName);
 	DDX_Control(pDX, IDC_MATERIALID_EDIT, m_MaterialID);
-	//}}AFX_DATA_MAP
 	DDX_Control(pDX, IDC_MATERIALNAME_EDIT2, m_BatchNumber);
 	DDX_Control(pDX, IDC_MANUFACTURE, m_Manufacture);
 }
 
 
 BEGIN_MESSAGE_MAP(CMaterialAddDialog, CDialog)
-//{{AFX_MSG_MAP(CMaterialAddDialog)
-	//}}AFX_MSG_MAP
 	ON_BN_CLICKED(IDOK, &CMaterialAddDialog::OnBnClickedOk)
-	ON_WM_CTLCOLOR()
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -76,7 +72,7 @@ void CMaterialAddDialog::OnOK()
 	{
 		RecordSetPointer::getInstanceRef().execSQL() ;
 	}
-	catch (_com_error& e)
+	catch (_com_error)
 	{
 		AfxMessageBox("该批号已经存在，或者输入非法！");
 		return;
@@ -95,7 +91,7 @@ void CMaterialAddDialog::OnOK()
 		m_pRecordset->PutCollect("MATERIALNAME", _variant_t(materialName));
 		m_pRecordset->PutCollect("MANUFACTURE", _variant_t(materialManufacture));
 	}
-	catch(_com_error &e)
+	catch(_com_error)
 	{
 		AfxMessageBox("批号重复！请检查批号，以及相应的生产厂商");
 		return;
@@ -106,7 +102,7 @@ void CMaterialAddDialog::OnOK()
 	{
 		m_pRecordset->Update();
 	}
-	catch(_com_error &e)
+	catch(_com_error)
 	{
 		AfxMessageBox("批号重复！请检查批号，以及相应的生产厂商");
 		return;
@@ -173,25 +169,9 @@ BOOL CMaterialAddDialog::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 	
-	// TODO: Add extra initialization here
+	uiFunctions::setdlgsize(this, &m_ButtonCancel, &m_ButtonOK);
 
-	CBitmap   bmp;   
-	bmp.LoadBitmap(IDB_MATERIALCOUNTINPUT);//载入图片   
-	m_brBk.CreatePatternBrush(&bmp); 
-	bmp.DeleteObject();   
-
-	CRect wndRect((1024 - 640) / 2, (768 - 385) / 2, (1024 - 640) / 2 + 640, (768 - 385) / 2 + 400);
-	this->MoveWindow(wndRect);
-
-	CRect okRect(404, 339, 503, 374);
-	CRect cancelRect(520, 339, 618, 374);
-
-	m_ButtonOK.MoveWindow(okRect);
-
-	m_ButtonCancel.MoveWindow(cancelRect);
-
-	return TRUE;  // return TRUE unless you set the focus to a control
-	              // EXCEPTION: OCX Property Pages should return FALSE
+	return TRUE;
 }
 
 CMaterialAddDialog::~CMaterialAddDialog()
@@ -204,20 +184,3 @@ void CMaterialAddDialog::OnBnClickedOk()
 	OnOK();
 }
 
-HBRUSH CMaterialAddDialog::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
-{
-	HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
-
-	// TODO:  Change any attributes of the DC here
-	if   (pWnd == this)   
-	{   
-		return m_brBk;   
-	}   
-	if   (nCtlColor   ==   CTLCOLOR_STATIC)   
-	{     
-		pDC->SetBkMode(TRANSPARENT);	//透明   
-		return (HBRUSH)::GetStockObject(HOLLOW_BRUSH);   
-	}  
-	// TODO:  Return a different brush if the default is not desired
-	return hbr;
-}

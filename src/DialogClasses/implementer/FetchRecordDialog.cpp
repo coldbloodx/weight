@@ -56,7 +56,6 @@ BEGIN_MESSAGE_MAP(CFetchRecordDialog, CDialog)
 	ON_BN_CLICKED(IDC_ALL_BUTTON, OnAllButton)
 	ON_WM_TIMER()
 	//}}AFX_MSG_MAP
-	ON_WM_CTLCOLOR()
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////

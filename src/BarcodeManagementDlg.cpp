@@ -41,12 +41,15 @@ END_MESSAGE_MAP()
 //add barcode
 void CBarcodeManagemengDlg::OnBnClickedButton10()
 {
-
+	CBarcodeUpdateDlg updatedlg;
+	updatedlg.bAddFlag = 1;
+	updatedlg.DoModal();
 }
 
 //remove barcode
 void CBarcodeManagemengDlg::OnBnClickedButton11()
 {
+
 }
 
 //update barcode
