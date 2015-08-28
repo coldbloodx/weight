@@ -3,6 +3,8 @@
 
 // CQueryResultDialog dialog
 #include "constants.h"
+#include "afxcmn.h"
+#include "afxwin.h"
 class CQueryResultDialog : public CDialog
 {
 	DECLARE_DYNAMIC(CQueryResultDialog)
@@ -17,6 +19,9 @@ public:
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
-
+    virtual BOOL OnInitDialog();
 	DECLARE_MESSAGE_MAP()
+public:
+    CListCtrl ctlResultList;
+    CButton btnCancel;
 };
