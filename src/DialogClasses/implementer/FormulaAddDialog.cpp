@@ -34,15 +34,10 @@ CFormulaAddDialog::CFormulaAddDialog(CWnd* pParent /*=NULL*/)
 void CFormulaAddDialog::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CFormulaAddDialog)
-	//DDX_Control(pDX, IDC_STATUSSTATIC1111, m_StatusStatic);
 	DDX_Control(pDX, IDOK, m_ButtonOK);
 	DDX_Control(pDX, IDCANCEL, m_ButtonCancel);
-	//DDX_Control(pDX, IDC_PERCENTAGESECOND_STATIC, m_PercentageSecond);
-	//DDX_Control(pDX, IDC_MATERIALSECOND_STATIC, m_MaterialSecond);
 	DDX_Control(pDX, IDC_FORMULANAME_EDIT, m_FormulaName);
 	DDX_Control(pDX, IDC_FORMULAID_EDIT, m_FormulaID);
-	//}}AFX_DATA_MAP
 }
 
 
@@ -187,14 +182,7 @@ BOOL CFormulaAddDialog::OnInitDialog()
 
     uiFunctions::setdlgsize(this);
 
-	CRect okRect(681, 643,783, 679);
-	CRect cancelRect(801, 643, 903, 679);
 
-	m_ButtonOK.MoveWindow(okRect);
-	m_ButtonCancel.MoveWindow(cancelRect);
-
-	buttonVector.push_back(&m_ButtonCancel);
-	buttonVector.push_back(&m_ButtonOK);
 
 
 	

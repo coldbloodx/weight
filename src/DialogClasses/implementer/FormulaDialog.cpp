@@ -89,7 +89,7 @@ void CFormulaDialog::OnFormulaAdd()
 
 void CFormulaDialog::initList()
 {
-	m_FormulaListCtrl.DeleteAllItems();
+
 	CString sqlState = "SELECT * FROM FORMULAS";
 
 	//init recordset pointer

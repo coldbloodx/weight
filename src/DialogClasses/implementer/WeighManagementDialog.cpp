@@ -114,6 +114,6 @@ void CMainSettings::OnBnClickedGoBack()
 
 void CMainSettings::OnBnClickedBarcodeManagement()
 {
-    CBarcodeManagemengDlg mgrDlg;
+    CBarcodeManagementDlg mgrDlg;
     mgrDlg.DoModal();
 }

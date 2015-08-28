@@ -6,6 +6,8 @@
 #include "BarcodeUpdateDlg.h"
 #include "uiFunctions.h"
 #include "RecordSetPointer.h"
+#include "BarcodeManagementDlg.h"
+#include "helperclass.h"
 
 
 // CBarcodemanagementDlg dialog
@@ -84,7 +86,12 @@ void CBarcodeUpdateDlg::OnBnClickedOk()
 	}
 	_RecordsetPtr dbptr = RecordSetPointer::getInstancePtr()->execquery(sql);
 
-	OnOK();
+	CBarcodeManagementDlg* dlgptr = (CBarcodeManagementDlg*)SingletonHelper::getInstance()->getPtrData();
+	
+	dlgptr->resultlist.DeleteAllItems();
+	dlgptr->initlistctrl();
+
+	CDialog::OnOK();
 }
 
 void CBarcodeUpdateDlg::OnBnClickedCancel()

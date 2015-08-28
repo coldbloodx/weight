@@ -6,6 +6,7 @@
 #include "MaterialCountInputDialog.h"
 #include "FormulaAddDialog.h"
 #include "HelperClass.h"
+#include "uiFunctions.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -76,27 +77,10 @@ BOOL CMaterialCountInputDialog::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 	
-	CBitmap   bmp;   
-	bmp.LoadBitmap(IDB_MATERIALINPUTCOUNT);//ÔØÈëÍ¼Æ¬   
-	m_brBk.CreatePatternBrush(&bmp); 
-	bmp.DeleteObject();   
+	uiFunctions::setdlgsize(this, &m_ButtonCancel, &m_ButtonOK);
 
-	CRect wndRect((1024 - 640) / 2, (768 - 236) / 2, (1024 - 640) / 2 + 640, (768 - 236) / 2 + 250);
-	this->MoveWindow(wndRect);
-
-	CRect okRect(404, 190, 503, 224);
-	CRect cancelRect(520, 190, 618, 224);
-
-	m_ButtonOK.MoveWindow(okRect);
-
-
-	m_ButtonCancel.MoveWindow(cancelRect);
-
-	// TODO: Add extra initialization here
-//	HelperFunctions::setButtonStyle(m_ButtonOK, RGB(55,71,158),SingletonHelper::getInstance()->simSong20)	;
-//	HelperFunctions::setButtonStyle(m_ButtonCancel, RGB(55,71,158),SingletonHelper::getInstance()->simSong20);
-	return TRUE;  // return TRUE unless you set the focus to a control
-	              // EXCEPTION: OCX Property Pages should return FALSE
+	return TRUE; 
+	             
 }
 
 

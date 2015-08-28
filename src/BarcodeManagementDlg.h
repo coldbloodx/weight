@@ -4,17 +4,19 @@
 
 // CBarcodeManagemengDlg dialog
 
-class CBarcodeManagemengDlg : public CDialog
+class CBarcodeManagementDlg : public CDialog
 {
-	DECLARE_DYNAMIC(CBarcodeManagemengDlg)
+	DECLARE_DYNAMIC(CBarcodeManagementDlg)
 
 public:
-	CBarcodeManagemengDlg(CWnd* pParent = NULL);   // standard constructor
-	virtual ~CBarcodeManagemengDlg();
+	CBarcodeManagementDlg(CWnd* pParent = NULL);   // standard constructor
+	virtual ~CBarcodeManagementDlg();
 
 // Dialog Data
 	enum { IDD = IDD_BARCODE_MANAGEMENT };
     virtual BOOL OnInitDialog();
+
+	void initlistctrl();
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support

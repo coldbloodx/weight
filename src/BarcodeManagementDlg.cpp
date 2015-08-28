@@ -7,39 +7,40 @@
 #include "BarcodeUpdateDlg.h"
 #include "uiFunctions.h"
 #include "RecordSetPointer.h"
+#include "helperclass.h"
 
 
 // CBarcodeManagemengDlg dialog
 
-IMPLEMENT_DYNAMIC(CBarcodeManagemengDlg, CDialog)
+IMPLEMENT_DYNAMIC(CBarcodeManagementDlg, CDialog)
 
-CBarcodeManagemengDlg::CBarcodeManagemengDlg(CWnd* pParent /*=NULL*/)
-	: CDialog(CBarcodeManagemengDlg::IDD, pParent)
+CBarcodeManagementDlg::CBarcodeManagementDlg(CWnd* pParent /*=NULL*/)
+: CDialog(CBarcodeManagementDlg::IDD, pParent)
 {
 
 }
 
-CBarcodeManagemengDlg::~CBarcodeManagemengDlg()
+CBarcodeManagementDlg::~CBarcodeManagementDlg()
 {
 }
 
-void CBarcodeManagemengDlg::DoDataExchange(CDataExchange* pDX)
+void CBarcodeManagementDlg::DoDataExchange(CDataExchange* pDX)
 {
-    CDialog::DoDataExchange(pDX);
-    DDX_Control(pDX, IDC_LIST2, resultlist);
+	CDialog::DoDataExchange(pDX);
+	DDX_Control(pDX, IDC_LIST2, resultlist);
 }
 
 
-BEGIN_MESSAGE_MAP(CBarcodeManagemengDlg, CDialog)
-    ON_BN_CLICKED(IDC_BUTTON10, &CBarcodeManagemengDlg::OnBnClickedButton10)
-    ON_BN_CLICKED(IDC_BUTTON11, &CBarcodeManagemengDlg::OnBnClickedButton11)
-    ON_BN_CLICKED(IDC_BUTTON1, &CBarcodeManagemengDlg::OnBnClickedButton1)
+BEGIN_MESSAGE_MAP(CBarcodeManagementDlg, CDialog)
+	ON_BN_CLICKED(IDC_BUTTON10, &CBarcodeManagementDlg::OnBnClickedButton10)
+	ON_BN_CLICKED(IDC_BUTTON11, &CBarcodeManagementDlg::OnBnClickedButton11)
+	ON_BN_CLICKED(IDC_BUTTON1, &CBarcodeManagementDlg::OnBnClickedButton1)
 END_MESSAGE_MAP()
 
 
 // CBarcodeManagemengDlg message handlers
 //add barcode
-void CBarcodeManagemengDlg::OnBnClickedButton10()
+void CBarcodeManagementDlg::OnBnClickedButton10()
 {
 	CBarcodeUpdateDlg updatedlg;
 	updatedlg.bAddFlag = 1;
@@ -47,35 +48,42 @@ void CBarcodeManagemengDlg::OnBnClickedButton10()
 }
 
 //remove barcode
-void CBarcodeManagemengDlg::OnBnClickedButton11()
+void CBarcodeManagementDlg::OnBnClickedButton11()
 {
 
 }
 
 //update barcode
-void CBarcodeManagemengDlg::OnBnClickedButton1()
+void CBarcodeManagementDlg::OnBnClickedButton1()
 {
-   
-    CBarcodeUpdateDlg updatedlg;
-    updatedlg.DoModal();
+
+	CBarcodeUpdateDlg updatedlg;
+	SingletonHelper::getInstance()->setPtrData(this);
+	updatedlg.DoModal();
 }
 
-BOOL CBarcodeManagemengDlg::OnInitDialog()
+BOOL CBarcodeManagementDlg::OnInitDialog()
 {
-    CDialog::OnInitDialog();
+	CDialog::OnInitDialog();
 
-    CString sql = "select * from barcodes;";
+	initlistctrl();
 
-    _RecordsetPtr dbptr = RecordSetPointer::getInstancePtr()->execquery(sql);
-    
+	uiFunctions::setdlgsize(this);
+	return TRUE;
+}
 
-    CString headerarray[3] = {"ID", "barcode", "manufacture"};
-    vector<CString>  headervec(headerarray, headerarray + 3);
-    uiFunctions::initListHeader(headervec, resultlist);
-    uiFunctions::updateList(dbptr, resultlist , headervec);
+void CBarcodeManagementDlg::initlistctrl()
+{
+	resultlist.DeleteAllItems();
+	CString sql = "select * from barcodes;";
+
+	_RecordsetPtr dbptr = RecordSetPointer::getInstancePtr()->execquery(sql);
 
 
-    uiFunctions::setdlgsize(this);
-    return TRUE;
+	CString headerarray[3] = {"ID", "barcode", "manufacture"};
+	vector<CString>  headervec(headerarray, headerarray + 3);
+	uiFunctions::initListHeader(headervec, resultlist);
+	uiFunctions::updateList(dbptr, resultlist , headervec);
+
 }
 
