@@ -8,6 +8,7 @@
 #include "FormulaDialog.h"
 #include "DatabaseConnector.h"
 #include "RecordSetPointer.h"
+#include "uiFunctions.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -356,69 +357,8 @@ BOOL CFetchAmountInputDialog::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 	
-	// TODO: Add extra initialization here
-	//prepare for UI
-
-	CBitmap   bmp;   
-	bmp.LoadBitmap(IDB_FETCHAMOUNTINPUT);//ÔØÈëÍ¼Æ¬   
-	m_brBk.CreatePatternBrush(&bmp);   
-	bmp.DeleteObject();  
+    uiFunctions::setdlgsize(this, &m_ButtonCancel, &m_ButtonOK);
 	
-	CRect wndRect((1024 - 960) / 2, (768 - 585) / 2, (1024 - 960) / 2 + 960, (768 - 585) / 2 + 600);
-	this->MoveWindow(wndRect);
-
-	CRect okRect(504, 49, 622, 89);
-	m_ButtonOK.MoveWindow(okRect);
-
-
-	CRect cancelRect(653, 49, 770, 89);
-	m_ButtonCancel.MoveWindow(cancelRect);
-
-
-	CRect gobackRect(166, 465, 255, 490);
-	m_GoBack.MoveWindow(gobackRect);
-
-
-	// TODO: Add extra initialization here
-	buttonVector.push_back(&m_Button1);
-	buttonVector.push_back(&m_Button2);
-	buttonVector.push_back(&m_Button3);
-	buttonVector.push_back(&m_Button4);
-	buttonVector.push_back(&m_Button5);	
-	buttonVector.push_back(&m_Button6);
-	buttonVector.push_back(&m_Button7);	
-	buttonVector.push_back(&m_Button8);
-	buttonVector.push_back(&m_Button9);
-	buttonVector.push_back(&m_Button0);
-	buttonVector.push_back(&m_ButtonComma);
-	buttonVector.push_back(&m_ButtonBack);
-	
-	int left = 650;
-	int top = 165;
-	int width = 707 - 650;
-	int height = 223 - 165;
-	int horiSpacer = 718 - 707;
-	int vertSpacer = 234 - 223;
-
-	for (size_t i = 0; i < buttonVector.size(); ++i)
-	{
-		CRect startRect(left, top, left + width, top + height);
-		buttonVector[i]->MoveWindow(startRect, TRUE);
-
-		if (((i + 1) % 3) == 0)
-		{
-			left = 650;
-			top = startRect.bottom + vertSpacer;
-		}
-		else
-		{
-			left = startRect.right + horiSpacer;
-		}
-	}
-	
-	//HelperFunctions::showStatus(m_StatusStatic);
-	//SetTimer(1000,1000,NULL);
-	/////////////////////
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE
 }
@@ -430,27 +370,9 @@ void CFetchAmountInputDialog::OnTimer(UINT nIDEvent)
 	CDialog::OnTimer(nIDEvent);
 }
 
-HBRUSH CFetchAmountInputDialog::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
-{
-	HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
-
-	if   (nCtlColor   ==   CTLCOLOR_STATIC)   
-	{     
-		pDC->SetBkMode(TRANSPARENT);	//Í¸Ã÷   
-		return (HBRUSH)::GetStockObject(HOLLOW_BRUSH);   
-	}   
-	// TODO:  Change any attributes of the DC here
-	if   (pWnd   ==   this)   
-	{   
-		return   m_brBk;   
-	} 
-	// TODO:  Return a different brush if the default is not desired
-	return hbr;
-}
 
 void CFetchAmountInputDialog::OnBnClickedOk()
 {
-	// TODO: Add your control notification handler code here
 	OnOK();
 }
 

@@ -42,10 +42,6 @@ BEGIN_MESSAGE_MAP(CFormulaDialog, CDialog)
 	ON_BN_CLICKED(IDC_FORMULA_ADD, OnFormulaAdd)
 	ON_BN_CLICKED(IDC_FORMULA_DEL, OnFormulaDel)
 	ON_BN_CLICKED(IDC_FORMULAFETCH_BUTTON, OnFormulaFetch)
-	ON_WM_TIMER()
-
-	//}}AFX_MSG_MAP
-	ON_WM_CTLCOLOR()
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -81,7 +77,6 @@ CFormulaDialog::~CFormulaDialog()
 void CFormulaDialog::OnFormulaAdd() 
 {
 	SingletonHelper::getInstance()->setPtrData((void*)this);
-	// TODO: Add your control notification handler code here
 	CMaterialCountInputDialog materialCountInputDialog;
 	materialCountInputDialog.DoModal();
 	return;
@@ -238,12 +233,6 @@ void CFormulaDialog::OnFormulaFetch()
 	fetchAmountInputDialog.DoModal();
 }
 
-void CFormulaDialog::OnTimer(UINT nIDEvent) 
-{
-	// TODO: Add your message handler code here and/or call default
-	//HelperFunctions::showStatus(m_StatusStatic);
-	CDialog::OnTimer(nIDEvent);
-}
 
 BOOL CFormulaDialog::OnCommand(WPARAM wParam, LPARAM lParam) 
 {

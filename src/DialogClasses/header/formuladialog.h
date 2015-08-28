@@ -53,7 +53,6 @@ protected:
 	afx_msg void OnFormulaDel();
 	afx_msg	void OnFormulaFetch();
 	virtual BOOL OnInitDialog();
-	afx_msg void OnTimer(UINT nIDEvent);
 	DECLARE_MESSAGE_MAP()
 private:
 

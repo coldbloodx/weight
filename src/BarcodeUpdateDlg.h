@@ -13,6 +13,7 @@ public:
 	virtual ~CBarcodeUpdateDlg();
 
 
+
 // Dialog Data
 	enum { IDD = IDD_BARCODE_UPDATE };
 
@@ -29,7 +30,8 @@ public:
 	BOOL bAddFlag;
 	CEdit barcode;
 	CEdit manufacture;
-	CString origBarcode;
+	CString origbarcode;
+    CString barcodeid;
 };
 #pragma once
 

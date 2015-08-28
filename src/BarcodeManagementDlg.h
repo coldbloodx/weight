@@ -17,6 +17,7 @@ public:
     virtual BOOL OnInitDialog();
 
 	void initlistctrl();
+    void initlistheader();
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support

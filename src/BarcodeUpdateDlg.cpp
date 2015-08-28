@@ -15,7 +15,7 @@
 IMPLEMENT_DYNAMIC(CBarcodeUpdateDlg, CDialog)
 
 CBarcodeUpdateDlg::CBarcodeUpdateDlg(CWnd* pParent /*=NULL*/)
-	: CDialog(CBarcodeUpdateDlg::IDD, pParent), bAddFlag(0)
+	: CDialog(CBarcodeUpdateDlg::IDD, pParent), bAddFlag(0), barcodeid("")
 {
 
 }
@@ -51,22 +51,26 @@ BOOL CBarcodeUpdateDlg::OnInitDialog()
 	}
 	else
 	{
-		barcode.SetWindowText(origBarcode);
+		barcode.SetWindowText(origbarcode);
 		barcode.EnableWindow(FALSE);
 		this->SetWindowText("ÐÞ¸Ä³§¼Ò");
 	}
-
+    
+    uiFunctions::setdlgsize(this, &m_ButtonCancel, &m_ButtonOK);
     return TRUE;
 }
 
 
 void CBarcodeUpdateDlg::OnBnClickedOk()
 {
-	CString barcodeStr;
+
 	CString manuStr;
 	CString sql;
-	barcode.GetWindowText(barcodeStr);
+
 	manufacture.GetWindowText(manuStr);
+
+    CString barcodeStr;
+    barcode.GetWindowText(barcodeStr);
 
 	if(barcodeStr.IsEmpty() || manuStr.IsEmpty())
 	{
@@ -82,15 +86,12 @@ void CBarcodeUpdateDlg::OnBnClickedOk()
 	}
 	else
 	{
-		sql.Format("update barcodes set manufacture = \"%s\" where barcode = \"%s\"", manuStr, barcodeStr);
+		sql.Format("update barcodes set manufacture = '%s' where id = %s", manuStr, barcodeid);
 	}
+
 	_RecordsetPtr dbptr = RecordSetPointer::getInstancePtr()->execquery(sql);
 
-	CBarcodeManagementDlg* dlgptr = (CBarcodeManagementDlg*)SingletonHelper::getInstance()->getPtrData();
-	
-	dlgptr->resultlist.DeleteAllItems();
-	dlgptr->initlistctrl();
-
+    
 	CDialog::OnOK();
 }
 
