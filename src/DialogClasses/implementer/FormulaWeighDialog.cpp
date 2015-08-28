@@ -108,19 +108,19 @@ BOOL CFormulaWeighDialog::OnInitDialog()
 		CString sqlState("SELECT BATCHNUMBER,MANUFACTURE FROM MATERIALS WHERE NAME = '");
 		sqlState += tempMaterialName + "'";
 		
-		RecordSetPointer::getInstanceRef().setDatabaseConnection(DBConnector::getInstanceRef().getdbcon());
-		RecordSetPointer::getInstanceRef().setSqlState(sqlState);
+		SQLExecutor::getInstanceRef().setDatabaseConnection(DBConnector::getInstanceRef().getdbcon());
+		SQLExecutor::getInstanceRef().setSqlState(sqlState);
 
 		CString oldLineNumber;
 		try
 		{
-			RecordSetPointer::getInstanceRef().execSQL() ;
+			SQLExecutor::getInstanceRef().execSQL() ;
 		}
 		catch (_com_error& e)
 		{
 			AfxMessageBox(e.Description());
 		}
-		_RecordsetPtr& m_pRecordset = RecordSetPointer::getInstanceRef().getRecordPtr();
+		_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
 
 		try
 		{
@@ -476,12 +476,12 @@ void CFormulaWeighDialog::OnOK()
 	CString sqlState("UPDATE FORMULAS SET TOTAL = TOTAL + ");
 	sqlState +=  SingletonHelper::getInstance()->getFormulaWeigh() + " WHERE ID = " + SingletonHelper::getInstance()->getFormulaID() ;
 	
-	RecordSetPointer::getInstanceRef().setSqlState(sqlState);
+	SQLExecutor::getInstanceRef().setSqlState(sqlState);
 
 	//exec SQL state
 	try
 	{
-		RecordSetPointer::getInstanceRef().execSQL() ;
+		SQLExecutor::getInstanceRef().execSQL() ;
 	}
 	catch (_com_error& e)
 	{
@@ -490,15 +490,15 @@ void CFormulaWeighDialog::OnOK()
 	}
 
 	//get the result data set
-	_RecordsetPtr& m_pRecordset = RecordSetPointer::getInstanceRef().getRecordPtr();
+	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
 
 	//init recordset pointer
-	RecordSetPointer::getInstanceRef().setSqlState(CString("SELECT * FROM WEIGHT"));
+	SQLExecutor::getInstanceRef().setSqlState(CString("SELECT * FROM WEIGHT"));
 
 	//exec SQL state
 	try
 	{
-		RecordSetPointer::getInstanceRef().execSQL() ;
+		SQLExecutor::getInstanceRef().execSQL() ;
 	}
 	catch (_com_error& e)
 	{
@@ -507,7 +507,7 @@ void CFormulaWeighDialog::OnOK()
 	}
 
 	//get the result data set
-	m_pRecordset = RecordSetPointer::getInstanceRef().getRecordPtr();
+	m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
 
 	CString weighID;
 

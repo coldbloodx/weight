@@ -119,13 +119,13 @@ void CLoginDialog::OnOK()
 	CString tempRight;
 	
 	//init recordset pointer
-	RecordSetPointer::getInstanceRef().setDatabaseConnection(DBConnector::getInstanceRef().getdbcon());
-	RecordSetPointer::getInstanceRef().setSqlState(sqlState);
+	SQLExecutor::getInstanceRef().setDatabaseConnection(DBConnector::getInstanceRef().getdbcon());
+	SQLExecutor::getInstanceRef().setSqlState(sqlState);
 	
 	//exec SQL state
 	try
 	{
-		RecordSetPointer::getInstanceRef().execSQL() ;
+		SQLExecutor::getInstanceRef().execSQL() ;
 	}
 	catch (_com_error& e)
 	{
@@ -134,7 +134,7 @@ void CLoginDialog::OnOK()
 	}
 	
 	//get the result data set
-	_RecordsetPtr& m_pRecordset = RecordSetPointer::getInstanceRef().getRecordPtr();
+	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
 
 	try
 	{

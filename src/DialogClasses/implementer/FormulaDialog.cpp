@@ -88,12 +88,12 @@ void CFormulaDialog::initList()
 	CString sqlState = "SELECT * FROM FORMULAS";
 
 	//init recordset pointer
-	RecordSetPointer::getInstanceRef().setSqlState(sqlState);
+	SQLExecutor::getInstanceRef().setSqlState(sqlState);
 
 	//exec SQL state
 	try
 	{
-		RecordSetPointer::getInstanceRef().execSQL() ;
+		SQLExecutor::getInstanceRef().execSQL() ;
 	}
 	catch (_com_error& e)
 	{
@@ -102,7 +102,7 @@ void CFormulaDialog::initList()
 	}
 
 	//get the result data set
-	_RecordsetPtr& m_pRecordset = RecordSetPointer::getInstanceRef().getRecordPtr();
+	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
 
 	CString headerArray[4] = {"ID", "NAME", "MATERIAL", "TOTAL"};
 	std::vector<CString> headerList(headerArray, headerArray + 4);
@@ -185,12 +185,12 @@ void CFormulaDialog::OnFormulaDel()
 	}
 
 	//init recordset pointer
-	RecordSetPointer::getInstanceRef().setSqlState(sqlState);
+	SQLExecutor::getInstanceRef().setSqlState(sqlState);
 
 	//exec SQL state
 	try
 	{
-		RecordSetPointer::getInstanceRef().execSQL() ;
+		SQLExecutor::getInstanceRef().execSQL() ;
 	}
 	catch (_com_error& e)
 	{
@@ -199,7 +199,7 @@ void CFormulaDialog::OnFormulaDel()
 	}
 
 	//get the result data set
-	_RecordsetPtr& m_pRecordset = RecordSetPointer::getInstanceRef().getRecordPtr();
+	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
 
 	try
 	{

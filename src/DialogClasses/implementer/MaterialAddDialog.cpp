@@ -66,11 +66,11 @@ void CMaterialAddDialog::OnOK()
 ///增加厂商开始
 
 	//增加厂商
-	RecordSetPointer::getInstanceRef().setSqlState(CString("SELECT * FROM MANUFACTURES"));
+	SQLExecutor::getInstanceRef().setSqlState(CString("SELECT * FROM MANUFACTURES"));
 
 	try
 	{
-		RecordSetPointer::getInstanceRef().execSQL() ;
+		SQLExecutor::getInstanceRef().execSQL() ;
 	}
 	catch (_com_error)
 	{
@@ -78,7 +78,7 @@ void CMaterialAddDialog::OnOK()
 		return;
 	}
 
-	_RecordsetPtr& m_pRecordset = RecordSetPointer::getInstanceRef().getRecordPtr();	
+	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();	
 	
 	try
 	{
@@ -111,12 +111,12 @@ void CMaterialAddDialog::OnOK()
 
 	///增加材料开始
 	//init recordset pointer
-	RecordSetPointer::getInstanceRef().setSqlState(CString("SELECT * FROM MATERIALS"));
+	SQLExecutor::getInstanceRef().setSqlState(CString("SELECT * FROM MATERIALS"));
 
 	//exec SQL state
 	try
 	{
-		RecordSetPointer::getInstanceRef().execSQL() ;
+		SQLExecutor::getInstanceRef().execSQL() ;
 	}
 	catch (_com_error& e)
 	{
@@ -125,7 +125,7 @@ void CMaterialAddDialog::OnOK()
 	}
 
 	//get the result data set
-	m_pRecordset = RecordSetPointer::getInstanceRef().getRecordPtr();
+	m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
 
 	try
 	{

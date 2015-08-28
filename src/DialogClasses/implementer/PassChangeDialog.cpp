@@ -85,12 +85,12 @@ void CPassChangeDialog::OnOK()
 	sqlState += confirmPass +"' WHERE ID = " + SingletonHelper::getInstance()->getUserID();
 
 	//init recordset pointer
-	RecordSetPointer::getInstanceRef().setSqlState(sqlState);
+	SQLExecutor::getInstanceRef().setSqlState(sqlState);
 
 	//exec SQL state
 	try
 	{
-		RecordSetPointer::getInstanceRef().execSQL() ;
+		SQLExecutor::getInstanceRef().execSQL() ;
 	}
 	catch (_com_error& e)
 	{
@@ -99,7 +99,7 @@ void CPassChangeDialog::OnOK()
 	}
 
 	//get the result data set
-	_RecordsetPtr& m_pRecordset = RecordSetPointer::getInstanceRef().getRecordPtr();
+	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
 
 	SingletonHelper::getInstance()->setUserPass(confirmPass);
 

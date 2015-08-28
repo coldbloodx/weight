@@ -61,13 +61,13 @@ BOOL CDetailRecordDialog::OnInitDialog()
 	CString sqlState("SELECT ID, FORMULAID, FORMULANAME, USERID, USERNAME, AMOUNT, DATE, TIME, COMMENT FROM weight WHERE ID = ");
 	sqlState += SingletonHelper::getInstance()->getRecordID();
 	
-	RecordSetPointer::getInstanceRef().setDatabaseConnection(DBConnector::getInstanceRef().getdbcon());
-	RecordSetPointer::getInstanceRef().setSqlState(sqlState);
+	SQLExecutor::getInstanceRef().setDatabaseConnection(DBConnector::getInstanceRef().getdbcon());
+	SQLExecutor::getInstanceRef().setSqlState(sqlState);
 
 	//exec SQL state
 	try
 	{
-		RecordSetPointer::getInstanceRef().execSQL() ;
+		SQLExecutor::getInstanceRef().execSQL() ;
 	}
 	catch (_com_error& e)
 	{
@@ -76,7 +76,7 @@ BOOL CDetailRecordDialog::OnInitDialog()
 	}
 
 	//get the result data set
-	_RecordsetPtr& m_pRecordset = RecordSetPointer::getInstanceRef().getRecordPtr();
+	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
 
 	CString recordID, formulaID, formulaName, userID, userName, amount, date, time, comment;
 	

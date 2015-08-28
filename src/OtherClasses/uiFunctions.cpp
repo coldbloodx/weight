@@ -133,3 +133,25 @@ void uiFunctions::init6Buttons(vector<CButton*>& buttonvec)
         }
     }
 }
+
+void uiFunctions::fillCombo(_RecordsetPtr& dbptr, CComboBox* pcombo, CString& key)
+{
+    try
+    {
+        while(!dbptr->adoEOF)
+        {
+                _variant_t vDataField = dbptr->GetCollect(_variant_t(key));
+                if (vDataField.vt != VT_NULL)
+                {
+                    CString dataField = (LPCTSTR)(_bstr_t)vDataField;
+                    pcombo->AddString(dataField);
+                }
+
+            dbptr->MoveNext();
+        }
+    }
+    catch (_com_error& e)
+    {
+        throw e;
+    }
+}

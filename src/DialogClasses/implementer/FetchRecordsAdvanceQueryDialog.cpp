@@ -361,13 +361,13 @@ void CFetchRecordsAdvanceQueryDialog::OnOK()
 	fetchRecordDialog->m_FetchRecordList.DeleteAllItems();
 
 	//init recordset pointer
-	RecordSetPointer::getInstanceRef().setDatabaseConnection(DBConnector::getInstanceRef().getdbcon());
-	RecordSetPointer::getInstanceRef().setSqlState(sqlHeader + sqlState);
+	SQLExecutor::getInstanceRef().setDatabaseConnection(DBConnector::getInstanceRef().getdbcon());
+	SQLExecutor::getInstanceRef().setSqlState(sqlHeader + sqlState);
 
 	//exec SQL state
 	try
 	{
-		RecordSetPointer::getInstanceRef().execSQL() ;
+		SQLExecutor::getInstanceRef().execSQL() ;
 	}
 	catch (_com_error& e)
 	{
@@ -376,7 +376,7 @@ void CFetchRecordsAdvanceQueryDialog::OnOK()
 	}
 
 	//get the result data set
-	_RecordsetPtr& m_pRecordset = RecordSetPointer::getInstanceRef().getRecordPtr();
+	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
 
 	CString headerArray[9] = {"ID", "FORMULAID", "FORMULANAME", "FORMULANAME", "OPERATORID", "OPERATORNAME","AMOUNT", "DATE", "TIME" };
 	std::vector<CString> headerList(headerArray, headerArray + 9);
@@ -386,12 +386,12 @@ void CFetchRecordsAdvanceQueryDialog::OnOK()
 	CString total;
 	if (m_SumCheck.GetCheck())
 	{
-		RecordSetPointer::getInstanceRef().setSqlState(sumHeader + sqlState);
+		SQLExecutor::getInstanceRef().setSqlState(sumHeader + sqlState);
 
 		//exec SQL state
 		try
 		{
-			RecordSetPointer::getInstanceRef().execSQL() ;
+			SQLExecutor::getInstanceRef().execSQL() ;
 		}
 		catch (_com_error& e)
 		{
@@ -400,7 +400,7 @@ void CFetchRecordsAdvanceQueryDialog::OnOK()
 		}
 
 		//get the result data set
-		_RecordsetPtr& m_pRecordset = RecordSetPointer::getInstanceRef().getRecordPtr();
+		_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
 
 		try
 		{

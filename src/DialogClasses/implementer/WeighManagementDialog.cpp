@@ -11,6 +11,7 @@
 #include "helperclass.h"
 #include "uifunctions.h"
 #include "BarcodeManagementDlg.h"
+#include "TraceQueryDialog.h"
 
 
 // CWeighManagementDialog dialog
@@ -56,9 +57,10 @@ END_MESSAGE_MAP()
 
 void CMainSettings::OnBnClickedButton4()
 {
-    // TODO: Add your control notification handler code here
-    CStatisticDialog statisticDialog;
-    statisticDialog.DoModal();
+    //CStatisticDialog statisticDialog;
+    //statisticDialog.DoModal();
+    CTraceQueryDialog dlg;
+    dlg.DoModal();
 }
 
 BOOL CMainSettings::OnInitDialog()

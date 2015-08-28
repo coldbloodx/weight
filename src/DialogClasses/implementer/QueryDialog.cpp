@@ -197,12 +197,12 @@ void CQueryDialog::refreshUserList()
 	}
 
 	//init recordset pointer
-	RecordSetPointer::getInstanceRef().setSqlState(sqlState);
+	SQLExecutor::getInstanceRef().setSqlState(sqlState);
 
 	//exec SQL state
 	try
 	{
-		RecordSetPointer::getInstanceRef().execSQL() ;
+		SQLExecutor::getInstanceRef().execSQL() ;
 	}
 	catch (_com_error& e)
 	{
@@ -211,7 +211,7 @@ void CQueryDialog::refreshUserList()
 	}
 
 	//get the result data set
-	_RecordsetPtr& m_pRecordset = RecordSetPointer::getInstanceRef().getRecordPtr();
+	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
 	
 	CString headerArray[3] ={"ID", "NAME", "RIGHT"};
 	
@@ -265,13 +265,13 @@ void CQueryDialog::refreshFormulaList()
 	}
 
 	//init recordset pointer
-	RecordSetPointer::getInstanceRef().setSqlState(sqlState);
+	SQLExecutor::getInstanceRef().setSqlState(sqlState);
 
 
 	//exec SQL state
 	try
 	{
-		RecordSetPointer::getInstanceRef().execSQL() ;
+		SQLExecutor::getInstanceRef().execSQL() ;
 	}
 	catch (_com_error& e)
 	{
@@ -280,7 +280,7 @@ void CQueryDialog::refreshFormulaList()
 	}
 
 	//get the result data set
-	_RecordsetPtr& m_pRecordset = RecordSetPointer::getInstanceRef().getRecordPtr();
+	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
 
 	CString headerArray[3] ={"ID", "NAME", "MATERIAL"};
 	std::vector<CString> headerList(headerArray, headerArray + 3);
@@ -331,12 +331,12 @@ void CQueryDialog::refreshMaterialList()
 	}
 
 	//init recordset pointer
-	RecordSetPointer::getInstanceRef().setSqlState(sqlState);
+	SQLExecutor::getInstanceRef().setSqlState(sqlState);
 
 	//exec SQL state
 	try
 	{
-		RecordSetPointer::getInstanceRef().execSQL() ;
+		SQLExecutor::getInstanceRef().execSQL() ;
 	}
 	catch (_com_error& e)
 	{
@@ -345,7 +345,7 @@ void CQueryDialog::refreshMaterialList()
 	}
 
 	//get the result data set
-	_RecordsetPtr& m_pRecordset = RecordSetPointer::getInstanceRef().getRecordPtr();
+	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
 	
 	CString headerArray[2] ={"ID", "NAME"};
 	std::vector<CString> headerList(headerArray, headerArray + 2);

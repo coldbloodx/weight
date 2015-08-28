@@ -325,7 +325,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\QueryCondDialog.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\DialogClasses\implementer\QueryDialog.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\QueryResultDialog.cpp"
 				>
 			</File>
 			<File
@@ -377,6 +385,10 @@
 			</File>
 			<File
 				RelativePath=".\ExternClasses\implementer\tinyxmlparser.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\TraceQueryDialog.cpp"
 				>
 			</File>
 			<File
@@ -446,6 +458,10 @@
 			</File>
 			<File
 				RelativePath=".\DialogClasses\header\ChangeManufactureNameDialog.h"
+				>
+			</File>
+			<File
+				RelativePath=".\constants.h"
 				>
 			</File>
 			<File
@@ -537,7 +553,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\QueryCondDialog.h"
+				>
+			</File>
+			<File
 				RelativePath=".\DialogClasses\header\QueryDialog.h"
+				>
+			</File>
+			<File
+				RelativePath=".\QueryResultDialog.h"
 				>
 			</File>
 			<File
@@ -574,6 +598,10 @@
 			</File>
 			<File
 				RelativePath=".\ExternClasses\header\tinyxml.h"
+				>
+			</File>
+			<File
+				RelativePath=".\TraceQueryDialog.h"
 				>
 			</File>
 			<File

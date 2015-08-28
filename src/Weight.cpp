@@ -173,7 +173,7 @@ CWeightApp::~CWeightApp()
 	//handle exception when close recordset
 	try
 	{
-		RecordSetPointer::getInstanceRef().closeRecordSet();
+		SQLExecutor::getInstanceRef().closeRecordSet();
 	}
 	catch (_com_error& e)
 	{
@@ -198,7 +198,7 @@ CWeightApp::~CWeightApp()
 
 
 	DBConnector::RemoveInstance();
-	RecordSetPointer::RemoveInstance();
+	SQLExecutor::RemoveInstance();
 	if (m_bATLInited)
 	{
 		_Module.RevokeClassObjects();

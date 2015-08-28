@@ -326,11 +326,11 @@ void CFormulaAdvanceQueryDialog::OnOK()
 	statisticDialog->m_StatisticList.DeleteAllItems();
 
 	//init recordset pointer
-	RecordSetPointer::getInstanceRef().setSqlState(sqlHeader + sqlState);
+	SQLExecutor::getInstanceRef().setSqlState(sqlHeader + sqlState);
 	//exec SQL state
 	try
 	{
-		RecordSetPointer::getInstanceRef().execSQL() ;
+		SQLExecutor::getInstanceRef().execSQL() ;
 	}
 	catch (_com_error& e)
 	{
@@ -339,7 +339,7 @@ void CFormulaAdvanceQueryDialog::OnOK()
 	}
 
 	//get the result data set
-	_RecordsetPtr& m_pRecordset = RecordSetPointer::getInstanceRef().getRecordPtr();
+	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
 
 	CString headerArray[9] = {"ID", "FORMULAID", "FORMULANAME", "USERID", "USERNAME", "AMOUNT","DATE", "TIME","COMMENT" };
 	std::vector<CString> headerList(headerArray, headerArray + 9);
@@ -349,11 +349,11 @@ void CFormulaAdvanceQueryDialog::OnOK()
 	CString total;
 	if (m_SumCheck.GetCheck())
 	{
-		RecordSetPointer::getInstanceRef().setSqlState(sumHeader + sqlState);
+		SQLExecutor::getInstanceRef().setSqlState(sumHeader + sqlState);
 		//exec SQL state
 		try
 		{
-			RecordSetPointer::getInstanceRef().execSQL() ;
+			SQLExecutor::getInstanceRef().execSQL() ;
 		}
 		catch (_com_error& e)
 		{
@@ -362,7 +362,7 @@ void CFormulaAdvanceQueryDialog::OnOK()
 		}
 
 		//get the result data set
-		_RecordsetPtr& m_pRecordset = RecordSetPointer::getInstanceRef().getRecordPtr();
+		_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
 
 		try
 		{

@@ -99,12 +99,12 @@ void CMaterialManagementDialog::initListHeader()
 void CMaterialManagementDialog::initList()
 {
 	//init recordset pointer
-	RecordSetPointer::getInstanceRef().setSqlState(CString("SELECT * FROM MATERIALS"));
+	SQLExecutor::getInstanceRef().setSqlState(CString("SELECT * FROM MATERIALS"));
 
 	//exec SQL state
 	try
 	{
-		RecordSetPointer::getInstanceRef().execSQL() ;
+		SQLExecutor::getInstanceRef().execSQL() ;
 	}
 	catch (_com_error& e)
 	{
@@ -113,7 +113,7 @@ void CMaterialManagementDialog::initList()
 	}
 
 	//get the result data set
-	_RecordsetPtr& m_pRecordset = RecordSetPointer::getInstanceRef().getRecordPtr();
+	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
 	
 	CString headerArray[4] = {"ID", "NAME","BATCHNUMBER","MANUFACTURE"};
 	std::vector<CString> headerList(headerArray, headerArray + 4);
@@ -157,12 +157,12 @@ void CMaterialManagementDialog::OnMaterialdel()
 // 	}
 
 	//init recordset pointer
-	RecordSetPointer::getInstanceRef().setSqlState(CString("SELECT * FROM MATERIALS"));
+	SQLExecutor::getInstanceRef().setSqlState(CString("SELECT * FROM MATERIALS"));
 
 	//exec SQL state
 	try
 	{
-		RecordSetPointer::getInstanceRef().execSQL() ;
+		SQLExecutor::getInstanceRef().execSQL() ;
 	}
 	catch (_com_error& e)
 	{
@@ -171,7 +171,7 @@ void CMaterialManagementDialog::OnMaterialdel()
 	}
 
 	//get the result data set
-	_RecordsetPtr& m_pRecordset = RecordSetPointer::getInstanceRef().getRecordPtr();
+	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
 
 	try
 	{

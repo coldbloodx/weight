@@ -123,12 +123,12 @@ void CFormulaSelectDialog::OnOK()
 	sqlState += ID ;
 
 	//init recordset pointer
-	RecordSetPointer::getInstanceRef().setSqlState(sqlState);
+	SQLExecutor::getInstanceRef().setSqlState(sqlState);
 
 	//exec SQL state
 	try
 	{
-		RecordSetPointer::getInstanceRef().execSQL() ;
+		SQLExecutor::getInstanceRef().execSQL() ;
 	}
 	catch (_com_error& e)
 	{
@@ -137,7 +137,7 @@ void CFormulaSelectDialog::OnOK()
 	}
 
 	//get the result data set
-	_RecordsetPtr& m_pRecordset = RecordSetPointer::getInstanceRef().getRecordPtr();
+	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
 	
 	try
 	{
@@ -180,12 +180,12 @@ BOOL CFormulaSelectDialog::OnInitDialog()
 	CString sqlState = "SELECT NAME FROM FORMULAS";
 	
 	//init recordset pointer
-	RecordSetPointer::getInstanceRef().setSqlState(sqlState);
+	SQLExecutor::getInstanceRef().setSqlState(sqlState);
 
 	//exec SQL state
 	try
 	{
-		RecordSetPointer::getInstanceRef().execSQL() ;
+		SQLExecutor::getInstanceRef().execSQL() ;
 	}
 	catch (_com_error& e)
 	{
@@ -194,7 +194,7 @@ BOOL CFormulaSelectDialog::OnInitDialog()
 	}
 
 	//get the result data set
-	_RecordsetPtr& m_pRecordset = RecordSetPointer::getInstanceRef().getRecordPtr();
+	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
 	
 	try
 	{
@@ -238,12 +238,12 @@ void CFormulaSelectDialog::OnSelchangeFormulaselectCombo()
 	SingletonHelper::getInstance()->setFormulaName(formulaName);
 
 	//init recordset pointer
-	RecordSetPointer::getInstanceRef().setSqlState(sqlState);
+	SQLExecutor::getInstanceRef().setSqlState(sqlState);
 
 	//exec SQL state
 	try
 	{
-		RecordSetPointer::getInstanceRef().execSQL() ;
+		SQLExecutor::getInstanceRef().execSQL() ;
 	}
 	catch (_com_error& e)
 	{
@@ -252,7 +252,7 @@ void CFormulaSelectDialog::OnSelchangeFormulaselectCombo()
 	}
 
 	//get the result data set
-	_RecordsetPtr& m_pRecordset = RecordSetPointer::getInstanceRef().getRecordPtr();
+	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
 
 	try
 	{

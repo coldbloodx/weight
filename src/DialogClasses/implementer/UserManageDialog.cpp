@@ -72,12 +72,12 @@ BOOL CUserManageDialog::OnInitDialog()
 
 void CUserManageDialog::initList()
 {
-	RecordSetPointer::getInstanceRef().setSqlState(CString("SELECT * FROM USERS"));
+	SQLExecutor::getInstanceRef().setSqlState(CString("SELECT * FROM USERS"));
 
 	//exec SQL state
 	try
 	{
-		RecordSetPointer::getInstanceRef().execSQL() ;
+		SQLExecutor::getInstanceRef().execSQL() ;
 	}
 	catch (_com_error& e)
 	{
@@ -86,7 +86,7 @@ void CUserManageDialog::initList()
 	}
 
 	//get the result data set
-	_RecordsetPtr& m_pRecordset = RecordSetPointer::getInstanceRef().getRecordPtr();
+	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
 
 	CString headerArray[3] = {"ID", "NAME", "RIGHT"};
 	std::vector<CString> headerList(headerArray, headerArray+3);
@@ -141,12 +141,12 @@ void CUserManageDialog::OnUserdel()
 	}
 
 	CString sqlState("SELECT * FROM USERS");
-	RecordSetPointer::getInstanceRef().setSqlState(sqlState);
+	SQLExecutor::getInstanceRef().setSqlState(sqlState);
 
 	//exec SQL state
 	try
 	{
-		RecordSetPointer::getInstanceRef().execSQL() ;
+		SQLExecutor::getInstanceRef().execSQL() ;
 	}
 	catch (_com_error& e)
 	{
@@ -155,7 +155,7 @@ void CUserManageDialog::OnUserdel()
 	}
 
 	//get the result data set
-	_RecordsetPtr& m_pRecordset = RecordSetPointer::getInstanceRef().getRecordPtr();
+	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
 
 	try
 	{

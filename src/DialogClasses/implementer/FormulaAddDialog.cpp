@@ -122,12 +122,12 @@ void CFormulaAddDialog::OnOK()
 	//	return;
 	//}
 
-	RecordSetPointer::getInstanceRef().setSqlState(CString("SELECT * FROM FORMULAS"));
+	SQLExecutor::getInstanceRef().setSqlState(CString("SELECT * FROM FORMULAS"));
 
 	//exec SQL state
 	try
 	{
-		RecordSetPointer::getInstanceRef().execSQL() ;
+		SQLExecutor::getInstanceRef().execSQL() ;
 	}
 	catch (_com_error& e)
 	{
@@ -135,7 +135,7 @@ void CFormulaAddDialog::OnOK()
 		return;
 	}
 	//get the result data set
-	_RecordsetPtr& m_pRecordset = RecordSetPointer::getInstanceRef().getRecordPtr();
+	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
 	
 	try
 	{
@@ -276,12 +276,12 @@ CFormulaAddDialog::~CFormulaAddDialog()
 
 void CFormulaAddDialog::queryMaterials()
 {
-	RecordSetPointer::getInstanceRef().setSqlState(CString("SELECT NAME FROM MATERIALS"));
+	SQLExecutor::getInstanceRef().setSqlState(CString("SELECT NAME FROM MATERIALS"));
 
 	//exec SQL state
 	try
 	{
-		RecordSetPointer::getInstanceRef().execSQL() ;
+		SQLExecutor::getInstanceRef().execSQL() ;
 	}
 	catch (_com_error& e)
 	{
@@ -290,7 +290,7 @@ void CFormulaAddDialog::queryMaterials()
 	}
 
 	//get the result data set
-	_RecordsetPtr& recordSetPtr = RecordSetPointer::getInstanceRef().getRecordPtr();
+	_RecordsetPtr& recordSetPtr = SQLExecutor::getInstanceRef().getRecordPtr();
 
 	try
 	{

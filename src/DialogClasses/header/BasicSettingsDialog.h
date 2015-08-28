@@ -26,7 +26,6 @@ public:
 	CButton m_OtherSettingsButton;
 	CButton m_UserManagement;
 	CButton m_ChangePassword;
-	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 	virtual BOOL OnInitDialog();
 	afx_msg void OnBnClickedButton1();
 	afx_msg void OnBnClickedButton2();

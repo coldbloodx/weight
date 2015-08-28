@@ -66,6 +66,10 @@
 #define IDB_LOGINBG                     209
 #define IDD_BARCODE_MANAGEMENT          212
 #define IDD_BARCODE_UPDATE              214
+#define IDD_TRACE_DIALOG                215
+#define IDD_QUERYCOND_DIALOG            216
+#define IDD_DIALOG1                     218
+#define IDD_QUERY_RESULT                218
 #define IDC_WEIGHFREE_BUTTON            1003
 #define IDC_STATISTIC_BUTTON            1005
 #define IDC_QUERY_BUTTON                1006
@@ -250,14 +254,20 @@
 #define IDC_LIST2                       1251
 #define IDC_EDIT1                       1252
 #define IDC_EDIT2                       1253
+#define IDC_QUERY_LABEL                 1254
+#define IDC_QUERY_ITEM                  1256
+#define IDC_TIME_SECTION                1257
+#define IDC_DATE_START                  1259
+#define IDC_DATE_END                    1260
+#define IDC_TIMESECTION_COMBO           1261
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        215
+#define _APS_NEXT_RESOURCE_VALUE        219
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1254
+#define _APS_NEXT_CONTROL_VALUE         1262
 #define _APS_NEXT_SYMED_VALUE           104
 #endif
 #endif

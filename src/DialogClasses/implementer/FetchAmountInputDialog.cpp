@@ -102,13 +102,13 @@ void CFetchAmountInputDialog::OnOK()
 	sqlState += SingletonHelper::getInstance()->getFormulaID();
 
 	//init recordset pointer
-	RecordSetPointer::getInstanceRef().setDatabaseConnection(DBConnector::getInstanceRef().getdbcon());
-	RecordSetPointer::getInstanceRef().setSqlState(sqlState);
+	SQLExecutor::getInstanceRef().setDatabaseConnection(DBConnector::getInstanceRef().getdbcon());
+	SQLExecutor::getInstanceRef().setSqlState(sqlState);
 
 	//exec SQL state
 	try
 	{
-		RecordSetPointer::getInstanceRef().execSQL() ;
+		SQLExecutor::getInstanceRef().execSQL() ;
 	}
 	catch (_com_error& e)
 	{
@@ -117,7 +117,7 @@ void CFetchAmountInputDialog::OnOK()
 	}
 
 	//get the result data set
-	_RecordsetPtr& m_pRecordset = RecordSetPointer::getInstanceRef().getRecordPtr();
+	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
 
 
 	try
@@ -164,12 +164,12 @@ void CFetchAmountInputDialog::OnOK()
 	sqlState = "UPDATE FORMULAS SET TOTAL = " + newAmount + " WHERE ID = " + SingletonHelper::getInstance()->getFormulaID();
 	
 
-	RecordSetPointer::getInstanceRef().setSqlState(sqlState);
+	SQLExecutor::getInstanceRef().setSqlState(sqlState);
 
 	//exec SQL state
 	try
 	{
-		RecordSetPointer::getInstanceRef().execSQL() ;
+		SQLExecutor::getInstanceRef().execSQL() ;
 	}
 	catch (_com_error& e)
 	{
@@ -178,7 +178,7 @@ void CFetchAmountInputDialog::OnOK()
 	}
 
 	//get the result data set
-	m_pRecordset = RecordSetPointer::getInstanceRef().getRecordPtr();
+	m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
 
 	//组成新纪录，并且将记录插入fetchrecord表
 	sqlState = "SELECT * FROM FETCHRECORDS";
@@ -188,12 +188,12 @@ void CFetchAmountInputDialog::OnOK()
 	CString date = currentTime.Format("%Y-%m-%d");
 	CString time = currentTime.Format("%X");
 	
-	RecordSetPointer::getInstanceRef().setSqlState(sqlState);
+	SQLExecutor::getInstanceRef().setSqlState(sqlState);
 
 	//exec SQL state
 	try
 	{
-		RecordSetPointer::getInstanceRef().execSQL() ;
+		SQLExecutor::getInstanceRef().execSQL() ;
 	}
 	catch (_com_error& e)
 	{
@@ -202,7 +202,7 @@ void CFetchAmountInputDialog::OnOK()
 	}
 
 	//get the result data set
-	m_pRecordset = RecordSetPointer::getInstanceRef().getRecordPtr();
+	m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
 	
 	CString fetchRectordID;
 

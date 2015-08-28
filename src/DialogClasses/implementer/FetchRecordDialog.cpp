@@ -119,13 +119,13 @@ void CFetchRecordDialog::initList()
 	CString sqlState = "SELECT * FROM FETCHRECORDS";
 
 	//init recordset pointer
-	RecordSetPointer::getInstanceRef().setDatabaseConnection(DBConnector::getInstanceRef().getdbcon());
-	RecordSetPointer::getInstanceRef().setSqlState(sqlState);
+	SQLExecutor::getInstanceRef().setDatabaseConnection(DBConnector::getInstanceRef().getdbcon());
+	SQLExecutor::getInstanceRef().setSqlState(sqlState);
 
 	//exec SQL state
 	try
 	{
-		RecordSetPointer::getInstanceRef().execSQL() ;
+		SQLExecutor::getInstanceRef().execSQL() ;
 	}
 	catch (_com_error& e)
 	{
@@ -134,7 +134,7 @@ void CFetchRecordDialog::initList()
 	}
 
 	//get the result data set
-	_RecordsetPtr& m_pRecordset = RecordSetPointer::getInstanceRef().getRecordPtr();
+	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
 
 	CString headerArray[8] = {"ID", "FORMULAID", "FORMULANAME", "OPERATORID", "OPERATORNAME", "AMOUNT","DATE", "TIME" };
 	headerList.assign(headerArray, headerArray + 8);
@@ -172,13 +172,13 @@ void CFetchRecordDialog::OnPrintButton()
 	CString sqlState = "SELECT * FROM FETCHRECORDS WHERE ID = " + ID;
 
 	//init recordset pointer
-	RecordSetPointer::getInstanceRef().setDatabaseConnection(DBConnector::getInstanceRef().getdbcon());
-	RecordSetPointer::getInstanceRef().setSqlState(sqlState);
+	SQLExecutor::getInstanceRef().setDatabaseConnection(DBConnector::getInstanceRef().getdbcon());
+	SQLExecutor::getInstanceRef().setSqlState(sqlState);
 
 	//exec SQL state
 	try
 	{
-		RecordSetPointer::getInstanceRef().execSQL() ;
+		SQLExecutor::getInstanceRef().execSQL() ;
 	}
 	catch (_com_error& e)
 	{
@@ -186,7 +186,7 @@ void CFetchRecordDialog::OnPrintButton()
 		return;
 	}
 	
-	_RecordsetPtr& m_pRecordset = RecordSetPointer::getInstanceRef().getRecordPtr();
+	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
 	
 	HelperFunctions::updateRecordValueVector(m_pRecordset, valueList, headerList);
 
@@ -257,13 +257,13 @@ void CFetchRecordDialog::OnQueryButton()
 	}
 
 	//init recordset pointer
-	RecordSetPointer::getInstanceRef().setDatabaseConnection(DBConnector::getInstanceRef().getdbcon());
-	RecordSetPointer::getInstanceRef().setSqlState(sqlState);
+	SQLExecutor::getInstanceRef().setDatabaseConnection(DBConnector::getInstanceRef().getdbcon());
+	SQLExecutor::getInstanceRef().setSqlState(sqlState);
 
 	//exec SQL state
 	try
 	{
-		RecordSetPointer::getInstanceRef().execSQL() ;
+		SQLExecutor::getInstanceRef().execSQL() ;
 	}
 	catch (_com_error& e)
 	{
@@ -272,7 +272,7 @@ void CFetchRecordDialog::OnQueryButton()
 	}
 	
 	//get the result data set
-	_RecordsetPtr& m_pRecordset = RecordSetPointer::getInstanceRef().getRecordPtr();
+	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
 
 
 	CString headerArray[8] = {"ID", "FORMULAID", "FORMULANAME", "OPERATORID", "OPERATORNAME", "AMOUNT","DATE", "TIME" };

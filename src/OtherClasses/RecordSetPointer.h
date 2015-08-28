@@ -1,10 +1,10 @@
 #include "StdAfx.h"
 
 
-class RecordSetPointer :public SingletonTemplateBase<RecordSetPointer>
+class SQLExecutor :public SingletonTemplateBase<SQLExecutor>
 {
 public:
-	RecordSetPointer();
+	SQLExecutor();
 	void execSQL();
 	void setSqlState(CString& sqlState);
 	void setDatabaseConnection(_ConnectionPtr& connection);

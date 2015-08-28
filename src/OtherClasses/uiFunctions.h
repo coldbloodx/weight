@@ -18,5 +18,7 @@ namespace uiFunctions
 
     void init6Buttons(vector<CButton*>& buttonvec);
 
+    void fillCombo(_RecordsetPtr& dbptr, CComboBox* pcombo, CString& key);
+
 };
 #endif

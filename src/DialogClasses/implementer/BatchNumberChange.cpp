@@ -58,12 +58,12 @@ void CBatchNumberChange::OnBnClickedOk()
 	//查询出生产厂家
 	CString sqlState ("SELECT MANUFACTURE FROM MANUFACTURES WHERE BATCHNUMBER = '");
 	sqlState += batchNumber + "'";
-	RecordSetPointer::getInstanceRef().setDatabaseConnection(DBConnector::getInstanceRef().getdbcon());
-	RecordSetPointer::getInstanceRef().setSqlState(sqlState);
+	SQLExecutor::getInstanceRef().setDatabaseConnection(DBConnector::getInstanceRef().getdbcon());
+	SQLExecutor::getInstanceRef().setSqlState(sqlState);
 
 	try
 	{
-		RecordSetPointer::getInstanceRef().execSQL() ;
+		SQLExecutor::getInstanceRef().execSQL() ;
 	}
 	catch (_com_error& e)
 	{
@@ -71,7 +71,7 @@ void CBatchNumberChange::OnBnClickedOk()
 		return;
 	}
 
-	_RecordsetPtr& m_pRecordset = RecordSetPointer::getInstanceRef().getRecordPtr();
+	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
 
 	try
 	{
@@ -98,13 +98,13 @@ void CBatchNumberChange::OnBnClickedOk()
 	sqlState += batchNumber + ", MANUFACTURE = '" + manufacture + "' " ;
 	sqlState += (" WHERE ID = ") + materialID;
 
-	RecordSetPointer::getInstanceRef().setDatabaseConnection(DBConnector::getInstanceRef().getdbcon());
-	RecordSetPointer::getInstanceRef().setSqlState(sqlState);
+	SQLExecutor::getInstanceRef().setDatabaseConnection(DBConnector::getInstanceRef().getdbcon());
+	SQLExecutor::getInstanceRef().setSqlState(sqlState);
 
 	//exec SQL state
 	try
 	{
-		RecordSetPointer::getInstanceRef().execSQL() ;
+		SQLExecutor::getInstanceRef().execSQL() ;
 	}
 	catch (_com_error& e)
 	{

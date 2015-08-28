@@ -3,12 +3,12 @@
 #include "DatabaseConnector.h"
 
 
-RecordSetPointer::RecordSetPointer():sqlstr("")
+SQLExecutor::SQLExecutor():sqlstr("")
 {
 	//init m_SqlSate as empty
 }
 
-void RecordSetPointer::closeRecordSet()
+void SQLExecutor::closeRecordSet()
 {
 	if (resultptr == NULL)
 	{
@@ -29,7 +29,7 @@ void RecordSetPointer::closeRecordSet()
 	return;
 }
 
-_RecordsetPtr& RecordSetPointer::execquery(CString sqlstr)
+_RecordsetPtr& SQLExecutor::execquery(CString sqlstr)
 {
     this->dbcon = DBConnector::getInstanceRef().getdbcon();
 
@@ -50,7 +50,7 @@ _RecordsetPtr& RecordSetPointer::execquery(CString sqlstr)
     return this->resultptr;
 }
 
-void RecordSetPointer::execSQL()
+void SQLExecutor::execSQL()
 {
 
 	try
@@ -69,18 +69,18 @@ void RecordSetPointer::execSQL()
 	}
 }
 
-void RecordSetPointer::setSqlState(CString& sqlState)
+void SQLExecutor::setSqlState(CString& sqlState)
 {
 	this->sqlstr = sqlState;
 	return;
 }
 
-void RecordSetPointer::setDatabaseConnection(_ConnectionPtr& connection)
+void SQLExecutor::setDatabaseConnection(_ConnectionPtr& connection)
 {
 	this->dbcon = connection;
 }
 
-_RecordsetPtr& RecordSetPointer::getRecordPtr()
+_RecordsetPtr& SQLExecutor::getRecordPtr()
 {
 	return resultptr;
 }

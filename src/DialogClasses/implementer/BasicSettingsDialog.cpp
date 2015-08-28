@@ -49,20 +49,6 @@ END_MESSAGE_MAP()
 
 // CMainSettingsDialog message handlers
 
-HBRUSH CBasicSettingsDialog::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
-{
-	HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
-
-	// TODO:  Change any attributes of the DC here
-	if   (pWnd == this)   
-	{   
-		return m_brBk;   
-	}  
-
-	return hbr;
-	// TODO:  Return a different brush if the default is not desired
-}
-
 BOOL CBasicSettingsDialog::OnInitDialog()
 {
 	CDialog::OnInitDialog();
@@ -120,8 +106,6 @@ void CBasicSettingsDialog::OnBnClickedButton2()
 	CUserManageDialog userManageDialog;
 	userManageDialog.DoModal();
 }
-
-
 
 void CBasicSettingsDialog::OnBnClickedButton4()
 {

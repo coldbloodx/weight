@@ -77,12 +77,12 @@ void CUserAddDialog::OnOK()
 	}
 	
 	//init recordset pointer
-	RecordSetPointer::getInstanceRef().setSqlState(CString("SELECT * FROM USERS"));
+	SQLExecutor::getInstanceRef().setSqlState(CString("SELECT * FROM USERS"));
 
 	//exec SQL state
 	try
 	{
-		RecordSetPointer::getInstanceRef().execSQL() ;
+		SQLExecutor::getInstanceRef().execSQL() ;
 	}
 	catch (_com_error& e)
 	{
@@ -91,7 +91,7 @@ void CUserAddDialog::OnOK()
 	}
 
 	//get the result data set
-	_RecordsetPtr& m_pRecordset = RecordSetPointer::getInstanceRef().getRecordPtr();
+	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
 
 	try
 	{

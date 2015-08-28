@@ -30,7 +30,6 @@ void CBarcodeManagementDlg::DoDataExchange(CDataExchange* pDX)
     DDX_Control(pDX, IDC_LIST2, resultlist);
 }
 
-
 BEGIN_MESSAGE_MAP(CBarcodeManagementDlg, CDialog)
     ON_BN_CLICKED(IDC_BUTTON10, &CBarcodeManagementDlg::OnBnClickedButton10)
     ON_BN_CLICKED(IDC_BUTTON11, &CBarcodeManagementDlg::OnBnClickedButton11)
@@ -63,7 +62,7 @@ void CBarcodeManagementDlg::OnBnClickedButton11()
     CString sql; 
     sql.Format("delete from barcodes where id = %s", barcodeid);
 
-    _RecordsetPtr dbptr = RecordSetPointer::getInstancePtr()->execquery(sql);
+    _RecordsetPtr dbptr = SQLExecutor::getInstancePtr()->execquery(sql);
     resultlist.DeleteAllItems();
     initlistctrl();
 }
@@ -107,7 +106,7 @@ void CBarcodeManagementDlg::initlistctrl()
     resultlist.DeleteAllItems();
     CString sql = "select * from barcodes;";
 
-    _RecordsetPtr dbptr = RecordSetPointer::getInstancePtr()->execquery(sql);
+    _RecordsetPtr dbptr = SQLExecutor::getInstancePtr()->execquery(sql);
 
 
     CString headerarray[3] = {"ID", "barcode", "manufacture"};

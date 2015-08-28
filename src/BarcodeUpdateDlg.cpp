@@ -80,18 +80,15 @@ void CBarcodeUpdateDlg::OnBnClickedOk()
 
 	if(bAddFlag)
 	{
-
 		sql.Format("insert into barcodes(barcode, manufacture) values('%s', '%s')", barcodeStr, manuStr);
-		
 	}
 	else
 	{
 		sql.Format("update barcodes set manufacture = '%s' where id = %s", manuStr, barcodeid);
 	}
 
-	_RecordsetPtr dbptr = RecordSetPointer::getInstancePtr()->execquery(sql);
+	_RecordsetPtr dbptr = SQLExecutor::getInstancePtr()->execquery(sql);
 
-    
 	CDialog::OnOK();
 }
 

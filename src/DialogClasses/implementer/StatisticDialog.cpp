@@ -100,12 +100,12 @@ void CStatisticDialog::refreshList()
 	m_StatisticList.DeleteAllItems();
 
 	//init recordset pointer
-	RecordSetPointer::getInstanceRef().setSqlState(CString("SELECT * FROM WEIGHT"));
+	SQLExecutor::getInstanceRef().setSqlState(CString("SELECT * FROM WEIGHT"));
 
 	//exec SQL state
 	try
 	{
-		RecordSetPointer::getInstanceRef().execSQL() ;
+		SQLExecutor::getInstanceRef().execSQL() ;
 	}
 	catch (_com_error& e)
 	{
@@ -114,7 +114,7 @@ void CStatisticDialog::refreshList()
 	}
 
 	//get the result data set
-	_RecordsetPtr& m_pRecordset = RecordSetPointer::getInstanceRef().getRecordPtr();
+	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
 
 	CString headerArray[9] = {"ID", "FORMULAID", "FORMULANAME", "USERID","USERNAME", "AMOUNT", "DATE", "TIME", "COMMENT"};
 	std::vector<CString> headerList(headerArray, headerArray + 9);
@@ -207,13 +207,13 @@ void CStatisticDialog::OnQueryButton()
 	}
 
 	//init recordset pointer
-	RecordSetPointer::getInstanceRef().setDatabaseConnection(DBConnector::getInstanceRef().getdbcon());
-	RecordSetPointer::getInstanceRef().setSqlState(sqlState);
+	SQLExecutor::getInstanceRef().setDatabaseConnection(DBConnector::getInstanceRef().getdbcon());
+	SQLExecutor::getInstanceRef().setSqlState(sqlState);
 
 	//exec SQL state
 	try
 	{
-		RecordSetPointer::getInstanceRef().execSQL() ;
+		SQLExecutor::getInstanceRef().execSQL() ;
 	}
 	catch (_com_error& e)
 	{
@@ -222,7 +222,7 @@ void CStatisticDialog::OnQueryButton()
 	}
 
 	//get the result data set
-	_RecordsetPtr& m_pRecordset = RecordSetPointer::getInstanceRef().getRecordPtr();
+	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
 	
 	CString headerArray[9] = {"ID", "FORMULAID", "FORMULANAME", "USERID","USERNAME", "AMOUNT", "DATE", "TIME", "COMMENT"};
 	std::vector<CString> headerList(headerArray, headerArray + 9);

@@ -12,8 +12,6 @@ public:
 	CBarcodeUpdateDlg(CWnd* pParent = NULL);   // standard constructor
 	virtual ~CBarcodeUpdateDlg();
 
-
-
 // Dialog Data
 	enum { IDD = IDD_BARCODE_UPDATE };
 
