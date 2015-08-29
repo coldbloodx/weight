@@ -12,7 +12,15 @@ class CQueryResultDialog : public CDialog
 public:
 	CQueryResultDialog(CWnd* pParent = NULL);   // standard constructor
 	virtual ~CQueryResultDialog();
-    QUERYTYPE qtype;
+    
+	CString key;
+	
+	QUERYTYPE qtype;
+	TIMESECTION timetype;
+
+	
+	CTime timeStart;
+	CTime timeEnd;
 
 // Dialog Data
 	enum { IDD = IDD_QUERY_RESULT };

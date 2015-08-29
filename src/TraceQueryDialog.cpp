@@ -46,7 +46,7 @@ END_MESSAGE_MAP()
 void CTraceQueryDialog::OnBnClickedButton1()
 {
     CQueryCondDialog conddlg;
-    conddlg.qtype = QTYPE_WORKOUT;
+    conddlg.qtype = QTYPE_USERWORKOUT;
     conddlg.DoModal();
 }
 

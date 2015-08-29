@@ -1108,6 +1108,8 @@ BEGIN
 0xaed6, 0xf3ba, "\000" 
     IDC_TIMESECTION_COMBO, 0x403, 5, 0
 0xaed6, 0xe4bc, "\000" 
+    IDC_TIMESECTION_COMBO, 0x403, 5, 0
+0xbdc1, 0xcbb6, "\000" 
     0
 END
 

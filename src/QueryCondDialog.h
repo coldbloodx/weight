@@ -14,6 +14,7 @@ public:
 	CQueryCondDialog(CWnd* pParent = NULL);   // standard constructor
 	virtual ~CQueryCondDialog();
     QUERYTYPE qtype;
+	TIMESECTION getTimeSection(CString timeSection);
 
 // Dialog Data
 	enum { IDD = IDD_QUERYCOND_DIALOG };

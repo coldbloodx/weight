@@ -5,7 +5,7 @@
 #include "Weight.h"
 #include "BatchNumberChange.h"
 #include "HelperClass.h"
-#include "DatabaseConnector.h"
+#include "DBConnector.h"
 #include "RecordSetPointer.h"
 #include "MaterialManagementDialog.h"
 #include "uiFunctions.h"

@@ -237,7 +237,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\OtherClasses\DatabaseConnector.cpp"
+				RelativePath=".\OtherClasses\DBConnector.cpp"
 				>
 			</File>
 			<File
@@ -286,10 +286,6 @@
 			</File>
 			<File
 				RelativePath=".\OtherClasses\HelperClass.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\ExternClasses\implementer\inifile.cpp"
 				>
 			</File>
 			<File
@@ -465,7 +461,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\OtherClasses\DatabaseConnector.h"
+				RelativePath=".\OtherClasses\DBConnector.h"
 				>
 			</File>
 			<File
@@ -514,10 +510,6 @@
 			</File>
 			<File
 				RelativePath=".\OtherClasses\helperclass.h"
-				>
-			</File>
-			<File
-				RelativePath=".\ExternClasses\header\inifile.h"
 				>
 			</File>
 			<File

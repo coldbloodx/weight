@@ -8,7 +8,7 @@
 #include "HelperClass.h"
 #include <numeric>
 #include <functional>
-#include "DatabaseConnector.h"
+#include "DBConnector.h"
 #include "RecordSetPointer.h"
 #include "uiFunctions.h"
 

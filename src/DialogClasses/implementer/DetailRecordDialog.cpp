@@ -5,7 +5,7 @@
 #include "Weight.h"
 #include "DetailRecordDialog.h"
 #include "HelperClass.h"
-#include "DatabaseConnector.h"
+#include "DBConnector.h"
 #include "RecordSetPointer.h"
 #include "uifunctions.h"
 

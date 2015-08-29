@@ -5,6 +5,7 @@
 #include "Weight.h"
 #include "QueryCondDialog.h"
 #include "uiFunctions.h"
+#include "helperclass.h"
 #include "RecordSetPointer.h"
 #include "QueryResultDialog.h"
 
@@ -44,20 +45,17 @@ BOOL CQueryCondDialog::OnInitDialog()
 
     switch(qtype)
     {
-    case QTYPE_WORKOUT:
+    case QTYPE_USERWORKOUT:
         this->SetWindowText("工作量查询");
         lbQueryLabel.SetWindowText("员工姓名:");
-        sql.Format("select name from users;");
         break;
     case QTYPE_MATERIAMOUNT:
         this->SetWindowText("材料用量查询");
         lbQueryLabel.SetWindowText("材料名:");
-        sql.Format("select name from materials;");
         break;
     case QTYPE_PRODUCTAMOUNT:
         this->SetWindowText("成品总量查询");
         lbQueryLabel.SetWindowText("配方名称：");
-        sql.Format("select name from formulas;");
         break;
 
     default:
@@ -85,8 +83,58 @@ BOOL CQueryCondDialog::OnInitDialog()
 
 void CQueryCondDialog::OnBnClickedOk()
 {
+
+
+	// get query type
     CQueryResultDialog resultDlg;
     resultDlg.qtype = this->qtype;
+
+
+	// get query key
+	CString key;
+	cboQueryItem.GetWindowText(key);
+	resultDlg.key = key;
+
+	// get time section type
+	CString timesection;
+	cboTimeSetion.GetWindowText(timesection);
+	TIMESECTION ttype = this->getTimeSection(timesection);
+	resultDlg.timetype = ttype;
+
+	// get start time and end time
+	CTime tStartTime;
+	CTime tEndTime;
+	dateStart.GetTime(tStartTime);
+	dateEnd.GetTime(tEndTime);
+
+	resultDlg.timeStart = tStartTime;
+	resultDlg.timeEnd = tEndTime;
+
     resultDlg.DoModal();
     OnOK();
+}
+
+
+TIMESECTION CQueryCondDialog::getTimeSection(CString timeSection)
+{
+	if (timeSection == "之前")
+	{
+		return TTYPE_BEFORE;
+	} 
+	else if (timeSection == "之后")
+	{
+		return TTYPE_AFTER;
+	}
+	else if (timeSection == "之间")
+	{
+		return TTYPE_BETWEEN;
+	}
+	else if (timeSection == "两端")
+	{
+		return TTYPE_BEYOND;
+	}
+	else
+	{
+		return TTYPE_END;
+	}
 }

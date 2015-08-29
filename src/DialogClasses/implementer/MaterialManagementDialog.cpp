@@ -8,7 +8,7 @@
 #include <vector>
 #include "MaterialAddDialog.h"
 #include "HelperClass.h"
-#include "DatabaseConnector.h"
+#include "DBConnector.h"
 #include "RecordSetPointer.h"
 #include "uiFunctions.h"
 #include "BatchNumberChange.h"

@@ -18,7 +18,7 @@
 #include "FetchRecordDialog.h"
 #include "HelperClass.h"
 
-#include "DatabaseConnector.h"
+#include "DBConnector.h"
 #include "RecordSetPointer.h"
 #include "PatternLoader.h"
 
@@ -40,53 +40,30 @@ class CAboutDlg : public CDialog
 {
 public:
 	CAboutDlg();
-	
-	// Dialog Data
-	//{{AFX_DATA(CAboutDlg)
 	enum { IDD = IDD_ABOUTBOX };
-	//}}AFX_DATA
-	
-	// ClassWizard generated virtual function overrides
-	//{{AFX_VIRTUAL(CAboutDlg)
+
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
-	//}}AFX_VIRTUAL
-	
-	// Implementation
-protected:
-	//{{AFX_MSG(CAboutDlg)
-	//}}AFX_MSG
+
 	DECLARE_MESSAGE_MAP()
 };
 
 CAboutDlg::CAboutDlg() : CDialog()
 {
-	//{{AFX_DATA_INIT(CAboutDlg)
-	//}}AFX_DATA_INIT
 }
 
 void CAboutDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CAboutDlg)
-	//}}AFX_DATA_MAP
 }
 
 BEGIN_MESSAGE_MAP(CAboutDlg, CDialog)
-//{{AFX_MSG_MAP(CAboutDlg)
-// No message handlers
-//}}AFX_MSG_MAP
-END_MESSAGE_MAP()
 
-/////////////////////////////////////////////////////////////////////////////
-// CWeightDlg dialog
+END_MESSAGE_MAP()
 
 CWeightDlg::CWeightDlg(CWnd* pParent /*=NULL*/)
 : CDialog(CWeightDlg::IDD, pParent),pFormulaDialog(NULL)
 {
-	//{{AFX_DATA_INIT(CWeightDlg)
-	//}}AFX_DATA_INIT
-	// Note that LoadIcon does not require a subsequent DestroyIcon in Win32
 
 }
 
@@ -176,12 +153,6 @@ BOOL CWeightDlg::OnInitDialog()
 	SingletonHelper::getInstance()->setCom1BaudRate(patternLoader.pattern.com1.c_str());
 	SingletonHelper::getInstance()->setCom2BaudRate(patternLoader.pattern.com2.c_str());
 	
-	SingletonHelper::getInstance()->backgroundColor = 
-		RGB(patternLoader.pattern.bgColor.r, patternLoader.pattern.bgColor.g, patternLoader.pattern.bgColor.b);
-	SingletonHelper::getInstance()->textColor = 
-		RGB(patternLoader.pattern.textColor.r, patternLoader.pattern.textColor.g, patternLoader.pattern.textColor.b);
-	SingletonHelper::getInstance()->buttonColor = 
-		RGB(patternLoader.pattern.buttonColor.r, patternLoader.pattern.buttonColor.g, patternLoader.pattern.buttonColor.b);
 
 	//show login window
 	CLoginDialog loginDialog;
@@ -213,7 +184,6 @@ BOOL CWeightDlg::OnInitDialog()
     uiFunctions::init6Buttons(buttonvec);
 	this->UpdateData(TRUE);
 
-	
 	//make the dialog fullscreen
 	uiFunctions::setdlgsize(this, false);   
 
@@ -434,7 +404,6 @@ void CWeightDlg::OnCancel()
 	}
 	
 }
-
 
 int CWeightDlg::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {

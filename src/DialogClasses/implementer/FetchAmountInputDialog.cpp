@@ -6,7 +6,7 @@
 #include "FetchAmountInputDialog.h"
 #include "HelperClass.h"
 #include "FormulaDialog.h"
-#include "DatabaseConnector.h"
+#include "DBConnector.h"
 #include "RecordSetPointer.h"
 #include "uiFunctions.h"
 

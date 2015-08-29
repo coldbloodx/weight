@@ -3,11 +3,11 @@
 
 #include "stdafx.h"
 #include "Weight.h"
-#include "DialogClasses\header\WeightDlg.h"
-#include "OtherClasses\HelperClass.h"
+#include "WeightDlg.h"
+#include "HelperClass.h"
 
-#include "OtherClasses\DatabaseConnector.h"
-#include "OtherClasses\RecordSetPointer.h"
+#include "DBConnector.h"
+#include "RecordSetPointer.h"
 #include "Splash.h"
 #include "skin/SkinMagicLib.h"
 #pragma comment(lib, "skin/SkinMagicTrial.lib")

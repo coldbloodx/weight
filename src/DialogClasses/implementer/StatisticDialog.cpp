@@ -7,7 +7,7 @@
 #include "DetailRecordDialog.h"
 #include "FormulaAdvanceQueryDialog.h"
 #include "HelperClass.h"
-#include "DatabaseConnector.h"
+#include "DBConnector.h"
 #include "RecordSetPointer.h"
 #include "uiFunctions.h"
 
@@ -54,9 +54,6 @@ BEGIN_MESSAGE_MAP(CStatisticDialog, CDialog)
 	ON_BN_CLICKED(IDC_ALL_BUTTON, OnAllButton)
 	ON_BN_CLICKED(IDC_QUERY_BUTTON, OnQueryButton)
 	ON_BN_CLICKED(IDC_ADVANCEQUERY_BUTTON, OnAdvancequeryButton)
-	ON_WM_TIMER()
-	//}}AFX_MSG_MAP
-	ON_WM_CTLCOLOR()
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -235,29 +232,4 @@ void CStatisticDialog::OnAdvancequeryButton()
 	CFormulaAdvanceQueryDialog formulaAdvanceQueryDialog;
 	SingletonHelper::getInstance()->setPtrData((void*)this);
 	formulaAdvanceQueryDialog.DoModal();
-}
-
-void CStatisticDialog::OnTimer(UINT nIDEvent) 
-{
-	// TODO: Add your message handler code here and/or call default
-	//HelperFunctions::showStatus(m_StatusStatic);
-	CDialog::OnTimer(nIDEvent);
-}
-
-HBRUSH CStatisticDialog::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
-{
-	HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
-	if   (pWnd == this)   
-	{   
-		return m_brBk;   
-	}
-	if   (nCtlColor   ==   CTLCOLOR_STATIC)   
-	{     
-		pDC->SetBkMode(TRANSPARENT);	//Í¸Ã÷   
-		return (HBRUSH)::GetStockObject(HOLLOW_BRUSH);   
-	} 
-	// TODO:  Change any attributes of the DC here
-
-	// TODO:  Return a different brush if the default is not desired
-	return hbr;
 }

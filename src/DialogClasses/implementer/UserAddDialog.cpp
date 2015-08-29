@@ -6,7 +6,7 @@
 #include "UserAddDialog.h"
 #include "UserManageDialog.h"
 #include "HelperClass.h"
-#include "DatabaseConnector.h"
+#include "DBConnector.h"
 #include "RecordSetPointer.h"
 
 

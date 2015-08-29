@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "DatabaseConnector.h"
+#include "DBConnector.h"
 
 DBConnector::DBConnector():m_ConnectString("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=weight.mdb")
 {

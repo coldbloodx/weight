@@ -5,7 +5,7 @@
 #include "Weight.h"
 #include "PassChangeDialog.h"
 #include "HelperClass.h"
-#include "DatabaseConnector.h"
+#include "DBConnector.h"
 #include "RecordSetPointer.h"
 #include "uiFunctions.h"
 #ifdef _DEBUG

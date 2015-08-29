@@ -51,8 +51,6 @@ private:
 	//ЬѕТы
 	CString lineNumber;
 
-
-
 private:
 	static  SingletonHelper* m_instance;
 	
@@ -152,6 +150,7 @@ private:
 	void deleteFonts();
 
 };
+
 namespace HelperFunctions
 {
 	bool isDouble(CEdit* editControl);
@@ -181,5 +180,7 @@ namespace HelperFunctions
 	void printLabel(CString name, CString weigh, CString lineNumber);
 	void printVector(CString tilte, std::vector<CString>& headerList, std::vector<CString>& valueList);
 	void updateRecordValueVector(_RecordsetPtr& pRecordset, std::vector<CString>& valueList, std::vector<CString>& headerList);
+
+	unsigned long time2gmt(CTime& timeparam);
 };
 #endif

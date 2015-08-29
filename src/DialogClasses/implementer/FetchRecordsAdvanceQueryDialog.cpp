@@ -6,7 +6,7 @@
 #include "FetchRecordsAdvanceQueryDialog.h"
 #include "FetchRecordDialog.h"
 #include "HelperClass.h"
-#include "DatabaseConnector.h"
+#include "DBConnector.h"
 #include "RecordSetPointer.h"
 #include "uiFunctions.h"
 
@@ -45,7 +45,6 @@ void CFetchRecordsAdvanceQueryDialog::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_BUTTON0, m_Button0);
 	DDX_Control(pDX, IDC_BUTTON_COMMA, m_CommaButton);
 	DDX_Control(pDX, IDC_BUTTON_BACK, m_BackButton);
-//	DDX_Control(pDX, IDC_STATUS_STATIC2, m_StatusStatic);
 	DDX_Control(pDX, IDOK, m_ButtonOK);
 	DDX_Control(pDX, IDC_USER_EDIT, m_UserEdit);
 	DDX_Control(pDX, IDC_FORMULA_EDIT, m_FormulaEdit);
@@ -78,9 +77,7 @@ BEGIN_MESSAGE_MAP(CFetchRecordsAdvanceQueryDialog, CDialog)
 	ON_CBN_SELCHANGE(IDC_DATE_COMBO, OnSelchangeDateCombo)
 	ON_CBN_SELCHANGE(IDC_AMOUNT_COMBO, OnSelchangeAmountCombo)
 	ON_BN_CLICKED(IDC_BUTTON_BACK, OnButtonBack)
-	//}}AFX_MSG_MAP
 	ON_BN_CLICKED(IDOK, &CFetchRecordsAdvanceQueryDialog::OnBnClickedOk)
-	ON_WM_CTLCOLOR()
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -100,11 +97,6 @@ BOOL CFetchRecordsAdvanceQueryDialog::OnInitDialog()
 
 	CRect wndRect((1024 - 960) / 2, (768 - 644) / 2, (1024 - 960) / 2 + 960, (768 - 644) / 2 + 660);
 	this->MoveWindow(wndRect);
-
-	CBitmap   bmp;   
-	bmp.LoadBitmap(IDB_FETCHADVANCEQUERY);//ÔØÈëÍ¼Æ¬   
-	m_brBk.CreatePatternBrush(&bmp); 
-	bmp.DeleteObject();   
 
 	int left = 43;
 	int top = 534;
@@ -555,22 +547,4 @@ void CFetchRecordsAdvanceQueryDialog::OnBnClickedOk()
 {
 	OnOK();
 	// TODO: Add your control notification handler code here
-}
-
-HBRUSH CFetchRecordsAdvanceQueryDialog::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
-{
-	HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
-
-	// TODO:  Change any attributes of the DC here
-	if   (pWnd == this)   
-	{   
-		return m_brBk;   
-	}   
-	if   (nCtlColor   ==   CTLCOLOR_STATIC)   
-	{     
-		pDC->SetBkMode(TRANSPARENT);	//Í¸Ã÷   
-		return (HBRUSH)::GetStockObject(HOLLOW_BRUSH);   
-	}   
-	// TODO:  Return a different brush if the default is not desired
-	return hbr;
 }

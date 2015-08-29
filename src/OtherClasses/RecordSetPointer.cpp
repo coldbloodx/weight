@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "RecordSetPointer.h"
-#include "DatabaseConnector.h"
+#include "DBConnector.h"
 
 
 SQLExecutor::SQLExecutor():sqlstr("")
