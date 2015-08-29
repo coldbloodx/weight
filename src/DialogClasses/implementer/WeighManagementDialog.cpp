@@ -69,12 +69,11 @@ BOOL CMainSettings::OnInitDialog()
 
 
 
-    CButton* buttonArray[6] = {&m_MaterialManagement,&m_FormulaManagement,
+    CButton* btnarray[6] = {&m_MaterialManagement,&m_FormulaManagement,
         &m_Query, &m_Statistic, &m_barcodeManagement, &m_goBackButton};
-    std::vector<CButton*> buttonvec(buttonArray, buttonArray + 6);
-    uiFunctions::init6Buttons(buttonvec);
+    uiutils::init2rowbtns(btnarray, 6);
 
-    uiFunctions::setdlgsize(this);
+    uiutils::setdlgsize(this);
     return TRUE;  // return TRUE unless you set the focus to a control
     // EXCEPTION: OCX Property Pages should return FALSE
 }
@@ -106,7 +105,7 @@ void CMainSettings::OnBnClickedButton3()
 
 void CMainSettings::OnPaint()
 {
-    uiFunctions::drawDlgBg(this, IDB_MAINPAGE);
+    uiutils::drawDlgBg(this, IDB_MAINPAGE);
 }
 
 void CMainSettings::OnBnClickedGoBack()

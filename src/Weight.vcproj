@@ -241,6 +241,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\OtherClasses\DBptr.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\DialogClasses\implementer\DetailRecordDialog.cpp"
 				>
 			</File>
@@ -330,10 +334,6 @@
 			</File>
 			<File
 				RelativePath=".\QueryResultDialog.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\OtherClasses\RecordSetPointer.cpp"
 				>
 			</File>
 			<File
@@ -465,6 +465,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\OtherClasses\DBptr.h"
+				>
+			</File>
+			<File
 				RelativePath=".\DialogClasses\header\DetailRecordDialog.h"
 				>
 			</File>
@@ -554,10 +558,6 @@
 			</File>
 			<File
 				RelativePath=".\QueryResultDialog.h"
-				>
-			</File>
-			<File
-				RelativePath=".\OtherClasses\RecordSetPointer.h"
 				>
 			</File>
 			<File

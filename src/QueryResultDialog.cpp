@@ -6,6 +6,7 @@
 #include "QueryResultDialog.h"
 #include "uiFunctions.h"
 #include "helperclass.h"
+#include "DBptr.h"
 
 
 // CQueryResultDialog dialog
@@ -36,32 +37,30 @@ END_MESSAGE_MAP()
 BOOL CQueryResultDialog::OnInitDialog()
 {
 	CDialog::OnInitDialog();
-	uiFunctions::setdlgsize(this, &btnCancel);
+	uiutils::setdlgsize(this, &btnCancel);
 
 	unsigned long startsecs = HelperFunctions::time2gmt(timeStart);
 	unsigned long endsecs = HelperFunctions::time2gmt(timeEnd);
-
-	CString starttimestr;
-	CString endtimestr;
 
 	CString timesqlstr;
 
 	switch(timetype)
 	{
 	case TTYPE_BEFORE:
-		timesqlstr = " gmt <= " + starttimestr;	
+		timesqlstr.Format(" gmt <= %ld ", startsecs);
 		break;
 
 	case TTYPE_AFTER:
-		timesqlstr = " gmt >= " + starttimestr;
+
+		timesqlstr.Format(" gmt >= %ld ", startsecs);
 		break;
 
 	case TTYPE_BETWEEN:
-		timesqlstr = " gmt >= " + starttimestr + " and gmt <= " + endtimestr;
+		timesqlstr.Format(" gmt >= %ld and gmt <= %ld", startsecs, endsecs);
 		break;
 
 	case TTYPE_BEYOND:
-		timesqlstr = " gmt <= " + starttimestr + " and gmt >= " + endtimestr;
+		timesqlstr.Format("gmt <= %ld or gmt >= %ld", startsecs, endsecs);
 		break;
 	}
 
@@ -96,6 +95,9 @@ BOOL CQueryResultDialog::OnInitDialog()
 
 	}
 
+	_RecordsetPtr dbptr = SQLExecutor::getInstancePtr()->execquery(sql);
+	uiutils::initlistheader(headervec, ctlResultList);
+	uiutils::updatelist(dbptr, ctlResultList, headervec);
 	return TRUE;
 }
 

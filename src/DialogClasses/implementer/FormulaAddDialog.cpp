@@ -9,7 +9,7 @@
 #include <numeric>
 #include <functional>
 #include "DBConnector.h"
-#include "RecordSetPointer.h"
+#include "DBptr.h"
 #include "uiFunctions.h"
 
 #ifdef _DEBUG
@@ -180,7 +180,7 @@ BOOL CFormulaAddDialog::OnInitDialog()
 	
 
 
-    uiFunctions::setdlgsize(this);
+    uiutils::setdlgsize(this);
 
 
 

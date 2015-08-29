@@ -4,11 +4,11 @@
 #ifndef _UIFUNCTIONS_HEADER_
 #define _UIFUNCTIONS_HEADER_
 
-namespace uiFunctions
+namespace uiutils
 {
-	void initListHeader(std::vector<CString>& headerList, CListCtrl& listCtrl);
+	void initlistheader(std::vector<CString>& headerList, CListCtrl& listCtrl);
 	
-    void updateList(_RecordsetPtr& pRecordset, CListCtrl& listCtrl, std::vector<CString>& headerList);
+    void updatelist(_RecordsetPtr& pRecordset, CListCtrl& listCtrl, std::vector<CString>& headerList);
 	
     void clearList(CListCtrl& listCtrl);
 	
@@ -16,7 +16,8 @@ namespace uiFunctions
    
     void drawDlgBg(CDialog* pDlg, int bmpId);
 
-    void init6Buttons(vector<CButton*>& buttonvec);
+
+	void init2rowbtns(CButton** btnarray, int arraysize);
 
     void fillCombo(_RecordsetPtr& dbptr, CComboBox* pcombo, CString& key);
 

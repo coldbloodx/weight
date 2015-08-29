@@ -79,10 +79,9 @@ BOOL CTraceQueryDialog::OnInitDialog()
 
     CButton* btnarray[6] = {&btnWorkOut, &btnMaterialAmount, &btnProductAmount, 
         &btnTraceQuery, &btnCancel, &btnOK};
-    vector<CButton*> btnvec(btnarray, btnarray + 5);
-    uiFunctions::init6Buttons(btnvec);
+    uiutils::init2rowbtns(btnarray, 5);
     btnOK.ShowWindow(FALSE);
-    uiFunctions::setdlgsize(this);
+    uiutils::setdlgsize(this);
 
     return TRUE;
 }

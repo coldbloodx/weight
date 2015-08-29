@@ -6,7 +6,7 @@
 #include "BarcodeManagementDlg.h"
 #include "BarcodeUpdateDlg.h"
 #include "uiFunctions.h"
-#include "RecordSetPointer.h"
+#include "DBptr.h"
 #include "helperclass.h"
 
 
@@ -97,7 +97,7 @@ BOOL CBarcodeManagementDlg::OnInitDialog()
     initlistheader();
     initlistctrl();
 
-    uiFunctions::setdlgsize(this);
+    uiutils::setdlgsize(this);
     return TRUE;
 }
 
@@ -111,13 +111,13 @@ void CBarcodeManagementDlg::initlistctrl()
 
     CString headerarray[3] = {"ID", "barcode", "manufacture"};
     vector<CString>  headervec(headerarray, headerarray + 3);
-    uiFunctions::updateList(dbptr, resultlist , headervec);
+    uiutils::updatelist(dbptr, resultlist , headervec);
 }
 
 void CBarcodeManagementDlg::initlistheader()
 {
     CString headerarray[3] = {"±àºÅ", "ÌõÂë", "³§ÉÌ"};
     vector<CString>  headervec(headerarray, headerarray + 3);
-    uiFunctions::initListHeader(headervec, resultlist);
+    uiutils::initlistheader(headervec, resultlist);
 }
 

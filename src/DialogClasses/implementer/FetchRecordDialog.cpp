@@ -7,7 +7,7 @@
 #include "FetchRecordsAdvanceQueryDialog.h"
 #include "HelperClass.h"
 #include "DBConnector.h"
-#include "RecordSetPointer.h"
+#include "DBptr.h"
 #include "uiFunctions.h"
 
 #ifdef _DEBUG
@@ -104,7 +104,7 @@ BOOL CFetchRecordDialog::OnInitDialog()
 	
 	std::vector<CButton*> buttonVector(buttonArray, buttonArray + 6);
 
-    uiFunctions::setdlgsize(this);
+    uiutils::setdlgsize(this);
 	
 	//HelperFunctions::showStatus(m_StatusStatic);
 	SetTimer(1000,1000,NULL);
@@ -139,7 +139,7 @@ void CFetchRecordDialog::initList()
 	CString headerArray[8] = {"ID", "FORMULAID", "FORMULANAME", "OPERATORID", "OPERATORNAME", "AMOUNT","DATE", "TIME" };
 	headerList.assign(headerArray, headerArray + 8);
 
-	uiFunctions::updateList(m_pRecordset, m_FetchRecordList, headerList);
+	uiutils::updatelist(m_pRecordset, m_FetchRecordList, headerList);
 
 	return;
 }
@@ -278,7 +278,7 @@ void CFetchRecordDialog::OnQueryButton()
 	CString headerArray[8] = {"ID", "FORMULAID", "FORMULANAME", "OPERATORID", "OPERATORNAME", "AMOUNT","DATE", "TIME" };
 	std::vector<CString> headerList(headerArray, headerArray + 8);
 
-	uiFunctions::updateList(m_pRecordset, m_FetchRecordList, headerList);
+	uiutils::updatelist(m_pRecordset, m_FetchRecordList, headerList);
 }
 
 void CFetchRecordDialog::OnAdvancequeryButton() 

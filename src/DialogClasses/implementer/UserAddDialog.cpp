@@ -7,7 +7,7 @@
 #include "UserManageDialog.h"
 #include "HelperClass.h"
 #include "DBConnector.h"
-#include "RecordSetPointer.h"
+#include "DBptr.h"
 
 
 #ifdef _DEBUG
@@ -101,10 +101,10 @@ void CUserAddDialog::OnOK()
 		}
 
 		m_pRecordset->AddNew();
-		m_pRecordset->PutCollect("ID", _variant_t(userID));
-		m_pRecordset->PutCollect("NAME", _variant_t(userName));
-		m_pRecordset->PutCollect("PASSWORDS", _variant_t("123456"));
-		m_pRecordset->PutCollect("RIGHT", _variant_t(userRight));
+		m_pRecordset->PutCollect("id", _variant_t(userID));
+		m_pRecordset->PutCollect("name", _variant_t(userName));
+		m_pRecordset->PutCollect("password", _variant_t("123456"));
+		m_pRecordset->PutCollect("permission", _variant_t(userRight));
 		
 	}
 	catch(_com_error &e)
@@ -117,13 +117,12 @@ void CUserAddDialog::OnOK()
 	{
 		m_pRecordset->Update();	
 	}
-	catch(_com_error &e)
+	catch(_com_error)
 	{
-		e;
 		AfxMessageBox("添加用户出现错误，请确认用户ID是否重复");
 		return;
 	}
-	
+
 	AfxMessageBox("添加用户成功，默认密码为123456，\r请退出系统，用心用户登录修改密码！");
 	m_UserManagementWindow->m_UserList.DeleteAllItems();
 	m_UserManagementWindow->initList();

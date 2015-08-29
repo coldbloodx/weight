@@ -8,7 +8,7 @@
 #include "FormulaAdvanceQueryDialog.h"
 #include "HelperClass.h"
 #include "DBConnector.h"
-#include "RecordSetPointer.h"
+#include "DBptr.h"
 #include "uiFunctions.h"
 
 #ifdef _DEBUG
@@ -74,7 +74,7 @@ BOOL CStatisticDialog::OnInitDialog()
 	
 
 
-	uiFunctions::setdlgsize(this, &m_ButtonOK);
+	uiutils::setdlgsize(this, &m_ButtonOK);
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE
@@ -115,7 +115,7 @@ void CStatisticDialog::refreshList()
 
 	CString headerArray[9] = {"ID", "FORMULAID", "FORMULANAME", "USERID","USERNAME", "AMOUNT", "DATE", "TIME", "COMMENT"};
 	std::vector<CString> headerList(headerArray, headerArray + 9);
-	uiFunctions::updateList(m_pRecordset, m_StatisticList, headerList);
+	uiutils::updatelist(m_pRecordset, m_StatisticList, headerList);
 }
 
 void CStatisticDialog::OnDetailrecordButton() 
@@ -223,7 +223,7 @@ void CStatisticDialog::OnQueryButton()
 	
 	CString headerArray[9] = {"ID", "FORMULAID", "FORMULANAME", "USERID","USERNAME", "AMOUNT", "DATE", "TIME", "COMMENT"};
 	std::vector<CString> headerList(headerArray, headerArray + 9);
-	uiFunctions::updateList(m_pRecordset, m_StatisticList, headerList);
+	uiutils::updatelist(m_pRecordset, m_StatisticList, headerList);
 }
 
 void CStatisticDialog::OnAdvancequeryButton() 

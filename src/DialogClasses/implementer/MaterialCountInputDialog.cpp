@@ -77,7 +77,7 @@ BOOL CMaterialCountInputDialog::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 	
-	uiFunctions::setdlgsize(this, &m_ButtonCancel, &m_ButtonOK);
+	uiutils::setdlgsize(this, &m_ButtonCancel, &m_ButtonOK);
 
 	return TRUE; 
 	             

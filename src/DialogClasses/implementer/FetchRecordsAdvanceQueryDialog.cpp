@@ -7,7 +7,7 @@
 #include "FetchRecordDialog.h"
 #include "HelperClass.h"
 #include "DBConnector.h"
-#include "RecordSetPointer.h"
+#include "DBptr.h"
 #include "uiFunctions.h"
 
 #ifdef _DEBUG
@@ -130,7 +130,7 @@ BOOL CFetchRecordsAdvanceQueryDialog::OnInitDialog()
 
 	//HelperFunctions::showStatus(m_StatusStatic);
 	//SetTimer(1000,1000,NULL);
-    uiFunctions::setdlgsize(this);
+    uiutils::setdlgsize(this);
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// EXCEPTION: OCX Property Pages should return FALSE
 }
@@ -373,7 +373,7 @@ void CFetchRecordsAdvanceQueryDialog::OnOK()
 	CString headerArray[9] = {"ID", "FORMULAID", "FORMULANAME", "FORMULANAME", "OPERATORID", "OPERATORNAME","AMOUNT", "DATE", "TIME" };
 	std::vector<CString> headerList(headerArray, headerArray + 9);
 
-	uiFunctions::updateList(m_pRecordset, fetchRecordDialog->m_FetchRecordList, headerList);
+	uiutils::updatelist(m_pRecordset, fetchRecordDialog->m_FetchRecordList, headerList);
 	
 	CString total;
 	if (m_SumCheck.GetCheck())
@@ -546,5 +546,4 @@ BOOL CFetchRecordsAdvanceQueryDialog::OnCommand(WPARAM wParam, LPARAM lParam)
 void CFetchRecordsAdvanceQueryDialog::OnBnClickedOk()
 {
 	OnOK();
-	// TODO: Add your control notification handler code here
 }

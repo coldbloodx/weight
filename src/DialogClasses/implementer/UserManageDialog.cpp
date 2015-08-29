@@ -9,7 +9,7 @@
 #include "UserAddDialog.h"
 #include "HelperClass.h"
 #include "DBConnector.h"
-#include "RecordSetPointer.h"
+#include "DBptr.h"
 #include "uiFunctions.h"
 
 #ifdef _DEBUG
@@ -65,7 +65,7 @@ BOOL CUserManageDialog::OnInitDialog()
 	initListHeader();
 	initList();
 	
-	uiFunctions::setdlgsize(this, &m_ButtonOK);
+	uiutils::setdlgsize(this, &m_ButtonOK);
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// EXCEPTION: OCX Property Pages should return FALSE
 }
@@ -93,7 +93,7 @@ void CUserManageDialog::initList()
 
 	try
 	{
-		uiFunctions::updateList(m_pRecordset, m_UserList, headerList);
+		uiutils::updatelist(m_pRecordset, m_UserList, headerList);
 	}
 	catch (_com_error& e)
 	{

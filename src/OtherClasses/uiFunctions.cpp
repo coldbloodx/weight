@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "uiFunctions.h"
 
-void uiFunctions::updateList(_RecordsetPtr& pRecordset, CListCtrl& listCtrl, std::vector<CString>& headerList)
+void uiutils::updatelist(_RecordsetPtr& pRecordset, CListCtrl& listCtrl, std::vector<CString>& headerList)
 {
 	int itemIndex = 0;
 	int subItemIndex = 0;
@@ -34,7 +34,7 @@ void uiFunctions::updateList(_RecordsetPtr& pRecordset, CListCtrl& listCtrl, std
 	return;
 }
 
-void uiFunctions::initListHeader(std::vector<CString>& headerList, CListCtrl& listCtrl)
+void uiutils::initlistheader(std::vector<CString>& headerList, CListCtrl& listCtrl)
 {
 	for (size_t i = 0; i < headerList.size(); ++i)
 	{
@@ -43,13 +43,13 @@ void uiFunctions::initListHeader(std::vector<CString>& headerList, CListCtrl& li
 	return;
 }
 
-void uiFunctions::clearList(CListCtrl& listCtrl)
+void uiutils::clearList(CListCtrl& listCtrl)
 {
 	listCtrl.DeleteAllItems();
 	return;
 }
 
-void uiFunctions::setdlgsize(CDialog* pdlg, CButton* pback, CButton* pok, bool hasBorder)
+void uiutils::setdlgsize(CDialog* pdlg, CButton* pback, CButton* pok, bool hasBorder)
 {
 	if(hasBorder)
 	{
@@ -90,7 +90,7 @@ void uiFunctions::setdlgsize(CDialog* pdlg, CButton* pback, CButton* pok, bool h
 }
 
 
-void uiFunctions::drawDlgBg(CDialog* pDlg, int bmpId)
+void uiutils::drawDlgBg(CDialog* pDlg, int bmpId)
 {
     CPaintDC dc(pDlg);
     CRect rc;
@@ -106,35 +106,34 @@ void uiFunctions::drawDlgBg(CDialog* pDlg, int bmpId)
     dc.StretchBlt(0,0,rc.Width(), rc.Height(), &dcMem,0,0,bitmap.bmWidth, bitmap.bmHeight, SRCCOPY);
 }
 
-void uiFunctions::init6Buttons(vector<CButton*>& buttonvec)
+void uiutils::init2rowbtns(CButton** btnarray, int arraysize)
 {
+	int left = 30;
+	int top = 180;
+	int width = 320 - left;
+	int height = 355 - top;
+	int horiSpacer = 365 - 320;
+	int vertSpacer = 400 - 355;
 
+	for (int i = 0; i < arraysize; ++i)
+	{
+		CRect rect(left, top, left + width, top + height);
+		btnarray[i]->MoveWindow(rect, TRUE);
 
-    int left = 30;
-    int top = 180;
-    int width = 320 - left;
-    int height = 355 - top;
-    int horiSpacer = 365 - 320;
-    int vertSpacer = 400 - 355;
+		if (((i + 1) % 3) == 0)
+		{
+			left = 30;
+			top = rect.bottom + vertSpacer;
+		}
+		else
+		{
+			left = rect.right + horiSpacer;
+		}
+	}
 
-    for (size_t i = 0; i < buttonvec.size(); ++i)
-    {
-        CRect rect(left, top, left + width, top + height);
-        buttonvec[i]->MoveWindow(rect, TRUE);
-
-        if (((i + 1) % 3) == 0)
-        {
-            left = 30;
-            top = rect.bottom + vertSpacer;
-        }
-        else
-        {
-            left = rect.right + horiSpacer;
-        }
-    }
 }
 
-void uiFunctions::fillCombo(_RecordsetPtr& dbptr, CComboBox* pcombo, CString& key)
+void uiutils::fillCombo(_RecordsetPtr& dbptr, CComboBox* pcombo, CString& key)
 {
     try
     {

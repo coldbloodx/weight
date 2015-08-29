@@ -19,7 +19,7 @@
 #include "HelperClass.h"
 
 #include "DBConnector.h"
-#include "RecordSetPointer.h"
+#include "DBptr.h"
 #include "PatternLoader.h"
 
 #include "BasicSettingsDialog.h"
@@ -176,23 +176,18 @@ BOOL CWeightDlg::OnInitDialog()
 
 	//update main window buttons
 
-    CButton* buttonArray[6] = 
-    {&m_WeighFreeButton,&m_FormulaWeighButton,&m_FormulaManagementButton,
-    &m_FetchStuffButton,&m_OtherSettingsButton,&m_PowerOffButton};
-    vector<CButton*> buttonvec(buttonArray, buttonArray+6);
+    CButton* buttonArray[6] = { &m_WeighFreeButton,&m_FormulaWeighButton,&m_FormulaManagementButton,
+				 &m_FetchStuffButton,&m_OtherSettingsButton,&m_PowerOffButton };
 
-    uiFunctions::init6Buttons(buttonvec);
+    uiutils::init2rowbtns(buttonArray, 6);
 	this->UpdateData(TRUE);
 
-	//make the dialog fullscreen
-	uiFunctions::setdlgsize(this, false);   
+	uiutils::setdlgsize(this, false);   
 
-	
-	//update status
 	HelperFunctions::showStatus(m_StatusStatic);
 	SetTimer(1000, 1000, NULL);
  
-	return TRUE;  // return TRUE  unless you set the focus to a control
+	return TRUE; 
 }
 
 void CWeightDlg::OnSysCommand(UINT nID, LPARAM lParam)
@@ -233,7 +228,7 @@ void CWeightDlg::OnPaint()
 	}
 	else
 	{
-        uiFunctions::drawDlgBg(this, IDB_MAINPAGE);
+        uiutils::drawDlgBg(this, IDB_MAINPAGE);
 	}
 }
 

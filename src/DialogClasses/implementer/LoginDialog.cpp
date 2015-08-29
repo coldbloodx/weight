@@ -7,7 +7,7 @@
 #include "LoginDialog.h"
 #include "HelperClass.h"
 #include "DBConnector.h"
-#include "RecordSetPointer.h"
+#include "DBptr.h"
 #include "uiFunctions.h"
 #include "Splash.h"
 
@@ -111,7 +111,7 @@ void CLoginDialog::OnOK()
 	}
 		
 	
-	CString select("SELECT PASSWORDS, RIGHT,NAME FROM USERS WHERE ID = ");
+	CString select("select password, permission, name from  users where id =  ");
     CString sqlState = select + userID;
 	
 	CString tempUserName;
@@ -146,9 +146,9 @@ void CLoginDialog::OnOK()
 		
 		while(!m_pRecordset->adoEOF)
 		{
-			vtPassword = m_pRecordset->GetCollect("PASSWORDS");
-			vtRight = m_pRecordset->GetCollect("RIGHT");
-			vUserName = m_pRecordset->GetCollect("NAME");
+			vtPassword = m_pRecordset->GetCollect("password");
+			vtRight = m_pRecordset->GetCollect("permission");
+			vUserName = m_pRecordset->GetCollect("name");
 			
 			if (vtPassword.vt != VT_NULL)
 			{
@@ -300,7 +300,7 @@ void CLoginDialog::OnButtonBack()
 BOOL CLoginDialog::OnInitDialog() 
 {
 	CDialog::OnInitDialog();
-	uiFunctions::setdlgsize(this);
+	uiutils::setdlgsize(this);
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 				// EXCEPTION: OCX Property Pages should return FALSE
@@ -332,7 +332,7 @@ int CLoginDialog::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 void CLoginDialog::OnPaint()
 {
-    uiFunctions::drawDlgBg(this, IDB_MAINPAGE);
+    uiutils::drawDlgBg(this, IDB_MAINPAGE);
 }
 
 

@@ -9,7 +9,7 @@
 #include "FetchAmountInputDialog.h"
 #include "HelperClass.h"
 #include "DBConnector.h"
-#include "RecordSetPointer.h"
+#include "DBptr.h"
 #include "uiFunctions.h"
 
 #ifdef _DEBUG
@@ -107,7 +107,7 @@ void CFormulaDialog::initList()
 	CString headerArray[4] = {"ID", "NAME", "MATERIAL", "TOTAL"};
 	std::vector<CString> headerList(headerArray, headerArray + 4);
 
-	uiFunctions::updateList(m_pRecordset, m_FormulaListCtrl, headerList);
+	uiutils::updatelist(m_pRecordset, m_FormulaListCtrl, headerList);
 }
 
 
@@ -130,7 +130,7 @@ BOOL CFormulaDialog::OnInitDialog()
 	m_FormulaDel	= new CButton;
 	m_FetchButton = new CButton;
 	
-    uiFunctions::setdlgsize(this);
+    uiutils::setdlgsize(this);
 
 	if (m_From == 1)
 	{
@@ -147,7 +147,7 @@ BOOL CFormulaDialog::OnInitDialog()
 		m_FetchButton->ShowWindow(SW_SHOW);
 	}
 
-	uiFunctions::setdlgsize(this, &m_ButtonOK);
+	uiutils::setdlgsize(this, &m_ButtonOK);
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// EXCEPTION: OCX Property Pages should return FALSE
 }

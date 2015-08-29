@@ -6,7 +6,7 @@
 #include "BatchNumberChange.h"
 #include "HelperClass.h"
 #include "DBConnector.h"
-#include "RecordSetPointer.h"
+#include "DBptr.h"
 #include "MaterialManagementDialog.h"
 #include "uiFunctions.h"
 // CBatchNumberChage dialog
@@ -127,7 +127,7 @@ BOOL CBatchNumberChange::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 
-    uiFunctions::setdlgsize(this, &m_ButtonCancel, &m_ButtonOK);
+    uiutils::setdlgsize(this, &m_ButtonCancel, &m_ButtonOK);
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// EXCEPTION: OCX Property Pages should return FALSE

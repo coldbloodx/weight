@@ -6,7 +6,7 @@
 #include "QueryCondDialog.h"
 #include "uiFunctions.h"
 #include "helperclass.h"
-#include "RecordSetPointer.h"
+#include "DBptr.h"
 #include "QueryResultDialog.h"
 
 
@@ -39,7 +39,7 @@ BOOL CQueryCondDialog::OnInitDialog()
 {
     CDialog::OnInitDialog();
 
-    uiFunctions::setdlgsize(this, &btnCancel, &btnOK);
+    uiutils::setdlgsize(this, &btnCancel, &btnOK);
 
     CString sql;
 
@@ -48,14 +48,17 @@ BOOL CQueryCondDialog::OnInitDialog()
     case QTYPE_USERWORKOUT:
         this->SetWindowText("工作量查询");
         lbQueryLabel.SetWindowText("员工姓名:");
+		sql = "select name from users;";
         break;
     case QTYPE_MATERIAMOUNT:
         this->SetWindowText("材料用量查询");
         lbQueryLabel.SetWindowText("材料名:");
+		sql = "select name from materials;";
         break;
     case QTYPE_PRODUCTAMOUNT:
         this->SetWindowText("成品总量查询");
         lbQueryLabel.SetWindowText("配方名称：");
+		sql = "select name from formulas;";
         break;
 
     default:
@@ -69,7 +72,7 @@ BOOL CQueryCondDialog::OnInitDialog()
 
     _RecordsetPtr dbptr = SQLExecutor::getInstancePtr()->execquery(sql);
 
-    uiFunctions::fillCombo(dbptr, &cboQueryItem, CString("name"));
+    uiutils::fillCombo(dbptr, &cboQueryItem, CString("name"));
 
     if(cboQueryItem.GetCount())
     {
@@ -79,12 +82,8 @@ BOOL CQueryCondDialog::OnInitDialog()
     return TRUE;
 }
 
-
-
 void CQueryCondDialog::OnBnClickedOk()
 {
-
-
 	// get query type
     CQueryResultDialog resultDlg;
     resultDlg.qtype = this->qtype;

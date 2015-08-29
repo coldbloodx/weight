@@ -7,7 +7,7 @@
 #include "MaterialManagementDialog.h"
 #include "HelperClass.h"
 #include "DBConnector.h"
-#include "RecordSetPointer.h"
+#include "DBptr.h"
 #include "uiFunctions.h"
 
 #ifdef _DEBUG
@@ -169,7 +169,7 @@ BOOL CMaterialAddDialog::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 	
-	uiFunctions::setdlgsize(this, &m_ButtonCancel, &m_ButtonOK);
+	uiutils::setdlgsize(this, &m_ButtonCancel, &m_ButtonOK);
 
 	return TRUE;
 }

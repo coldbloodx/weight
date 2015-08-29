@@ -73,7 +73,7 @@ BOOL COtherSettingsDialog::OnInitDialog()
 	filePath = buffer;
 	oldFileName = filePath + "\\" + fileName;
 
-    uiFunctions::setdlgsize(this, &m_ButtonCancel, &m_ButtonOK);
+    uiutils::setdlgsize(this, &m_ButtonCancel, &m_ButtonOK);
 	
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// EXCEPTION: OCX Property Pages should return FALSE

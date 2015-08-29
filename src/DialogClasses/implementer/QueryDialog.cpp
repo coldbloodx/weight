@@ -6,7 +6,7 @@
 #include "QueryDialog.h"
 #include "HelperClass.h"
 #include "DBConnector.h"
-#include "RecordSetPointer.h"
+#include "DBptr.h"
 #include "uiFunctions.h"
 
 #ifdef _DEBUG
@@ -216,7 +216,7 @@ void CQueryDialog::refreshUserList()
 	CString headerArray[3] ={"ID", "NAME", "RIGHT"};
 	
 	std::vector<CString> headerList(headerArray, headerArray + 3);
-	uiFunctions::updateList(m_pRecordset, m_ResultList, headerList);
+	uiutils::updatelist(m_pRecordset, m_ResultList, headerList);
 }
 
 void CQueryDialog::initFormulaListHeader()
@@ -284,7 +284,7 @@ void CQueryDialog::refreshFormulaList()
 
 	CString headerArray[3] ={"ID", "NAME", "MATERIAL"};
 	std::vector<CString> headerList(headerArray, headerArray + 3);
-	uiFunctions::updateList(m_pRecordset, m_ResultList, headerList);
+	uiutils::updatelist(m_pRecordset, m_ResultList, headerList);
 }
 
 void CQueryDialog::initMaterialListHeader()
@@ -349,7 +349,7 @@ void CQueryDialog::refreshMaterialList()
 	
 	CString headerArray[2] ={"ID", "NAME"};
 	std::vector<CString> headerList(headerArray, headerArray + 2);
-	uiFunctions::updateList(m_pRecordset, m_ResultList, headerList);
+	uiutils::updatelist(m_pRecordset, m_ResultList, headerList);
 }
 
 void CQueryDialog::clearResultList()
@@ -377,7 +377,7 @@ BOOL CQueryDialog::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 
-	uiFunctions::setdlgsize(this, &m_ButtonCancel);
+	uiutils::setdlgsize(this, &m_ButtonCancel);
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE
 }

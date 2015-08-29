@@ -259,7 +259,7 @@ BOOL CWeighPerPackDialog::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 	
-    uiFunctions::setdlgsize(this, &m_ButtonCancel, &m_ButtonOK);
+    uiutils::setdlgsize(this, &m_ButtonCancel, &m_ButtonOK);
 	m_GrossWeight.SetWindowText("1");
 	/////////////////////
 	return TRUE;  // return TRUE unless you set the focus to a control

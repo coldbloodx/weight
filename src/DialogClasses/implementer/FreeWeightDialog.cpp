@@ -76,7 +76,7 @@ BOOL CFreeWeightDialog::OnInitDialog()
 		CString("COM1"),
 		comRate);
 
-	uiFunctions::setdlgsize(this, &m_ButtonOK);
+	uiutils::setdlgsize(this, &m_ButtonOK);
 
 	m_Com1DataStatic.SetWindowText("«Î…‘µ»...");
 	m_Com2DataStatic.SetWindowText("«Î…‘µ»...");

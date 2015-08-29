@@ -9,7 +9,7 @@
 #include "MaterialAddDialog.h"
 #include "HelperClass.h"
 #include "DBConnector.h"
-#include "RecordSetPointer.h"
+#include "DBptr.h"
 #include "uiFunctions.h"
 #include "BatchNumberChange.h"
 
@@ -72,7 +72,7 @@ BOOL CMaterialManagementDialog::OnInitDialog()
 	//CRect delRect(0, 0, 0, 0);
 	//m_Del.MoveWindow(delRect);
 
-    uiFunctions::setdlgsize(this, &m_ButtonOK);
+    uiutils::setdlgsize(this, &m_ButtonOK);
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE
@@ -118,7 +118,7 @@ void CMaterialManagementDialog::initList()
 	CString headerArray[4] = {"ID", "NAME","BATCHNUMBER","MANUFACTURE"};
 	std::vector<CString> headerList(headerArray, headerArray + 4);
 
-	uiFunctions::updateList(m_pRecordset, m_MaterialList, headerList);
+	uiutils::updatelist(m_pRecordset, m_MaterialList, headerList);
 }
 
 void CMaterialManagementDialog::OnMaterialadd() 

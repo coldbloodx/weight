@@ -7,7 +7,7 @@
 #include "HelperClass.h"
 
 #include "DBConnector.h"
-#include "RecordSetPointer.h"
+#include "DBptr.h"
 #include "Splash.h"
 #include "skin/SkinMagicLib.h"
 #pragma comment(lib, "skin/SkinMagicTrial.lib")

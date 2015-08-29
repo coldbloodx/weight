@@ -6,7 +6,7 @@
 #include "PassChangeDialog.h"
 #include "HelperClass.h"
 #include "DBConnector.h"
-#include "RecordSetPointer.h"
+#include "DBptr.h"
 #include "uiFunctions.h"
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -81,8 +81,8 @@ void CPassChangeDialog::OnOK()
 		return;
 	}
 
-	CString sqlState("UPDATE USERS SET PASSWORDS = '");
-	sqlState += confirmPass +"' WHERE ID = " + SingletonHelper::getInstance()->getUserID();
+	CString sqlState("update users set password = '");
+	sqlState += confirmPass +"' where id = " + SingletonHelper::getInstance()->getUserID();
 
 	//init recordset pointer
 	SQLExecutor::getInstanceRef().setSqlState(sqlState);
@@ -112,7 +112,7 @@ BOOL CPassChangeDialog::OnInitDialog()
 	
 
 
-	uiFunctions::setdlgsize(this, &m_ButtonCancel, &m_ButtonOK);
+	uiutils::setdlgsize(this, &m_ButtonCancel, &m_ButtonOK);
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// EXCEPTION: OCX Property Pages should return FALSE
 }

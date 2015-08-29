@@ -7,7 +7,7 @@
 #include "HelperClass.h"
 #include "FormulaWeighDialog.h"
 #include "DBConnector.h"
-#include "RecordSetPointer.h"
+#include "DBptr.h"
 #include "uifunctions.h"
 
 #ifdef _DEBUG
@@ -219,7 +219,7 @@ BOOL CFormulaSelectDialog::OnInitDialog()
 		AfxMessageBox(e.Description());
 	}
 	
-	uiFunctions::setdlgsize(this, &m_ButtonCancel, &m_ButtonOK);
+	uiutils::setdlgsize(this, &m_ButtonCancel, &m_ButtonOK);
 
 	
 	/////////////////////

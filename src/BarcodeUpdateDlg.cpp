@@ -5,7 +5,7 @@
 #include "Weight.h"
 #include "BarcodeUpdateDlg.h"
 #include "uiFunctions.h"
-#include "RecordSetPointer.h"
+#include "DBptr.h"
 #include "BarcodeManagementDlg.h"
 #include "helperclass.h"
 
@@ -56,7 +56,7 @@ BOOL CBarcodeUpdateDlg::OnInitDialog()
 		this->SetWindowText("ÐÞ¸Ä³§¼Ò");
 	}
     
-    uiFunctions::setdlgsize(this, &m_ButtonCancel, &m_ButtonOK);
+    uiutils::setdlgsize(this, &m_ButtonCancel, &m_ButtonOK);
     return TRUE;
 }
 

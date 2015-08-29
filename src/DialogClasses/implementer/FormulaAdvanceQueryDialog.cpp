@@ -7,7 +7,7 @@
 #include "StatisticDialog.h"
 #include "HelperClass.h"
 #include "DBConnector.h"
-#include "RecordSetPointer.h"
+#include "DBptr.h"
 #include "uiFunctions.h"
 
 #ifdef _DEBUG
@@ -97,7 +97,7 @@ BOOL CFormulaAdvanceQueryDialog::OnInitDialog()
 	m_DateCombo.SetCurSel(0);
 	m_AmountSecondEdit.EnableWindow(FALSE);
 	m_DateSecond.EnableWindow(FALSE);
-    uiFunctions::setdlgsize(this);
+    uiutils::setdlgsize(this);
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// EXCEPTION: OCX Property Pages should return FALSE
 }
@@ -344,7 +344,7 @@ void CFormulaAdvanceQueryDialog::OnOK()
 	CString headerArray[9] = {"ID", "FORMULAID", "FORMULANAME", "USERID", "USERNAME", "AMOUNT","DATE", "TIME","COMMENT" };
 	std::vector<CString> headerList(headerArray, headerArray + 9);
 
-	uiFunctions::updateList(m_pRecordset, statisticDialog->m_StatisticList, headerList);
+	uiutils::updatelist(m_pRecordset, statisticDialog->m_StatisticList, headerList);
 
 	CString total;
 	if (m_SumCheck.GetCheck())
