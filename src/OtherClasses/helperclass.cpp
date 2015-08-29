@@ -2,6 +2,7 @@
 #include "stdafx.h"
 #include "HelperClass.h"
 #include "winspool.h"
+#include "DBptr.h"
 
 SingletonHelper* SingletonHelper::m_instance = NULL;
 
@@ -740,7 +741,6 @@ void HelperFunctions::printVector(CString tilte, std::vector<CString>& headerLis
 	delete headerFont;
 	delete footerFont;
 }
-
 
 unsigned long HelperFunctions::time2gmt(CTime& timeparam)
 {

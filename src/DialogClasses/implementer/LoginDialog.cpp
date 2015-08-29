@@ -52,8 +52,8 @@ void CLoginDialog::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_BUTTON0, m_Button0);
 	DDX_Control(pDX, IDC_BUTTON_COMMA, m_ButtonComma);
 	DDX_Control(pDX, IDC_BUTTON_BACK, m_ButonBack);
-	DDX_Control(pDX, IDC_PASSWORD_EDIT, m_Password);
-	DDX_Control(pDX, IDC_USERNAME_EDIT, m_UserName);
+	DDX_Control(pDX, IDC_PASSWORD_EDIT, passwordEdit);
+	DDX_Control(pDX, IDC_USERNAME_EDIT, usernameEdit);
 	//}}AFX_DATA_MAP
 }
 
@@ -91,7 +91,7 @@ void CLoginDialog::OnCancel()
 void CLoginDialog::OnOK() 
 {
 	// TODO: Add extra validation here
-	CString userID;
+	CString username;
 	CString password;
 	
 	if (tryTimes >= 2)
@@ -100,44 +100,24 @@ void CLoginDialog::OnOK()
 		SendMessage(WM_CLOSE);   
 	}
 	
-	m_UserName.GetWindowText(userID);
-	m_Password.GetWindowText(password);
+	usernameEdit.GetWindowText(username);
+	passwordEdit.GetWindowText(password);
 	
-	if (userID.IsEmpty() || password.IsEmpty())
+	if (username.IsEmpty() || password.IsEmpty())
 	{
 		++tryTimes;
 		AfxMessageBox("用户编号，密码不能为空，请重新输入！");
 		return;
 	}
-		
-	
-	CString select("select password, permission, name from  users where id =  ");
-    CString sqlState = select + userID;
-	
-	CString tempUserName;
-	CString tempPassword;
-	CString tempRight;
-	
-	//init recordset pointer
-	SQLExecutor::getInstanceRef().setDatabaseConnection(DBConnector::getInstanceRef().getdbcon());
-	SQLExecutor::getInstanceRef().setSqlState(sqlState);
-	
-	//exec SQL state
-	try
-	{
-		SQLExecutor::getInstanceRef().execSQL() ;
-	}
-	catch (_com_error& e)
-	{
-		AfxMessageBox(e.Description());
-		return;
-	}
-	
-	//get the result data set
-	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
+
+	CString sql, dbuserid, dbusername, dbpassword, dbpermission;
+    sql.Format("select id, password, permission, name from  users where name = '%s'", username);
+
+    _RecordsetPtr& m_pRecordset = SQLExecutor::getInstancePtr()->execquery(sql);
 
 	try
 	{
+        _variant_t vtUserid;
 		_variant_t vtPassword;
 		_variant_t vtRight;
 		_variant_t vUserName;
@@ -146,27 +126,31 @@ void CLoginDialog::OnOK()
 		
 		while(!m_pRecordset->adoEOF)
 		{
+            vtUserid = m_pRecordset->GetCollect("id");
 			vtPassword = m_pRecordset->GetCollect("password");
 			vtRight = m_pRecordset->GetCollect("permission");
 			vUserName = m_pRecordset->GetCollect("name");
 			
+            if(vtUserid.vt != VT_NULL)
+            {
+                dbuserid = (LPCTSTR)(_bstr_t)vtUserid;
+            }
 			if (vtPassword.vt != VT_NULL)
 			{
-				tempPassword = (LPCTSTR)(_bstr_t)vtPassword;
+				dbpassword = (LPCTSTR)(_bstr_t)vtPassword;
 			}
 			
 			if (vUserName.vt != VT_NULL)
 			{
-				tempUserName = (LPCTSTR)(_bstr_t)vUserName;
+				dbusername = (LPCTSTR)(_bstr_t)vUserName;
 			}
 			
 			if (vtRight.vt != VT_NULL)
 			{
-				tempRight =(LPCTSTR)(_bstr_t)vtRight;
+				dbpermission =(LPCTSTR)(_bstr_t)vtRight;
 			}
 			m_pRecordset->MoveNext();
 		}
-		
 	}
 	catch(_com_error &e)
 	{
@@ -174,15 +158,15 @@ void CLoginDialog::OnOK()
 		return;
 	}
 	
-	SingletonHelper::getInstance()->setUserID(userID);
-	SingletonHelper::getInstance()->setUserName(tempUserName);
-	SingletonHelper::getInstance()->setUserPass(tempPassword);
-	SingletonHelper::getInstance()->setUserRight(tempRight);
+	SingletonHelper::getInstance()->setUserID(dbuserid);
+	SingletonHelper::getInstance()->setUserName(dbusername);
+	SingletonHelper::getInstance()->setUserPass(dbpassword);
+	SingletonHelper::getInstance()->setUserRight(dbpermission);
 	
 	//密码正确则进入程序
-	if (tempPassword == password)
+	if (dbpassword == password)
 	{
-		if (tempRight == "普通用户")
+		if (dbpermission == "普通用户")
 		{
 			CWeightDlg* controlPanel = (CWeightDlg*)(SingletonHelper::getInstance()->getPtrData());
 			controlPanel->m_ChangePasswordButton.EnableWindow(FALSE);
@@ -199,7 +183,6 @@ void CLoginDialog::OnOK()
 		++tryTimes;
 	}
 }
-
 
 void CLoginDialog::OnButton1() 
 {

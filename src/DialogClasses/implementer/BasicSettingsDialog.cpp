@@ -57,7 +57,7 @@ BOOL CBasicSettingsDialog::OnInitDialog()
 	CButton* btnarray[5] = {&m_OtherSettingsButton,&m_UserManagement,&m_ChangeNameButton,
 		&m_ChangePassword, &m_goBackButton};
 	uiutils::init2rowbtns(btnarray, 5);
-
+    uiutils::setdlgsize(this);
 	return TRUE; 
 }
 

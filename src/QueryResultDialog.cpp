@@ -80,7 +80,9 @@ BOOL CQueryResultDialog::OnInitDialog()
 
 	case QTYPE_MATERIAMOUNT:
 		{
-			sql.Format("select * from materials where materialname = '%s' and %s", key, timesqlstr);
+			sql.Format("select formulaname, username, date, time, comment, amount from weight where comment like '%%%s%%' and %s ", key, timesqlstr);
+            CString headerarray [6] = {"formulaname", "username", "date", "time", "comment", "amount"};
+            headervec.assign(headerarray, headerarray + 6);
 		}
 
 		break;
@@ -95,8 +97,10 @@ BOOL CQueryResultDialog::OnInitDialog()
 
 	}
 
+    uiutils::initlistheader(headervec, ctlResultList);
+
 	_RecordsetPtr dbptr = SQLExecutor::getInstancePtr()->execquery(sql);
-	uiutils::initlistheader(headervec, ctlResultList);
+
 	uiutils::updatelist(dbptr, ctlResultList, headervec);
 	return TRUE;
 }

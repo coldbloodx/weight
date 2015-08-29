@@ -182,5 +182,6 @@ namespace HelperFunctions
 	void updateRecordValueVector(_RecordsetPtr& pRecordset, std::vector<CString>& valueList, std::vector<CString>& headerList);
 
 	unsigned long time2gmt(CTime& timeparam);
+
 };
 #endif

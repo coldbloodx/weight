@@ -71,9 +71,6 @@ BOOL CStatisticDialog::OnInitDialog()
 	CButton* buttonArray[6] = {&m_Clear,&m_ButtonOK,&m_Query,&m_Advance,&m_All,&m_Detail};
 	std::vector<CButton*> buttonVector(buttonArray, buttonArray+6);
 
-	
-
-
 	uiutils::setdlgsize(this, &m_ButtonOK);
 
 	return TRUE;  // return TRUE unless you set the focus to a control

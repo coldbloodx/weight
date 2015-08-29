@@ -8,7 +8,6 @@
 #include "QueryCondDialog.h"
 #include "constants.h"
 
-// CTraceQueryDialog dialog
 
 IMPLEMENT_DYNAMIC(CTraceQueryDialog, CDialog)
 

@@ -50,6 +50,8 @@ _RecordsetPtr& SQLExecutor::execquery(CString sqlstr)
     return this->resultptr;
 }
 
+
+
 void SQLExecutor::execSQL()
 {
 
