@@ -231,6 +231,8 @@ void CFormulaDialog::OnFormulaFetch()
 	SingletonHelper::getInstance()->setPtrData((void*)this);
 	CFetchAmountInputDialog fetchAmountInputDialog;
 	fetchAmountInputDialog.DoModal();
+    m_FormulaListCtrl.DeleteAllItems();
+    initList();
 }
 
 

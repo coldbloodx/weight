@@ -28,7 +28,6 @@ public:
 	CButton	m_QueryButton;
 	CButton	m_FormulaWeighButton;
 	CButton	m_WeighFreeButton;
-	CButton	m_FetchRecordButton;
 	CButton	m_StatisticButton;
 	CButton	m_OtherSettingsButton;
 	CButton	m_UserManagementButton;
@@ -63,25 +62,15 @@ protected:
 	afx_msg void OnFormulaManagement();
 	afx_msg void OnUsermanagement();
 	afx_msg void OnMaterialmanagementButton();
-	afx_msg void OnOthersettingsbutton();
-	afx_msg void OnStatisticButton();
 	afx_msg void OnQueryButton();
 	afx_msg void OnWightstartButton();
 	afx_msg void OnChangepasswordButton();
-	afx_msg void OnFetchrecord();
 	afx_msg void OnWeighfreeButton();
 	afx_msg void OnFetchstuffButton();
 	afx_msg void OnTimer(UINT nIDEvent);
 	afx_msg void OnCancel();
-	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
-public:
-
-	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 };
-
-//{{AFX_INSERT_LOCATION}}
-// Microsoft Visual C++ will insert additional declarations immediately before the previous line.
 
 #endif // !defined(AFX_WEIGHTDLG_H__56D4B0C6_DC15_4B46_8696_E868E66A4144__INCLUDED_)
 

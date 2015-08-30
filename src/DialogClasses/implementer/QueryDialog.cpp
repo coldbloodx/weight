@@ -173,17 +173,17 @@ void CQueryDialog::refreshUserList()
 
 	if (indexName == "用户编号")
 	{
-		fieldName = "ID = ";
+		fieldName = "id = ";
 	}
 
 	if (indexName == "人员姓名")
 	{
-		fieldName = "NAME = ";
+		fieldName = "name = ";
 	}
 
 	if (indexName == "权限" )
 	{
-		fieldName = "RIGHT =";
+		fieldName = "permision =";
 	}
 
 	sqlState += fieldName;
@@ -213,7 +213,7 @@ void CQueryDialog::refreshUserList()
 	//get the result data set
 	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
 	
-	CString headerArray[3] ={"ID", "NAME", "RIGHT"};
+	CString headerArray[3] ={"id", "name", "permission"};
 	
 	std::vector<CString> headerList(headerArray, headerArray + 3);
 	uiutils::updatelist(m_pRecordset, m_ResultList, headerList);
@@ -378,8 +378,7 @@ BOOL CQueryDialog::OnInitDialog()
 	CDialog::OnInitDialog();
 
 	uiutils::setdlgsize(this, &m_ButtonCancel);
-	return TRUE;  // return TRUE unless you set the focus to a control
-	              // EXCEPTION: OCX Property Pages should return FALSE
+	return TRUE;
 }
 
 CQueryDialog::~CQueryDialog()

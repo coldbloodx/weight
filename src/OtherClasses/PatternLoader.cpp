@@ -1,5 +1,4 @@
 #include "StdAfx.h"
-//#include "..\ExternClasses\header\tinyxml.h"
 #include "PatternLoader.h"
 
 PatternLoader::PatternLoader(std::string fileName):profileName(fileName)

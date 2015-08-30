@@ -38,7 +38,7 @@ public:
 	CButton	m_ButtonComma;
 	CButton	m_ButtonBack;
 	CEdit	m_FetchAmount;
-	CBrush   m_brBk;//在public中定义   
+ 
 	//}}AFX_DATA
 	std::vector<CButton*> buttonVector;
 	std::vector<CString> printVector;
@@ -69,13 +69,9 @@ protected:
 	afx_msg void OnButtonComma();
 	afx_msg void OnButtonBack();
 	virtual BOOL OnInitDialog();
-	afx_msg void OnTimer(UINT nIDEvent);
-	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 public:
 	afx_msg void OnBnClickedOk();
-	afx_msg void OnBnClickedGoback();
-	CButton m_GoBack;
 };
 
 //{{AFX_INSERT_LOCATION}}

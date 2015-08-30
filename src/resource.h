@@ -12,7 +12,6 @@
 #define IDD_USERMANAGEMENT_DIALOG       131
 #define IDD_MATERIALMANAGEMENT_DIALOG   132
 #define IDD_SETTINGS_DIALOG             133
-#define IDD_STATISTIC_DIALOG            134
 #define IDD_QUERY_DIALOG                135
 #define IDD_MATERIALADD_DIALOG          136
 #define IDD_USERADD_DIALOG              137
@@ -27,8 +26,6 @@
 #define IDD_PASSCHANGE_DIALOG           149
 #define IDD_DETAILSRECORD_DIALOG        150
 #define IDD_FETCHAMOUNTINTPUT_DIALOG    152
-#define IDD_FETCHRECORD_DIALOG          153
-#define IDD_FETCHRECORDADVANCEQUERY_DIALOG 155
 #define IDD_FORMULAADVANCEQUERY_DIALOG  157
 #define IDB_SPLASH                      161
 #define IDR_MAINFRAME                   166
@@ -72,8 +69,6 @@
 #define IDD_QUERY_RESULT                218
 #define IDC_WEIGHFREE_BUTTON            1003
 #define IDC_STATISTIC_BUTTON            1005
-#define IDC_QUERY_BUTTON                1006
-#define IDC_DETAILRECORD_BUTTON         1007
 #define IDC_FORMULAMANAGE_BUTTON        1008
 #define IDC_USERMANAGEMENT              1009
 #define IDC_OTHERSETTINGSBUTTON         1010
@@ -136,14 +131,11 @@
 #define IDC_RESULT_LIST                 1091
 #define ID_QUERY                        1092
 #define IDC_CLEARRESULT_BUTTON          1094
-#define IDC_STATISTIC_LIST              1095
 #define IDC_INDEXNAME_STATIC            1096
-#define IDC_INDEX_COMBO                 1098
 #define IDC_FORMULASELECT_STATIC        1100
 #define IDC_FORMULASELECT_COMBO         1101
 #define IDC_LIST1                       1104
 #define IDC_COM2DISPLAY_LIST            1104
-#define IDC_FETCHRECORD_LIST            1104
 #define IDC_WEIGH_EDIT                  1105
 #define IDC_WEIGH_STATIC                1106
 #define IDC_FORMULAWEIGH_STATIC         1109
@@ -185,15 +177,10 @@
 #define IDC_WEIGHNEEDED                 1150
 #define IDC_DATE_STATIC                 1152
 #define IDC_TIME_STATIC                 1153
-#define IDC_CLEAR_BUTTON                1154
-#define IDC_ALL_BUTTON                  1155
 #define IDC_WEIGH1_STATIC               1156
 #define IDC_WEIGH2_STATIC               1157
 #define IDC_FETCHAMOUNT_EDIT            1158
 #define IDC_FORMULAFETCH_BUTTON         1161
-#define IDC_PRINT_BUTTON                1164
-#define IDC_FETCHRECORDCLEAR_BUTTON     1167
-#define IDC_ADVANCEQUERY_BUTTON         1181
 #define IDC_FORMULA_COMBO               1184
 #define IDC_USER_COMBO                  1185
 #define IDC_AMOUNT_COMBO                1186

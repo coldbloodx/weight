@@ -5,7 +5,6 @@
 #include "Weight.h"
 #include "WeighManagementDialog.h"
 #include "formuladialog.h"
-#include "StatisticDialog.h"
 #include "QueryDialog.h"
 #include "MaterialManagementDialog.h"
 #include "helperclass.h"

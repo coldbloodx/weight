@@ -253,19 +253,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\DialogClasses\implementer\FetchRecordDialog.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\DialogClasses\implementer\FetchRecordsAdvanceQueryDialog.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\DialogClasses\implementer\FormulaAddDialog.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\DialogClasses\implementer\FormulaAdvanceQueryDialog.cpp"
 				>
 			</File>
 			<File
@@ -338,10 +326,6 @@
 			</File>
 			<File
 				RelativePath=".\Splash.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\DialogClasses\implementer\StatisticDialog.cpp"
 				>
 			</File>
 			<File
@@ -477,19 +461,11 @@
 				>
 			</File>
 			<File
-				RelativePath=".\DialogClasses\header\FetchRecordDialog.h"
-				>
-			</File>
-			<File
 				RelativePath=".\DialogClasses\header\FetchRecordsAdvanceQueryDialog.h"
 				>
 			</File>
 			<File
 				RelativePath=".\DialogClasses\header\FormulaAddDialog.h"
-				>
-			</File>
-			<File
-				RelativePath=".\DialogClasses\header\FormulaAdvanceQueryDialog.h"
 				>
 			</File>
 			<File
@@ -574,10 +550,6 @@
 			</File>
 			<File
 				RelativePath=".\Splash.h"
-				>
-			</File>
-			<File
-				RelativePath=".\DialogClasses\header\StatisticDialog.h"
 				>
 			</File>
 			<File

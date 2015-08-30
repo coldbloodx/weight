@@ -9,13 +9,11 @@
 #include "UserManageDialog.h"
 #include "MaterialManagementDialog.h"
 #include "OtherSettingsDialog.h"
-#include "StatisticDialog.h"
 #include "QueryDialog.h"
 #include "LoginDialog.h"
 #include "FormulaSelectDialog.h"
 #include "FreeWeightDialog.h"
 #include "PassChangeDialog.h"
-#include "FetchRecordDialog.h"
 #include "HelperClass.h"
 
 #include "DBConnector.h"
@@ -75,21 +73,13 @@ CWeightDlg::~CWeightDlg()
 void CWeightDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CWeightDlg)
 	DDX_Control(pDX, IDC_STATUS_STATIC, m_StatusStatic);
 	DDX_Control(pDX, IDC_FETCHSTUFF_BUTTON, m_FetchStuffButton);
-	//DDX_Control(pDX, IDC_QUERY_BUTTON, m_QueryButton);
 	DDX_Control(pDX, IDC_FORMULAWEIGH_BUTTON, m_FormulaWeighButton);
 	DDX_Control(pDX, IDC_WEIGHFREE_BUTTON, m_WeighFreeButton);
-	//DDX_Control(pDX, IDC_FETCHRECORD, m_FetchRecordButton);
-	//DDX_Control(pDX, IDC_STATISTIC_BUTTON, m_StatisticButton);
 	DDX_Control(pDX, IDC_OTHERSETTINGSBUTTON, m_OtherSettingsButton);
-	//DDX_Control(pDX, IDC_USERMANAGEMENT, m_UserManagementButton);
 	DDX_Control(pDX, IDC_POWEROFF_BUTTON, m_PowerOffButton);
-	//DDX_Control(pDX, IDC_MATERIALMANAGEMENT_BUTTON, m_MaterialManagementButton);
 	DDX_Control(pDX, IDC_FORMULAMANAGE_BUTTON, m_FormulaManagementButton);
-	//DDX_Control(pDX, IDC_CHANGEPASSWORD_BUTTON, m_ChangePasswordButton);
-	//}}AFX_DATA_MAP
 }
 
 BEGIN_MESSAGE_MAP(CWeightDlg, CDialog)
@@ -101,18 +91,11 @@ ON_BN_CLICKED(IDC_POWEROFF_BUTTON, OnPowerOff)
 ON_BN_CLICKED(IDC_FORMULAMANAGE_BUTTON, OnFormulaManagement)
 ON_BN_CLICKED(IDC_USERMANAGEMENT, OnUsermanagement)
 ON_BN_CLICKED(IDC_MATERIALMANAGEMENT_BUTTON, OnMaterialmanagementButton)
-ON_BN_CLICKED(IDC_OTHERSETTINGSBUTTON, OnOthersettingsbutton)
-ON_BN_CLICKED(IDC_STATISTIC_BUTTON, OnStatisticButton)
-ON_BN_CLICKED(IDC_QUERY_BUTTON, OnQueryButton)
 ON_BN_CLICKED(IDC_FORMULAWEIGH_BUTTON, OnWightstartButton)
 ON_BN_CLICKED(IDC_CHANGEPASSWORD_BUTTON, OnChangepasswordButton)
-ON_BN_CLICKED(IDC_FETCHRECORD, OnFetchrecord)
 ON_BN_CLICKED(IDC_WEIGHFREE_BUTTON, OnWeighfreeButton)
 ON_BN_CLICKED(IDC_FETCHSTUFF_BUTTON, OnFetchstuffButton)
 ON_WM_TIMER()
-//}}AFX_MSG_MAP
-ON_WM_CTLCOLOR()
-ON_WM_CREATE()
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -165,7 +148,6 @@ BOOL CWeightDlg::OnInitDialog()
 	{
 		return TRUE;
 	}
-
 
 	CSplashWnd::ShowSplashScreen(this);
 
@@ -310,19 +292,6 @@ void CWeightDlg::OnMaterialmanagementButton()
 	materialManagementDialog.DoModal();
 }
 
-void CWeightDlg::OnOthersettingsbutton() 
-{
-	// TODO: Add your control notification handler code here
-	CBasicSettingsDialog otherSettingsDialog;
-	otherSettingsDialog.DoModal();
-}
-
-void CWeightDlg::OnStatisticButton() 
-{
-	// TODO: Add your control notification handler code here
-	CStatisticDialog statisticDialog;
-	statisticDialog.DoModal();
-}
 
 void CWeightDlg::OnQueryButton() 
 {
@@ -347,12 +316,6 @@ void CWeightDlg::OnChangepasswordButton()
 	passChangeDialog.DoModal();
 }
 
-void CWeightDlg::OnFetchrecord() 
-{
-	// TODO: Add your control notification handler code here
-	CFetchRecordDialog fetchRecordDialog;
-	fetchRecordDialog.DoModal();
-}
 
 void CWeightDlg::OnWeighfreeButton() 
 {
@@ -400,9 +363,3 @@ void CWeightDlg::OnCancel()
 	
 }
 
-int CWeightDlg::OnCreate(LPCREATESTRUCT lpCreateStruct)
-{
-	if (CDialog::OnCreate(lpCreateStruct) == -1)
-		return -1;
-	return 0;
-}

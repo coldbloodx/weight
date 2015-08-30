@@ -80,9 +80,9 @@ BOOL CQueryResultDialog::OnInitDialog()
 
 	case QTYPE_MATERIAMOUNT:
 		{
-			sql.Format("select formulaname, username, odate, otime, comment, amount from weight where comment like '%%%s%%' and %s ", key, timesqlstr);
-            CString headerarray [6] = {"formulaname", "username", "odate", "otime", "comment", "amount"};
-            headervec.assign(headerarray, headerarray + 6);
+			sql.Format("select  materialname, materialbatchnumber, formulaname, formula_batch_number, operatorname, amount, operate_date, operate_time from materialrecords where materialname = '%s' and %s", key, timesqlstr);
+            CString headerarray [8] = {"materialname", "materialbatchnumber", "formulaname", "formula_batch_number", "operatorname", "amount", "operate_date", "operate_time"};
+            headervec.assign(headerarray, headerarray + 8);
 		}
 
 		break;

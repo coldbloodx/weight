@@ -36,9 +36,7 @@ CFetchAmountInputDialog::~CFetchAmountInputDialog()
 void CFetchAmountInputDialog::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CFetchAmountInputDialog)
 	DDX_Control(pDX, IDC_PRINT_CHECK, m_PrintCheck);
-	//DDX_Control(pDX, IDC_STATUS_STATIC2, m_StatusStatic);
 	DDX_Control(pDX, IDOK, m_ButtonOK);
 	DDX_Control(pDX, IDCANCEL, m_ButtonCancel);
 	DDX_Control(pDX, IDC_BUTTON9, m_Button9);
@@ -54,8 +52,6 @@ void CFetchAmountInputDialog::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_BUTTON_COMMA, m_ButtonComma);
 	DDX_Control(pDX, IDC_BUTTON_BACK, m_ButtonBack);
 	DDX_Control(pDX, IDC_FETCHAMOUNT_EDIT, m_FetchAmount);
-	//}}AFX_DATA_MAP
-	DDX_Control(pDX, IDC_GOBACK, m_GoBack);
 }
 
 
@@ -73,11 +69,7 @@ BEGIN_MESSAGE_MAP(CFetchAmountInputDialog, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON0, OnButton0)
 	ON_BN_CLICKED(IDC_BUTTON_COMMA, OnButtonComma)
 	ON_BN_CLICKED(IDC_BUTTON_BACK, OnButtonBack)
-	ON_WM_TIMER()
-	//}}AFX_MSG_MAP
-	ON_WM_CTLCOLOR()
 	ON_BN_CLICKED(IDOK, &CFetchAmountInputDialog::OnBnClickedOk)
-	ON_BN_CLICKED(IDC_GOBACK, &CFetchAmountInputDialog::OnBnClickedGoback)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -225,8 +217,8 @@ void CFetchAmountInputDialog::OnOK()
 		m_pRecordset->PutCollect("OPERATORID", _variant_t(SingletonHelper::getInstance()->getUserID()));
 		m_pRecordset->PutCollect("OPERATORNAME", _variant_t(SingletonHelper::getInstance()->getUsername()));
 		m_pRecordset->PutCollect("AMOUNT", _variant_t(fetchAmount));
-		m_pRecordset->PutCollect("DATE", _variant_t(date));
-		m_pRecordset->PutCollect("TIME", _variant_t(time));
+		m_pRecordset->PutCollect("ODATE", _variant_t(date));
+		m_pRecordset->PutCollect("OTIME", _variant_t(time));
 	}
 	catch(_com_error &e)
 	{
@@ -363,21 +355,8 @@ BOOL CFetchAmountInputDialog::OnInitDialog()
 	              // EXCEPTION: OCX Property Pages should return FALSE
 }
 
-void CFetchAmountInputDialog::OnTimer(UINT nIDEvent) 
-{
-	// TODO: Add your message handler code here and/or call default
-	//HelperFunctions::showStatus(m_StatusStatic);
-	CDialog::OnTimer(nIDEvent);
-}
-
 
 void CFetchAmountInputDialog::OnBnClickedOk()
 {
 	OnOK();
-}
-
-void CFetchAmountInputDialog::OnBnClickedGoback()
-{
-	// TODO: Add your control notification handler code here
-	CDialog::OnCancel();
 }
