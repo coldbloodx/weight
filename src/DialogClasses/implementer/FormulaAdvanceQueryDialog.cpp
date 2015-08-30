@@ -60,10 +60,7 @@ BEGIN_MESSAGE_MAP(CFormulaAdvanceQueryDialog, CDialog)
 	ON_CBN_SELCHANGE(IDC_FORMULA_COMBO, OnSelchangeFormulaCombo)
 	ON_CBN_SELCHANGE(IDC_AMOUNT_COMBO, OnSelchangeAmountCombo)
 	ON_CBN_SELCHANGE(IDC_DATE_COMBO, OnSelchangeDateCombo)
-	ON_WM_TIMER()
-	//}}AFX_MSG_MAP
 	ON_BN_CLICKED(IDOK, &CFormulaAdvanceQueryDialog::OnBnClickedOk)
-	ON_WM_CTLCOLOR()
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -287,17 +284,17 @@ void CFormulaAdvanceQueryDialog::OnOK()
 
 	if (dateKeywordFirst == dateKeywordSecond)
 	{	
-		sqlState += " DATE <= \#" + dateKeywordFirst +"\#";
+		sqlState += " ODATE <= \#" + dateKeywordFirst +"\#";
 	}
 	else
 	{
 		if (dateIndex == "之前")
 		{
-			sqlState += " DATE <= \#" + dateKeywordFirst +"\#";
+			sqlState += " ODATE <= \#" + dateKeywordFirst +"\#";
 		}
 		if (dateIndex == "之后")
 		{
-			sqlState += " DATE >= \#" + dateKeywordFirst +"\#";
+			sqlState += " ODATE >= \#" + dateKeywordFirst +"\#";
 		}
 		if (dateIndex == "之间")
 		{
@@ -306,7 +303,7 @@ void CFormulaAdvanceQueryDialog::OnOK()
 				AfxMessageBox("请检查日期输入的合法性！");
 				return;
 			}
-			sqlState += " DATE > \#" + dateKeywordFirst +"\#" + " AND DATE < \#" + dateKeywordSecond + "\#";
+			sqlState += " DATE > \#" + dateKeywordFirst +"\#" + " AND ODATE < \#" + dateKeywordSecond + "\#";
 		}
 		if (dateIndex == "两端")
 		{
@@ -315,7 +312,7 @@ void CFormulaAdvanceQueryDialog::OnOK()
 				AfxMessageBox("请检查日期输入的合法性！");
 				return;
 			}
-			sqlState += " (DATE < \#" + dateKeywordFirst + "\#" + " OR DATE >  \#" + dateKeywordSecond + "\#)";
+			sqlState += " (ODATE < \#" + dateKeywordFirst + "\#" + " OR ODATE >  \#" + dateKeywordSecond + "\#)";
 		}
 	}
 	TRACE("sqlState: %s%s", sqlHeader.GetBuffer(0),sqlState.GetBuffer(0));
@@ -341,7 +338,7 @@ void CFormulaAdvanceQueryDialog::OnOK()
 	//get the result data set
 	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
 
-	CString headerArray[9] = {"ID", "FORMULAID", "FORMULANAME", "USERID", "USERNAME", "AMOUNT","DATE", "TIME","COMMENT" };
+	CString headerArray[9] = {"ID", "FORMULAID", "FORMULANAME", "USERID", "USERNAME", "AMOUNT","ODATE", "OTIME","COMMENT" };
 	std::vector<CString> headerList(headerArray, headerArray + 9);
 
 	uiutils::updatelist(m_pRecordset, statisticDialog->m_StatisticList, headerList);
@@ -388,35 +385,8 @@ void CFormulaAdvanceQueryDialog::OnOK()
 	CDialog::OnOK();
 }
 
-void CFormulaAdvanceQueryDialog::OnTimer(UINT nIDEvent) 
-{
-	// TODO: Add your message handler code here and/or call default
-	//HelperFunctions::showStatus(m_StatusStatic);
-	CDialog::OnTimer(nIDEvent);
-}
-
 void CFormulaAdvanceQueryDialog::OnBnClickedOk()
 {
 	// TODO: Add your control notification handler code here
 	OnOK();
-}
-
-HBRUSH CFormulaAdvanceQueryDialog::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
-{
-	HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
-
-	if   (pWnd == this)   
-	{   
-		return m_brBk;   
-	}   
-	if   (nCtlColor   ==   CTLCOLOR_STATIC)   
-	{     
-		pDC->SetBkMode(TRANSPARENT);	//透明   
-		return (HBRUSH)::GetStockObject(HOLLOW_BRUSH);   
-	}   
-
-	// TODO:  Change any attributes of the DC here
-
-	// TODO:  Return a different brush if the default is not desired
-	return hbr;
 }

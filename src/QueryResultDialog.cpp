@@ -71,8 +71,8 @@ BOOL CQueryResultDialog::OnInitDialog()
 	{
 	case QTYPE_USERWORKOUT:
 		{
-			sql.Format("select username, formulaname, amount, date, time from weight where username = '%s' and %s", key, timesqlstr);
-			CString headerarray[5] = {"username", "formulaname", "amount", "date", "time"};
+			sql.Format("select username, formulaname, amount, odate, otime from weight where username = '%s' and %s", key, timesqlstr);
+			CString headerarray[5] = {"username", "formulaname", "amount", "odate", "otime"};
 			headervec.assign(headerarray, headerarray + 5);	
 		}
 
@@ -80,8 +80,8 @@ BOOL CQueryResultDialog::OnInitDialog()
 
 	case QTYPE_MATERIAMOUNT:
 		{
-			sql.Format("select formulaname, username, date, time, comment, amount from weight where comment like '%%%s%%' and %s ", key, timesqlstr);
-            CString headerarray [6] = {"formulaname", "username", "date", "time", "comment", "amount"};
+			sql.Format("select formulaname, username, odate, otime, comment, amount from weight where comment like '%%%s%%' and %s ", key, timesqlstr);
+            CString headerarray [6] = {"formulaname", "username", "odate", "otime", "comment", "amount"};
             headervec.assign(headerarray, headerarray + 6);
 		}
 
@@ -89,8 +89,8 @@ BOOL CQueryResultDialog::OnInitDialog()
 
 	case QTYPE_PRODUCTAMOUNT:
 		{
-			sql.Format("select username, formulaname, amount, date, time from weight where formulaname = '%s' and %s", key, timesqlstr);
-			CString headerarray[5] = {"username", "formulaname", "amount", "date", "time"};
+			sql.Format("select username, formulaname, amount, odate, otime from weight where formulaname = '%s' and %s", key, timesqlstr);
+			CString headerarray[5] = {"username", "formulaname", "amount", "odate", "otime"};
 			headervec.assign(headerarray, headerarray + 5);	
 		}
 		break;

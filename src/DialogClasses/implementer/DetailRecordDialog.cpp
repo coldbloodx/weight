@@ -58,7 +58,7 @@ BOOL CDetailRecordDialog::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 		
-	CString sqlState("SELECT ID, FORMULAID, FORMULANAME, USERID, USERNAME, AMOUNT, DATE, TIME, COMMENT FROM weight WHERE ID = ");
+	CString sqlState("SELECT ID, FORMULAID, FORMULANAME, USERID, USERNAME, AMOUNT, ODATE, OTIME, COMMENT FROM weight WHERE ID = ");
 	sqlState += SingletonHelper::getInstance()->getRecordID();
 	
 	SQLExecutor::getInstanceRef().setDatabaseConnection(DBConnector::getInstanceRef().getdbcon());
@@ -209,10 +209,6 @@ BOOL CDetailRecordDialog::OnInitDialog()
 	
 
 	
-	
-	utils::setButtonStyle(m_ButtonOK, RGB(55,71,158), SingletonHelper::getInstance()->simSong20);
-	utils::setButtonStyle(m_Print, RGB(55,71,158), SingletonHelper::getInstance()->simSong20);
-
 
 	utils::showStatus(m_StatusStatic);
     uiutils::setdlgsize(this);
