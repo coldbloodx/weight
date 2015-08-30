@@ -67,8 +67,6 @@ public:
 // Implementation
 protected:
 
-	// Generated message map functions
-	//{{AFX_MSG(CFormulaWeighDialog)
 	virtual BOOL OnInitDialog();
 	virtual void OnOK();
 	virtual void OnCancel();
@@ -84,14 +82,12 @@ protected:
 	afx_msg void OnButton0();
 	afx_msg void OnButtonComma();
 	afx_msg void OnButtonBack();
-	afx_msg void OnTimer(UINT nIDEvent);
-	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 public:
-	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 	afx_msg void OnBnClickedOk();
 	CStatic m_WeightStatic;
 	CButton m_PrintCheck;
+	CEdit editFBNumber;
 };
 
 //{{AFX_INSERT_LOCATION}}

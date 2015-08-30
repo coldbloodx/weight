@@ -21,11 +21,8 @@ static char THIS_FILE[] = __FILE__;
 CFormulaWeighDialog::CFormulaWeighDialog(CWnd* pParent /*=NULL*/)
 : CDialog(CFormulaWeighDialog::IDD, pParent),totalWeigh(0.0),m_FocusedID(0)
 {
-	//{{AFX_DATA_INIT(CFormulaWeighDialog)
-	// NOTE: the ClassWizard will add member initialization here
-	//}}AFX_DATA_INIT
-}
 
+}
 
 void CFormulaWeighDialog::DoDataExchange(CDataExchange* pDX)
 {
@@ -47,6 +44,7 @@ void CFormulaWeighDialog::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_BUTTON_BACK, m_ButtonBack);
 	DDX_Control(pDX, IDC_WEIGHT_STATIC, m_WeightStatic);
 	DDX_Control(pDX, IDC_PRINTERCHECK, m_PrintCheck);
+	DDX_Control(pDX, IDC_EDIT1, editFBNumber);
 }
 
 
@@ -64,9 +62,6 @@ BEGIN_MESSAGE_MAP(CFormulaWeighDialog, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON0, OnButton0)
 	ON_BN_CLICKED(IDC_BUTTON_COMMA, OnButtonComma)
 	ON_BN_CLICKED(IDC_BUTTON_BACK, OnButtonBack)
-	ON_WM_TIMER()
-	//}}AFX_MSG_MAP
-	ON_WM_CTLCOLOR()
 	ON_BN_CLICKED(IDOK, &CFormulaWeighDialog::OnBnClickedOk)
 END_MESSAGE_MAP()
 
@@ -91,7 +86,6 @@ BOOL CFormulaWeighDialog::OnInitDialog()
 	totalWeigh = atof(SingletonHelper::getInstance()->getFormulaWeigh().GetBuffer(SingletonHelper::getInstance()->getFormulaWeigh().GetLength()));
 	
 	m_MissionStatic.SetWindowText(SingletonHelper::getInstance()->getFormulaName());
-
 
 
 	m_WeightStatic.SetWindowText(SingletonHelper::getInstance()->getFormulaWeigh() + "公斤");
@@ -445,6 +439,14 @@ void CFormulaWeighDialog::OnOK()
 		AfxMessageBox("注意！称量过程没有完成！");
 		return;
 	}
+
+	CString fbatchnumber;
+	editFBNumber.GetWindowText(fbatchnumber);
+	if(fbatchnumber.IsEmpty())
+	{
+		AfxMessageBox("请输入成品批号!");
+		return;
+	}
 	
 	//将称量的结果存入输入据库，两个部分，
 	//称量记录存到历史记录表里面，
@@ -471,91 +473,33 @@ void CFormulaWeighDialog::OnOK()
 
 	//下面开始处理数据，完成一个一个表的数据插入，一个表的数据修改。	
 	//首先修改配方表，将配方的成品量增加。
-
-	//增加成品的SQL语句	
-	CString sqlState("UPDATE FORMULAS SET TOTAL = TOTAL + ");
-	sqlState +=  SingletonHelper::getInstance()->getFormulaWeigh() + " WHERE ID = " + SingletonHelper::getInstance()->getFormulaID() ;
 	
-	SQLExecutor::getInstanceRef().setSqlState(sqlState);
+	CString dbweigh, dbfid, dbfname, dbuserid, dbusername;
 
-	//exec SQL state
-	try
-	{
-		SQLExecutor::getInstanceRef().execSQL() ;
-	}
-	catch (_com_error& e)
-	{
-		AfxMessageBox(e.Description());
-		return;
-	}
+	dbweigh = SingletonHelper::getInstance()->getFormulaWeigh();
+	dbfname = SingletonHelper::getInstance()->getFormulaName();
+	dbfid = SingletonHelper::getInstance()->getFormulaID();
+	dbusername = SingletonHelper::getInstance()->getUsername();
+	dbuserid = SingletonHelper::getInstance()->getUserID();
+	
+	unsigned long gmttime = HelperFunctions::time2gmt(currentTime);
 
-	//get the result data set
-	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
+	//update product total
+	CString sql;
+	sql.Format("update formulas set total = total + %s where id = %s", 
+		SingletonHelper::getInstance()->getFormulaWeigh(),
+		SingletonHelper::getInstance()->getFormulaID());
 
-	//init recordset pointer
-	SQLExecutor::getInstanceRef().setSqlState(CString("SELECT * FROM WEIGHT"));
+	SQLExecutor::getInstanceRef().execquery(sql);
 
-	//exec SQL state
-	try
-	{
-		SQLExecutor::getInstanceRef().execSQL() ;
-	}
-	catch (_com_error& e)
-	{
-		AfxMessageBox(e.Description());
-		return;
-	}
+	sql.Format("insert into weight(formulaid, formulaname, userid, username, amount, odate, otime, comment, fbatchnumber, gmt) values('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%ld')", 
+		dbfid, dbfname, dbuserid, dbusername,dbweigh, date, time, comment, fbatchnumber, gmttime);
 
-	//get the result data set
-	m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
-
-	CString weighID;
-
- 	try
- 	{
- 		if (! m_pRecordset->adoEOF)
- 		{		
- 			m_pRecordset->MoveLast();
- 		}
-
-		 m_pRecordset->AddNew();
-		_variant_t ID = m_pRecordset->GetCollect(_variant_t("ID"));
-		if (ID.vt != VT_NULL)
-		{
-			weighID = (LPCTSTR)(_bstr_t)ID;
-		}
-
- 		m_pRecordset->PutCollect("FORMULAID", _variant_t(SingletonHelper::getInstance()->getFormulaID()));
- 		m_pRecordset->PutCollect("FORMULANAME", _variant_t(SingletonHelper::getInstance()->getFormulaName()));
- 		m_pRecordset->PutCollect("USERID", _variant_t(SingletonHelper::getInstance()->getUserID()));
- 		m_pRecordset->PutCollect("USERNAME", _variant_t(SingletonHelper::getInstance()->getUsername()));
- 		m_pRecordset->PutCollect("AMOUNT",_variant_t(SingletonHelper::getInstance()->getFormulaWeigh()));
- 		m_pRecordset->PutCollect("DATE", _variant_t(date));
- 		m_pRecordset->PutCollect("TIME", _variant_t(time));
- 		m_pRecordset->PutCollect("COMMENT", _variant_t(comment));
- 	}
- 	catch(_com_error &e)
- 	{
- 		AfxMessageBox(e.Description());
-		SingletonHelper::getInstance()->clearCompositions();
-		return;
- 	}
- 	
- 	//更新数据库
- 	try
- 	{
- 		m_pRecordset->Update();	
- 	}
- 	catch(_com_error &e)
- 	{
- 		AfxMessageBox("增加记录出现错误：" + e.Description());
-		SingletonHelper::getInstance()->clearCompositions();
- 		return;
- 	}	
+	SQLExecutor::getInstanceRef().execquery(sql);	
 
 	if (m_PrintCheck.GetCheck())
-	{
-		printVector.push_back(weighID);
+	{	
+		printVector.push_back(fbatchnumber);
 		printVector.push_back(SingletonHelper::getInstance()->getFormulaName());
 		printVector.push_back(SingletonHelper::getInstance()->getFormulaWeigh() + "Kg");
 		printVector.push_back(SingletonHelper::getInstance()->getUsername());
@@ -625,7 +569,6 @@ void CFormulaWeighDialog::OnCancel()
 
 void CFormulaWeighDialog::OnButton1() 
 {
-	// TODO: Add your control notification handler code here
 	CWnd * pWnd = GetDlgItem(m_FocusedID);
 	::SetFocus(pWnd->GetSafeHwnd());
 	keybd_event(VK_NUMPAD1, 0, 0, 0);
@@ -633,7 +576,6 @@ void CFormulaWeighDialog::OnButton1()
 
 void CFormulaWeighDialog::OnButton2() 
 {
-	// TODO: Add your control notification handler code here
 	CWnd * pWnd = GetDlgItem(m_FocusedID);
 	::SetFocus(pWnd->GetSafeHwnd());
 	keybd_event(VK_NUMPAD2, 0, 0, 0);
@@ -641,7 +583,6 @@ void CFormulaWeighDialog::OnButton2()
 
 void CFormulaWeighDialog::OnButton3() 
 {
-	// TODO: Add your control notification handler code here
 	CWnd * pWnd = GetDlgItem(m_FocusedID);
 	::SetFocus(pWnd->GetSafeHwnd());
 	keybd_event(VK_NUMPAD3, 0, 0, 0);
@@ -649,7 +590,6 @@ void CFormulaWeighDialog::OnButton3()
 
 void CFormulaWeighDialog::OnButton4() 
 {
-	// TODO: Add your control notification handler code here
 	CWnd * pWnd = GetDlgItem(m_FocusedID);
 	::SetFocus(pWnd->GetSafeHwnd());
 	keybd_event(VK_NUMPAD4, 0, 0, 0);
@@ -657,7 +597,6 @@ void CFormulaWeighDialog::OnButton4()
 
 void CFormulaWeighDialog::OnButton5() 
 {
-	// TODO: Add your control notification handler code here
 	CWnd * pWnd = GetDlgItem(m_FocusedID);
 	::SetFocus(pWnd->GetSafeHwnd());
 	keybd_event(VK_NUMPAD5, 0, 0, 0);
@@ -665,7 +604,6 @@ void CFormulaWeighDialog::OnButton5()
 
 void CFormulaWeighDialog::OnButton6() 
 {
-	// TODO: Add your control notification handler code here
 	CWnd * pWnd = GetDlgItem(m_FocusedID);
 	::SetFocus(pWnd->GetSafeHwnd());
 	keybd_event(VK_NUMPAD6, 0, 0, 0);
@@ -673,7 +611,6 @@ void CFormulaWeighDialog::OnButton6()
 
 void CFormulaWeighDialog::OnButton7() 
 {
-	// TODO: Add your control notification handler code here
 	CWnd * pWnd = GetDlgItem(m_FocusedID);
 	::SetFocus(pWnd->GetSafeHwnd());
 	keybd_event(VK_NUMPAD7, 0, 0, 0);
@@ -681,7 +618,6 @@ void CFormulaWeighDialog::OnButton7()
 
 void CFormulaWeighDialog::OnButton8() 
 {
-	// TODO: Add your control notification handler code here
 	CWnd * pWnd = GetDlgItem(m_FocusedID);
 	::SetFocus(pWnd->GetSafeHwnd());
 	keybd_event(VK_NUMPAD8, 0, 0, 0);
@@ -689,7 +625,6 @@ void CFormulaWeighDialog::OnButton8()
 
 void CFormulaWeighDialog::OnButton9() 
 {
-	// TODO: Add your control notification handler code here
 	CWnd * pWnd = GetDlgItem(m_FocusedID);
 	::SetFocus(pWnd->GetSafeHwnd());
 	keybd_event(VK_NUMPAD9, 0, 0, 0);
@@ -697,7 +632,6 @@ void CFormulaWeighDialog::OnButton9()
 
 void CFormulaWeighDialog::OnButton0() 
 {
-	// TODO: Add your control notification handler code here
 	CWnd * pWnd = GetDlgItem(m_FocusedID);
 	::SetFocus(pWnd->GetSafeHwnd());
 	keybd_event(VK_NUMPAD0, 0, 0, 0);
@@ -705,7 +639,6 @@ void CFormulaWeighDialog::OnButton0()
 
 void CFormulaWeighDialog::OnButtonComma() 
 {
-	// TODO: Add your control notification handler code here
 	CWnd * pWnd = GetDlgItem(m_FocusedID);
 	::SetFocus(pWnd->GetSafeHwnd());
 	keybd_event(188, 0, 0, 0);
@@ -713,47 +646,13 @@ void CFormulaWeighDialog::OnButtonComma()
 
 void CFormulaWeighDialog::OnButtonBack() 
 {
-	// TODO: Add your control notification handler code here
 	CWnd * pWnd = GetDlgItem(m_FocusedID);
 	::SetFocus(pWnd->GetSafeHwnd());
 	keybd_event(VK_BACK, 0, 0, 0);
 }
-void CFormulaWeighDialog::OnTimer(UINT nIDEvent) 
-{
-	// TODO: Add your message handler code here and/or call default
-	//HelperFunctions::showStatus(m_StatusStatic);
-	CDialog::OnTimer(nIDEvent);
-}
-
-HBRUSH CFormulaWeighDialog::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
-{
-	HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
-
-	// TODO:  Change any attributes of the DC here
-	if   (pWnd   ==   this)   
-	{   
-		return   m_brBk;   
-	}   
-
-	if   (nCtlColor   ==   CTLCOLOR_STATIC)   
-	{     
-		if ( pWnd->GetDlgCtrlID() == IDC_WEIGHT_STATIC || pWnd->GetDlgCtrlID() == IDC_MISSION_STATIC  )
-		{
-			pDC->SetTextColor(RGB(255,0,0));
-		}
-
-		pDC->SetBkMode(TRANSPARENT);	//透明   
-		return (HBRUSH)::GetStockObject(HOLLOW_BRUSH);   
-	}   
-
-	
-	// TODO:  Return a different brush if the default is not desired
-	return hbr;
-}
 
 void CFormulaWeighDialog::OnBnClickedOk()
 {
-	// TODO: Add your control notification handler code here
 	OnOK();
 }
 
