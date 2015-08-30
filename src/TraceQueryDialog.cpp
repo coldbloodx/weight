@@ -6,6 +6,7 @@
 #include "TraceQueryDialog.h"
 #include "uiFunctions.h"
 #include "QueryCondDialog.h"
+#include "ProductTraceDlg.h"
 #include "constants.h"
 
 
@@ -69,6 +70,8 @@ void CTraceQueryDialog::OnBnClickedButton3()
 void CTraceQueryDialog::OnBnClickedButton4()
 {
     //not done yet
+    CProductTraceDlg pdlg;
+    pdlg.DoModal();
 }
 
 

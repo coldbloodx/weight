@@ -355,7 +355,6 @@ BOOL CFetchAmountInputDialog::OnInitDialog()
 	              // EXCEPTION: OCX Property Pages should return FALSE
 }
 
-
 void CFetchAmountInputDialog::OnBnClickedOk()
 {
 	OnOK();

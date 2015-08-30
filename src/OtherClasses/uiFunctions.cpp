@@ -1,6 +1,39 @@
 #include "stdafx.h"
 #include "uiFunctions.h"
 
+void uiutils::updatelist(_RecordsetPtr& pRecordset, CListCtrl& listCtrl, CString* headerptr, int headerlen)
+{
+    int itemIndex = 0;
+    int subItemIndex = 0;
+    try
+    {
+        while(!pRecordset->adoEOF)
+        {
+            for (size_t i = 0; i < headerlen; ++i )
+            {
+                _variant_t vDataField = pRecordset->GetCollect(_variant_t(headerptr[i]));
+                CString dataField;
+                if (vDataField.vt != VT_NULL)
+                {
+                    dataField = (LPCTSTR)(_bstr_t)vDataField;
+                }
+                //insert or modify by the value of i
+                i == 0 ? (listCtrl.InsertItem(itemIndex,dataField)):(listCtrl.SetItemText(itemIndex, subItemIndex, dataField));
+                ++subItemIndex;
+            }
+            subItemIndex = 0;
+            ++itemIndex;
+            pRecordset->MoveNext();
+        }
+    }
+    catch (_com_error& e)
+    {
+        throw e;
+    }
+    return;
+}
+
+
 void uiutils::updatelist(_RecordsetPtr& pRecordset, CListCtrl& listCtrl, std::vector<CString>& headerList)
 {
 	int itemIndex = 0;
@@ -42,6 +75,16 @@ void uiutils::initlistheader(std::vector<CString>& headerList, CListCtrl& listCt
 	}
 	return;
 }
+
+void uiutils::initlistheader(CListCtrl& listCtrl, CString* strarray, int arraylen)
+{
+    for (size_t i = 0; i < arraylen; ++i)
+    {
+        listCtrl.InsertColumn(i, strarray[i], 0, 160);
+    }
+    return;
+}
+
 
 void uiutils::clearList(CListCtrl& listCtrl)
 {
@@ -133,7 +176,7 @@ void uiutils::init2rowbtns(CButton** btnarray, int arraysize)
 
 }
 
-void uiutils::fillCombo(_RecordsetPtr& dbptr, CComboBox* pcombo, CString& key)
+void uiutils::fillcombo( _RecordsetPtr& dbptr, CComboBox& rcombo, CString& key )
 {
     try
     {
@@ -143,7 +186,7 @@ void uiutils::fillCombo(_RecordsetPtr& dbptr, CComboBox* pcombo, CString& key)
                 if (vDataField.vt != VT_NULL)
                 {
                     CString dataField = (LPCTSTR)(_bstr_t)vDataField;
-                    pcombo->AddString(dataField);
+                    rcombo.AddString(dataField);
                 }
 
             dbptr->MoveNext();

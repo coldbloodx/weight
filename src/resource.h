@@ -67,6 +67,7 @@
 #define IDD_QUERYCOND_DIALOG            216
 #define IDD_DIALOG1                     218
 #define IDD_QUERY_RESULT                218
+#define IDD_PRODUCT_TRACE               219
 #define IDC_WEIGHFREE_BUTTON            1003
 #define IDC_STATISTIC_BUTTON            1005
 #define IDC_FORMULAMANAGE_BUTTON        1008
@@ -247,14 +248,17 @@
 #define IDC_DATE_START                  1259
 #define IDC_DATE_END                    1260
 #define IDC_TIMESECTION_COMBO           1261
+#define IDC_COMBO1                      1263
+#define IDC_PRODUCT_LIST                1264
+#define IDC_MATERIAL_LIST               1265
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        219
+#define _APS_NEXT_RESOURCE_VALUE        220
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1262
+#define _APS_NEXT_CONTROL_VALUE         1265
 #define _APS_NEXT_SYMED_VALUE           104
 #endif
 #endif

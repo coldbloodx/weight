@@ -72,7 +72,7 @@ BOOL CQueryCondDialog::OnInitDialog()
 
     _RecordsetPtr dbptr = SQLExecutor::getInstancePtr()->execquery(sql);
 
-    uiutils::fillCombo(dbptr, &cboQueryItem, CString("name"));
+    uiutils::fillcombo(dbptr, cboQueryItem, CString("name"));
 
     if(cboQueryItem.GetCount())
     {

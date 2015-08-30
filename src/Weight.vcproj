@@ -313,6 +313,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\ProductTraceDlg.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\QueryCondDialog.cpp"
 				>
 			</File>
@@ -522,6 +526,10 @@
 			</File>
 			<File
 				RelativePath=".\OtherClasses\PatternLoader.h"
+				>
+			</File>
+			<File
+				RelativePath=".\ProductTraceDlg.h"
 				>
 			</File>
 			<File
