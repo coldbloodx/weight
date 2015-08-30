@@ -57,7 +57,6 @@
 #define IDD_WEIGHMANAGEMENT             200
 #define IDB_MAINSETTINGS                201
 #define IDB_WEIGHTSETTINGS              202
-#define IDD_CHANGEMANUFACTURENAME       203
 #define IDB_DLGBG                       206
 #define IDB_BITMAP1                     209
 #define IDB_LOGINBG                     209

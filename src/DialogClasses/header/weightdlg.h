@@ -70,6 +70,8 @@ protected:
 	afx_msg void OnTimer(UINT nIDEvent);
 	afx_msg void OnCancel();
 	DECLARE_MESSAGE_MAP()
+public:
+    afx_msg void OnBnClickedOthersettingsbutton();
 };
 
 #endif // !defined(AFX_WEIGHTDLG_H__56D4B0C6_DC15_4B46_8696_E868E66A4144__INCLUDED_)

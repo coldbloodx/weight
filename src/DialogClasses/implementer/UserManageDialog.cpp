@@ -88,7 +88,7 @@ void CUserManageDialog::initList()
 	//get the result data set
 	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
 
-	CString headerArray[3] = {"ID", "NAME", "RIGHT"};
+	CString headerArray[3] = {"id", "name", "permission"};
 	std::vector<CString> headerList(headerArray, headerArray+3);
 
 	try

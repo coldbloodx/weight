@@ -22,7 +22,6 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	CButton m_goBackButton;
-	CButton m_ChangeNameButton;
 	CButton m_OtherSettingsButton;
 	CButton m_UserManagement;
 	CButton m_ChangePassword;
@@ -30,6 +29,5 @@ public:
 	afx_msg void OnBnClickedButton1();
 	afx_msg void OnBnClickedButton2();
 	afx_msg void OnBnClickedButton4();
-	afx_msg void OnBnClickedButton3();
     afx_msg void OnPaint();
 };

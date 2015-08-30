@@ -15,6 +15,7 @@
 #include "FreeWeightDialog.h"
 #include "PassChangeDialog.h"
 #include "HelperClass.h"
+#include "BasicSettingsDialog.h"
 
 #include "DBConnector.h"
 #include "DBptr.h"
@@ -96,6 +97,7 @@ ON_BN_CLICKED(IDC_CHANGEPASSWORD_BUTTON, OnChangepasswordButton)
 ON_BN_CLICKED(IDC_WEIGHFREE_BUTTON, OnWeighfreeButton)
 ON_BN_CLICKED(IDC_FETCHSTUFF_BUTTON, OnFetchstuffButton)
 ON_WM_TIMER()
+ON_BN_CLICKED(IDC_OTHERSETTINGSBUTTON, &CWeightDlg::OnBnClickedOthersettingsbutton)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -363,3 +365,10 @@ void CWeightDlg::OnCancel()
 	
 }
 
+
+void CWeightDlg::OnBnClickedOthersettingsbutton()
+{
+    // TODO: Add your control notification handler code here
+    CBasicSettingsDialog dlg;
+    dlg.DoModal();
+}

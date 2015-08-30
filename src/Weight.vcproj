@@ -116,7 +116,7 @@
 			IntermediateDirectory=".\Debug"
 			ConfigurationType="1"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
-			UseOfMFC="1"
+			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			CharacterSet="2"
 			>
@@ -230,10 +230,6 @@
 			</File>
 			<File
 				RelativePath=".\DialogClasses\implementer\BatchNumberChange.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\DialogClasses\implementer\ChangeManufactureNameDialog.cpp"
 				>
 			</File>
 			<File
@@ -438,10 +434,6 @@
 			</File>
 			<File
 				RelativePath=".\DialogClasses\header\BatchNumberChange.h"
-				>
-			</File>
-			<File
-				RelativePath=".\DialogClasses\header\ChangeManufactureNameDialog.h"
 				>
 			</File>
 			<File
