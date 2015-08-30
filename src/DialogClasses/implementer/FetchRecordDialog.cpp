@@ -188,11 +188,11 @@ void CFetchRecordDialog::OnPrintButton()
 	
 	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
 	
-	HelperFunctions::updateRecordValueVector(m_pRecordset, valueList, headerList);
+	utils::updateRecordValueVector(m_pRecordset, valueList, headerList);
 
 	//打印两张领料记录
-	HelperFunctions::printVector(CString("成品领取记录"), headerVector, valueList);
-	HelperFunctions::printVector(CString("成品领取记录"), headerVector, valueList);
+	utils::printVector(CString("成品领取记录"), headerVector, valueList);
+	utils::printVector(CString("成品领取记录"), headerVector, valueList);
 
 	valueList.clear();
 	return;

@@ -168,7 +168,7 @@ BOOL CDetailRecordDialog::OnInitDialog()
 	std::string separators(";+");
 	std::vector<std::string> keywords;
 	
-	HelperFunctions::ParseKeywords(materials, separators, keywords);
+	utils::ParseKeywords(materials, separators, keywords);
 	
 	int materialNameStaticID = 2000;
 	int batchNumberStaticID = 3000;
@@ -210,11 +210,11 @@ BOOL CDetailRecordDialog::OnInitDialog()
 
 	
 	
-	HelperFunctions::setButtonStyle(m_ButtonOK, RGB(55,71,158), SingletonHelper::getInstance()->simSong20);
-	HelperFunctions::setButtonStyle(m_Print, RGB(55,71,158), SingletonHelper::getInstance()->simSong20);
+	utils::setButtonStyle(m_ButtonOK, RGB(55,71,158), SingletonHelper::getInstance()->simSong20);
+	utils::setButtonStyle(m_Print, RGB(55,71,158), SingletonHelper::getInstance()->simSong20);
 
 
-	HelperFunctions::showStatus(m_StatusStatic);
+	utils::showStatus(m_StatusStatic);
     uiutils::setdlgsize(this);
 	SetTimer(1000, 1000, NULL);
 	return TRUE;  
@@ -257,7 +257,7 @@ CDetailRecordDialog::~CDetailRecordDialog()
 void CDetailRecordDialog::OnTimer(UINT nIDEvent) 
 {
 	// TODO: Add your message handler code here and/or call default
-		HelperFunctions::showStatus(m_StatusStatic);
+		utils::showStatus(m_StatusStatic);
 	CDialog::OnTimer(nIDEvent);
 }
 

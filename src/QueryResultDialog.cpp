@@ -39,8 +39,8 @@ BOOL CQueryResultDialog::OnInitDialog()
 	CDialog::OnInitDialog();
 	uiutils::setdlgsize(this, &btnCancel);
 
-	unsigned long startsecs = HelperFunctions::time2gmt(timeStart);
-	unsigned long endsecs = HelperFunctions::time2gmt(timeEnd);
+	unsigned long startsecs = utils::time2gmt(timeStart);
+	unsigned long endsecs = utils::time2gmt(timeEnd);
 
 	CString timesqlstr;
 

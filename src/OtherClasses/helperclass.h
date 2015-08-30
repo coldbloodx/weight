@@ -151,7 +151,7 @@ private:
 
 };
 
-namespace HelperFunctions
+namespace utils
 {
 	bool isDouble(CEdit* editControl);
 	bool isBatchNumber(CEdit* editControl);

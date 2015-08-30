@@ -192,30 +192,6 @@ void CMaterialManagementDialog::OnMaterialdel()
 	initList();
 }
 
-void CMaterialManagementDialog::OnTimer(UINT nIDEvent) 
-{
-	// TODO: Add your message handler code here and/or call default
-	HelperFunctions::showStatus(m_StatusStatic);
-	CDialog::OnTimer(nIDEvent);
-}
-
-HBRUSH CMaterialManagementDialog::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
-{
-	if   (pWnd   ==   this)   
-	{   
-		return   m_brBk;   
-	}   
-	HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
-
-	if   (nCtlColor   ==   CTLCOLOR_STATIC)   
-	{     
-		pDC->SetBkMode(TRANSPARENT);	//Í¸Ã÷   
-		return (HBRUSH)::GetStockObject(HOLLOW_BRUSH);   
-	}  
-	return hbr;
-}
-
-
 void CMaterialManagementDialog::OnBnClickedBatchnumberchange()
 {
 	// TODO: Add your control notification handler code here

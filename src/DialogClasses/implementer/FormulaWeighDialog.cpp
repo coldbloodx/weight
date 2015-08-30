@@ -77,16 +77,11 @@ BOOL CFormulaWeighDialog::OnInitDialog()
 	std::vector<std::string> materialVector;
 	std::string separator(",;");
 
-	HelperFunctions::ParseKeywords(
-	SingletonHelper::getInstance()->getMaterials(),
-		separator,
-		materialVector);
+	utils::ParseKeywords(SingletonHelper::getInstance()->getMaterials(), separator, materialVector);
 
-	
 	totalWeigh = atof(SingletonHelper::getInstance()->getFormulaWeigh().GetBuffer(SingletonHelper::getInstance()->getFormulaWeigh().GetLength()));
 	
 	m_MissionStatic.SetWindowText(SingletonHelper::getInstance()->getFormulaName());
-
 
 	m_WeightStatic.SetWindowText(SingletonHelper::getInstance()->getFormulaWeigh() + "公斤");
 
@@ -187,7 +182,6 @@ BOOL CFormulaWeighDialog::OnInitDialog()
 		CEdit*   batchNumberEdit = NULL;
 		CEdit*   lineNumberEdit = NULL;
 
-		
 		//创建材料名字static控件
 		materialNameStatic = new CStatic;
 		SingletonHelper* sPointer =NULL;
@@ -199,10 +193,11 @@ BOOL CFormulaWeighDialog::OnInitDialog()
 			rect,
 			this,
 			materialNameStaticID++);
-		//materialNameStatic->SetFont(SingletonHelper::getInstance()->simSong20);
 		materialNameStatic->ShowWindow(SW_SHOW);
 		materialNameVector.push_back(materialNameStatic);
 		
+		dbmname.push_back(newComposition.material.c_str());
+
 		//调整控件位置
 		rect.left = controlLeft + nameWidth + splitorWidth;
 		rect.right = rect.left + weightWidth + splitorWidth;
@@ -210,8 +205,7 @@ BOOL CFormulaWeighDialog::OnInitDialog()
 
 		//创建材料重量static控件
 		materialWeighStatic = new CStatic;
-		//std::string test(gcvt((newComposition.percentage * totalWeigh / 100), 8, buffer));
-		CString test1 = HelperFunctions::doubleToCString(newComposition.percentage * totalWeigh / 100);
+		CString test1 = utils::doubleToCString(newComposition.percentage * totalWeigh / 100);
 		test1 += "Kg";
 		materialWeighStatic->Create(test1,
 			WS_VISIBLE | ES_CENTER,
@@ -221,14 +215,15 @@ BOOL CFormulaWeighDialog::OnInitDialog()
 		//materialWeighStatic->SetFont(SingletonHelper::getInstance()->simSong20);
 		materialWeighStatic->ShowWindow(SW_SHOW);
 		materialWeighVector.push_back(materialWeighStatic);
-		
+
+		dbmweigh.push_back(utils::doubleToCString(newComposition.percentage * totalWeigh / 100));
+
 		//调整控件位置
 		rect.left = rect.right + 2;
 		rect.right = rect.left + buttonWidth + splitorWidth;
 		
 		//创建分次称量按钮
 		CRect buttonRect = rect;
-
 		sepWeightButton = new CButton;
 		sepWeightButton->Create("", 
 			BS_PUSHBUTTON | WS_VISIBLE | WS_CHILD | ES_CENTER, 
@@ -236,8 +231,6 @@ BOOL CFormulaWeighDialog::OnInitDialog()
 			this,  
 			sepWeighButtonID++);
 
-
-		//HelperFunctions::setButtonStyle(*sepWeightButton, RGB(55,71,158), SingletonHelper::getInstance()->simSong20);
         sepWeightButton->SetWindowText("称重");
 		sepWeightButton->ShowWindow(SW_SHOW);
 		sepWeightButtonVector.push_back(sepWeightButton);
@@ -310,11 +303,6 @@ BOOL CFormulaWeighDialog::OnInitDialog()
 		rect.bottom += rowSpace + controlHeight;
 	}
 	
-	CButton* buttonArray[14] = {&m_Button1,&m_Button2,&m_Button3,&m_Button4,&m_Button5,&m_Button6,&m_Button7,
-		&m_Button8,&m_Button9,&m_Button0,&m_ButtonComma,&m_ButtonBack,&m_ButtonOK,&m_ButtonCancel};
-
-
-	std::vector<CButton*> buttonVector(buttonArray, buttonArray+14);
 	uiutils::setdlgsize(this, &m_ButtonCancel, &m_ButtonOK);
 
 	return TRUE;  // return TRUE unless you set the focus to a control
@@ -406,7 +394,7 @@ void CFormulaWeighDialog::OnOK()
 	{
 		//输入批号验证
 		batchNumberEditVector[i]->GetWindowText(batchNumber);
-		if (batchNumber.IsEmpty() || !HelperFunctions::isBatchNumber(batchNumberEditVector[i]))
+		if (batchNumber.IsEmpty() || !utils::isBatchNumber(batchNumberEditVector[i]))
 		{
 			batchNumberVector.clear();
 			AfxMessageBox("批号只能是数字和逗号的组合");
@@ -425,7 +413,7 @@ void CFormulaWeighDialog::OnOK()
 		}
 		if (lineNumber != lineNumberOld[i] )
 		{
-			AfxMessageBox("第"+HelperFunctions::intToCString(i+1)+"个材料的条码不匹配，请检查！");
+			AfxMessageBox("第"+utils::intToCString(i+1)+"个材料的条码不匹配，请检查！");
 		}
 		lineNumberVector.push_back(lineNumber);
 		//输入条码验证结束
@@ -471,7 +459,7 @@ void CFormulaWeighDialog::OnOK()
 		comment += tempMaterialName + "," +batchNumberVector[k] +"," +lineNumberVector[k]+ "," + manufactures[k] + separator;
 	}
 
-	//下面开始处理数据，完成一个一个表的数据插入，一个表的数据修改。	
+	//下面开始处理数据，完成一个表的数据插入，一个表的数据修改。	
 	//首先修改配方表，将配方的成品量增加。
 	
 	CString dbweigh, dbfid, dbfname, dbuserid, dbusername;
@@ -482,7 +470,7 @@ void CFormulaWeighDialog::OnOK()
 	dbusername = SingletonHelper::getInstance()->getUsername();
 	dbuserid = SingletonHelper::getInstance()->getUserID();
 	
-	unsigned long gmttime = HelperFunctions::time2gmt(currentTime);
+	unsigned long gmttime = utils::time2gmt(currentTime);
 
 	//update product total
 	CString sql;
@@ -496,6 +484,18 @@ void CFormulaWeighDialog::OnOK()
 		dbfid, dbfname, dbuserid, dbusername,dbweigh, date, time, comment, fbatchnumber, gmttime);
 
 	SQLExecutor::getInstanceRef().execquery(sql);	
+
+	
+
+	for (size_t i = 0; i < dbmweigh.size(); ++i)
+	{
+		sql.Format("insert into materialrecords(materialname, materialbatchnumber, formulaid, formulaname, formula_batch_number, \
+			operatorid, operatorname, amount, operate_date, operate_time, gmt) values('%s', '%s', '%s', '%s', '%s', '%s', '%s', \
+			%s, '%s', '%s', %ld)", 
+			dbmname[i], batchNumberVector[i], dbfid, dbfname, fbatchnumber, 
+			dbuserid, dbusername, dbmweigh[i], date, time, gmttime);
+		SQLExecutor::getInstanceRef().execquery(sql);
+	}
 
 	if (m_PrintCheck.GetCheck())
 	{	
@@ -511,7 +511,7 @@ void CFormulaWeighDialog::OnOK()
 		CString headerArray[8] ={"生产批号:","配方名称:","称量重量:","用户姓名:","称重日期:","称重时间:","检验:","检验日期:"};
 		std::vector<CString> headerList(headerArray, headerArray + 8);
 		
-		HelperFunctions::printVector(CString("山西东睦华晟混合粉"),headerList, printVector);
+		utils::printVector(CString("山西东睦华晟混合粉"),headerList, printVector);
 
 		printVector.clear();
 	}
@@ -535,7 +535,6 @@ void CFormulaWeighDialog::refreshWeighedFlag()
 		weighedFlagVector[i]->GetParent()->InvalidateRect(&rect, TRUE);
 	}
 }
-
 
 //检查是否称重完毕
 bool CFormulaWeighDialog::isWeighFinished()
@@ -655,4 +654,3 @@ void CFormulaWeighDialog::OnBnClickedOk()
 {
 	OnOK();
 }
-

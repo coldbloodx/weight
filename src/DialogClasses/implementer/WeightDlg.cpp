@@ -184,7 +184,7 @@ BOOL CWeightDlg::OnInitDialog()
 
 	uiutils::setdlgsize(this, false);   
 
-	HelperFunctions::showStatus(m_StatusStatic);
+	utils::showStatus(m_StatusStatic);
 	SetTimer(1000, 1000, NULL);
  
 	return TRUE; 
@@ -371,7 +371,7 @@ void CWeightDlg::OnFetchstuffButton()
 void CWeightDlg::OnTimer(UINT nIDEvent) 
 {
 	// TODO: Add your message handler code here and/or call default
-	HelperFunctions::showStatus(m_StatusStatic); 
+	utils::showStatus(m_StatusStatic); 
 	CDialog::OnTimer(nIDEvent);
 }
 

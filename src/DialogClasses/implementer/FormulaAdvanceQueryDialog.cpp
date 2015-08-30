@@ -209,7 +209,7 @@ void CFormulaAdvanceQueryDialog::OnOK()
 	if (!amountKeywordFirst.IsEmpty())
 	{
 		double firstAmount, secondAmount;
-		if (HelperFunctions::isDouble(&m_AmountFirstEdit))
+		if (utils::isDouble(&m_AmountFirstEdit))
 		{
 			firstAmount = atof(amountKeywordFirst.GetBuffer(0));
 		}
@@ -237,7 +237,7 @@ void CFormulaAdvanceQueryDialog::OnOK()
 		}
 		if (amountIndex == "½éÓÚ")
 		{
-			if (!amountKeywordSecond.IsEmpty() && HelperFunctions::isDouble(&m_AmountSecondEdit))
+			if (!amountKeywordSecond.IsEmpty() && utils::isDouble(&m_AmountSecondEdit))
 			{
 				secondAmount = atof(amountKeywordSecond.GetBuffer(0));
 			}
@@ -257,7 +257,7 @@ void CFormulaAdvanceQueryDialog::OnOK()
 		}
 		if (amountIndex == "Á½¶Ë")
 		{
-			if (!amountKeywordSecond.IsEmpty() && HelperFunctions::isDouble(&m_AmountSecondEdit))
+			if (!amountKeywordSecond.IsEmpty() && utils::isDouble(&m_AmountSecondEdit))
 			{
 				secondAmount = atof(amountKeywordSecond.GetBuffer(0));
 			}

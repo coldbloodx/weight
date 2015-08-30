@@ -25,6 +25,9 @@ public:
 	std::vector<CEdit*>	  batchNumberEditVector;
 	std::vector<CEdit*>	  lineNumberEditVector;
 
+	std::vector<CString> dbmname;
+	std::vector<CString> dbmweigh;
+
 	std::vector<CStatic*> weighedFlagVector;
 	double totalWeigh;
 	//CStatic m_StatusStatic;

@@ -72,7 +72,7 @@ BOOL CFreeWeightDialog::OnInitDialog()
 	//init comPort;
 	int comRate;
 	comRate = atoi(SingletonHelper::getInstance()->getCom1BaudRate().GetBuffer(0));
-	com1 = HelperFunctions::initCom(SingletonHelper::getInstance()->com1,
+	com1 = utils::initCom(SingletonHelper::getInstance()->com1,
 		CString("COM1"),
 		comRate);
 
@@ -86,7 +86,7 @@ BOOL CFreeWeightDialog::OnInitDialog()
 		AfxMessageBox("com1初始化失败！请将此对话框关闭重试！");
 	}
 	comRate = atoi(SingletonHelper::getInstance()->getCom2BaudRate().GetBuffer(0));
-	com2 = HelperFunctions::initCom(SingletonHelper::getInstance()->com2,
+	com2 = utils::initCom(SingletonHelper::getInstance()->com2,
 		CString("COM2"),
 		comRate);
 	
@@ -128,12 +128,12 @@ void CFreeWeightDialog::OnTimer(UINT nIDEvent)
 	CString com1Result,com2Result;
 	if (com1 >= 0)
 	{
-		com1Result = HelperFunctions::readCom(SingletonHelper::getInstance()->com1);
+		com1Result = utils::readCom(SingletonHelper::getInstance()->com1);
 	}
 	
 	if (com2 >= 0)
 	{
-		com2Result = HelperFunctions::readCom(SingletonHelper::getInstance()->com2);
+		com2Result = utils::readCom(SingletonHelper::getInstance()->com2);
 	}
 	
 	
@@ -160,7 +160,7 @@ void CFreeWeightDialog::OnTimer(UINT nIDEvent)
 void CFreeWeightDialog::OnDestroy()
 {
 	CDialog::OnDestroy();
-	HelperFunctions::closeCom(SingletonHelper::getInstance()->com1);
-	HelperFunctions::closeCom(SingletonHelper::getInstance()->com2);
+	utils::closeCom(SingletonHelper::getInstance()->com1);
+	utils::closeCom(SingletonHelper::getInstance()->com2);
 	// TODO: Add your message handler code here
 }

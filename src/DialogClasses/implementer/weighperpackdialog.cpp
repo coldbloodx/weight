@@ -90,7 +90,7 @@ void CWeighPerPackDialog::OnOK()
 		AfxMessageBox("请输入皮重！");
 		return;
 	}
-	if (!HelperFunctions::isDouble(&m_GrossWeight))
+	if (!utils::isDouble(&m_GrossWeight))
 	{
 		AfxMessageBox("皮重输入有误，请重新输入！");
 		return;
@@ -104,7 +104,7 @@ void CWeighPerPackDialog::OnOK()
 
 	//处理分包相关问题
 	m_WeighPerPack.GetWindowText(weighPerPackCString);
-	if (!HelperFunctions::isDouble(&m_WeighPerPack))
+	if (!utils::isDouble(&m_WeighPerPack))
 	{
 		AfxMessageBox("包重输入错误，请重新输入");
 		return;
@@ -116,7 +116,7 @@ void CWeighPerPackDialog::OnOK()
 	{
 		formulaSepWeighDialog->bIsMultiPackFlag = FALSE;
 		formulaSepWeighDialog->m_IsMultiPackNeeded.SetWindowText("否");
-		formulaSepWeighDialog->m_WeighNeeded.SetWindowText(HelperFunctions::doubleToCString(
+		formulaSepWeighDialog->m_WeighNeeded.SetWindowText(utils::doubleToCString(
 			materialWeigh + atof(grossWeight.GetBuffer(0))));
 		formulaSepWeighDialog->dWeightNeeded = materialWeigh /*+ atof(grossWeight.GetBuffer(0))*/;
 		formulaSepWeighDialog->updateMultiTimes();
@@ -142,18 +142,18 @@ void CWeighPerPackDialog::OnOK()
 		double neededWeigh = rest * weighPerPack;
 		formulaSepWeighDialog->m_WeightPerPack.SetWindowText(weighPerPackCString+"Kg");
 		//更新包数
-		formulaSepWeighDialog->m_PackNeeded.SetWindowText(HelperFunctions::intToCString(packCount) +"包");
+		formulaSepWeighDialog->m_PackNeeded.SetWindowText(utils::intToCString(packCount) +"包");
 		formulaSepWeighDialog->iTotalPacks = packCount;
 
 		//更新已经称量过的重量
-		formulaSepWeighDialog->m_AlreadyWeighed.SetWindowText(HelperFunctions::doubleToCString(packCount * weighPerPack));
+		formulaSepWeighDialog->m_AlreadyWeighed.SetWindowText(utils::doubleToCString(packCount * weighPerPack));
 		formulaSepWeighDialog->dAlreadyWeighed = packCount * weighPerPack;
 		formulaSepWeighDialog->dWeightNeeded = formulaSepWeighDialog->dWeightNeeded - packCount * weighPerPack;
 		
 
 		//跟新
-		formulaSepWeighDialog->m_WeighNeeded.SetWindowText(HelperFunctions::doubleToCString(neededWeigh  + gross)+"Kg");
-		formulaSepWeighDialog->m_RestNeeded.SetWindowText(HelperFunctions::doubleToCString(neededWeigh) + "Kg");
+		formulaSepWeighDialog->m_WeighNeeded.SetWindowText(utils::doubleToCString(neededWeigh  + gross)+"Kg");
+		formulaSepWeighDialog->m_RestNeeded.SetWindowText(utils::doubleToCString(neededWeigh) + "Kg");
 		formulaSepWeighDialog->dRestWeight = neededWeigh;
 
 	}

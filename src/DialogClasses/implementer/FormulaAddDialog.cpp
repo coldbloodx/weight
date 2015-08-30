@@ -86,7 +86,7 @@ void CFormulaAddDialog::OnOK()
 		comboboxVector[i]->GetWindowText(materialName);
 		formulaMaterials += materialName + ",";
 		nameVector.push_back(materialName);
-		if (!HelperFunctions::isDouble(editVector[i]))
+		if (!utils::isDouble(editVector[i]))
 		{
 			AfxMessageBox("请检查材料百分比输入！");
 			return;

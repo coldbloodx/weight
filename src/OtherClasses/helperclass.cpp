@@ -284,7 +284,7 @@ void SingletonHelper::removeInstance()
 	
 }
 
-bool HelperFunctions::isDouble(CEdit* editControl)
+bool utils::isDouble(CEdit* editControl)
 {
 	int dotFlag=0;
 	CString str;
@@ -301,14 +301,13 @@ bool HelperFunctions::isDouble(CEdit* editControl)
 			|| (str[i] >= '0' && str[i] <= '9'))//所输入的数不是.0-9
 			)
 		{ 
-			//editControl->SetWindowText(""); 
 			return false;
 		} 
 	}
 	return true;
 }
 
-void HelperFunctions::ParseKeywords(const std::string& keyword,const std::string& separators, std::vector<std::string>& keywords)
+void utils::ParseKeywords(const std::string& keyword,const std::string& separators, std::vector<std::string>& keywords)
 {
 	char* temp = strdup(keyword.c_str());
 	
@@ -326,7 +325,7 @@ void HelperFunctions::ParseKeywords(const std::string& keyword,const std::string
 	return;
 }
 
-int HelperFunctions::initCom(HANDLE& com, CString port, int rate)
+int utils::initCom(HANDLE& com, CString port, int rate)
 {
 	com = CreateFile(port,
 		GENERIC_READ | GENERIC_WRITE,
@@ -370,12 +369,12 @@ int HelperFunctions::initCom(HANDLE& com, CString port, int rate)
 	return 0;
 }
 
-int HelperFunctions::closeCom(HANDLE &com)
+int utils::closeCom(HANDLE &com)
 {
 	return CloseHandle(com);
 }
 
-CString HelperFunctions::readCom(HANDLE comPort)
+CString utils::readCom(HANDLE comPort)
 {
 	char str[8];
 	memset(str, 0, 8);
@@ -403,7 +402,7 @@ CString HelperFunctions::readCom(HANDLE comPort)
 	return returnValue;
 }
 
-bool HelperFunctions::isBatchNumber(CEdit* editControl)
+bool utils::isBatchNumber(CEdit* editControl)
 {
 	int dotFlag=0;
 	CString str;
@@ -427,21 +426,21 @@ bool HelperFunctions::isBatchNumber(CEdit* editControl)
 	return true;
 }
 
-CString HelperFunctions::doubleToCString(double aDouble)
+CString utils::doubleToCString(double aDouble)
 {
 	CString temp;
 	temp.Format("%lf", aDouble);
 	return temp;
 }
 
-CString HelperFunctions::intToCString(int aInt)
+CString utils::intToCString(int aInt)
 {
 	CString temp;
 	temp.Format("%d", aInt);
 	return temp;
 }
 
-void HelperFunctions::showStatus(CStatic& statusStatic)
+void utils::showStatus(CStatic& statusStatic)
 {
 	CTime curTime;
 	curTime = CTime::GetCurrentTime();
@@ -455,27 +454,27 @@ void HelperFunctions::showStatus(CStatic& statusStatic)
 	statusStatic.GetParent()->InvalidateRect(&rect, TRUE);
 }
 
-void HelperFunctions::setButtonStyle(CButton& button, COLORREF bgColor, CFont* pFont, bool reDraw /* = TRUE  */, bool blFlat /* = FALSE */)
+void utils::setButtonStyle(CButton& button, COLORREF bgColor, CFont* pFont, bool reDraw /* = TRUE  */, bool blFlat /* = FALSE */)
 {
 	button.SetFont(pFont, reDraw);
 
 }
 
-CString HelperFunctions::getCurrentDate()
+CString utils::getCurrentDate()
 {
 	CTime curDate =  CTime::GetCurrentTime();
 	CString date = curDate.Format("%Y年%m月%d日");
 	return date;
 }
 
-CString HelperFunctions::getCurrentTime()
+CString utils::getCurrentTime()
 {
 	CTime curTime =  CTime::GetCurrentTime();
 	CString time = curTime.Format("%X");
 	return time;
 }
 
-void HelperFunctions::updateRecordValueVector(_RecordsetPtr& pRecordset, std::vector<CString>& valueList, std::vector<CString>& headerList)
+void utils::updateRecordValueVector(_RecordsetPtr& pRecordset, std::vector<CString>& valueList, std::vector<CString>& headerList)
 {
 	int itemIndex = 0;
 	int subItemIndex = 0;
@@ -509,7 +508,7 @@ void HelperFunctions::updateRecordValueVector(_RecordsetPtr& pRecordset, std::ve
 	return;
 }
 
-void HelperFunctions::printLabel( CString name, CString weigh, CString lineNumber )
+void utils::printLabel( CString name, CString weigh, CString lineNumber )
 {
 	CPrintDialog printDialog(FALSE);
 
@@ -635,7 +634,7 @@ void HelperFunctions::printLabel( CString name, CString weigh, CString lineNumbe
 
 }
 
-void HelperFunctions::printVector(CString tilte, std::vector<CString>& headerList, std::vector<CString>& valueList)
+void utils::printVector(CString tilte, std::vector<CString>& headerList, std::vector<CString>& valueList)
 {
 	CPrintDialog printDialog(FALSE);
 
@@ -742,7 +741,7 @@ void HelperFunctions::printVector(CString tilte, std::vector<CString>& headerLis
 	delete footerFont;
 }
 
-unsigned long HelperFunctions::time2gmt(CTime& timeparam)
+unsigned long utils::time2gmt(CTime& timeparam)
 {
 	tm mytm;
 	timeparam.GetGmtTm(&mytm);

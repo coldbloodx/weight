@@ -50,10 +50,7 @@ protected:
 	virtual BOOL OnInitDialog();
 	afx_msg void OnMaterialadd();
 	afx_msg void OnMaterialdel();
-	afx_msg void OnTimer(UINT nIDEvent);
-	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
-	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 public:
 	CButton m_BatchNumberChange;
 	afx_msg void OnBnClickedBatchnumberchange();

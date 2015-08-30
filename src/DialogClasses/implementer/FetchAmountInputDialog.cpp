@@ -86,7 +86,7 @@ END_MESSAGE_MAP()
 void CFetchAmountInputDialog::OnOK() 
 {
 	// TODO: Add extra validation here
-	if (!HelperFunctions::isDouble(&m_FetchAmount))
+	if (!utils::isDouble(&m_FetchAmount))
 	{
 		AfxMessageBox("请确认输入！");
 		return;
@@ -158,7 +158,7 @@ void CFetchAmountInputDialog::OnOK()
 	}
 
 	//更新formula表
-	CString newAmount(HelperFunctions::doubleToCString(dFormulaAmount - dFetchAmount));
+	CString newAmount(utils::doubleToCString(dFormulaAmount - dFetchAmount));
 	
 	
 	sqlState = "UPDATE FORMULAS SET TOTAL = " + newAmount + " WHERE ID = " + SingletonHelper::getInstance()->getFormulaID();
@@ -263,7 +263,7 @@ void CFetchAmountInputDialog::OnOK()
 
 		CString headerArray[8] = {"生产批号","配方名称","领取重量","混料人姓名","称重日期","称重时间","领取人姓名","领料日期"};;
 		std::vector<CString> headerList(headerArray, headerArray + 8);
-		HelperFunctions::printVector(CString("成品领取记录"), headerList, printVector);
+		utils::printVector(CString("成品领取记录"), headerList, printVector);
 		printVector.clear();
 	}
 
