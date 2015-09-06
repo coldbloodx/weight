@@ -606,7 +606,10 @@ void utils::printLabel( CString name, CString weigh, CString lineNumber )
 
 	//打印页脚
 	dc.SelectObject(footerFont);
-    dc.TextOut(50, 230, SingletonHelper::getInstance()->getpowered());
+    ConfParser parser("config.xml");
+    parser.load();
+    CString poweredstr = parser.getpowered().c_str();
+    dc.TextOut(50, 230, poweredstr);
 
 	//最后的横线
 	dc.MoveTo(50, 270);

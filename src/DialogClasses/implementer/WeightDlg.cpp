@@ -137,8 +137,6 @@ BOOL CWeightDlg::OnInitDialog()
 
 	SingletonHelper::getInstance()->setCom1BaudRate(parser.getcom1rate().c_str());
 	SingletonHelper::getInstance()->setCom2BaudRate(parser.getcom2rate().c_str());
-    SingletonHelper::getInstance()->settitle(parser.gettitle());
-    SingletonHelper::getInstance()->setpowered(parser.getpowered());
 	
 
 	//show login window

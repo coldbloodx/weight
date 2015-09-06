@@ -511,7 +511,10 @@ void CFormulaWeighDialog::OnOK()
 		CString headerArray[8] ={"生产批号:","配方名称:","称量重量:","用户姓名:","称重日期:","称重时间:","检验:","检验日期:"};
 		std::vector<CString> headerList(headerArray, headerArray + 8);
 		
-        utils::printVector(SingletonHelper::getInstance()->gettitle(), headerList, printVector);
+        ConfParser parser("config.xml");
+        parser.load();
+        CString title = parser.gettitle().c_str();
+        utils::printVector(title, headerList, printVector);
 
 		printVector.clear();
 	}
