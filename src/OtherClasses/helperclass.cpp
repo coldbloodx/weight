@@ -606,7 +606,7 @@ void utils::printLabel( CString name, CString weigh, CString lineNumber )
 
 	//打印页脚
 	dc.SelectObject(footerFont);
-	dc.TextOut(50, 230, CString("SHANXI TONGMUO HUASHENG POWDER METALLYRGY CO., LTM.  "));
+    dc.TextOut(50, 230, SingletonHelper::getInstance()->getpowered());
 
 	//最后的横线
 	dc.MoveTo(50, 270);
@@ -717,7 +717,7 @@ void utils::printVector(CString tilte, std::vector<CString>& headerList, std::ve
 	dc.TextOut(250, 0, tilte);
 
 	int startYpos = 50;
-	for (int i = 0; i < headerList.size(); ++i)
+	for (size_t i = 0; i < headerList.size(); ++i)
 	{
 		CString tempString = headerList[i] + CString("    ") + valueList[i];
 		dc.TextOut(80, startYpos, tempString);

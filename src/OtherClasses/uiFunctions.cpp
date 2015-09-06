@@ -9,7 +9,7 @@ void uiutils::updatelist(_RecordsetPtr& pRecordset, CListCtrl& listCtrl, CString
     {
         while(!pRecordset->adoEOF)
         {
-            for (size_t i = 0; i < headerlen; ++i )
+            for (int i = 0; i < headerlen; ++i )
             {
                 _variant_t vDataField = pRecordset->GetCollect(_variant_t(headerptr[i]));
                 CString dataField;
@@ -78,7 +78,7 @@ void uiutils::initlistheader(std::vector<CString>& headerList, CListCtrl& listCt
 
 void uiutils::initlistheader(CListCtrl& listCtrl, CString* strarray, int arraylen)
 {
-    for (size_t i = 0; i < arraylen; ++i)
+    for (int i = 0; i < arraylen; ++i)
     {
         listCtrl.InsertColumn(i, strarray[i], 0, 160);
     }

@@ -93,11 +93,13 @@ void COtherSettingsDialog::OnOK()
 	SingletonHelper::getInstance()->setCom1BaudRate(rate1);
 	SingletonHelper::getInstance()->setCom2BaudRate(rate2);
 	
-	PatternLoader patternLoader("config.xml");
-	patternLoader.loadPattern("ConfigPattern");
-	patternLoader.pattern.com1 = rate1.GetBuffer(0);
-	patternLoader.pattern.com2 = rate2.GetBuffer(0);
-	patternLoader.savePattern();
+	ConfParser parser("config.xml");
+	parser.load();
+
+    parser.setcom1rate(rate1.GetBuffer(0));
+    parser.setcom1rate(rate2.GetBuffer(0));
+
+	parser.save();
 
 	CDialog::OnOK();
 }

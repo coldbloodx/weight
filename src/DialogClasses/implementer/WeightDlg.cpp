@@ -132,11 +132,13 @@ BOOL CWeightDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// Set small icon
 		
 	//set com baud rate
-	PatternLoader patternLoader(std::string("config.xml"));
-	patternLoader.loadPattern("ConfigPattern");
+	ConfParser parser(std::string("config.xml"));
+	parser.load();
 
-	SingletonHelper::getInstance()->setCom1BaudRate(patternLoader.pattern.com1.c_str());
-	SingletonHelper::getInstance()->setCom2BaudRate(patternLoader.pattern.com2.c_str());
+	SingletonHelper::getInstance()->setCom1BaudRate(parser.getcom1rate().c_str());
+	SingletonHelper::getInstance()->setCom2BaudRate(parser.getcom2rate().c_str());
+    SingletonHelper::getInstance()->settitle(parser.gettitle());
+    SingletonHelper::getInstance()->setpowered(parser.getpowered());
 	
 
 	//show login window

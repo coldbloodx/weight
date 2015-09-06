@@ -21,6 +21,17 @@ private:
 	void* sepWeighWindowPtr;
 	int   intData;
 
+    CString title;
+    CString powered;
+
+public:
+    void settitle(std::string title){ title = title.c_str(); }
+    CString gettitle() {return this->title; }
+
+    void setpowered(std::string powered) { powered = powered.c_str(); }
+    CString getpowered() { return this->powered; }
+
+private:
 	//用户的标识，用户ID，和用户的姓名
 	CString userID;
 	CString userName;

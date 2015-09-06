@@ -511,7 +511,7 @@ void CFormulaWeighDialog::OnOK()
 		CString headerArray[8] ={"生产批号:","配方名称:","称量重量:","用户姓名:","称重日期:","称重时间:","检验:","检验日期:"};
 		std::vector<CString> headerList(headerArray, headerArray + 8);
 		
-		utils::printVector(CString("山西东睦华晟混合粉"),headerList, printVector);
+        utils::printVector(SingletonHelper::getInstance()->gettitle(), headerList, printVector);
 
 		printVector.clear();
 	}
