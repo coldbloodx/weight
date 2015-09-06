@@ -33,7 +33,7 @@ public:
 	CButton	m_ButtonComma;
 	CButton	m_ButonBack;
 	CEdit	passwordEdit;
-	CEdit	usernameEdit;
+	CEdit	useridEdit;
 	//}}AFX_DATA
 	int		tryTimes;
 	std::vector<CButton*> buttonVector;

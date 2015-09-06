@@ -53,7 +53,7 @@ void CLoginDialog::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_BUTTON_COMMA, m_ButtonComma);
 	DDX_Control(pDX, IDC_BUTTON_BACK, m_ButonBack);
 	DDX_Control(pDX, IDC_PASSWORD_EDIT, passwordEdit);
-	DDX_Control(pDX, IDC_USERNAME_EDIT, usernameEdit);
+	DDX_Control(pDX, IDC_USERNAME_EDIT, useridEdit);
 	//}}AFX_DATA_MAP
 }
 
@@ -91,7 +91,7 @@ void CLoginDialog::OnCancel()
 void CLoginDialog::OnOK() 
 {
 	// TODO: Add extra validation here
-	CString username;
+	CString userid;
 	CString password;
 	
 	if (tryTimes >= 2)
@@ -100,10 +100,10 @@ void CLoginDialog::OnOK()
 		SendMessage(WM_CLOSE);   
 	}
 	
-	usernameEdit.GetWindowText(username);
+	useridEdit.GetWindowText(userid);
 	passwordEdit.GetWindowText(password);
 	
-	if (username.IsEmpty() || password.IsEmpty())
+	if (userid.IsEmpty() || password.IsEmpty())
 	{
 		++tryTimes;
 		AfxMessageBox("用户编号，密码不能为空，请重新输入！");
@@ -111,7 +111,7 @@ void CLoginDialog::OnOK()
 	}
 
 	CString sql, dbuserid, dbusername, dbpassword, dbpermission;
-    sql.Format("select id, password, permission, name from  users where name = '%s'", username);
+    sql.Format("select id, password, permission, name from  users where id = '%s'", userid);
 
     _RecordsetPtr& m_pRecordset = SQLExecutor::getInstancePtr()->execquery(sql);
 
