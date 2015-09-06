@@ -111,7 +111,7 @@ void CLoginDialog::OnOK()
 	}
 
 	CString sql, dbuserid, dbusername, dbpassword, dbpermission;
-    sql.Format("select id, password, permission, name from  users where id = '%s'", userid);
+    sql.Format("select id, password, permission, name from  users where id = %s", userid);
 
     _RecordsetPtr& m_pRecordset = SQLExecutor::getInstancePtr()->execquery(sql);
 
