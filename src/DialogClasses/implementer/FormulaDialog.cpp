@@ -23,7 +23,7 @@ static char THIS_FILE[] = __FILE__;
 
 
 CFormulaDialog::CFormulaDialog(CWnd* pParent /*=NULL*/)
-: CDialog(CFormulaDialog::IDD, pParent),m_FormulaAdd(NULL),m_FormulaDel(NULL), m_FetchButton(NULL), m_From(0)
+: CDialog(CFormulaDialog::IDD, pParent),btnAdd(NULL),btnDel(NULL), btnFetch(NULL), m_From(0)
 {	
 }
 
@@ -56,20 +56,20 @@ int CFormulaDialog::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 CFormulaDialog::~CFormulaDialog()
 {
-	if (m_FormulaAdd)
+	if (btnAdd)
 	{
-		delete m_FormulaAdd;
-		m_FormulaAdd = NULL;
+		delete btnAdd;
+		btnAdd = NULL;
 	}
-	if (m_FormulaDel)
+	if (btnDel)
 	{
-		delete m_FormulaDel;
-		m_FormulaDel = NULL;
+		delete btnDel;
+		btnDel = NULL;
 	}
-	if (m_FetchButton)
+	if (btnFetch)
 	{
-		delete m_FetchButton;
-		m_FetchButton = NULL;
+		delete btnFetch;
+		btnFetch = NULL;
 	}
 }
 
@@ -87,22 +87,7 @@ void CFormulaDialog::initList()
 
 	CString sqlState = "SELECT * FROM FORMULAS";
 
-	//init recordset pointer
-	SQLExecutor::getInstanceRef().setSqlState(sqlState);
-
-	//exec SQL state
-	try
-	{
-		SQLExecutor::getInstanceRef().execSQL() ;
-	}
-	catch (_com_error& e)
-	{
-		AfxMessageBox(e.Description());
-		return;
-	}
-
-	//get the result data set
-	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
+	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().execquery(sqlState);
 
 	CString headerArray[4] = {"ID", "NAME", "MATERIAL", "TOTAL"};
 	std::vector<CString> headerList(headerArray, headerArray + 4);
@@ -115,36 +100,37 @@ BOOL CFormulaDialog::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 
-	//HelperFunctions::showStatus(m_StatusStatic);
-	SetTimer(1000,1000,NULL);
 	// TODO: Add extra initialization here
 	if (SingletonHelper::getInstance()->getUserRight() == "普通用户")
 	{
-		m_FormulaAdd->EnableWindow(FALSE);
-		m_FormulaDel->EnableWindow(FALSE);
+		btnAdd->EnableWindow(FALSE);
+		btnDel->EnableWindow(FALSE);
 	}
 	initListHeader();
 	initList();
 
-	m_FormulaAdd = new CButton;
-	m_FormulaDel	= new CButton;
-	m_FetchButton = new CButton;
+	btnAdd = new CButton;
+	btnDel	= new CButton;
+	btnFetch = new CButton;
 	
     uiutils::setdlgsize(this);
 
 	if (m_From == 1)
 	{
-		m_FormulaAdd->Create("增加配方", SW_HIDE, CRect(574 - 30, 650, 574 - 30 + 200, 650 + 60), this, 1000);
-		m_FormulaAdd->ShowWindow(SW_SHOW);
-		m_FormulaDel->Create("删除配方", SW_HIDE, CRect(322, 650, 322 + 200, 650 + 60), this, 2000);
-		m_FormulaDel->ShowWindow(SW_SHOW);
+		btnAdd->Create("增加配方", SW_HIDE, CRect(574 - 30, 650, 574 - 30 + 200, 650 + 60), this, 1000);
+		btnAdd->SetFont(SingletonHelper::getInstance()->defaultFont, TRUE);
+		btnAdd->ShowWindow(SW_SHOW);
+		btnDel->Create("删除配方", SW_HIDE, CRect(322, 650, 322 + 200, 650 + 60), this, 2000);
+		btnDel->SetFont(SingletonHelper::getInstance()->defaultFont, TRUE);
+		btnDel->ShowWindow(SW_SHOW);
 		
 	}
 
 	if (m_From == 0)
 	{
-		m_FetchButton->Create("成品领取", SW_HIDE, CRect(574 - 30, 650, 574 - 30 + 200, 650 + 60), this, 3000);
-		m_FetchButton->ShowWindow(SW_SHOW);
+		btnFetch->Create("成品领取", SW_HIDE, CRect(574 - 30, 650, 574 - 30 + 200, 650 + 60), this, 3000);
+		btnFetch->SetFont(SingletonHelper::getInstance()->defaultFont, TRUE);
+		btnFetch->ShowWindow(SW_SHOW);
 	}
 
 	uiutils::setdlgsize(this, &m_ButtonOK);

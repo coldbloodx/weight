@@ -25,9 +25,6 @@ static char THIS_FILE[] = __FILE__;
 CFormulaAddDialog::CFormulaAddDialog(CWnd* pParent /*=NULL*/)
 : CDialog(CFormulaAddDialog::IDD, pParent)
 {
-	//{{AFX_DATA_INIT(CFormulaAddDialog)
-	// NOTE: the ClassWizard will add member initialization here
-	//}}AFX_DATA_INIT
 }
 
 
@@ -42,11 +39,7 @@ void CFormulaAddDialog::DoDataExchange(CDataExchange* pDX)
 
 
 BEGIN_MESSAGE_MAP(CFormulaAddDialog, CDialog)
-//{{AFX_MSG_MAP(CFormulaAddDialog)
-	ON_WM_TIMER()
-	//}}AFX_MSG_MAP
 	ON_BN_CLICKED(IDOK, &CFormulaAddDialog::OnBnClickedOk)
-	ON_WM_CTLCOLOR()
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -175,17 +168,9 @@ void CFormulaAddDialog::OnOK()
 BOOL CFormulaAddDialog::OnInitDialog() 
 {
 	CDialog::OnInitDialog();
-	//HelperFunctions::showStatus(m_StatusStatic);
-	SetTimer(1000,1000,NULL);
-	
 
+    uiutils::setdlgsize(this, &m_ButtonCancel, &m_ButtonOK);
 
-    uiutils::setdlgsize(this);
-
-
-
-
-	
 	queryMaterials();
 	
 	int mCount = this->materialCount;
@@ -222,26 +207,21 @@ BOOL CFormulaAddDialog::OnInitDialog()
 		
 		CComboBox* testCombox = new CComboBox;
 		testCombox->Create(CBS_DROPDOWNLIST|WS_VISIBLE |WS_VSCROLL ,
-			CRect(comboLeft,comboTop,comboLeft + comboWidth,comboBottom), 
-			this, 
-			comboboxID++);
+			CRect(comboLeft,comboTop,comboLeft + comboWidth,comboBottom),  this, comboboxID++);
 		
 		for (size_t j = 0; j < materialVector.size(); ++j)
 		{
 			testCombox->AddString(materialVector[j]);
 		}
+
+		testCombox->SetFont(SingletonHelper::getInstance()->defaultFont, TRUE);
 		testCombox->SetCurSel(0);
 		testCombox->ShowWindow(SW_SHOW);
 		comboboxVector.push_back(testCombox);
 		
 		CEdit* testEdit = new CEdit;
-		testEdit->CreateEx(WS_EX_CLIENTEDGE,   
-			"Edit",   
-			"",   
-			WS_CHILD|WS_VISIBLE|ES_LEFT,   
-			CRect(editLeft,editTop,editLeft + editWidth,editTop + editHeigh),   
-			this,   
-			editID);
+		testEdit->CreateEx(WS_EX_CLIENTEDGE, "Edit", "", WS_CHILD|WS_VISIBLE|ES_LEFT,   
+			CRect(editLeft,editTop,editLeft + editWidth,editTop + editHeigh), this, editID);
 		testEdit->ShowWindow(SW_SHOW);
 		editVector.push_back(testEdit);
 
@@ -276,21 +256,8 @@ CFormulaAddDialog::~CFormulaAddDialog()
 
 void CFormulaAddDialog::queryMaterials()
 {
-	SQLExecutor::getInstanceRef().setSqlState(CString("SELECT NAME FROM MATERIALS"));
-
-	//exec SQL state
-	try
-	{
-		SQLExecutor::getInstanceRef().execSQL() ;
-	}
-	catch (_com_error& e)
-	{
-		AfxMessageBox(e.Description());
-		return;
-	}
-
 	//get the result data set
-	_RecordsetPtr& recordSetPtr = SQLExecutor::getInstanceRef().getRecordPtr();
+	_RecordsetPtr& recordSetPtr = SQLExecutor::getInstanceRef().execquery("select name from materials");
 
 	try
 	{
@@ -316,33 +283,8 @@ void CFormulaAddDialog::queryMaterials()
 	}
 }
 
-void CFormulaAddDialog::OnTimer(UINT nIDEvent) 
-{
-	// TODO: Add your message handler code here and/or call default
-	//HelperFunctions::showStatus(m_StatusStatic);
-	CDialog::OnTimer(nIDEvent);
-}
-
 void CFormulaAddDialog::OnBnClickedOk()
 {
 	// TODO: Add your control notification handler code here
 	OnOK();
-}
-
-HBRUSH CFormulaAddDialog::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
-{
-	HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
-
-	// TODO:  Change any attributes of the DC here
-	if   (pWnd == this)   
-	{   
-		return m_brBk;   
-	}   
-	if   (nCtlColor   ==   CTLCOLOR_STATIC)   
-	{     
-		pDC->SetBkMode(TRANSPARENT);	//Í¸Ã÷   
-		return (HBRUSH)::GetStockObject(HOLLOW_BRUSH);   
-	}   
-	// TODO:  Return a different brush if the default is not desired
-	return hbr;
 }

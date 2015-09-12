@@ -189,10 +189,8 @@ BOOL CFormulaWeighDialog::OnInitDialog()
 		composition newComposition = *(sPointer->compositions[j]);
 
 		materialNameStatic->Create(newComposition.material.c_str(),
-			WS_VISIBLE | ES_CENTER,
-			rect,
-			this,
-			materialNameStaticID++);
+			WS_VISIBLE | ES_CENTER, rect, this, materialNameStaticID++);
+		materialNameStatic->SetFont(SingletonHelper::getInstance()->defaultFont, TRUE);
 		materialNameStatic->ShowWindow(SW_SHOW);
 		materialNameVector.push_back(materialNameStatic);
 		
@@ -207,12 +205,9 @@ BOOL CFormulaWeighDialog::OnInitDialog()
 		materialWeighStatic = new CStatic;
 		CString test1 = utils::doubleToCString(newComposition.percentage * totalWeigh / 100);
 		test1 += "Kg";
-		materialWeighStatic->Create(test1,
-			WS_VISIBLE | ES_CENTER,
-			rect,
-			this,
-			materialWeighStaticID++);
-		//materialWeighStatic->SetFont(SingletonHelper::getInstance()->simSong20);
+		materialWeighStatic->Create(test1, WS_VISIBLE | ES_CENTER, rect,
+			this, materialWeighStaticID++);
+		materialWeighStatic->SetFont(SingletonHelper::getInstance()->defaultFont, TRUE);
 		materialWeighStatic->ShowWindow(SW_SHOW);
 		materialWeighVector.push_back(materialWeighStatic);
 
@@ -225,12 +220,9 @@ BOOL CFormulaWeighDialog::OnInitDialog()
 		//创建分次称量按钮
 		CRect buttonRect = rect;
 		sepWeightButton = new CButton;
-		sepWeightButton->Create("", 
-			BS_PUSHBUTTON | WS_VISIBLE | WS_CHILD | ES_CENTER, 
-			buttonRect, 
-			this,  
-			sepWeighButtonID++);
-
+		sepWeightButton->Create("",  BS_PUSHBUTTON | WS_VISIBLE | WS_CHILD | ES_CENTER, 
+			buttonRect,  this,  sepWeighButtonID++);
+		sepWeightButton->SetFont(SingletonHelper::getInstance()->defaultFont, TRUE);
         sepWeightButton->SetWindowText("称重");
 		sepWeightButton->ShowWindow(SW_SHOW);
 		sepWeightButtonVector.push_back(sepWeightButton);
@@ -255,6 +247,7 @@ BOOL CFormulaWeighDialog::OnInitDialog()
 			rect,
 			this,
 			materialWeighedFlagID++);
+		weighedFlagStatic->SetFont(SingletonHelper::getInstance()->defaultFont, TRUE);
 		weighedFlagStatic->ShowWindow(SW_SHOW);
 		weighedFlagVector.push_back(weighedFlagStatic);
 		
@@ -264,16 +257,9 @@ BOOL CFormulaWeighDialog::OnInitDialog()
 		
 		//创建批号输入editbox
 		CRect batchNumerRect(rect);
-		//batchNumerRect.right += 150;
 		batchNumberEdit = new CEdit;
-		batchNumberEdit->CreateEx(
-			WS_EX_CLIENTEDGE,
-			"Edit",
-			"",
-			WS_VISIBLE | WS_CHILD | ES_LEFT ,
-			batchNumerRect,
-			this,
-			batchNumberEditID++);
+		batchNumberEdit->CreateEx(WS_EX_CLIENTEDGE, "Edit", "", WS_VISIBLE | WS_CHILD | ES_LEFT ,
+			batchNumerRect, this, batchNumberEditID++);
 		batchNumberEdit->ShowWindow(SW_SHOW);
 		batchNumberEditVector.push_back(batchNumberEdit);
 		
@@ -284,14 +270,8 @@ BOOL CFormulaWeighDialog::OnInitDialog()
 		CRect lineNumerRect(rect);
 		//batchNumerRect.right += 150;
 		lineNumberEdit = new CEdit;
-		lineNumberEdit->CreateEx(
-			WS_EX_CLIENTEDGE,
-			"Edit",
-			"",
-			WS_VISIBLE | WS_CHILD | ES_LEFT ,
-			lineNumerRect,
-			this,
-			lineNumberEditID++);
+		lineNumberEdit->CreateEx(WS_EX_CLIENTEDGE, "Edit", "", WS_VISIBLE | WS_CHILD | ES_LEFT , 
+			lineNumerRect, this, lineNumberEditID++);
 		lineNumberEdit->ShowWindow(SW_SHOW);
 		lineNumberEditVector.push_back(lineNumberEdit);
 

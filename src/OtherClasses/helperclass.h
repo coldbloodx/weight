@@ -59,7 +59,7 @@ private:
 	
 	//make the constructor private, so others can't create instances.
 private:
-	SingletonHelper():ptrData(NULL), intData(0),simhei80(NULL),simSong20(NULL), simSong32(NULL), simHei40(NULL){}	
+	SingletonHelper():ptrData(NULL), intData(0),simhei80(NULL),defaultFont(NULL), simHei40(NULL){}	
 	SingletonHelper(const SingletonHelper& rval){}
 	~SingletonHelper();
 	
@@ -135,8 +135,7 @@ public:
 	
 	//global fonts
 	CFont*	    simhei80;
-	CFont*		simSong20;
-	CFont*		simSong32;
+	CFont*		defaultFont;
 	CFont*		simHei40;
 	
 	//global COLORREF

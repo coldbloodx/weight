@@ -222,15 +222,12 @@ void SingletonHelper::clearCompositions()
 void SingletonHelper::initFonts()
 {
 	simhei80 = new CFont;
-	simSong20 = new CFont;
-	simSong32 = new CFont;
+	defaultFont = new CFont;
 	simHei40 = new CFont;
 
 	simhei80->CreateFont(80, 0, 0, 0, 700, FALSE, FALSE, 0,  
 		DEFAULT_CHARSET, OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_MODERN, _T("黑体"));
-	simSong20->CreateFont(20, 0, 0, 0, 700, FALSE, FALSE, 0,  
-		DEFAULT_CHARSET, OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_MODERN, _T("宋体"));
-	simSong32->CreateFont(32, 0, 0, 0, 700, FALSE, FALSE, 0,  
+	defaultFont->CreateFont(16, 0, 0, 0, 100, FALSE, FALSE, 0,  
 		DEFAULT_CHARSET, OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_MODERN, _T("宋体"));
 	simHei40->CreateFont(55, 0, 0, 0, 700, FALSE, FALSE, 0,  
 		DEFAULT_CHARSET, OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_MODERN, _T("黑体"));
@@ -244,16 +241,11 @@ void SingletonHelper::deleteFonts()
 		simHei40 = NULL;
 	}
 
-	if (simSong32)
-	{
-		delete simSong32;
-		simSong32 = NULL;
-	}
 
-	if (simSong20)
+	if (defaultFont)
 	{
-		delete simSong20;
-		simSong20 = NULL;
+		delete defaultFont;
+		defaultFont = NULL;
 	}
 
 	if (simhei80)

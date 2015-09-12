@@ -25,9 +25,9 @@ public:
 	CListCtrl	m_FormulaListCtrl;
 	std::vector<CButton*> buttonVector;
 	CButton	m_ButtonOK;
-	CButton*	m_FetchButton;
-	CButton*	m_FormulaDel;
-	CButton*	m_FormulaAdd;
+	CButton*	btnFetch;
+	CButton*	btnDel;
+	CButton*	btnAdd;
 
 	unsigned char	m_From;
 public:

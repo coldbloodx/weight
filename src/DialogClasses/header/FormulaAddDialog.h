@@ -56,12 +56,10 @@ protected:
 	//{{AFX_MSG(CFormulaAddDialog)
 	virtual void OnOK();
 	virtual BOOL OnInitDialog();
-	afx_msg void OnTimer(UINT nIDEvent);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 public:
 	afx_msg void OnBnClickedOk();
-	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 };
 
 //{{AFX_INSERT_LOCATION}}
