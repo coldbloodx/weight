@@ -24,6 +24,8 @@ public:
 	std::vector<CButton*> sepWeightButtonVector;
 	std::vector<CEdit*>	  batchNumberEditVector;
 	std::vector<CEdit*>	  lineNumberEditVector;
+    std::vector<CButton*> skipCheckBoxVector;
+
 
 	std::vector<CString> dbmname;
 	std::vector<CString> dbmweigh;

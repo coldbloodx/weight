@@ -166,11 +166,12 @@ BOOL CWeightDlg::OnInitDialog()
     uiutils::init2rowbtns(buttonArray, 6);
 	this->UpdateData(TRUE);
 
-	uiutils::setdlgsize(this, false);   
+	uiutils::setdlgsize(this);
 
 	utils::showStatus(m_StatusStatic);
 	SetTimer(1000, 1000, NULL);
- 
+    SetWindowLong(this->GetSafeHwnd(),GWL_STYLE,
+        GetWindowLong(this->GetSafeHwnd(),GWL_STYLE)-WS_CAPTION);
 	return TRUE; 
 }
 

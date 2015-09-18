@@ -158,9 +158,10 @@ BOOL CFormulaWeighDialog::OnInitDialog()
 	int materialWeighedFlagID = 50000;
 	int batchNumberEditID = 60000;
 	int lineNumberEditID = 61000;
+    int skipCheckID = 62000;
 	
 	int controlTop = 150;
-	int controlLeft = 80;
+	int controlLeft = 30;
 	int controlWidth = 150;
 	int controlHeight = 25;
 	int rowSpace = 10;
@@ -181,6 +182,7 @@ BOOL CFormulaWeighDialog::OnInitDialog()
 		CStatic* weighedFlagStatic = NULL;
 		CEdit*   batchNumberEdit = NULL;
 		CEdit*   lineNumberEdit = NULL;
+        CButton* skipCheckBox = NULL;
 
 		//创建材料名字static控件
 		materialNameStatic = new CStatic;
@@ -268,12 +270,20 @@ BOOL CFormulaWeighDialog::OnInitDialog()
 		rect.right = rect.left + editWidth / 2 ;
 		
 		CRect lineNumerRect(rect);
-		//batchNumerRect.right += 150;
 		lineNumberEdit = new CEdit;
 		lineNumberEdit->CreateEx(WS_EX_CLIENTEDGE, "Edit", "", WS_VISIBLE | WS_CHILD | ES_LEFT , 
 			lineNumerRect, this, lineNumberEditID++);
 		lineNumberEdit->ShowWindow(SW_SHOW);
 		lineNumberEditVector.push_back(lineNumberEdit);
+
+        rect.left = rect.right + splitorWidth + 15;
+        rect.right = rect.left + 30 ;
+        CRect skipCheckRect(rect);
+
+        skipCheckBox = new CButton;
+        skipCheckBox->Create("",  WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_AUTOCHECKBOX, rect, this, skipCheckID++);
+        skipCheckBox->ShowWindow(SW_SHOW);
+        skipCheckBoxVector.push_back(skipCheckBox);
 
 		//调整两行之间的间隔
 		rect.left = controlLeft;
@@ -308,6 +318,8 @@ CFormulaWeighDialog::~CFormulaWeighDialog()
 			batchNumberEditVector[i] = NULL;
 			delete lineNumberEditVector[i];
 			lineNumberEditVector[i] = NULL;
+            delete skipCheckBoxVector[i];
+            skipCheckBoxVector[i] = NULL;
 		}
 	}
 }
@@ -315,7 +327,6 @@ CFormulaWeighDialog::~CFormulaWeighDialog()
 //用来相应动态创建的按钮的消息
 BOOL CFormulaWeighDialog::OnCommand(WPARAM wParam, LPARAM lParam) 
 {
-	// TODO: Add your specialized code here and/or call the base class
 	
 	//这里处理动态创建的按钮！
 	int constrolID =LOWORD(wParam);
@@ -347,14 +358,48 @@ BOOL CFormulaWeighDialog::OnCommand(WPARAM wParam, LPARAM lParam)
 		CFormulaSepWeighDialog formulaSepWeighDialog;
 		formulaSepWeighDialog.DoModal();
 	}
-	if (constrolID >= 60000 && constrolID < 61000)
+
+    if (constrolID >= 62000)
+    {
+        int nVectorIndex = constrolID - 62000;
+        CButton* pSkipButton = skipCheckBoxVector[nVectorIndex];
+        int isCheck = pSkipButton->GetCheck();
+
+        CString batchNumber, lineNumber;
+        batchNumberEditVector[nVectorIndex]->GetWindowText(batchNumber);
+        lineNumberEditVector[nVectorIndex]->GetWindowText(lineNumber);
+        if (batchNumber.IsEmpty() || lineNumber.IsEmpty())
+        {
+            AfxMessageBox("批号，或者条码为空！");
+            pSkipButton->SetCheck(FALSE);
+            return true;
+        }
+        if (lineNumber != lineNumberOld[nVectorIndex])
+        {
+            AfxMessageBox("条码不匹配，请检查条码输入");
+            pSkipButton->SetCheck(FALSE);
+            return true;
+        }
+        
+        if(isCheck)
+        {
+            //设置该材料为已经称重
+            SingletonHelper::getInstance()->compositions[nVectorIndex]->isWeigh  = TRUE;
+            sepWeightButtonVector[nVectorIndex]->SetWindowText("已称重");
+        }
+        else
+        {
+            //设置该材料没有称
+            SingletonHelper::getInstance()->compositions[nVectorIndex]->isWeigh  = FALSE;
+            sepWeightButtonVector[nVectorIndex]->SetWindowText("称重");
+        }
+    }
+
+	if (constrolID >= 60000 && constrolID < 62000)
 	{
 		m_FocusedID = constrolID;
 	}
-	if (constrolID >= 61000)
-	{
-		m_FocusedID = constrolID;
-	}
+
 	return CDialog::OnCommand(wParam, lParam);
 }
 
@@ -464,8 +509,6 @@ void CFormulaWeighDialog::OnOK()
 		dbfid, dbfname, dbuserid, dbusername,dbweigh, date, time, comment, fbatchnumber, gmttime);
 
 	SQLExecutor::getInstanceRef().execquery(sql);	
-
-	
 
 	for (size_t i = 0; i < dbmweigh.size(); ++i)
 	{
