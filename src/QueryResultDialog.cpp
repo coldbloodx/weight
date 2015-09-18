@@ -72,7 +72,7 @@ BOOL CQueryResultDialog::OnInitDialog()
 	case QTYPE_USERWORKOUT:
 		{
 			sql.Format("select username, formulaname, amount, odate, otime from weight where username = '%s' and %s", key, timesqlstr);
-			CString headerarray[5] = {"username", "formulaname", "amount", "odate", "otime"};
+			CString headerarray[5] = {"用户名", "配方名称", "数量", "日期", "时间"};
 			headervec.assign(headerarray, headerarray + 5);	
 		}
 
@@ -81,7 +81,7 @@ BOOL CQueryResultDialog::OnInitDialog()
 	case QTYPE_MATERIAMOUNT:
 		{
 			sql.Format("select  materialname, materialbatchnumber, formulaname, formula_batch_number, operatorname, amount, operate_date, operate_time from materialrecords where materialname = '%s' and %s", key, timesqlstr);
-            CString headerarray [8] = {"materialname", "materialbatchnumber", "formulaname", "formula_batch_number", "operatorname", "amount", "operate_date", "operate_time"};
+            CString headerarray [8] = {"材料名称", "材料批号", "配方名称", "配方批号", "用户名", "数量", "日期", "时间"};
             headervec.assign(headerarray, headerarray + 8);
 		}
 
@@ -90,7 +90,7 @@ BOOL CQueryResultDialog::OnInitDialog()
 	case QTYPE_PRODUCTAMOUNT:
 		{
 			sql.Format("select username, formulaname, amount, odate, otime from weight where formulaname = '%s' and %s", key, timesqlstr);
-			CString headerarray[5] = {"username", "formulaname", "amount", "odate", "otime"};
+			CString headerarray[5] = {"用户名", "配方名称", "数量", "日期", "时间"};
 			headervec.assign(headerarray, headerarray + 5);	
 		}
 		break;
