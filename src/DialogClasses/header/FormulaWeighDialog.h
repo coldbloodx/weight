@@ -93,6 +93,7 @@ public:
 	CStatic m_WeightStatic;
 	CButton m_PrintCheck;
 	CEdit editFBNumber;
+	CStatic skipStatic;
 };
 
 //{{AFX_INSERT_LOCATION}}

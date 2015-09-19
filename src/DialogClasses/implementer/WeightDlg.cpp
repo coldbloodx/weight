@@ -170,8 +170,6 @@ BOOL CWeightDlg::OnInitDialog()
 
 	utils::showStatus(m_StatusStatic);
 	SetTimer(1000, 1000, NULL);
-    SetWindowLong(this->GetSafeHwnd(),GWL_STYLE,
-        GetWindowLong(this->GetSafeHwnd(),GWL_STYLE)-WS_CAPTION);
 	return TRUE; 
 }
 

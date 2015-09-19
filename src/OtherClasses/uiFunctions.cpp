@@ -94,10 +94,6 @@ void uiutils::clearList(CListCtrl& listCtrl)
 
 void uiutils::setdlgsize(CDialog* pdlg, CButton* pback, CButton* pok, bool hasBorder)
 {
-
-
-
-
     pdlg->ModifyStyleEx(0, WS_EX_APPWINDOW | WS_EX_CONTROLPARENT, SWP_NOSIZE |SWP_NOMOVE | SWP_FRAMECHANGED);
     pdlg->ModifyStyle( WS_DLGFRAME | WS_THICKFRAME | WS_POPUP , SWP_NOSIZE | SWP_NOMOVE | SWP_FRAMECHANGED);  
 	if(pback)

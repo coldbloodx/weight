@@ -23,6 +23,8 @@ bool ConfParser::load()
     this->title = rootnode->FirstChildElement("title")->Attribute("str");
     this->powered = rootnode->FirstChildElement("powered")->Attribute("str");
 
+	this->skipenabled = rootnode->FirstChildElement("skip")->Attribute("enabled");
+	this->skiplabel = rootnode->FirstChildElement("skip")->Attribute("str");
 	return true;
 }
 

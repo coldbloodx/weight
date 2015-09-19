@@ -3,4 +3,5 @@
     <com2 rate="2400" />
     <title str="南京东睦华晟混合粉" />
     <powered str="SHANXI TONGMUO HUASHENG POWDER METALLYRGY CO., LTM.  " />
+    <skip enabled="1" str="跳过" />
 </Profile>

@@ -45,6 +45,7 @@ void CFormulaWeighDialog::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_WEIGHT_STATIC, m_WeightStatic);
 	DDX_Control(pDX, IDC_PRINTERCHECK, m_PrintCheck);
 	DDX_Control(pDX, IDC_EDIT1, editFBNumber);
+	DDX_Control(pDX, IDC_STATIC_SKIP, skipStatic);
 }
 
 
@@ -276,14 +277,24 @@ BOOL CFormulaWeighDialog::OnInitDialog()
 		lineNumberEdit->ShowWindow(SW_SHOW);
 		lineNumberEditVector.push_back(lineNumberEdit);
 
-        rect.left = rect.right + splitorWidth + 15;
-        rect.right = rect.left + 30 ;
-        CRect skipCheckRect(rect);
+		ConfParser parser("config.xml");
+		parser.load();
+		
+		std::string skipenabled = parser.getskipenabled();
+		std::string skiplabel = parser.getskiplabel();
 
-        skipCheckBox = new CButton;
-        skipCheckBox->Create("",  WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_AUTOCHECKBOX, rect, this, skipCheckID++);
-        skipCheckBox->ShowWindow(SW_SHOW);
-        skipCheckBoxVector.push_back(skipCheckBox);
+		if(skipenabled == "1")
+		{
+			skipStatic.SetWindowText(skiplabel.c_str());
+			rect.left = rect.right + splitorWidth + 15;
+			rect.right = rect.left + 30 ;
+			CRect skipCheckRect(rect);
+
+			skipCheckBox = new CButton;
+			skipCheckBox->Create("",  WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_AUTOCHECKBOX, rect, this, skipCheckID++);
+			skipCheckBox->ShowWindow(SW_SHOW);
+			skipCheckBoxVector.push_back(skipCheckBox);
+		}
 
 		//调整两行之间的间隔
 		rect.left = controlLeft;
@@ -318,9 +329,14 @@ CFormulaWeighDialog::~CFormulaWeighDialog()
 			batchNumberEditVector[i] = NULL;
 			delete lineNumberEditVector[i];
 			lineNumberEditVector[i] = NULL;
-            delete skipCheckBoxVector[i];
-            skipCheckBoxVector[i] = NULL;
+
 		}
+		for(size_t i = 0; i < skipCheckBoxVector.size(); ++i)
+		{
+			delete skipCheckBoxVector[i] ;
+			skipCheckBoxVector[i] = NULL;
+		}
+		
 	}
 }
 
