@@ -54,7 +54,6 @@ _RecordsetPtr& SQLExecutor::execquery(CString sqlstr)
 
 void SQLExecutor::execSQL()
 {
-
 	try
 	{
 		resultptr.CreateInstance("ADODB.Recordset");

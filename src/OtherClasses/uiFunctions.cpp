@@ -3,34 +3,34 @@
 
 void uiutils::updatelist(_RecordsetPtr& pRecordset, CListCtrl& listCtrl, CString* headerptr, int headerlen)
 {
-    int itemIndex = 0;
-    int subItemIndex = 0;
-    try
-    {
-        while(!pRecordset->adoEOF)
-        {
-            for (int i = 0; i < headerlen; ++i )
-            {
-                _variant_t vDataField = pRecordset->GetCollect(_variant_t(headerptr[i]));
-                CString dataField;
-                if (vDataField.vt != VT_NULL)
-                {
-                    dataField = (LPCTSTR)(_bstr_t)vDataField;
-                }
-                //insert or modify by the value of i
-                i == 0 ? (listCtrl.InsertItem(itemIndex,dataField)):(listCtrl.SetItemText(itemIndex, subItemIndex, dataField));
-                ++subItemIndex;
-            }
-            subItemIndex = 0;
-            ++itemIndex;
-            pRecordset->MoveNext();
-        }
-    }
-    catch (_com_error& e)
-    {
-        throw e;
-    }
-    return;
+	int itemIndex = 0;
+	int subItemIndex = 0;
+	try
+	{
+		while(!pRecordset->adoEOF)
+		{
+			for (int i = 0; i < headerlen; ++i )
+			{
+				_variant_t vDataField = pRecordset->GetCollect(_variant_t(headerptr[i]));
+				CString dataField;
+				if (vDataField.vt != VT_NULL)
+				{
+					dataField = (LPCTSTR)(_bstr_t)vDataField;
+				}
+				//insert or modify by the value of i
+				i == 0 ? (listCtrl.InsertItem(itemIndex,dataField)):(listCtrl.SetItemText(itemIndex, subItemIndex, dataField));
+				++subItemIndex;
+			}
+			subItemIndex = 0;
+			++itemIndex;
+			pRecordset->MoveNext();
+		}
+	}
+	catch (_com_error& e)
+	{
+		throw e;
+	}
+	return;
 }
 
 
@@ -78,11 +78,11 @@ void uiutils::initlistheader(std::vector<CString>& headerList, CListCtrl& listCt
 
 void uiutils::initlistheader(CListCtrl& listCtrl, CString* strarray, int arraylen)
 {
-    for (int i = 0; i < arraylen; ++i)
-    {
-        listCtrl.InsertColumn(i, strarray[i], 0, 160);
-    }
-    return;
+	for (int i = 0; i < arraylen; ++i)
+	{
+		listCtrl.InsertColumn(i, strarray[i], 0, 160);
+	}
+	return;
 }
 
 
@@ -94,8 +94,8 @@ void uiutils::clearList(CListCtrl& listCtrl)
 
 void uiutils::setdlgsize(CDialog* pdlg, CButton* pback, CButton* pok, bool hasBorder)
 {
-    pdlg->ModifyStyleEx(0, WS_EX_APPWINDOW | WS_EX_CONTROLPARENT, SWP_NOSIZE |SWP_NOMOVE | SWP_FRAMECHANGED);
-    pdlg->ModifyStyle( WS_DLGFRAME | WS_THICKFRAME | WS_POPUP , SWP_NOSIZE | SWP_NOMOVE | SWP_FRAMECHANGED);  
+	pdlg->ModifyStyleEx(0, WS_EX_APPWINDOW | WS_EX_CONTROLPARENT, SWP_NOSIZE |SWP_NOMOVE | SWP_FRAMECHANGED);
+	pdlg->ModifyStyle( WS_DLGFRAME | WS_THICKFRAME | WS_POPUP , SWP_NOSIZE | SWP_NOMOVE | SWP_FRAMECHANGED);  
 	if(pback)
 	{
 		int bxstart = 768;
@@ -130,18 +130,18 @@ void uiutils::setdlgsize(CDialog* pdlg, CButton* pback, CButton* pok, bool hasBo
 
 void uiutils::drawDlgBg(CDialog* pDlg, int bmpId)
 {
-    CPaintDC dc(pDlg);
-    CRect rc;
-    pDlg->GetClientRect(&rc);
-    CDC dcMem;
-    dcMem.CreateCompatibleDC(&dc);
-    CBitmap bmpBackground;
-    bmpBackground.LoadBitmap(bmpId);
+	CPaintDC dc(pDlg);
+	CRect rc;
+	pDlg->GetClientRect(&rc);
+	CDC dcMem;
+	dcMem.CreateCompatibleDC(&dc);
+	CBitmap bmpBackground;
+	bmpBackground.LoadBitmap(bmpId);
 
-    BITMAP bitmap;
-    bmpBackground.GetBitmap(&bitmap);
-    CBitmap* pbmpPri = dcMem.SelectObject(&bmpBackground);
-    dc.StretchBlt(0,0,rc.Width(), rc.Height(), &dcMem,0,0,bitmap.bmWidth, bitmap.bmHeight, SRCCOPY);
+	BITMAP bitmap;
+	bmpBackground.GetBitmap(&bitmap);
+	CBitmap* pbmpPri = dcMem.SelectObject(&bmpBackground);
+	dc.StretchBlt(0,0,rc.Width(), rc.Height(), &dcMem,0,0,bitmap.bmWidth, bitmap.bmHeight, SRCCOPY);
 }
 
 void uiutils::init2rowbtns(CButton** btnarray, int arraysize)
@@ -173,22 +173,22 @@ void uiutils::init2rowbtns(CButton** btnarray, int arraysize)
 
 void uiutils::fillcombo( _RecordsetPtr& dbptr, CComboBox& rcombo, CString& key )
 {
-    try
-    {
-        while(!dbptr->adoEOF)
-        {
-                _variant_t vDataField = dbptr->GetCollect(_variant_t(key));
-                if (vDataField.vt != VT_NULL)
-                {
-                    CString dataField = (LPCTSTR)(_bstr_t)vDataField;
-                    rcombo.AddString(dataField);
-                }
+	try
+	{
+		while(!dbptr->adoEOF)
+		{
+			_variant_t vDataField = dbptr->GetCollect(_variant_t(key));
+			if (vDataField.vt != VT_NULL)
+			{
+				CString dataField = (LPCTSTR)(_bstr_t)vDataField;
+				rcombo.AddString(dataField);
+			}
 
-            dbptr->MoveNext();
-        }
-    }
-    catch (_com_error& e)
-    {
-        throw e;
-    }
+			dbptr->MoveNext();
+		}
+	}
+	catch (_com_error& e)
+	{
+		throw e;
+	}
 }

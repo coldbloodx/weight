@@ -466,6 +466,13 @@ CString utils::getCurrentTime()
 	return time;
 }
 
+CString utils::gettimestamp()
+{
+	CTime curtime = CTime::GetCurrentTime();
+	CString ret = curtime.Format("%Y%m%d%H%M");
+	return ret;
+}
+
 void utils::updateRecordValueVector(_RecordsetPtr& pRecordset, std::vector<CString>& valueList, std::vector<CString>& headerList)
 {
 	int itemIndex = 0;

@@ -1,6 +1,6 @@
 #pragma once
 #include "afxwin.h"
-
+#include <afxdb.h>
 
 // CTraceQueryDialog dialog
 
@@ -17,6 +17,11 @@ public:
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
+	CString getSheetSchemaStr(vector<CString> headers, CString sheetname);
+	CString joinvec( vector<CString> &vec, CString token );
+
+	void dbptr2sheet(_RecordsetPtr &dbptr, CDatabase& database, vector<CString>& aheaders, 
+		vector<CString> & xheaders, CString xtable);
     virtual BOOL OnInitDialog();
 	DECLARE_MESSAGE_MAP()
 public:
@@ -30,4 +35,6 @@ public:
     CButton btnTraceQuery;
     CButton btnOK;
     CButton btnCancel;
+	CButton btnExport;
+	afx_msg void OnBnClickedButton5();
 };
