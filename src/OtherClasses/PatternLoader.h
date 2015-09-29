@@ -23,12 +23,19 @@ public:
 	inline std::string getskipenabled() {return this->skipenabled;}
 	inline std::string getskiplabel() {return this->skiplabel; }
 
+	inline std::string getcom1gap() {return this->com1gap; }
+	inline std::string getcom2gap() {return this->com2gap; }
+	inline std::string getallgap() {return this->allgap; }
+
     std::string com1rate;
     std::string com2rate;
     std::string title;
     std::string powered;
 	std::string skipenabled;
 	std::string skiplabel;
+	std::string com1gap;
+	std::string com2gap;
+	std::string allgap;
 
 private:
 	std::string conf;

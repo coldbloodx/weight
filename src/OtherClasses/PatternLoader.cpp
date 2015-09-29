@@ -25,6 +25,10 @@ bool ConfParser::load()
 
 	this->skipenabled = rootnode->FirstChildElement("skip")->Attribute("enabled");
 	this->skiplabel = rootnode->FirstChildElement("skip")->Attribute("str");
+
+	this->com1gap = rootnode->FirstChildElement("threshold")->Attribute("com1");
+	this->com2gap = rootnode->FirstChildElement("threshold")->Attribute("com2");
+	this->allgap = rootnode->FirstChildElement("threshold")->Attribute("all");
 	return true;
 }
 
