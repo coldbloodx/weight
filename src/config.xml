@@ -4,4 +4,5 @@
     <title str="南京东睦华晟混合粉" />
     <powered str="SHANXI TONGMUO HUASHENG POWDER METALLYRGY CO., LTM.  " />
     <skip enabled="1" str="跳过" />
+    <threshold com1="0.5" com2="0.05" all="0.5" />
 </Profile>
