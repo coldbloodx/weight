@@ -33,7 +33,7 @@ public:
 	std::vector<CStatic*> weighedFlagVector;
 	double totalWeigh;
 	//CStatic m_StatusStatic;
-	int m_FocusedID;
+	int focusId;
 	std::vector<CString> lineNumberOld;
 	std::vector<CString> manufactures;
 

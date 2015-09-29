@@ -19,7 +19,7 @@ static char THIS_FILE[] = __FILE__;
 
 
 CFormulaWeighDialog::CFormulaWeighDialog(CWnd* pParent /*=NULL*/)
-: CDialog(CFormulaWeighDialog::IDD, pParent),totalWeigh(0.0),m_FocusedID(0)
+: CDialog(CFormulaWeighDialog::IDD, pParent),totalWeigh(0.0),focusId(0)
 {
 
 }
@@ -348,6 +348,12 @@ BOOL CFormulaWeighDialog::OnCommand(WPARAM wParam, LPARAM lParam)
 	int constrolID =LOWORD(wParam);
 	TRACE("controlID: %d \n", constrolID);
 	SingletonHelper::getInstance()->setPtrData((void*)this);
+
+	if (constrolID == IDC_EDIT1)
+	{
+		focusId = IDC_EDIT1;
+	}
+
 	if (constrolID >= 40000 && constrolID <50000)
 	{
 		if (SingletonHelper::getInstance()->compositions[constrolID - 40000]->isWeigh  == TRUE)
@@ -413,7 +419,7 @@ BOOL CFormulaWeighDialog::OnCommand(WPARAM wParam, LPARAM lParam)
 
 	if (constrolID >= 60000 && constrolID < 62000)
 	{
-		m_FocusedID = constrolID;
+		focusId = constrolID;
 	}
 
 	return CDialog::OnCommand(wParam, lParam);
@@ -473,8 +479,7 @@ void CFormulaWeighDialog::OnOK()
 	editFBNumber.GetWindowText(fbatchnumber);
 	if(fbatchnumber.IsEmpty())
 	{
-		AfxMessageBox("请输入成品批号!");
-		return;
+		fbatchnumber = utils::gettimestamp();
 	}
 	
 	//将称量的结果存入输入据库，两个部分，
@@ -610,84 +615,84 @@ void CFormulaWeighDialog::OnCancel()
 
 void CFormulaWeighDialog::OnButton1() 
 {
-	CWnd * pWnd = GetDlgItem(m_FocusedID);
+	CWnd * pWnd = GetDlgItem(focusId);
 	::SetFocus(pWnd->GetSafeHwnd());
 	keybd_event(VK_NUMPAD1, 0, 0, 0);
 }
 
 void CFormulaWeighDialog::OnButton2() 
 {
-	CWnd * pWnd = GetDlgItem(m_FocusedID);
+	CWnd * pWnd = GetDlgItem(focusId);
 	::SetFocus(pWnd->GetSafeHwnd());
 	keybd_event(VK_NUMPAD2, 0, 0, 0);
 }
 
 void CFormulaWeighDialog::OnButton3() 
 {
-	CWnd * pWnd = GetDlgItem(m_FocusedID);
+	CWnd * pWnd = GetDlgItem(focusId);
 	::SetFocus(pWnd->GetSafeHwnd());
 	keybd_event(VK_NUMPAD3, 0, 0, 0);
 }
 
 void CFormulaWeighDialog::OnButton4() 
 {
-	CWnd * pWnd = GetDlgItem(m_FocusedID);
+	CWnd * pWnd = GetDlgItem(focusId);
 	::SetFocus(pWnd->GetSafeHwnd());
 	keybd_event(VK_NUMPAD4, 0, 0, 0);
 }
 
 void CFormulaWeighDialog::OnButton5() 
 {
-	CWnd * pWnd = GetDlgItem(m_FocusedID);
+	CWnd * pWnd = GetDlgItem(focusId);
 	::SetFocus(pWnd->GetSafeHwnd());
 	keybd_event(VK_NUMPAD5, 0, 0, 0);
 }
 
 void CFormulaWeighDialog::OnButton6() 
 {
-	CWnd * pWnd = GetDlgItem(m_FocusedID);
+	CWnd * pWnd = GetDlgItem(focusId);
 	::SetFocus(pWnd->GetSafeHwnd());
 	keybd_event(VK_NUMPAD6, 0, 0, 0);
 }
 
 void CFormulaWeighDialog::OnButton7() 
 {
-	CWnd * pWnd = GetDlgItem(m_FocusedID);
+	CWnd * pWnd = GetDlgItem(focusId);
 	::SetFocus(pWnd->GetSafeHwnd());
 	keybd_event(VK_NUMPAD7, 0, 0, 0);
 }
 
 void CFormulaWeighDialog::OnButton8() 
 {
-	CWnd * pWnd = GetDlgItem(m_FocusedID);
+	CWnd * pWnd = GetDlgItem(focusId);
 	::SetFocus(pWnd->GetSafeHwnd());
 	keybd_event(VK_NUMPAD8, 0, 0, 0);
 }
 
 void CFormulaWeighDialog::OnButton9() 
 {
-	CWnd * pWnd = GetDlgItem(m_FocusedID);
+	CWnd * pWnd = GetDlgItem(focusId);
 	::SetFocus(pWnd->GetSafeHwnd());
 	keybd_event(VK_NUMPAD9, 0, 0, 0);
 }
 
 void CFormulaWeighDialog::OnButton0() 
 {
-	CWnd * pWnd = GetDlgItem(m_FocusedID);
+	CWnd * pWnd = GetDlgItem(focusId);
 	::SetFocus(pWnd->GetSafeHwnd());
 	keybd_event(VK_NUMPAD0, 0, 0, 0);
 }
 
 void CFormulaWeighDialog::OnButtonComma() 
 {
-	CWnd * pWnd = GetDlgItem(m_FocusedID);
+	CWnd * pWnd = GetDlgItem(focusId);
 	::SetFocus(pWnd->GetSafeHwnd());
 	keybd_event(188, 0, 0, 0);
 }
 
 void CFormulaWeighDialog::OnButtonBack() 
 {
-	CWnd * pWnd = GetDlgItem(m_FocusedID);
+	CWnd * pWnd = GetDlgItem(focusId);
 	::SetFocus(pWnd->GetSafeHwnd());
 	keybd_event(VK_BACK, 0, 0, 0);
 }

@@ -96,7 +96,6 @@ protected:
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 public:
-	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 	afx_msg void OnBnClickedOk();
 	afx_msg void OnBnClickedPributton();
 	afx_msg void OnBnClickedSecbutton();
