@@ -63,8 +63,6 @@ BOOL CWeightApp::InitInstance()
 	_Module.RegisterClassObjects(CLSCTX_LOCAL_SERVER, 
 		REGCLS_MULTIPLEUSE);
 
-
-
 	//Active initialize the singleton 
 	SingletonHelper::getInstance()->initFonts();
 	//CNavigatorPanel::getNavigatorPanelPtr();
@@ -72,22 +70,13 @@ BOOL CWeightApp::InitInstance()
 	{
 		DBConnector::getInstanceRef().openDatabaseConnection();
 	}
-	catch(_com_error& e)
+	catch(_com_error)
 	{
-		//to do 
-		//add the except into log
-		e;
 		AfxMessageBox("数据库连接出错，程序将退出！");
 		return TRUE;
 	}
 	
-	// Standard initialization
-	// If you are not using these features and wish to reduce the size
-	//  of your final executable, you should remove from the following
-	//  the specific initialization routines you do not need.
-
 	// 初始化SkinMagic库
-
 	VERIFY(InitSkinMagicLib(AfxGetInstanceHandle(), "MonitorDir", NULL, NULL));
 
 	// 从资源中加载皮肤文件。也可以用代码“LoadSkinFile("corona.smf")”直接从文件中加载
@@ -95,10 +84,8 @@ BOOL CWeightApp::InitInstance()
 	//if(LoadSkinFromResource(AfxGetInstanceHandle(), (LPCTSTR)IDR_SKINMAGIC1, "SKINMAGIC"))
     if(LoadSkinFile("skins\\AlphaOS.smf"))
 	{
-
 		// 设置对话框默认皮肤
 		SetDialogSkin("Dialog");
-
 	}
 
 
@@ -110,20 +97,7 @@ BOOL CWeightApp::InitInstance()
 	CWeightDlg dlg;
 	m_pMainWnd = &dlg;
 	int nResponse = dlg.DoModal();
-	if (nResponse == IDOK)
-	{
-		// TODO: Place code here to handle when the dialog is
-		//  dismissed with OK
-	}
-	else if (nResponse == IDCANCEL)
-	{
-		// TODO: Place code here to handle when the dialog is
-		//  dismissed with Cancel
 
-	}
-
-	// Since the dialog has been closed, return FALSE so that we exit the
-	//  application, rather than start the application's message pump.
 	return FALSE;
 }
 
@@ -169,16 +143,12 @@ CWeightApp::~CWeightApp()
 {
 	//do some cleaning job...
 	SingletonHelper::removeInstance();
-	//CNavigatorPanel::removeInstance();
-	//handle exception when close recordset
 	try
 	{
 		SQLExecutor::getInstanceRef().closeRecordSet();
 	}
 	catch (_com_error& e)
 	{
-		//to do 
-		//add the except into log
 		e;
 	}
 
@@ -189,13 +159,8 @@ CWeightApp::~CWeightApp()
 	}
 	catch (_com_error& e)
 	{
-		//to do 
-		//add the except into log
 		e;
 	}
-
-
-
 
 	DBConnector::RemoveInstance();
 	SQLExecutor::RemoveInstance();
@@ -204,18 +169,9 @@ CWeightApp::~CWeightApp()
 		_Module.RevokeClassObjects();
 		_Module.Term();
 	}
-
-	// TODO: Add your specialized code here and/or call the base class
-
-
 	//===SkinMagic===
-
-
 	// 释放SkinMagic库申请的内存
-
 	ExitSkinMagicLib();
-
-
 	//===SkinMagic===
 }
 
