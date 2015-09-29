@@ -8,6 +8,7 @@
 #include "FormulaWeighDialog.h"
 #include "WeighPerPackDialog.h"
 #include "uifunctions.h"
+#include <sstream>
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
@@ -41,7 +42,6 @@ CFormulaSepWeighDialog::~CFormulaSepWeighDialog()
 void CFormulaSepWeighDialog::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CFormulaSepWeighDialog)
 	DDX_Control(pDX, IDC_DIVIDE_BUTTON, m_ButtonDivide);
 	DDX_Control(pDX, IDOK, m_ButtonOK);
 	DDX_Control(pDX, IDC_WEIGH2_STATIC, m_Com2Value);
@@ -91,11 +91,7 @@ void CFormulaSepWeighDialog::OnOK()
 BOOL CFormulaSepWeighDialog::OnInitDialog() 
 {
 	CDialog::OnInitDialog();
-
-	// TODO: Add extra initialization here
-
-    
-
+  
 	//set reader timer;
 	SetTimer(1,1000,NULL);
 
@@ -145,7 +141,7 @@ BOOL CFormulaSepWeighDialog::OnInitDialog()
 	com1 = utils::initCom(SingletonHelper::getInstance()->com1,
 		CString("COM1"),
 		atoi(SingletonHelper::getInstance()->getCom1BaudRate().GetBuffer(0)));
-	if (com1 < 0)
+	if (com1 < 0 || utils::isready())
 	{
 		AfxMessageBox("com1初始化失败，请确认称的连接情况，然后关闭对话框重试！");
 	}
@@ -153,7 +149,7 @@ BOOL CFormulaSepWeighDialog::OnInitDialog()
 	com2 = utils::initCom(SingletonHelper::getInstance()->com2,
 		CString("COM2"),
 		atoi(SingletonHelper::getInstance()->getCom2BaudRate().GetBuffer(0)));
-	if (com2 < 0)
+	if (com2 < 0 || utils::isready())
 	{
 		AfxMessageBox("com2初始化失败，请确认称的连接情况，然后关闭对话框重试！");
 	}
@@ -220,29 +216,23 @@ void CFormulaSepWeighDialog::OnDivideButton()
 	weighPerPackDialog.DoModal();
 }
 
-HBRUSH CFormulaSepWeighDialog::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
-{
-	HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
-
-	// TODO:  Change any attributes of the DC here
-	if   (pWnd == this)   
-	{   
-		return m_brBk;   
-	}   
-	if   (nCtlColor   ==   CTLCOLOR_STATIC)   
-	{     
-		pDC->SetBkMode(TRANSPARENT);	//透明   
-		return (HBRUSH)::GetStockObject(HOLLOW_BRUSH);   
-	}   
-	// TODO:  Return a different brush if the default is not desired
-	return hbr;
-}
 
 void CFormulaSepWeighDialog::OnBnClickedOk()
 {
-	// TODO: Add your control notification handler code here
+
+
 	//总的称重误差限制，0.5公斤
 	double threshold = 0.5;
+
+	ConfParser parser("config.xml");
+	parser.load();
+	std::string sgap = parser.getallgap();
+	if(!sgap.empty())
+	{
+		std::stringstream ss(sgap);
+		ss >> threshold;
+	}
+
 
 	if (dWeightNeeded > threshold || dWeightNeeded < -1.0 * threshold)
 	{
@@ -271,7 +261,7 @@ void CFormulaSepWeighDialog::OnBnClickedOk()
 
 void CFormulaSepWeighDialog::OnBnClickedPributton()
 {
-	// TODO: Add your control notification handler code here
+
 	if (dPackWeight <=0.0)
 	{
 		AfxMessageBox("皮重输入有误，请输入皮重");
@@ -288,8 +278,17 @@ void CFormulaSepWeighDialog::OnBnClickedPributton()
 
 	double dPriIndicatorWeigh = atof(priWeigh.GetBuffer(0));
 	
-	//大称误差
 	double priThreshold = 0.5;
+	//大称误差
+	ConfParser parser("config.xml");
+	parser.load();
+	std::string sgap = parser.getcom1gap();
+	if(!sgap.empty())
+	{
+		std::stringstream ss(sgap);
+		ss >> priThreshold;
+	}
+
 	double priNeededWeigh = (dAlreadyWeighed + dPriIndicatorWeigh - dPackWeight) - dMaterialWeight;
 	//大称称量误差半公斤
 	if ( priNeededWeigh <= priThreshold || priNeededWeigh <= -1.0 * priThreshold)
@@ -310,7 +309,6 @@ void CFormulaSepWeighDialog::OnBnClickedPributton()
 
 void CFormulaSepWeighDialog::OnBnClickedSecbutton()
 {
-	// TODO: Add your control notification handler code here
 	if (dPackWeight <=0.0)
 	{
 		AfxMessageBox("皮重输入有误，请输入皮重");
@@ -328,6 +326,16 @@ void CFormulaSepWeighDialog::OnBnClickedSecbutton()
 
 	//小称称量误差
 	double secThreshold = 0.05;
+
+	ConfParser parser("config.xml");
+	parser.load();
+	std::string sgap = parser.getcom2gap();
+	if(!sgap.empty())
+	{
+		std::stringstream ss(sgap);
+		ss >> secThreshold;
+	}
+
 	double secNeededWeigh = (dAlreadyWeighed + dSecIndicatorWeigh - dPackWeight) - dMaterialWeight;
 
 	if (secNeededWeigh <= secThreshold || secNeededWeigh <= -1.0 * secThreshold)
@@ -374,5 +382,4 @@ void CFormulaSepWeighDialog::updateMultiTimes()
 	m_AlreadyWeighed.GetParent()->GetWindowRect(&rect);   
 	m_AlreadyWeighed.GetParent()->ScreenToClient(&rect);
 	m_AlreadyWeighed.GetParent()->InvalidateRect(&rect, TRUE);
-
 }
