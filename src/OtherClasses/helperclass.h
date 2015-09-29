@@ -186,6 +186,7 @@ namespace utils
 	
 
 	unsigned long time2gmt(CTime& timeparam);
+	bool isready();
 
 };
 #endif

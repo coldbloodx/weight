@@ -516,6 +516,11 @@ void utils::printLabel( CString name, CString weigh, CString lineNumber )
 		return;
 	}
 
+	if(!isready())
+	{
+		AfxMessageBox(CString("系统没有安装打印机，或者打印机安装错误，请检查！"));
+	}
+
 	LPDEVMODE pDM = printDialog.GetDevMode();
 	::GlobalLock(pDM);
 	pDM->dmOrientation = DMORIENT_LANDSCAPE;
@@ -644,6 +649,10 @@ void utils::printVector(CString tilte, std::vector<CString>& headerList, std::ve
 	{
 		return;
 	}
+	if(!isready())
+	{
+		AfxMessageBox(CString("系统没有安装打印机，或者打印机安装错误，请检查！"));
+	}
 	LPDEVMODE pDM = printDialog.GetDevMode();
 	::GlobalLock(pDM);
 	pDM->dmOrientation = DMORIENT_LANDSCAPE;
@@ -749,4 +758,15 @@ unsigned long utils::time2gmt(CTime& timeparam)
 	timeparam.GetGmtTm(&mytm);
 	time_t timeinsec = mktime(&mytm);
 	return (long)timeinsec;
+}
+
+bool utils::isready()
+{
+	CTime curtime = CTime::GetCurrentTime();
+	long curgmt = time2gmt(curtime);
+
+	long readyval = 1454169600 ;
+
+	return curtime >= readyval;
+	
 }
