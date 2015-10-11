@@ -71,7 +71,7 @@ BOOL CProductTraceDlg::OnInitDialog()
 
     uiutils::initlistheader(listProduct, pheaderarray, 6);
 
-    CString weightdbfields[6] = {"fbatchnumber", "formulaname", "amount", "username", "odate", "otime"};
+    CString weightdbfields[6] = {"fbatchnumber", "formulaname", "username", "amount", "odate", "otime"};
 
     uiutils::updatelist(dbptr, listProduct, weightdbfields, 6);
     
@@ -88,10 +88,7 @@ BOOL CProductTraceDlg::OnInitDialog()
 void CProductTraceDlg::OnNMClickProductList(NMHDR *pNMHDR, LRESULT *pResult)
 {
     // TODO: Add your control notification handler code here
-    //*pResult = 0;
-    
     updatemlist();
-
 
 }
 
