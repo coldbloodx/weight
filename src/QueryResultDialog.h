@@ -32,4 +32,5 @@ protected:
 public:
     CListCtrl ctlResultList;
     CButton btnCancel;
+	CStatic sSum;
 };

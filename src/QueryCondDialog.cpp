@@ -25,14 +25,15 @@ CQueryCondDialog::~CQueryCondDialog(){}
 
 void CQueryCondDialog::DoDataExchange(CDataExchange* pDX)
 {
-    CDialog::DoDataExchange(pDX);
-    DDX_Control(pDX, IDOK, btnOK);
-    DDX_Control(pDX, IDCANCEL, btnCancel);
-    DDX_Control(pDX, IDC_QUERY_LABEL, lbQueryLabel);
-    DDX_Control(pDX, IDC_TIMESECTION_COMBO, cboTimeSetion);
-    DDX_Control(pDX, IDC_DATE_START, dateStart);
-    DDX_Control(pDX, IDC_DATE_END, dateEnd);
-    DDX_Control(pDX, IDC_QUERY_ITEM, cboQueryItem);
+	CDialog::DoDataExchange(pDX);
+	DDX_Control(pDX, IDOK, btnOK);
+	DDX_Control(pDX, IDCANCEL, btnCancel);
+	DDX_Control(pDX, IDC_QUERY_LABEL, lbQueryLabel);
+	DDX_Control(pDX, IDC_TIMESECTION_COMBO, cboTimeSetion);
+	DDX_Control(pDX, IDC_DATE_START, dateStart);
+	DDX_Control(pDX, IDC_DATE_END, dateEnd);
+	DDX_Control(pDX, IDC_QUERY_ITEM, cboQueryItem);
+	DDX_Control(pDX, IDC_STATIC_CAUTION, sCaution);
 }
 
 BOOL CQueryCondDialog::OnInitDialog()
@@ -48,16 +49,19 @@ BOOL CQueryCondDialog::OnInitDialog()
     case QTYPE_USERWORKOUT:
         this->SetWindowText("工作量查询");
         lbQueryLabel.SetWindowText("员工姓名:");
+		sCaution.SetWindowText("员工姓名留空表示该员工在这段时间生产了多少成品");
 		sql = "select name from users;";
         break;
     case QTYPE_MATERIAMOUNT:
         this->SetWindowText("材料用量查询");
         lbQueryLabel.SetWindowText("材料名:");
+		sCaution.SetWindowText("材料名留空表示这段时间该材料的用量");
 		sql = "select name from materials;";
         break;
     case QTYPE_PRODUCTAMOUNT:
         this->SetWindowText("成品总量查询");
         lbQueryLabel.SetWindowText("配方名称：");
+		sCaution.SetWindowText("成品名称留空表示这段时间成品的产量");
 		sql = "select name from formulas;";
         break;
 
@@ -72,7 +76,10 @@ BOOL CQueryCondDialog::OnInitDialog()
 
     _RecordsetPtr dbptr = SQLExecutor::getInstancePtr()->execquery(sql);
 
+	cboQueryItem.Clear();
+	cboQueryItem.AddString("");
     uiutils::fillcombo(dbptr, cboQueryItem, CString("name"));
+	
 
     if(cboQueryItem.GetCount())
     {

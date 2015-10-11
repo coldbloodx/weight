@@ -173,6 +173,8 @@ namespace utils
 
 	CString doubleToCString(double aDouble);
 	CString intToCString(int aInt);
+	double cstr2double(CString cstr);
+
 	void showStatus(CStatic& statusStatic);
 	void setButtonStyle(CButton& button, COLORREF bgColor, CFont* pFont, bool reDraw = TRUE , bool blFlat = FALSE);
 
@@ -187,6 +189,7 @@ namespace utils
 
 	unsigned long time2gmt(CTime& timeparam);
 	bool isready();
+	double sumdbcol(_RecordsetPtr& pRecordset, CString key);
 
 };
 #endif

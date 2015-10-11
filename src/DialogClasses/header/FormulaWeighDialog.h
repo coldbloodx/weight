@@ -94,6 +94,8 @@ public:
 	CButton m_PrintCheck;
 	CEdit editFBNumber;
 	CStatic skipStatic;
+	CStatic sRatio;
+	CStatic sRealWeight;
 };
 
 //{{AFX_INSERT_LOCATION}}

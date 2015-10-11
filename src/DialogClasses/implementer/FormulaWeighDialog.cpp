@@ -46,6 +46,8 @@ void CFormulaWeighDialog::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_PRINTERCHECK, m_PrintCheck);
 	DDX_Control(pDX, IDC_EDIT1, editFBNumber);
 	DDX_Control(pDX, IDC_STATIC_SKIP, skipStatic);
+	DDX_Control(pDX, IDC_STATIC_RATIO, sRatio);
+	DDX_Control(pDX, IDC_STATIC_REAL, sRealWeight);
 }
 
 
@@ -73,21 +75,18 @@ END_MESSAGE_MAP()
 BOOL CFormulaWeighDialog::OnInitDialog() 
 {
 	CDialog::OnInitDialog();
-	//HelperFunctions::showStatus(m_StatusStatic);
-	// TODO: Add extra initialization here
+
 	std::vector<std::string> materialVector;
 	std::string separator(",;");
 
 	utils::ParseKeywords(SingletonHelper::getInstance()->getMaterials(), separator, materialVector);
-
 	totalWeigh = atof(SingletonHelper::getInstance()->getFormulaWeigh().GetBuffer(SingletonHelper::getInstance()->getFormulaWeigh().GetLength()));
 	
-	m_MissionStatic.SetWindowText(SingletonHelper::getInstance()->getFormulaName());
-
-	m_WeightStatic.SetWindowText(SingletonHelper::getInstance()->getFormulaWeigh() + "¹«½ï");
-
 	composition *tempComposition = NULL;
 	CString manufacture;
+	double dRatio = 0.0;
+	double dRealWeight = 0.0;
+
 	for (size_t i = 0; i < (materialVector.size() / 2); ++i)
 	{
 		tempComposition = new composition;
@@ -139,6 +138,7 @@ BOOL CFormulaWeighDialog::OnInitDialog()
 
 		std::string percentage = materialVector[i*2+1];
 		tempComposition->percentage = atof(percentage.c_str());
+		dRatio += atof(percentage.c_str());
 		tempComposition->isWeigh = FALSE;
 		if (tempComposition)
 		{
@@ -151,6 +151,11 @@ BOOL CFormulaWeighDialog::OnInitDialog()
 		}
 		tempComposition = NULL;
 	}
+
+	m_MissionStatic.SetWindowText(SingletonHelper::getInstance()->getFormulaName());
+	m_WeightStatic.SetWindowText(SingletonHelper::getInstance()->getFormulaWeigh() + "¹«½ï");
+	sRatio.SetWindowText(utils::doubleToCString(dRatio) + "%");
+	sRealWeight.SetWindowText(utils::doubleToCString(totalWeigh * dRatio / 100) +  "¹«½ï");
 	
 	int materialNameStaticID = 10000;
 	int materialWeighStaticID = 20000;

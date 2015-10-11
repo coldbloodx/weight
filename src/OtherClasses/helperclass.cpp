@@ -485,14 +485,10 @@ void utils::updateRecordValueVector(_RecordsetPtr& pRecordset, std::vector<CStri
 			{
 				_variant_t vDataField = pRecordset->GetCollect(_variant_t(headerList[i]));
 				CString dataField;
-				//取出某个字段的数据
 				if (vDataField.vt != VT_NULL)
 				{
 					dataField = (LPCTSTR)(_bstr_t)vDataField;
 				}
-				//insert or modify by the value of i
-				//i == 0 ? (listCtrl.InsertItem(itemIndex,dataField)):(listCtrl.SetItemText(itemIndex, subItemIndex, dataField));
-				//++subItemIndex;
 				valueList.push_back(dataField);
 			}
 			subItemIndex = 0;
@@ -752,6 +748,32 @@ void utils::printVector(CString tilte, std::vector<CString>& headerList, std::ve
 	delete footerFont;
 }
 
+double utils::sumdbcol(_RecordsetPtr& dbptr, CString key)
+{
+	double sum = 0.0;
+	dbptr->MoveFirst();
+	try
+	{
+		while(!dbptr->adoEOF)
+		{
+			_variant_t vcol = dbptr->GetCollect(_variant_t(key));
+			CString col;
+			if (vcol.vt != VT_NULL)
+			{
+				col = (LPCTSTR)(_bstr_t)vcol;
+			}
+			sum += cstr2double(col);
+			dbptr->MoveNext();
+		}
+	}
+	catch (_com_error& e)
+	{
+		throw e;
+	}
+	return sum;
+}
+
+
 unsigned long utils::time2gmt(CTime& timeparam)
 {
 	tm mytm;
@@ -769,4 +791,11 @@ bool utils::isready()
 
 	return curtime >= readyval;
 	
+}
+
+double utils::cstr2double(CString cstr)
+{
+	double ret = 0.0;
+	ret = _ttol(cstr); 
+	return ret;
 }

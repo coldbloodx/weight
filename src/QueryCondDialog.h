@@ -33,4 +33,5 @@ public:
     CDateTimeCtrl dateEnd;
     CComboBox cboQueryItem;
     afx_msg void OnBnClickedOk();
+	CStatic sCaution;
 };

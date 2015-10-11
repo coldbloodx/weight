@@ -169,11 +169,9 @@ void CLoginDialog::OnOK()
 		if (dbpermission == "ÆÕÍ¨ÓÃ»§")
 		{
 			CWeightDlg* controlPanel = (CWeightDlg*)(SingletonHelper::getInstance()->getPtrData());
-			controlPanel->m_ChangePasswordButton.EnableWindow(FALSE);
-			controlPanel->m_MaterialManagementButton.EnableWindow(FALSE);
-			controlPanel->m_UserManagementButton.EnableWindow(FALSE);
 			controlPanel->m_PowerOffButton.EnableWindow(FALSE);
 			controlPanel->m_OtherSettingsButton.EnableWindow(FALSE);
+			controlPanel->m_FormulaManagementButton.EnableWindow(FALSE);
 		}
 		CDialog::OnOK();
 	}

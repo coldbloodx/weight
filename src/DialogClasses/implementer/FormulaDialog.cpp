@@ -100,12 +100,6 @@ BOOL CFormulaDialog::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 
-	// TODO: Add extra initialization here
-	if (SingletonHelper::getInstance()->getUserRight() == "ÆÕÍ¨ÓÃ»§")
-	{
-		btnAdd->EnableWindow(FALSE);
-		btnDel->EnableWindow(FALSE);
-	}
 	initListHeader();
 	initList();
 
