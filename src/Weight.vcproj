@@ -241,10 +241,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\DialogClasses\implementer\DetailRecordDialog.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\DialogClasses\implementer\FetchAmountInputDialog.cpp"
 				>
 			</File>
@@ -446,10 +442,6 @@
 			</File>
 			<File
 				RelativePath=".\OtherClasses\DBptr.h"
-				>
-			</File>
-			<File
-				RelativePath=".\DialogClasses\header\DetailRecordDialog.h"
 				>
 			</File>
 			<File

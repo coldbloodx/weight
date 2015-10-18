@@ -5,7 +5,6 @@
 
 SQLExecutor::SQLExecutor():sqlstr("")
 {
-	//init m_SqlSate as empty
 }
 
 void SQLExecutor::closeRecordSet()
@@ -49,8 +48,6 @@ _RecordsetPtr& SQLExecutor::execquery(CString sqlstr)
 
     return this->resultptr;
 }
-
-
 
 void SQLExecutor::execSQL()
 {

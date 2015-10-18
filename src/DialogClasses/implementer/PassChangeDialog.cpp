@@ -19,44 +19,27 @@ static char THIS_FILE[] = __FILE__;
 
 
 CPassChangeDialog::CPassChangeDialog(CWnd* pParent /*=NULL*/)
-: CDialog(CPassChangeDialog::IDD, pParent)
-{
-	//{{AFX_DATA_INIT(CPassChangeDialog)
-	//}}AFX_DATA_INIT
-}
+: CDialog(CPassChangeDialog::IDD, pParent){}
 
-CPassChangeDialog::~CPassChangeDialog()
-{
-
-}
+CPassChangeDialog::~CPassChangeDialog(){}
 
 void CPassChangeDialog::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CPassChangeDialog)
 	DDX_Control(pDX, IDOK, m_ButtonOK);
 	DDX_Control(pDX, IDCANCEL, m_ButtonCancel);
 	DDX_Control(pDX, IDC_ORIGINALPASS_EDIT, m_OriginalPassEdit);
 	DDX_Control(pDX, IDC_NEWPASS_EDIT, m_NewPassEdit);
 	DDX_Control(pDX, IDC_NEWPASSCONFIRM_EDIT, m_NewPassConfirmEdit);
-	//}}AFX_DATA_MAP
-
 }
 
 
 BEGIN_MESSAGE_MAP(CPassChangeDialog, CDialog)
-	//{{AFX_MSG_MAP(CPassChangeDialog)
-	//}}AFX_MSG_MAP
 	ON_BN_CLICKED(IDOK, &CPassChangeDialog::OnBnClickedOk)
-
 END_MESSAGE_MAP()
-
-/////////////////////////////////////////////////////////////////////////////
-// CPassChangeDialog message handlers
 
 void CPassChangeDialog::OnOK() 
 {
-	// TODO: Add extra validation here
 	CString originalPass, newPass, confirmPass;
 
 	m_OriginalPassEdit.GetWindowText(originalPass);
@@ -81,25 +64,11 @@ void CPassChangeDialog::OnOK()
 		return;
 	}
 
-	CString sqlState("update users set password = '");
-	sqlState += confirmPass +"' where id = " + SingletonHelper::getInstance()->getUserID();
-
-	//init recordset pointer
-	SQLExecutor::getInstanceRef().setSqlState(sqlState);
-
-	//exec SQL state
-	try
-	{
-		SQLExecutor::getInstanceRef().execSQL() ;
-	}
-	catch (_com_error& e)
-	{
-		AfxMessageBox(e.Description());
-		return;
-	}
-
-	//get the result data set
-	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
+	CString sqlState;
+	sqlState.Format("update [users] set [password] = '%s' where [id] = %s; ", 
+		confirmPass,  SingletonHelper::getInstance()->getUserID());
+	
+	SQLExecutor::getInstanceRef().execquery(sqlState);
 
 	SingletonHelper::getInstance()->setUserPass(confirmPass);
 
@@ -109,17 +78,13 @@ void CPassChangeDialog::OnOK()
 BOOL CPassChangeDialog::OnInitDialog() 
 {
 	CDialog::OnInitDialog();
-	
-
 
 	uiutils::setdlgsize(this, &m_ButtonCancel, &m_ButtonOK);
-	return TRUE;  // return TRUE unless you set the focus to a control
-	// EXCEPTION: OCX Property Pages should return FALSE
+	return TRUE;
 }
 
 void CPassChangeDialog::OnBnClickedOk()
 {
-	// TODO: Add your control notification handler code here
 	OnOK();
 }
 

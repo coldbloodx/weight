@@ -20,16 +20,9 @@
 static char THIS_FILE[] = __FILE__;
 #endif
 
-/////////////////////////////////////////////////////////////////////////////
-// CMaterialManagementDialog dialog
-
-
 CMaterialManagementDialog::CMaterialManagementDialog(CWnd* pParent /*=NULL*/)
 	: CDialog(CMaterialManagementDialog::IDD, pParent)
 {
-	//{{AFX_DATA_INIT(CMaterialManagementDialog)
-		// NOTE: the ClassWizard will add member initialization here
-	//}}AFX_DATA_INIT
 }
 
 
@@ -42,45 +35,27 @@ void CMaterialManagementDialog::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_MATERIALDEL, m_Del);
 	DDX_Control(pDX, IDC_MATERIALADD, m_Add);
 	DDX_Control(pDX, IDC_MATERIALLIST, m_MaterialList);
-	//}}AFX_DATA_MAP
 	DDX_Control(pDX, IDC_BATCHNUMBERCHANGE, m_BatchNumberChange);
 }
 
 BEGIN_MESSAGE_MAP(CMaterialManagementDialog, CDialog)
-	//{{AFX_MSG_MAP(CMaterialManagementDialog)
 	ON_BN_CLICKED(IDC_MATERIALADD, OnMaterialadd)
 	ON_BN_CLICKED(IDC_MATERIALDEL, OnMaterialdel)
-	ON_WM_TIMER()
-	ON_WM_CTLCOLOR()
-	//}}AFX_MSG_MAP
 	ON_BN_CLICKED(IDC_BATCHNUMBERCHANGE, &CMaterialManagementDialog::OnBnClickedBatchnumberchange)
 END_MESSAGE_MAP()
-
-/////////////////////////////////////////////////////////////////////////////
-// CMaterialManagementDialog message handlers
 
 BOOL CMaterialManagementDialog::OnInitDialog() 
 {
 	CDialog::OnInitDialog();
 	initListHeader();
 	initList();
-	// TODO: Add extra initialization here
-	CBitmap   bmp;   
-
-	//去掉删除按钮！
-	//CRect delRect(650, 43, 765, 80);
-	//CRect delRect(0, 0, 0, 0);
-	//m_Del.MoveWindow(delRect);
-
     uiutils::setdlgsize(this, &m_ButtonOK);
 
-	return TRUE;  // return TRUE unless you set the focus to a control
-	              // EXCEPTION: OCX Property Pages should return FALSE
+	return TRUE;  
 }
 
 CMaterialManagementDialog::~CMaterialManagementDialog()
 {
-
 }
 
 void CMaterialManagementDialog::initListHeader()
@@ -98,27 +73,12 @@ void CMaterialManagementDialog::initListHeader()
 
 void CMaterialManagementDialog::initList()
 {
-	//init recordset pointer
-	SQLExecutor::getInstanceRef().setSqlState(CString("SELECT * FROM MATERIALS"));
-
-	//exec SQL state
-	try
-	{
-		SQLExecutor::getInstanceRef().execSQL() ;
-	}
-	catch (_com_error& e)
-	{
-		AfxMessageBox(e.Description());
-		return;
-	}
-
-	//get the result data set
-	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
+	_RecordsetPtr dbptr = SQLExecutor::getInstanceRef().execquery(CString("select * from materials"));
 	
-	CString headerArray[4] = {"ID", "NAME","BATCHNUMBER","MANUFACTURE"};
+	CString headerArray[4] = {"id", "name","batchnumber","manufacture"};
 	std::vector<CString> headerList(headerArray, headerArray + 4);
 
-	uiutils::updatelist(m_pRecordset, m_MaterialList, headerList);
+	uiutils::updatelist(dbptr, m_MaterialList, headerList);
 }
 
 void CMaterialManagementDialog::OnMaterialadd() 
@@ -135,13 +95,14 @@ void CMaterialManagementDialog::OnMaterialdel()
 
 	POSITION pos = m_MaterialList.GetFirstSelectedItemPosition() - 1;
 
-	CString ID = m_MaterialList.GetItemText((int)pos, 0);
+	CString mid = m_MaterialList.GetItemText((int)pos, 0);
 
-	if (ID.IsEmpty())
+	if (mid.IsEmpty())
 	{
 		AfxMessageBox("请在下表中选择要删除的材料!");
 		return;
 	}
+
 	CString msg("您确定要删除这种材料？");
 	CString caption("删除材料");
 	//选择cancel则返回
@@ -150,43 +111,10 @@ void CMaterialManagementDialog::OnMaterialdel()
 		return;
 	}
 
-// 	if (ID == "9999")
-// 	{
-// 		AfxMessageBox("该材料为系统保留，不能删除！");
-// 		return;
-// 	}
+	CString sql;
+	sql.Format("delete from materials where id = %s ", mid);
 
-	//init recordset pointer
-	SQLExecutor::getInstanceRef().setSqlState(CString("SELECT * FROM MATERIALS"));
-
-	//exec SQL state
-	try
-	{
-		SQLExecutor::getInstanceRef().execSQL() ;
-	}
-	catch (_com_error& e)
-	{
-		AfxMessageBox(e.Description());
-		return;
-	}
-
-	//get the result data set
-	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
-
-	try
-	{
-		m_pRecordset->MoveFirst();
-		m_pRecordset->Move((int)pos);
-		m_pRecordset->Delete(adAffectCurrent);
-		m_pRecordset->Update();	
-	}
-	catch (_com_error  &e)
-	{
-		AfxMessageBox(e.Description());
-		return;
-	}
-	
-
+	SQLExecutor::getInstanceRef().execquery(sql);
 
 	m_MaterialList.DeleteAllItems();
 	initList();
