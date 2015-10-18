@@ -31,21 +31,16 @@ CUserManageDialog::CUserManageDialog(CWnd* pParent /*=NULL*/)
 void CUserManageDialog::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CUserManageDialog)
 	DDX_Control(pDX, IDOK, m_ButtonOK);
 	DDX_Control(pDX, IDC_USERDEL, m_Del);
 	DDX_Control(pDX, IDC_USERADD, m_Add);
 	DDX_Control(pDX, IDC_USERLIST, m_UserList);
-	//}}AFX_DATA_MAP
 }
 
 
 BEGIN_MESSAGE_MAP(CUserManageDialog, CDialog)
-	//{{AFX_MSG_MAP(CUserManageDialog)
 	ON_BN_CLICKED(IDC_USERADD, OnUseradd)
 	ON_BN_CLICKED(IDC_USERDEL, OnUserdel)
-	ON_WM_TIMER()
-	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -61,32 +56,17 @@ BOOL CUserManageDialog::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 
-	// TODO: Add extra initialization here
 	initListHeader();
 	initList();
 	
 	uiutils::setdlgsize(this, &m_ButtonOK);
-	return TRUE;  // return TRUE unless you set the focus to a control
-	// EXCEPTION: OCX Property Pages should return FALSE
+	return TRUE;
 }
 
 void CUserManageDialog::initList()
 {
-	SQLExecutor::getInstanceRef().setSqlState(CString("SELECT * FROM USERS"));
 
-	//exec SQL state
-	try
-	{
-		SQLExecutor::getInstanceRef().execSQL() ;
-	}
-	catch (_com_error& e)
-	{
-		AfxMessageBox(e.Description());
-		return;
-	}
-
-	//get the result data set
-	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
+	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().execquery("select * from users");
 
 	CString headerArray[3] = {"id", "name", "permission"};
 	std::vector<CString> headerList(headerArray, headerArray+3);
@@ -132,44 +112,18 @@ void CUserManageDialog::OnUserdel()
 	
 	POSITION pos = m_UserList.GetFirstSelectedItemPosition() -1 ;
 
-	CString ID = m_UserList.GetItemText(((int)pos), 0);
+	CString userid = m_UserList.GetItemText(((int)pos), 0);
 
-	if (ID == "1001")
+	if (userid == "1001")
 	{
 		AfxMessageBox("管理员帐户，不可以删除！");
 		return;
 	}
 
-	CString sqlState("SELECT * FROM USERS");
-	SQLExecutor::getInstanceRef().setSqlState(sqlState);
+	CString sql;
+	sql.Format("delete from users where id = %s ", userid);
+	SQLExecutor::getInstanceRef().execquery(sql);
 
-	//exec SQL state
-	try
-	{
-		SQLExecutor::getInstanceRef().execSQL() ;
-	}
-	catch (_com_error& e)
-	{
-		AfxMessageBox(e.Description());
-		return;
-	}
-
-	//get the result data set
-	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
-
-	try
-	{
-		m_pRecordset->MoveFirst();
-		m_pRecordset->Move((int)pos);
-		m_pRecordset->Delete(adAffectCurrent);
-		m_pRecordset->Update();	
-	}
-	catch (_com_error  &e)
-	{
-		AfxMessageBox(e.Description());
-		return;
-	}
-	
 	m_UserList.DeleteAllItems();
 	initList();
 }
