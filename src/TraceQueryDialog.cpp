@@ -106,9 +106,9 @@ void CTraceQueryDialog::OnBnClickedButton5()
 	CString filename = savedlg.GetPathName();
 
 	// sql
-	CString asqlarray[3] = {"select formulaid, formulaname, username, amount, odate, otime, fbatchnumber from weight" ,
-		"select formulaid, formulaname, operatorname, amount, odate, otime from fetchrecords",
-		"select materialname, materialbatchnumber, formulaid, formulaname, operatorname, amount, operate_date, operate_time from materialrecords"};
+	CString asqlarray[3] = {"select formulaid, formulaname, username, amount, odate, otime, fbatchnumber from weight order by gmt desc" ,
+		"select formulaid, formulaname, operatorname, amount, odate, otime from fetchrecords order by gmt desc",
+		"select materialname, materialbatchnumber, formulaid, formulaname, operatorname, amount, operate_date, operate_time from materialrecords order by gmt desc"};
 
 	// xheaders
 	CString weighheaders[7] = { "配方id","配方名称", "用户名", "数量", "日期", "时间", "产品批号"};

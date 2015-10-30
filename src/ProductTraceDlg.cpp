@@ -49,7 +49,7 @@ void CProductTraceDlg::OnBnClickedOk()
     }
 
     CString sql;
-    sql.Format("select formulaname, username, amount, odate, otime, fbatchnumber from weight where fbatchnumber = '%s';", strBatchNumber);
+    sql.Format("select formulaname, username, amount, odate, otime, fbatchnumber from weight where fbatchnumber = '%s' order by gmt desc;", strBatchNumber);
     
     _RecordsetPtr dbptr = SQLExecutor::getInstancePtr()->execquery(sql);
     listProduct.DeleteAllItems();
@@ -64,7 +64,7 @@ BOOL CProductTraceDlg::OnInitDialog()
     CDialog::OnInitDialog();
     
     CString sql;
-    sql.Format("select formulaname, username, amount, odate, otime, fbatchnumber from weight;");
+    sql.Format("select formulaname, username, amount, odate, otime, fbatchnumber from weight order by gmt desc;");
     _RecordsetPtr dbptr = SQLExecutor::getInstancePtr()->execquery(sql);
 
     CString pheaderarray[6] = {"成品批号", "配方名称", "用户名", "称重数量", "日期", "时间"};
@@ -98,7 +98,7 @@ void CProductTraceDlg::updatemlist()
     CString strbnumber = listProduct.GetItemText((int)pos, 0);
 
     CString sql;
-    sql.Format("select materialname, materialbatchnumber, formulaname, formula_batch_number, operatorname, amount, operate_date, operate_time from materialrecords where formula_batch_number = '%s'", strbnumber);
+    sql.Format("select materialname, materialbatchnumber, formulaname, formula_batch_number, operatorname, amount, operate_date, operate_time from materialrecords where formula_batch_number = '%s' order by gmt desc", strbnumber);
 
     _RecordsetPtr dbptr = SQLExecutor::getInstanceRef().execquery(sql);
 

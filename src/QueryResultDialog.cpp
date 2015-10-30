@@ -77,11 +77,11 @@ BOOL CQueryResultDialog::OnInitDialog()
 			csSum = "员工工作总量：";
 			if(key.IsEmpty())
 			{
-				sql.Format("select username, formulaname, amount, odate, otime from weight where %s", timesqlstr);
+				sql.Format("select username, formulaname, amount, odate, otime from weight where %s order by gmt desc", timesqlstr);
 			}
 			else
 			{
-				sql.Format("select username, formulaname, amount, odate, otime from weight where username = '%s' and %s", key, timesqlstr);
+				sql.Format("select username, formulaname, amount, odate, otime from weight where username = '%s' and %s order by gmt desc", key, timesqlstr);
 			}
 			CString headerarray[5] = {"用户名", "配方名称", "数量", "日期", "时间"};
 			headervec.assign(headerarray, headerarray + 5);	
@@ -97,12 +97,12 @@ BOOL CQueryResultDialog::OnInitDialog()
 			csSum = "材料总用量：";
 			if(key.IsEmpty())
 			{
-				sql.Format("select  materialname, materialbatchnumber, formulaname, formula_batch_number, operatorname, amount, operate_date, operate_time from materialrecords where %s", timesqlstr);
+				sql.Format("select  materialname, materialbatchnumber, formulaname, formula_batch_number, operatorname, amount, operate_date, operate_time from materialrecords where %s order by gmt desc", timesqlstr);
 
 			}
 			else
 			{
-				sql.Format("select  materialname, materialbatchnumber, formulaname, formula_batch_number, operatorname, amount, operate_date, operate_time from materialrecords where materialname = '%s' and %s", key, timesqlstr);
+				sql.Format("select  materialname, materialbatchnumber, formulaname, formula_batch_number, operatorname, amount, operate_date, operate_time from materialrecords where materialname = '%s' and %s order by gmt desc", key, timesqlstr);
 			}
 			CString headerarray [8] = {"材料名称", "材料批号", "配方名称", "配方批号", "用户名", "数量", "日期", "时间"};
 			headervec.assign(headerarray, headerarray + 8);
@@ -118,11 +118,11 @@ BOOL CQueryResultDialog::OnInitDialog()
 			csSum = "产品总产量：";
 			if(key.IsEmpty())
 			{
-				sql.Format("select username, formulaname, amount, odate, otime from weight where %s", timesqlstr);
+				sql.Format("select username, formulaname, amount, odate, otime from weight where %s order by gmt desc", timesqlstr);
 			}
 			else
 			{
-				sql.Format("select username, formulaname, amount, odate, otime from weight where formulaname = '%s' and %s", key, timesqlstr);
+				sql.Format("select username, formulaname, amount, odate, otime from weight where formulaname = '%s' and %s order by gmt desc", key, timesqlstr);
 			}
 			CString headerarray[5] = {"用户名", "配方名称", "数量", "日期", "时间"};
 			headervec.assign(headerarray, headerarray + 5);	
