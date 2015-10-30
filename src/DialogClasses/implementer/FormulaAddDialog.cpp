@@ -108,56 +108,19 @@ void CFormulaAddDialog::OnOK()
 	double percentage = 0;
 	percentage = std::accumulate(doubleVector.begin(), doubleVector.end(), 0.0);
 	
-	//为了东睦增加搞笑配方，配料总和能超过100%，晕
+	//为了东睦增加搞笑配方，配料总和能超过100%
 	//if (percentage > (double)(100) || percentage < (double)(100))
 	//{
 	//	AfxMessageBox("配料百分比有误，请检查材料百分比输入！");
 	//	return;
 	//}
 
-	SQLExecutor::getInstanceRef().setSqlState(CString("SELECT * FROM FORMULAS"));
+	CString sql;
+	sql.Format("insert into formulas(id, name, material) values (%s, '%s', '%s') ", formulaID, formulaName, formulaMaterials);
 
-	//exec SQL state
-	try
-	{
-		SQLExecutor::getInstanceRef().execSQL() ;
-	}
-	catch (_com_error& e)
-	{
-		AfxMessageBox(e.Description());
-		return;
-	}
 	//get the result data set
-	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
-	
-	try
-	{
-		if (!m_pRecordset->adoEOF)
-		{
-			m_pRecordset->MoveLast();
-		}
-		
-		m_pRecordset->AddNew();
-		m_pRecordset->PutCollect("ID", _variant_t(formulaID));
-		m_pRecordset->PutCollect("NAME", _variant_t(formulaName));
-		m_pRecordset->PutCollect("MATERIAL", _variant_t(formulaMaterials));
-		
-	}
-	catch(_com_error &e)
-	{
-		AfxMessageBox(e.Description());
-		return;
-	}
-	
-	//更新数据库
-	try
-	{
-		m_pRecordset->Update();
-	}
-	catch(_com_error& e)
-	{
-		e;
-	}
+	SQLExecutor::getInstanceRef().execquery(sql);
+
 
 	CFormulaDialog *formulaDialog = (CFormulaDialog *)(SingletonHelper::getInstance()->getPtrData());
 	formulaDialog->m_FormulaListCtrl.DeleteAllItems();

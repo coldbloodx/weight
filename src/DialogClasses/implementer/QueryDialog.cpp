@@ -22,14 +22,12 @@ static char THIS_FILE[] = __FILE__;
 CQueryDialog::CQueryDialog(CWnd* pParent /*=NULL*/)
 : CDialog(CQueryDialog::IDD ,pParent)
 {
-	int my = 1;
 }
 
 
 void CQueryDialog::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CQueryDialog)
 	DDX_Control(pDX, IDCANCEL, m_ButtonCancel);
 	DDX_Control(pDX, IDC_CLEARRESULT_BUTTON, m_Clear);
 	DDX_Control(pDX, ID_QUERY, m_Query);
@@ -37,21 +35,14 @@ void CQueryDialog::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_KEYWORD_EDIT, m_Keyword);
 	DDX_Control(pDX, IDC_QUERYINDEX_COMBO, m_QueryIndex);
 	DDX_Control(pDX, IDC_QUERYTABLE_COMBO, m_QueryTable);
-	//}}AFX_DATA_MAP
 }
 
 
 BEGIN_MESSAGE_MAP(CQueryDialog, CDialog)
-	//{{AFX_MSG_MAP(CQueryDialog)
 	ON_BN_CLICKED(ID_QUERY, OnQuery)
 	ON_CBN_SELCHANGE(IDC_QUERYTABLE_COMBO, OnSelchangeQuerytableCombo)
 	ON_BN_CLICKED(IDC_CLEARRESULT_BUTTON, OnClearresultButton)
-	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
-
-/////////////////////////////////////////////////////////////////////////////
-// CQueryDialog message handlers
-
 
 
 void CQueryDialog::OnQuery() 
@@ -102,8 +93,6 @@ void CQueryDialog::OnQuery()
 
 void CQueryDialog::OnSelchangeQuerytableCombo() 
 {
-	// TODO: Add your control notification handler code here
-	// TODO: Add your control notification handler code here
 	int curSelection = m_QueryTable.GetCurSel();
 	CString tempString;
 	switch (curSelection)
@@ -167,56 +156,33 @@ void CQueryDialog::refreshUserList()
 	CString indexName;
 	CString keyWord;
 
-	CString sqlState("SELECT * FROM USERS WHERE " );
+	CString sql("select * from users where " );
 
-	CString fieldName;
+	CString csQueryCond;
 
 	if (indexName == "用户编号")
 	{
-		fieldName = "id = ";
+		csQueryCond.Format("id = %s", keyWord.GetBuffer(0));
 	}
 
 	if (indexName == "人员姓名")
 	{
-		fieldName = "name = ";
+		csQueryCond.Format("name = '%s'", keyWord);
 	}
 
 	if (indexName == "权限" )
 	{
-		fieldName = "permision =";
+		csQueryCond.Format("permision = '%s'", keyWord);
 	}
-
-	sqlState += fieldName;
-	if (indexName == "用户编号")
-	{
-		sqlState += keyWord.GetBuffer(0);
-	}
-	else
-	{
-		sqlState += "'" + keyWord + "'";
-	}
-
-	//init recordset pointer
-	SQLExecutor::getInstanceRef().setSqlState(sqlState);
-
-	//exec SQL state
-	try
-	{
-		SQLExecutor::getInstanceRef().execSQL() ;
-	}
-	catch (_com_error& e)
-	{
-		AfxMessageBox(e.Description());
-		return;
-	}
+	sql += csQueryCond;
 
 	//get the result data set
-	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
+	_RecordsetPtr& dbptr = SQLExecutor::getInstanceRef().execquery(sql);
 	
 	CString headerArray[3] ={"id", "name", "permission"};
 	
 	std::vector<CString> headerList(headerArray, headerArray + 3);
-	uiutils::updatelist(m_pRecordset, m_ResultList, headerList);
+	uiutils::updatelist(dbptr, m_ResultList, headerList);
 }
 
 void CQueryDialog::initFormulaListHeader()
@@ -239,52 +205,28 @@ void CQueryDialog::refreshFormulaList()
 	m_QueryIndex.GetWindowText(indexName);
 	m_Keyword.GetWindowText(keyWord);
 
-	CString sqlState("SELECT * FROM FORMULAS WHERE " );
+	CString sql("select * from formulas where " );
 
-	CString fieldName;
+	CString csQueryCond;
 
 	if (indexName == "配方编号")
 	{
-		fieldName = "ID = ";
+		csQueryCond.Format("ID = %s", keyWord.GetBuffer(0));
 	}
 
 	if (indexName == "配方名称")
 	{
-		fieldName = "NAME = ";
+		csQueryCond.Format("NAME = '%s'", keyWord);
 	}
 
-
-	sqlState += fieldName;
-	if (indexName == "配方编号")
-	{
-		sqlState += keyWord.GetBuffer(0);
-	}
-	else
-	{
-		sqlState += "'" + keyWord + "'";
-	}
-
-	//init recordset pointer
-	SQLExecutor::getInstanceRef().setSqlState(sqlState);
-
-
-	//exec SQL state
-	try
-	{
-		SQLExecutor::getInstanceRef().execSQL() ;
-	}
-	catch (_com_error& e)
-	{
-		AfxMessageBox(e.Description());
-		return;
-	}
-
+	sql += csQueryCond;
+	
 	//get the result data set
-	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
+	_RecordsetPtr& dbptr = SQLExecutor::getInstanceRef().execquery(sql);
 
 	CString headerArray[3] ={"ID", "NAME", "MATERIAL"};
 	std::vector<CString> headerList(headerArray, headerArray + 3);
-	uiutils::updatelist(m_pRecordset, m_ResultList, headerList);
+	uiutils::updatelist(dbptr, m_ResultList, headerList);
 }
 
 void CQueryDialog::initMaterialListHeader()
@@ -306,50 +248,28 @@ void CQueryDialog::refreshMaterialList()
 	m_QueryIndex.GetWindowText(indexName);
 	m_Keyword.GetWindowText(keyWord);
 
-	CString sqlState("SELECT * FROM MATERIALS WHERE ");
+	CString sql("select * from materials where ");
 
-	CString fieldName;
+	CString csQueryCond;
 
 	if (indexName == "材料编号")
 	{
-		fieldName = "ID = ";
+		csQueryCond.Format(" ID = %s ", keyWord.GetBuffer(0));
 	}
 
 	if (indexName == "材料名称")
 	{
-		fieldName = "NAME = ";
+		csQueryCond.Format("NAME = '%s' ", keyWord);
 	}
 
-	sqlState += fieldName;
-	if (indexName == "材料编号")
-	{
-		sqlState += keyWord.GetBuffer(0);
-	}
-	else
-	{
-		sqlState += "'" + keyWord + "'";
-	}
-
-	//init recordset pointer
-	SQLExecutor::getInstanceRef().setSqlState(sqlState);
-
-	//exec SQL state
-	try
-	{
-		SQLExecutor::getInstanceRef().execSQL() ;
-	}
-	catch (_com_error& e)
-	{
-		AfxMessageBox(e.Description());
-		return;
-	}
+	sql += csQueryCond;
 
 	//get the result data set
-	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
+	_RecordsetPtr& dbptr = SQLExecutor::getInstanceRef().execquery(sql);
 	
 	CString headerArray[2] ={"ID", "NAME"};
 	std::vector<CString> headerList(headerArray, headerArray + 2);
-	uiutils::updatelist(m_pRecordset, m_ResultList, headerList);
+	uiutils::updatelist(dbptr, m_ResultList, headerList);
 }
 
 void CQueryDialog::clearResultList()
@@ -376,7 +296,6 @@ void CQueryDialog::OnClearresultButton()
 BOOL CQueryDialog::OnInitDialog() 
 {
 	CDialog::OnInitDialog();
-
 	uiutils::setdlgsize(this, &m_ButtonCancel);
 	return TRUE;
 }

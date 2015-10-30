@@ -94,23 +94,12 @@ BOOL CFormulaWeighDialog::OnInitDialog()
 		CString tempMaterialName(materialVector[i*2].c_str()) ;
 		
 		//这里取出材料的条码，并放到条码容器中（lineNumberOld）
-		CString sqlState("SELECT BATCHNUMBER,MANUFACTURE FROM MATERIALS WHERE NAME = '");
-		sqlState += tempMaterialName + "'";
+		CString sql;
+		sql.Format("select batchnumber,manufacture from materials where name = '%s'", tempMaterialName);
+
+		_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().execquery(sql);
 		
-		SQLExecutor::getInstanceRef().setDatabaseConnection(DBConnector::getInstanceRef().getdbcon());
-		SQLExecutor::getInstanceRef().setSqlState(sqlState);
-
 		CString oldLineNumber;
-		try
-		{
-			SQLExecutor::getInstanceRef().execSQL() ;
-		}
-		catch (_com_error& e)
-		{
-			AfxMessageBox(e.Description());
-		}
-		_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
-
 		try
 		{
 			while(!m_pRecordset->adoEOF)

@@ -23,13 +23,10 @@ static char THIS_FILE[] = __FILE__;
 CFetchAmountInputDialog::CFetchAmountInputDialog(CWnd* pParent /*=NULL*/)
 	: CDialog(CFetchAmountInputDialog::IDD, pParent)
 {
-	//{{AFX_DATA_INIT(CFetchAmountInputDialog)
-	//}}AFX_DATA_INIT
 }
 
 CFetchAmountInputDialog::~CFetchAmountInputDialog()
 {
-
 }
 
 
@@ -72,12 +69,8 @@ BEGIN_MESSAGE_MAP(CFetchAmountInputDialog, CDialog)
 	ON_BN_CLICKED(IDOK, &CFetchAmountInputDialog::OnBnClickedOk)
 END_MESSAGE_MAP()
 
-/////////////////////////////////////////////////////////////////////////////
-// CFetchAmountInputDialog message handlers
-
 void CFetchAmountInputDialog::OnOK() 
 {
-	// TODO: Add extra validation here
 	if (!utils::isDouble(&m_FetchAmount))
 	{
 		AfxMessageBox("请确认输入！");
@@ -90,36 +83,21 @@ void CFetchAmountInputDialog::OnOK()
 	double dFormulaAmount, dFetchAmount;
 	
 	//查询formula表中成品量的多少
-	CString sqlState("SELECT NAME, TOTAL FROM FORMULAS WHERE ID = ");
-	sqlState += SingletonHelper::getInstance()->getFormulaID();
-
-	//init recordset pointer
-	SQLExecutor::getInstanceRef().setDatabaseConnection(DBConnector::getInstanceRef().getdbcon());
-	SQLExecutor::getInstanceRef().setSqlState(sqlState);
-
-	//exec SQL state
-	try
-	{
-		SQLExecutor::getInstanceRef().execSQL() ;
-	}
-	catch (_com_error& e)
-	{
-		AfxMessageBox(e.Description());
-		return;
-	}
+	CString sql;
+	sql.Format("select name, total from formulas where id = %s ", SingletonHelper::getInstance()->getFormulaID());
 
 	//get the result data set
-	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
+	_RecordsetPtr& dbptr = SQLExecutor::getInstanceRef().execquery(sql);
 
 
 	try
 	{
 		_variant_t vFormulaName;
 		_variant_t vAmount;
-		while(!m_pRecordset->adoEOF)
+		while(!dbptr->adoEOF)
 		{
-			vFormulaName = m_pRecordset->GetCollect("NAME");
-			vAmount = m_pRecordset->GetCollect("TOTAL");
+			vFormulaName = dbptr->GetCollect("NAME");
+			vAmount = dbptr->GetCollect("TOTAL");
 			
 			
 			if (vFormulaName.vt != VT_NULL)
@@ -132,7 +110,7 @@ void CFetchAmountInputDialog::OnOK()
 				formulaAmount = (LPCTSTR)(_bstr_t)vAmount;
 			}
 			
-			m_pRecordset->MoveNext();
+			dbptr->MoveNext();
 		}
 	}
 	catch(_com_error &e)
@@ -151,92 +129,26 @@ void CFetchAmountInputDialog::OnOK()
 
 	//更新formula表
 	CString newAmount(utils::doubleToCString(dFormulaAmount - dFetchAmount));
-	
-	
-	sqlState = "UPDATE FORMULAS SET TOTAL = " + newAmount + " WHERE ID = " + SingletonHelper::getInstance()->getFormulaID();
-	
 
-	SQLExecutor::getInstanceRef().setSqlState(sqlState);
 
-	//exec SQL state
-	try
-	{
-		SQLExecutor::getInstanceRef().execSQL() ;
-	}
-	catch (_com_error& e)
-	{
-		AfxMessageBox(e.Description());
-		return;
-	}
+	sql.Format("update formulas set total = %s  where id = %s", newAmount, SingletonHelper::getInstance()->getFormulaID());
+	dbptr = SQLExecutor::getInstanceRef().execquery(sql);
 
-	//get the result data set
-	m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
-
-	//组成新纪录，并且将记录插入fetchrecord表
-	sqlState = "SELECT * FROM FETCHRECORDS";
-	
 	//首先取得系统时间
 	CTime currentTime = CTime::GetCurrentTime();
 	CString date = currentTime.Format("%Y-%m-%d");
 	CString time = currentTime.Format("%X");
 	
-	SQLExecutor::getInstanceRef().setSqlState(sqlState);
-
-	//exec SQL state
-	try
-	{
-		SQLExecutor::getInstanceRef().execSQL() ;
-	}
-	catch (_com_error& e)
-	{
-		AfxMessageBox(e.Description());
-		return;
-	}
-
-	//get the result data set
-	m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
 	
-	CString fetchRectordID;
+	CString fetchRectordID = utils::gettimestamp();
 
-	try
-	{
-		if (!m_pRecordset->adoEOF)
-		{
-			m_pRecordset->MoveLast();
-		}
-		
-		m_pRecordset->AddNew();
-		//取得流水号！
-		_variant_t ID = m_pRecordset->GetCollect(_variant_t("ID"));
-		if (ID.vt != VT_NULL)
-		{
-			fetchRectordID = (LPCTSTR)(_bstr_t)ID;
-		}
-		m_pRecordset->PutCollect("FORMULAID", _variant_t(SingletonHelper::getInstance()->getFormulaID()));
-		m_pRecordset->PutCollect("FORMULANAME", _variant_t(formulaName));
-		m_pRecordset->PutCollect("OPERATORID", _variant_t(SingletonHelper::getInstance()->getUserID()));
-		m_pRecordset->PutCollect("OPERATORNAME", _variant_t(SingletonHelper::getInstance()->getUsername()));
-		m_pRecordset->PutCollect("AMOUNT", _variant_t(fetchAmount));
-		m_pRecordset->PutCollect("ODATE", _variant_t(date));
-		m_pRecordset->PutCollect("OTIME", _variant_t(time));
-	}
-	catch(_com_error &e)
-	{
-		AfxMessageBox(e.Description());
-		return;
-	}
+	
+	sql.Format("insert into fetchrecords(formulaid, formulaname, operatorid, operatorname, amount, odate, otime) values('%s', '%s', '%s', '%s', %s, '%s', '%s') ", 
+		SingletonHelper::getInstance()->getFormulaID(), formulaName, 
+		SingletonHelper::getInstance()->getUserID(), SingletonHelper::getInstance()->getUsername(), 
+		fetchAmount, date, time);
 
-	try
-	{
-		m_pRecordset->Update();
-	}
-	catch(_com_error &e)
-	{
-		AfxMessageBox(e.Description());
-		return;
-	}
-	m_pRecordset->Close();
-	//m_pRecordset = NULL;
+	SQLExecutor::getInstanceRef().execquery(sql);
 
 	CFormulaDialog* pFD = (CFormulaDialog*)SingletonHelper::getInstance()->getPtrData();
 	pFD->initList();

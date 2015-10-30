@@ -145,7 +145,7 @@ void CFormulaDialog::initListHeader()
 void CFormulaDialog::OnFormulaDel() 
 {
 	// TODO: Add your control notification handler code here
-	CString sqlState = "SELECT * FROM FORMULAS";
+	
 	POSITION pos = m_FormulaListCtrl.GetFirstSelectedItemPosition() - 1;
 
 	CString ID = m_FormulaListCtrl.GetItemText((int)pos, 0);
@@ -164,35 +164,9 @@ void CFormulaDialog::OnFormulaDel()
 		return;
 	}
 
-	//init recordset pointer
-	SQLExecutor::getInstanceRef().setSqlState(sqlState);
-
-	//exec SQL state
-	try
-	{
-		SQLExecutor::getInstanceRef().execSQL() ;
-	}
-	catch (_com_error& e)
-	{
-		AfxMessageBox(e.Description());
-		return;
-	}
-
-	//get the result data set
-	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
-
-	try
-	{
-		m_pRecordset->MoveFirst();
-		m_pRecordset->Move((int)pos);
-		m_pRecordset->Delete(adAffectCurrent);
-		m_pRecordset->Update();	
-	}
-	catch (_com_error  &e)
-	{
-		AfxMessageBox(e.Description());
-		return;
-	}
+	CString sql;
+	sql.Format("delete from formulas where id = %s", ID);
+	SQLExecutor::getInstanceRef().execquery(sql);
 
 	m_FormulaListCtrl.DeleteAllItems();
 	initList();

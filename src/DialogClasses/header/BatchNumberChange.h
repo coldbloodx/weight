@@ -20,7 +20,6 @@ protected:
 public:
 	CButton m_ButtonOK;
 	CButton m_ButtonCancel;
-	CBrush   m_brBk;//在public中定义   
 	afx_msg void OnBnClickedOk();
 	virtual BOOL OnInitDialog();
 

@@ -75,12 +75,9 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	afx_msg void OnBnClickedOk();
-	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 	CButton m_GoBack;
 	afx_msg void OnBnClickedGoback();
 };
 
-//{{AFX_INSERT_LOCATION}}
-// Microsoft Visual C++ will insert additional declarations immediately before the previous line.
 
-#endif // !defined(AFX_FORMULASELECTDIALOG_H__164FB553_66E0_4ED1_8D8B_AE3A4B569385__INCLUDED_)
+#endif 

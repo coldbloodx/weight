@@ -49,36 +49,3 @@ _RecordsetPtr& SQLExecutor::execquery(CString sqlstr)
     return this->resultptr;
 }
 
-void SQLExecutor::execSQL()
-{
-	try
-	{
-		resultptr.CreateInstance("ADODB.Recordset");
-		resultptr->Open(_variant_t(sqlstr),
-			_variant_t((IDispatch*)dbcon,true),
-			adOpenStatic,
-			adLockOptimistic,
-			adCmdText);
-	}
-	catch(_com_error &e)
-	{
-		throw e;
-		return;
-	}
-}
-
-void SQLExecutor::setSqlState(CString& sqlState)
-{
-	this->sqlstr = sqlState;
-	return;
-}
-
-void SQLExecutor::setDatabaseConnection(_ConnectionPtr& connection)
-{
-	this->dbcon = connection;
-}
-
-_RecordsetPtr& SQLExecutor::getRecordPtr()
-{
-	return resultptr;
-}

@@ -74,11 +74,8 @@ BEGIN_MESSAGE_MAP(CFormulaSelectDialog, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON0, OnButton0)
 	ON_BN_CLICKED(IDC_BUTTON_COMMA, OnButtonComma)
 	ON_BN_CLICKED(IDC_BUTTON_BACK, OnButtonBack)
-
-
-	//}}AFX_MSG_MAP
 	ON_BN_CLICKED(IDOK, &CFormulaSelectDialog::OnBnClickedOk)
-	ON_WM_CTLCOLOR()
+
 
 END_MESSAGE_MAP()
 
@@ -90,18 +87,13 @@ void CFormulaSelectDialog::OnOK()
 	// TODO: Add extra validation here
 	//查询出配方的ID和所需要的各种材料的用量
 	
-	CString weight,ID,formulaName,material;
+	CString weight,csFormuId,formulaName,material;
 	m_FormulaSelect.GetWindowText(formulaName);
-	m_FormulaIDCombo.GetWindowText(ID);
+	m_FormulaIDCombo.GetWindowText(csFormuId);
 	m_Weigh.GetWindowText(weight);
 
-	//CBitmap   bmp;   
-	//bmp.LoadBitmap(IDB_FORMULAINPUT);//载入图片   
-	//m_brBk.CreatePatternBrush(&bmp); 
-	//bmp.DeleteObject();   
 
-
-	if (ID.IsEmpty() || formulaName.IsEmpty())
+	if (csFormuId.IsEmpty() || formulaName.IsEmpty())
 	{
 		AfxMessageBox("请确认配方名称和编号！");
 		return;
@@ -119,25 +111,11 @@ void CFormulaSelectDialog::OnOK()
 		return;
 	}
 
-	CString sqlState("SELECT MATERIAL FROM FORMULAS WHERE ID = ");
-	sqlState += ID ;
-
-	//init recordset pointer
-	SQLExecutor::getInstanceRef().setSqlState(sqlState);
-
-	//exec SQL state
-	try
-	{
-		SQLExecutor::getInstanceRef().execSQL() ;
-	}
-	catch (_com_error& e)
-	{
-		AfxMessageBox(e.Description());
-		return;
-	}
+	CString sql;
+	sql.Format("select material from formulas where id = '%s'", csFormuId);
 
 	//get the result data set
-	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
+	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().execquery(sql);
 	
 	try
 	{
@@ -160,9 +138,9 @@ void CFormulaSelectDialog::OnOK()
 	{
 		AfxMessageBox(e.Description());
 	}
-	//先查出配方的ID，和成分，计算所需用量
 
-	SingletonHelper::getInstance()->setFormulaID(ID);
+	//先查出配方的ID，和成分，计算所需用量
+	SingletonHelper::getInstance()->setFormulaID(csFormuId);
 	SingletonHelper::getInstance()->setMaterials(material);
 	SingletonHelper::getInstance()->setFormulaName(formulaName);
 	SingletonHelper::getInstance()->setFormulaWeigh(weight);
@@ -177,32 +155,18 @@ BOOL CFormulaSelectDialog::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 
-	CString sqlState = "SELECT NAME FROM FORMULAS";
+	CString sql("select name from formulas");
 	
-	//init recordset pointer
-	SQLExecutor::getInstanceRef().setSqlState(sqlState);
-
-	//exec SQL state
-	try
-	{
-		SQLExecutor::getInstanceRef().execSQL() ;
-	}
-	catch (_com_error& e)
-	{
-		AfxMessageBox(e.Description());
-		return TRUE;
-	}
-
 	//get the result data set
-	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
+	_RecordsetPtr& dbptr = SQLExecutor::getInstanceRef().execquery(sql);
 	
 	try
 	{
 		_variant_t vName;
 		_variant_t vID;
-		while(!m_pRecordset->adoEOF)
+		while(!dbptr->adoEOF)
 		{
-			vName = m_pRecordset->GetCollect("NAME");
+			vName = dbptr->GetCollect("NAME");
 
 			CString name;
 			if (vName.vt != VT_NULL)
@@ -211,7 +175,7 @@ BOOL CFormulaSelectDialog::OnInitDialog()
 			}
 			m_FormulaSelect.AddString(name);
 
-			m_pRecordset->MoveNext();
+			dbptr->MoveNext();
 		}
 	}
 	catch(_com_error &e)
@@ -221,45 +185,30 @@ BOOL CFormulaSelectDialog::OnInitDialog()
 	
 	uiutils::setdlgsize(this, &m_ButtonCancel, &m_ButtonOK);
 
-	
-	/////////////////////
-	return TRUE;  // return TRUE unless you set the focus to a control
-	              // EXCEPTION: OCX Property Pages should return FALSE
+	return TRUE;  
 }
 
 void CFormulaSelectDialog::OnSelchangeFormulaselectCombo() 
 {
 	// TODO: Add your control notification handler code here
-	CString formulaName;
-	m_FormulaSelect.GetWindowText(formulaName);
-	CString sqlState("SELECT ID FROM FORMULAS WHERE NAME = '");
-	sqlState += formulaName + "'";
+	CString csFormuName;
+	m_FormulaSelect.GetWindowText(csFormuName);
+	
+	CString sql;
+	sql.Format("select id from formulas where name = '%s'", csFormuName);
+
 	CString ID;
-	SingletonHelper::getInstance()->setFormulaName(formulaName);
-
-	//init recordset pointer
-	SQLExecutor::getInstanceRef().setSqlState(sqlState);
-
-	//exec SQL state
-	try
-	{
-		SQLExecutor::getInstanceRef().execSQL() ;
-	}
-	catch (_com_error& e)
-	{
-		AfxMessageBox(e.Description());
-		return;
-	}
+	SingletonHelper::getInstance()->setFormulaName(csFormuName);
 
 	//get the result data set
-	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().getRecordPtr();
+	_RecordsetPtr& dbptr = SQLExecutor::getInstanceRef().execquery(sql);
 
 	try
 	{
 		_variant_t vID;
-		while(!m_pRecordset->adoEOF)
+		while(!dbptr->adoEOF)
 		{
-			vID = m_pRecordset->GetCollect("ID");
+			vID = dbptr->GetCollect("ID");
 			
 			if (vID.vt != VT_NULL)
 			{
@@ -267,13 +216,14 @@ void CFormulaSelectDialog::OnSelchangeFormulaselectCombo()
 			}
 			m_FormulaIDCombo.AddString(ID);
 
-			m_pRecordset->MoveNext();
+			dbptr->MoveNext();
 		}
 	}
 	catch(_com_error &e)
 	{
 		AfxMessageBox(e.Description());
 	}
+
 	m_FormulaIDCombo.SetCurSel(0);
 }
 
@@ -433,16 +383,6 @@ void CFormulaSelectDialog::OnBnClickedOk()
 	OnOK();
 }
 
-HBRUSH CFormulaSelectDialog::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
-{
-	HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
-	
-	if   (pWnd == this)   
-	{   
-		return m_brBk;   
-	}   
-	return hbr;
-}
 
 void CFormulaSelectDialog::OnBnClickedGoback()
 {
