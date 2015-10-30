@@ -112,7 +112,7 @@ void CFormulaSelectDialog::OnOK()
 	}
 
 	CString sql;
-	sql.Format("select material from formulas where id = '%s'", csFormuId);
+	sql.Format("select material from formulas where id = %s", csFormuId);
 
 	//get the result data set
 	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().execquery(sql);

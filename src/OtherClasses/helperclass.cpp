@@ -301,17 +301,19 @@ bool utils::isDouble(CEdit* editControl)
 
 void utils::ParseKeywords(const std::string& keyword,const std::string& separators, std::vector<std::string>& keywords)
 {
-	char* temp = strdup(keyword.c_str());
 	
+	char* temp = _strdup(keyword.c_str());
+	char* buff;
 	char* token;
-    token = strtok(temp,separators.c_str());
+    token = strtok_s(temp,separators.c_str(), &buff);
 	while(token != NULL)
 	{
 		if (NULL != token)
 		{
 			keywords.push_back(std::string(token));
 		}
-		token = strtok(NULL,separators.c_str());
+		token = strtok_s(NULL,separators.c_str(), &buff);
+		
 	}
 	free(temp);
 	return;

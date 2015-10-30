@@ -71,7 +71,7 @@ END_MESSAGE_MAP()
 /////////////////////////////////////////////////////////////////////////////
 // CFormulaWeighDialog message handlers
 
-//在对话框的初始函数中做一些空间的创建工作
+//在对话框的初始函数中做一些控件的创建工作
 BOOL CFormulaWeighDialog::OnInitDialog() 
 {
 	CDialog::OnInitDialog();
