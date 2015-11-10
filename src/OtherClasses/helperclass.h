@@ -114,11 +114,7 @@ public:
 	void setFormulaName(CString formulaName);
 	CString getFormulaName();
 	
-	void setCom1BaudRate(CString rate);
-	CString getCom1BaudRate();
 
-	void setCom2BaudRate(CString rate);
-	CString getCom2BaudRate();
 
 	void setRecordID(CString id);
 	CString getRecordID();
@@ -137,6 +133,7 @@ public:
 	CFont*	    simhei80;
 	CFont*		defaultFont;
 	CFont*		simHei40;
+	CFont*		simHei30;
 	
 	//global COLORREF
 	COLORREF backgroundColor;

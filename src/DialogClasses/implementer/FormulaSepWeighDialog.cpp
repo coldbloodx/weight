@@ -138,18 +138,18 @@ BOOL CFormulaSepWeighDialog::OnInitDialog()
 	//皮重
 	m_PackWeight.SetWindowText("1");
 
+
+	ConfParser parser("config.xml");
+	parser.load();
+
 	//init comPort;
-	com1 = utils::initCom(SingletonHelper::getInstance()->com1,
-		CString("COM1"),
-		atoi(SingletonHelper::getInstance()->getCom1BaudRate().GetBuffer(0)));
+	com1 = utils::initCom(SingletonHelper::getInstance()->com1, CString("COM1"), atoi(parser.getcom1rate().c_str()));
 	if (com1 < 0 || utils::isready())
 	{
 		AfxMessageBox("com1初始化失败，请确认称的连接情况，然后关闭对话框重试！");
 	}
 
-	com2 = utils::initCom(SingletonHelper::getInstance()->com2,
-		CString("COM2"),
-		atoi(SingletonHelper::getInstance()->getCom2BaudRate().GetBuffer(0)));
+	com2 = utils::initCom(SingletonHelper::getInstance()->com2, CString("COM2"), atoi(parser.getcom2rate().c_str()));
 	if (com2 < 0 || utils::isready())
 	{
 		AfxMessageBox("com2初始化失败，请确认称的连接情况，然后关闭对话框重试！");
@@ -157,6 +157,7 @@ BOOL CFormulaSepWeighDialog::OnInitDialog()
 
 	m_Com1Value.SetFont(SingletonHelper::getInstance()->simHei40, TRUE);
 	m_Com2Value.SetFont(SingletonHelper::getInstance()->simHei40, TRUE);
+
     uiutils::setdlgsize(this, &m_CancalButton, &m_ButtonOK);
     
 	return TRUE;  
@@ -218,8 +219,6 @@ void CFormulaSepWeighDialog::OnDivideButton()
 
 void CFormulaSepWeighDialog::OnBnClickedOk()
 {
-
-
 	//总的称重误差限制，0.5公斤
 	double threshold = 0.5;
 

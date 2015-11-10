@@ -135,8 +135,6 @@ BOOL CWeightDlg::OnInitDialog()
 	ConfParser parser(std::string("config.xml"));
 	parser.load();
 
-	SingletonHelper::getInstance()->setCom1BaudRate(parser.getcom1rate().c_str());
-	SingletonHelper::getInstance()->setCom2BaudRate(parser.getcom2rate().c_str());
 	
 
 	//show login window

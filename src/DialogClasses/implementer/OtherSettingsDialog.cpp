@@ -61,10 +61,12 @@ BOOL COtherSettingsDialog::OnInitDialog()
 	m_brBk.CreatePatternBrush(&bmp);   
 	bmp.DeleteObject();   
 
-	// TODO: Add extra initialization here
-	size_t i = m_Com1Rate.FindString(0,SingletonHelper::getInstance()->getCom1BaudRate());
+	ConfParser parser("config.xml");
+	parser.load();
+
+	size_t i = m_Com1Rate.FindString(0,parser.getcom1rate().c_str());
 	m_Com1Rate.SetCurSel(i);
-	i = m_Com2Rate.FindString(0, SingletonHelper::getInstance()->getCom2BaudRate());
+	i = m_Com2Rate.FindString(0, parser.getcom2rate().c_str());
 	m_Com2Rate.SetCurSel(i);
 
 	fileName = "weight.mdb";
@@ -89,15 +91,12 @@ void COtherSettingsDialog::OnOK()
 	m_Com2Rate.GetWindowText(rate2);
 
 	AfxMessageBox("com1波特率：" + rate1 + "\rcom2波特率：" + rate2);
-
-	SingletonHelper::getInstance()->setCom1BaudRate(rate1);
-	SingletonHelper::getInstance()->setCom2BaudRate(rate2);
 	
 	ConfParser parser("config.xml");
 	parser.load();
 
     parser.setcom1rate(rate1.GetBuffer(0));
-    parser.setcom1rate(rate2.GetBuffer(0));
+    parser.setcom2rate(rate2.GetBuffer(0));
 
 	parser.save();
 

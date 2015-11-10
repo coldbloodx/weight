@@ -32,12 +32,9 @@ void CFreeWeightDialog::DoDataExchange(CDataExchange* pDX)
 {
 
 	CDialog::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CFreeWeightDialog)
-	//DDX_Control(pDX, IDC_STATUS_STATIC, m_StatusStatic);
 	DDX_Control(pDX, IDC_COM2DATA_STATIC, m_Com2DataStatic);
 	DDX_Control(pDX, IDC_COM1DATA_STATIC, m_Com1DataStatic);
 	DDX_Control(pDX, IDOK, m_ButtonOK);
-	//}}AFX_DATA_MAP
 	DDX_Control(pDX, IDC_FWLABEL, fwLabel);
 	DDX_Control(pDX, IDC_FWBIG, fwBig);
 	DDX_Control(pDX, IDC_FWSMALL, fwSmall);
@@ -58,9 +55,6 @@ END_MESSAGE_MAP()
 
 void CFreeWeightDialog::OnOK() 
 {
-	// TODO: Add extra validation here
-	//closeCom(SingletonHelper::getInstance()->com1);
-
 	CDialog::OnOK();
 }
 
@@ -68,10 +62,11 @@ BOOL CFreeWeightDialog::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 	
-	// TODO: Add extra initialization here
-	//init comPort;
 	int comRate;
-	comRate = atoi(SingletonHelper::getInstance()->getCom1BaudRate().GetBuffer(0));
+	ConfParser parser("config.xml");
+	parser.load();
+
+	comRate = atoi(parser.getcom1rate().c_str());
 	com1 = utils::initCom(SingletonHelper::getInstance()->com1,
 		CString("COM1"),
 		comRate);
@@ -85,7 +80,8 @@ BOOL CFreeWeightDialog::OnInitDialog()
 	{
 		AfxMessageBox("com1初始化失败！请将此对话框关闭重试！");
 	}
-	comRate = atoi(SingletonHelper::getInstance()->getCom2BaudRate().GetBuffer(0));
+
+	comRate = atoi(parser.getcom2rate().c_str());
 	com2 = utils::initCom(SingletonHelper::getInstance()->com2,
 		CString("COM2"),
 		comRate);
@@ -96,8 +92,6 @@ BOOL CFreeWeightDialog::OnInitDialog()
 	}
 	SetTimer(1,1000,NULL);
 	
-
-
 	CStatic* sarray[4] = {&m_Com1DataStatic, &m_Com2DataStatic, &fwBig, &fwSmall};
 	
 	for (int i = 0; i < 4; ++i)
@@ -107,7 +101,7 @@ BOOL CFreeWeightDialog::OnInitDialog()
 	fwLabel.SetFont(SingletonHelper::getInstance()->simHei40, TRUE);
 
 
-	return TRUE;  // return TRUE unless you set the focus to a control
+	return TRUE;  
 
 }
 
@@ -117,14 +111,10 @@ CFreeWeightDialog::~CFreeWeightDialog()
 
 void CFreeWeightDialog::OnTimer(UINT nIDEvent) 
 {
-	// TODO: Add your message handler code here and/or call default
-	//HelperFunctions::showStatus(m_StatusStatic);
-	
 	//format time
 	CTime time = CTime::GetCurrentTime();
 	CString currentTime = time.Format("%Y:%m:%d:%X:   ");
 	
-	//read data and format data
 	CString com1Result,com2Result;
 	if (com1 >= 0)
 	{
@@ -150,7 +140,6 @@ void CFreeWeightDialog::OnTimer(UINT nIDEvent)
 	m_Com2DataStatic.GetWindowRect(&rect);   
 	m_Com2DataStatic.GetParent()->ScreenToClient(&rect);
 	m_Com2DataStatic.GetParent()->InvalidateRect(&rect, TRUE);
-	
 	
 	CDialog::OnTimer(nIDEvent);
 }

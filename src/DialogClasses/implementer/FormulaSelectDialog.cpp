@@ -149,6 +149,7 @@ BOOL CFormulaSelectDialog::OnInitDialog()
 	CDialog::OnInitDialog();
 
 	CString sql("select name from formulas");
+	m_FormulaSelect.SetFont(SingletonHelper::getInstance()->simHei30);
 	
 	//get the result data set
 	_RecordsetPtr& dbptr = SQLExecutor::getInstanceRef().execquery(sql);

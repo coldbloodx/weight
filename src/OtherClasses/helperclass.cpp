@@ -168,25 +168,6 @@ void* SingletonHelper::getSepWieghWindowPtr()
 	return this->sepWeighWindowPtr;
 }
 
-void SingletonHelper::setCom1BaudRate(CString rate)
-{
-	this->com1BaudRate = rate;
-}
-
-CString SingletonHelper::getCom1BaudRate()
-{
-	return this->com1BaudRate;
-}
-
-void SingletonHelper::setCom2BaudRate(CString rate)
-{
-	this->com2BaudRate = rate;
-}
-
-CString SingletonHelper::getCom2BaudRate()
-{
-	return this->com2BaudRate;
-}
 
 void SingletonHelper::setRecordID(CString id)
 {
@@ -224,6 +205,8 @@ void SingletonHelper::initFonts()
 	simhei80 = new CFont;
 	defaultFont = new CFont;
 	simHei40 = new CFont;
+	simHei30 = new CFont;
+
 
 	simhei80->CreateFont(80, 0, 0, 0, 700, FALSE, FALSE, 0,  
 		DEFAULT_CHARSET, OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_MODERN, _T("黑体"));
@@ -231,6 +214,8 @@ void SingletonHelper::initFonts()
 		DEFAULT_CHARSET, OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_MODERN, _T("宋体"));
 	simHei40->CreateFont(55, 0, 0, 0, 700, FALSE, FALSE, 0,  
 		DEFAULT_CHARSET, OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_MODERN, _T("黑体"));
+	simHei30->CreateFont(30, 0, 0, 0, 700, FALSE, FALSE, 0,  
+		DEFAULT_CHARSET, OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_MODERN, _T("宋体"));
 }
 
 void SingletonHelper::deleteFonts()
