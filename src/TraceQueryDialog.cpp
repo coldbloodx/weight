@@ -108,12 +108,12 @@ void CTraceQueryDialog::OnBnClickedButton5()
 	// sql
 	CString asqlarray[3] = {"select formulaid, formulaname, username, amount, odate, otime, fbatchnumber from weight order by gmt desc" ,
 		"select formulaid, formulaname, operatorname, amount, odate, otime from fetchrecords order by gmt desc",
-		"select materialname, materialbatchnumber, formulaid, formulaname, operatorname, amount, operate_date, operate_time from materialrecords order by gmt desc"};
+		"select materialname,formula_batch_number, materialbatchnumber, formulaid, formulaname, operatorname, amount, operate_date, operate_time from materialrecords order by gmt desc"};
 
 	// xheaders
 	CString weighheaders[7] = { "配方id","配方名称", "用户名", "数量", "日期", "时间", "产品批号"};
 	CString fetchheaders[6] = { "配方id","配方名称", "用户名", "数量", "日期", "时间"};
-	CString materialheaders[8] ={ "材料名称", "材料批号", "配方id", "配方名称", "用户名", "数量", "日期", "时间"};
+	CString materialheaders[9] ={ "材料名称", "材料批号", "配方批号","配方id", "配方名称", "用户名", "数量", "日期", "时间"};
 
 	vector<CString> weighheadervec(weighheaders, weighheaders+7);
 	vector<CString> fetchhheadervec(fetchheaders, fetchheaders+6);
@@ -127,7 +127,7 @@ void CTraceQueryDialog::OnBnClickedButton5()
 	// aheaders
 	CString aweightheaders[7] = {"formulaid", "formulaname", "username", "amount", "odate", "otime", "fbatchnumber"};
 	CString afetchheaders[6] = {"formulaid", "formulaname", "operatorname", "amount", "odate", "otime"};
-	CString amaterialheaders[8] = {"materialname", "materialbatchnumber", "formulaid", "formulaname", "operatorname",
+	CString amaterialheaders[9] = {"materialname", "materialbatchnumber", "formula_batch_number","formulaid", "formulaname", "operatorname",
 			"amount", "operate_date", "operate_time"};
 
 	vector<CString> aweightheadervec(aweightheaders, aweightheaders + 7);
