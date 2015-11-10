@@ -255,6 +255,8 @@
 #define IDC_STATIC_REAL                 1267
 #define IDC_STATIC_CAUTION              1268
 #define IDC_STATIC_SUM                  1269
+#define IDC_CHECK1                      1270
+#define IDC_MATERIAL_PRINT              1270
 
 // Next default values for new objects
 // 
@@ -262,7 +264,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        220
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1270
+#define _APS_NEXT_CONTROL_VALUE         1271
 #define _APS_NEXT_SYMED_VALUE           104
 #endif
 #endif

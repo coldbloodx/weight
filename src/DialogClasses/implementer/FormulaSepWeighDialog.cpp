@@ -64,6 +64,7 @@ void CFormulaSepWeighDialog::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_PACKWEIGHT, m_PackWeight);
 	DDX_Control(pDX, IDC_RESTNEEDED, m_RestNeeded);
 	//}}AFX_DATA_MAP
+	DDX_Control(pDX, IDC_MATERIAL_PRINT, ckMaterialPrint);
 }
 
 
@@ -204,13 +205,11 @@ void CFormulaSepWeighDialog::OnTimer(UINT nIDEvent)
 	m_Com1DisplayList.InsertString(0,currentTime + com2Result + "Kg");
 	m_Com2DisplayList.InsertString(0,currentTime + com1Result + "Kg");
 
-	//HelperFunctions::showStatus(m_StatusStatic);
 	CDialog::OnTimer(nIDEvent);
 }
 
 void CFormulaSepWeighDialog::OnDivideButton() 
 {
-	// TODO: Add your control notification handler code here
 	CWeighPerPackDialog weighPerPackDialog;
 	SingletonHelper::getInstance()->setSepWeighWindowPtr((void*)this);
 	weighPerPackDialog.DoModal();
@@ -243,20 +242,18 @@ void CFormulaSepWeighDialog::OnBnClickedOk()
 		{
 			return;
 		}
-		else
-		{
-			CDialog::OnOK();
-		}
 	}
 	else
 	{
 		CFormulaWeighDialog* pFormulaWeighDialog = (CFormulaWeighDialog*)SingletonHelper::getInstance()->getPtrData();
 		SingletonHelper::getInstance()->compositions[SingletonHelper::getInstance()->getIntData()]->isWeigh = TRUE;
 		pFormulaWeighDialog->refreshWeighedFlag();
-		utils::printLabel(materialName, materialWeigh, SingletonHelper::getInstance()->getLineNumber());
-		CDialog::OnOK();
+		if(ckMaterialPrint.GetCheck())
+		{
+			utils::printLabel(materialName, materialWeigh, SingletonHelper::getInstance()->getLineNumber());
+		}
 	}
-
+	CDialog::OnOK();
 }
 
 void CFormulaSepWeighDialog::OnBnClickedPributton()
@@ -357,7 +354,6 @@ void CFormulaSepWeighDialog::OnBnClickedSecbutton()
 
 void CFormulaSepWeighDialog::OnBnClickedCancel()
 {
-	// TODO: Add your control notification handler code here
 	CDialog::OnCancel();
 }
 

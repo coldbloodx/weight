@@ -21,9 +21,6 @@ static char THIS_FILE[] = __FILE__;
 CWeighPerPackDialog::CWeighPerPackDialog(CWnd* pParent /*=NULL*/)
 	: CDialog(CWeighPerPackDialog::IDD, pParent)
 {
-	//{{AFX_DATA_INIT(CWeighPerPackDialog)
-		// NOTE: the ClassWizard will add member initialization here
-	//}}AFX_DATA_INIT
 }
 
 CWeighPerPackDialog::~CWeighPerPackDialog()

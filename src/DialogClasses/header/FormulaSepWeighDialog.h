@@ -56,6 +56,7 @@ public:
 	CStatic m_IsMultiPackNeeded;
 	CStatic m_PackWeight;
 	CStatic m_RestNeeded;
+	CButton ckMaterialPrint;
 
 	bool bIsMultiPackFlag;
 	bool bIsGrossedFlag;
@@ -73,19 +74,11 @@ public:
 	int com1;
 	int com2;
 
-	CBrush m_brBk;
-// Overrides
-	// ClassWizard generated virtual function overrides
-	//{{AFX_VIRTUAL(CFormulaSepWeighDialog)
+
 	protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
-	//}}AFX_VIRTUAL
 
-// Implementation
 protected:
-
-	// Generated message map functions
-	//{{AFX_MSG(CFormulaSepWeighDialog)
 	virtual void OnOK();
 	virtual BOOL OnInitDialog();
 
@@ -103,9 +96,8 @@ public:
 
 public:
 		void updateMultiTimes();
+
 };
 
-//{{AFX_INSERT_LOCATION}}
-// Microsoft Visual C++ will insert additional declarations immediately before the previous line.
 
-#endif // !defined(AFX_FORMULASEPWEIGHDIALOG_H__E7613D61_3C91_40DA_907D_2F98A13C3588__INCLUDED_)
+#endif 
