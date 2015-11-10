@@ -24,7 +24,6 @@ public:
 
 	//}}AFX_DATA
 	CEdit	m_Weigh;
-	CComboBox	m_FormulaIDCombo;
 	CComboBox	m_FormulaSelect;
 	CButton	m_ButtonOK;
 	CButton	m_ButtonCancel;
@@ -57,7 +56,7 @@ protected:
 	//{{AFX_MSG(CFormulaSelectDialog)
 	virtual void OnOK();
 	virtual BOOL OnInitDialog();
-	afx_msg void OnSelchangeFormulaselectCombo();
+
 	afx_msg void OnButton1();
 	afx_msg void OnButton2();
 	afx_msg void OnButton3();

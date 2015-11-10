@@ -23,8 +23,7 @@ static char THIS_FILE[] = __FILE__;
 CFormulaSelectDialog::CFormulaSelectDialog(CWnd* pParent /*=NULL*/)
 	: CDialog(CFormulaSelectDialog::IDD, pParent)
 {
-	//{{AFX_DATA_INIT(CFormulaSelectDialog)
-	//}}AFX_DATA_INIT
+
 }
 
 CFormulaSelectDialog::~CFormulaSelectDialog()
@@ -37,9 +36,8 @@ void CFormulaSelectDialog::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CFormulaSelectDialog)
-	DDX_Control(pDX, IDC_WEIGH_EDIT, m_Weigh);
-	DDX_Control(pDX, IDC_FORMULAID_COMBO, m_FormulaIDCombo);
 	DDX_Control(pDX, IDC_FORMULASELECT_COMBO, m_FormulaSelect);
+	DDX_Control(pDX, IDC_WEIGH_EDIT, m_Weigh);
 	DDX_Control(pDX, IDOK, m_ButtonOK);
 	DDX_Control(pDX, IDCANCEL, m_ButtonCancel);
 	DDX_Control(pDX, IDC_BUTTON9, m_Button9);
@@ -61,7 +59,6 @@ void CFormulaSelectDialog::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(CFormulaSelectDialog, CDialog)
 	//{{AFX_MSG_MAP(CFormulaSelectDialog)
-	ON_CBN_SELCHANGE(IDC_FORMULASELECT_COMBO, OnSelchangeFormulaselectCombo)
 	ON_BN_CLICKED(IDC_BUTTON1, OnButton1)
 	ON_BN_CLICKED(IDC_BUTTON2, OnButton2)
 	ON_BN_CLICKED(IDC_BUTTON3, OnButton3)
@@ -84,18 +81,16 @@ END_MESSAGE_MAP()
 
 void CFormulaSelectDialog::OnOK() 
 {
-	// TODO: Add extra validation here
-	//查询出配方的ID和所需要的各种材料的用量
+	//查询出配方所需要的各种材料的用量
 	
-	CString weight,csFormuId,formulaName,material;
+	CString weight,formulaName,material;
 	m_FormulaSelect.GetWindowText(formulaName);
-	m_FormulaIDCombo.GetWindowText(csFormuId);
 	m_Weigh.GetWindowText(weight);
 
 
-	if (csFormuId.IsEmpty() || formulaName.IsEmpty())
+	if (formulaName.IsEmpty() )
 	{
-		AfxMessageBox("请确认配方名称和编号！");
+		AfxMessageBox("请确认配方名称！");
 		return;
 	}
 
@@ -112,9 +107,8 @@ void CFormulaSelectDialog::OnOK()
 	}
 
 	CString sql;
-	sql.Format("select material from formulas where id = %s", csFormuId);
+	sql.Format("select material from formulas where name = '%s'", formulaName);
 
-	//get the result data set
 	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().execquery(sql);
 	
 	try
@@ -140,7 +134,6 @@ void CFormulaSelectDialog::OnOK()
 	}
 
 	//先查出配方的ID，和成分，计算所需用量
-	SingletonHelper::getInstance()->setFormulaID(csFormuId);
 	SingletonHelper::getInstance()->setMaterials(material);
 	SingletonHelper::getInstance()->setFormulaName(formulaName);
 	SingletonHelper::getInstance()->setFormulaWeigh(weight);
@@ -166,7 +159,7 @@ BOOL CFormulaSelectDialog::OnInitDialog()
 		_variant_t vID;
 		while(!dbptr->adoEOF)
 		{
-			vName = dbptr->GetCollect("NAME");
+			vName = dbptr->GetCollect("name");
 
 			CString name;
 			if (vName.vt != VT_NULL)
@@ -188,62 +181,22 @@ BOOL CFormulaSelectDialog::OnInitDialog()
 	return TRUE;  
 }
 
-void CFormulaSelectDialog::OnSelchangeFormulaselectCombo() 
-{
-	// TODO: Add your control notification handler code here
-	CString csFormuName;
-	m_FormulaSelect.GetWindowText(csFormuName);
-	
-	CString sql;
-	sql.Format("select id from formulas where name = '%s'", csFormuName);
-
-	CString ID;
-	SingletonHelper::getInstance()->setFormulaName(csFormuName);
-
-	//get the result data set
-	_RecordsetPtr& dbptr = SQLExecutor::getInstanceRef().execquery(sql);
-
-	try
-	{
-		_variant_t vID;
-		while(!dbptr->adoEOF)
-		{
-			vID = dbptr->GetCollect("ID");
-			
-			if (vID.vt != VT_NULL)
-			{
-				ID =(LPCTSTR)(_bstr_t)vID;
-			}
-			m_FormulaIDCombo.AddString(ID);
-
-			dbptr->MoveNext();
-		}
-	}
-	catch(_com_error &e)
-	{
-		AfxMessageBox(e.Description());
-	}
-
-	m_FormulaIDCombo.SetCurSel(0);
-}
 
 void CFormulaSelectDialog::OnButtonBack() 
 {
-		// TODO: Add your control notification handler code here
-			if (m_FocusedID != IDC_WEIGH_EDIT)
-			{
-					return;
-				}
-		CWnd * pWnd = GetDlgItem(m_FocusedID);
-		::SetFocus(pWnd->GetSafeHwnd());
-		keybd_event(VK_BACK, 0, 0, 0);
+	if (m_FocusedID != IDC_WEIGH_EDIT)
+	{
+		return;
 	}
+	CWnd * pWnd = GetDlgItem(m_FocusedID);
+	::SetFocus(pWnd->GetSafeHwnd());
+	keybd_event(VK_BACK, 0, 0, 0);
+}
 
 
 
 void CFormulaSelectDialog::OnButton1() 
 {
-	// TODO: Add your control notification handler code here
 	CWnd * pWnd = GetDlgItem(m_FocusedID);
 	::SetFocus(pWnd->GetSafeHwnd());
 	keybd_event(VK_NUMPAD1, 0, 0, 0);
@@ -251,7 +204,6 @@ void CFormulaSelectDialog::OnButton1()
 
 void CFormulaSelectDialog::OnButton2() 
 {
-	// TODO: Add your control notification handler code here
 	if (m_FocusedID != IDC_WEIGH_EDIT)
 	{
 		return;
@@ -263,7 +215,6 @@ void CFormulaSelectDialog::OnButton2()
 
 void CFormulaSelectDialog::OnButton3() 
 {
-	// TODO: Add your control notification handler code here
 	if (m_FocusedID != IDC_WEIGH_EDIT)
 	{
 		return;
@@ -275,7 +226,6 @@ void CFormulaSelectDialog::OnButton3()
 
 void CFormulaSelectDialog::OnButton4() 
 {
-	// TODO: Add your control notification handler code here
 	if (m_FocusedID != IDC_WEIGH_EDIT)
 	{
 		return;
@@ -287,7 +237,6 @@ void CFormulaSelectDialog::OnButton4()
 
 void CFormulaSelectDialog::OnButton5() 
 {
-	// TODO: Add your control notification handler code here
 	if (m_FocusedID != IDC_WEIGH_EDIT)
 	{
 		return;
@@ -299,7 +248,6 @@ void CFormulaSelectDialog::OnButton5()
 
 void CFormulaSelectDialog::OnButton6() 
 {
-	// TODO: Add your control notification handler code here
 	if (m_FocusedID != IDC_WEIGH_EDIT)
 	{
 		return;
@@ -311,7 +259,6 @@ void CFormulaSelectDialog::OnButton6()
 
 void CFormulaSelectDialog::OnButton7() 
 {
-	// TODO: Add your control notification handler code here
 	if (m_FocusedID != IDC_WEIGH_EDIT)
 	{
 		return;
@@ -323,7 +270,6 @@ void CFormulaSelectDialog::OnButton7()
 
 void CFormulaSelectDialog::OnButton8() 
 {
-	// TODO: Add your control notification handler code here
 	if (m_FocusedID != IDC_WEIGH_EDIT)
 	{
 		return;
@@ -335,7 +281,6 @@ void CFormulaSelectDialog::OnButton8()
 
 void CFormulaSelectDialog::OnButton9() 
 {
-	// TODO: Add your control notification handler code here
 	if (m_FocusedID != IDC_WEIGH_EDIT)
 	{
 		return;
@@ -347,7 +292,6 @@ void CFormulaSelectDialog::OnButton9()
 
 void CFormulaSelectDialog::OnButton0() 
 {
-	// TODO: Add your control notification handler code here
 	CWnd * pWnd = GetDlgItem(m_FocusedID);
 	::SetFocus(pWnd->GetSafeHwnd());
 	keybd_event(VK_NUMPAD0, 0, 0, 0);
@@ -355,7 +299,6 @@ void CFormulaSelectDialog::OnButton0()
 
 void CFormulaSelectDialog::OnButtonComma() 
 {
-	// TODO: Add your control notification handler code here
 	if (m_FocusedID != IDC_WEIGH_EDIT)
 	{
 		return;
@@ -368,7 +311,6 @@ void CFormulaSelectDialog::OnButtonComma()
 
 BOOL CFormulaSelectDialog::OnCommand(WPARAM wParam, LPARAM lParam) 
 {
-	// TODO: Add your specialized code here and/or call the base class
 	int controlID = LOWORD(wParam);
 	if (controlID == IDC_WEIGH_EDIT)
 	{
@@ -379,7 +321,6 @@ BOOL CFormulaSelectDialog::OnCommand(WPARAM wParam, LPARAM lParam)
 
 void CFormulaSelectDialog::OnBnClickedOk()
 {
-	// TODO: Add your control notification handler code here
 	OnOK();
 }
 
@@ -387,5 +328,4 @@ void CFormulaSelectDialog::OnBnClickedOk()
 void CFormulaSelectDialog::OnBnClickedGoback()
 {
 	CDialog::OnCancel();
-	// TODO: Add your control notification handler code here
 }

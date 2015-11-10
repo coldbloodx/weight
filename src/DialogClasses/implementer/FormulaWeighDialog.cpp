@@ -161,7 +161,7 @@ BOOL CFormulaWeighDialog::OnInitDialog()
 	int controlHeight = 25;
 	int rowSpace = 10;
     
-	int nameWidth = 50;
+	int nameWidth = 210;
 	int weightWidth = 120;
 	int buttonWidth = 60;
 	int flagWidth = 90;
@@ -186,9 +186,10 @@ BOOL CFormulaWeighDialog::OnInitDialog()
 		composition newComposition = *(sPointer->compositions[j]);
 
 		materialNameStatic->Create(newComposition.material.c_str(),
-			WS_VISIBLE | ES_CENTER, rect, this, materialNameStaticID++);
+			WS_VISIBLE | ES_LEFT, rect, this, materialNameStaticID++);
 		materialNameStatic->SetFont(SingletonHelper::getInstance()->defaultFont, TRUE);
 		materialNameStatic->ShowWindow(SW_SHOW);
+		
 		materialNameVector.push_back(materialNameStatic);
 		
 		dbmname.push_back(newComposition.material.c_str());
@@ -202,7 +203,7 @@ BOOL CFormulaWeighDialog::OnInitDialog()
 		materialWeighStatic = new CStatic;
 		CString test1 = utils::doubleToCString(newComposition.percentage * totalWeigh / 100);
 		test1 += "Kg";
-		materialWeighStatic->Create(test1, WS_VISIBLE | ES_CENTER, rect,
+		materialWeighStatic->Create(test1, WS_VISIBLE | ES_LEFT, rect,
 			this, materialWeighStaticID++);
 		materialWeighStatic->SetFont(SingletonHelper::getInstance()->defaultFont, TRUE);
 		materialWeighStatic->ShowWindow(SW_SHOW);
