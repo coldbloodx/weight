@@ -73,7 +73,7 @@ void CMaterialManagementDialog::initListHeader()
 
 void CMaterialManagementDialog::initList()
 {
-	_RecordsetPtr dbptr = SQLExecutor::getInstanceRef().execquery(CString("select * from materials"));
+	_RecordsetPtr dbptr = SQLExecutor::getInstanceRef().execquery(CString("select * from materials order by id"));
 	
 	CString headerArray[4] = {"id", "name","batchnumber","manufacture"};
 	std::vector<CString> headerList(headerArray, headerArray + 4);
