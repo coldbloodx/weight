@@ -8,3 +8,5 @@ src/Weight.aps
 src/Weight.suo
 src/weight.ldb  
  
+src/weight.ldb
+*.mdb
