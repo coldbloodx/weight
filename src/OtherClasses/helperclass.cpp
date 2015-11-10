@@ -68,35 +68,7 @@ CString SingletonHelper::getUserRight()
 	return userRight;
 }
 
-void SingletonHelper::setTableName(CString &talbeName)
-{
-	this->tableName = tableName;
-}
 
-CString SingletonHelper::getTableName()
-{
-	return this->tableName;
-}
-
-void SingletonHelper::setIndexName(CString &indexName)
-{
-	this->indexName = indexName;
-}
-
-CString SingletonHelper::getIndexName()
-{
-	return this->indexName;
-}
-
-void SingletonHelper::setKeyWord(CString &keyWord)
-{
-	this->keyWord = keyWord;
-}
-
-CString SingletonHelper::getKeyWord()
-{
-	return this->keyWord;
-}
 
 void SingletonHelper::setFormulaWeigh(CString weigh)
 {
@@ -169,15 +141,6 @@ void* SingletonHelper::getSepWieghWindowPtr()
 }
 
 
-void SingletonHelper::setRecordID(CString id)
-{
-	this->recordID = id;
-}
-
-CString SingletonHelper::getRecordID()
-{
-	return this->recordID;
-}
 
 CString SingletonHelper::getLineNumber()
 {
@@ -433,11 +396,7 @@ void utils::showStatus(CStatic& statusStatic)
 	statusStatic.GetParent()->InvalidateRect(&rect, TRUE);
 }
 
-void utils::setButtonStyle(CButton& button, COLORREF bgColor, CFont* pFont, bool reDraw /* = TRUE  */, bool blFlat /* = FALSE */)
-{
-	button.SetFont(pFont, reDraw);
 
-}
 
 CString utils::getCurrentDate()
 {
@@ -458,36 +417,6 @@ CString utils::gettimestamp()
 	CTime curtime = CTime::GetCurrentTime();
 	CString ret = curtime.Format("%Y%m%d%H%M");
 	return ret;
-}
-
-void utils::updateRecordValueVector(_RecordsetPtr& pRecordset, std::vector<CString>& valueList, std::vector<CString>& headerList)
-{
-	int itemIndex = 0;
-	int subItemIndex = 0;
-	try
-	{
-		while(!pRecordset->adoEOF)
-		{
-			for (size_t i = 0; i < headerList.size(); ++i )
-			{
-				_variant_t vDataField = pRecordset->GetCollect(_variant_t(headerList[i]));
-				CString dataField;
-				if (vDataField.vt != VT_NULL)
-				{
-					dataField = (LPCTSTR)(_bstr_t)vDataField;
-				}
-				valueList.push_back(dataField);
-			}
-			subItemIndex = 0;
-			++itemIndex;
-			pRecordset->MoveNext();
-		}
-	}
-	catch (_com_error& e)
-	{
-		throw e;
-	}
-	return;
 }
 
 void utils::printLabel( CString name, CString weigh, CString lineNumber )

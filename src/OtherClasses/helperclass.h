@@ -21,8 +21,6 @@ private:
 	void* sepWeighWindowPtr;
 	int   intData;
 
-    CString title;
-    CString powered;
 
 	//用户的标识，用户ID，和用户的姓名
 	CString userID;
@@ -30,24 +28,14 @@ private:
 	CString userPass;
 	CString userRight;
 
-	//查询窗口用到
-	CString tableName;
-	CString indexName;
-	CString keyWord;
 
 	//配方ID，配方名字，配方重量
 	CString formulaID;
 	CString formulaName;
 	CString formulaWeigh;
 
-	//记录ID
-	CString recordID;
 
 	std::string materials;
-
-	//全局配置用到
-	CString		 com1BaudRate;
-	CString		 com2BaudRate;
 
 	double      weighPerPack;
 
@@ -86,14 +74,6 @@ public:
 	void setUserRight(CString &right);
 	CString getUserRight();
 
-	void setTableName(CString &talbeName);
-	CString getTableName();
-
-	void setIndexName(CString &indexName);
-	CString getIndexName();
-
-	void setKeyWord(CString &keyWord);
-	CString getKeyWord();
 
 	void setMaterials(CString &materials);
 	std::string getMaterials();
@@ -114,11 +94,6 @@ public:
 	void setFormulaName(CString formulaName);
 	CString getFormulaName();
 	
-
-
-	void setRecordID(CString id);
-	CString getRecordID();
-
 	void setLineNumber(CString lineNumber);
 	CString getLineNumber();
 
@@ -135,14 +110,6 @@ public:
 	CFont*		simHei40;
 	CFont*		simHei30;
 	
-	//global COLORREF
-	COLORREF backgroundColor;
-	COLORREF textColor;
-	COLORREF buttonColor;
-
-	const static int screenWidth = 1024;
-	const static int screenHeight = 768;
-
 	void initFonts();
 
 private:
@@ -157,11 +124,6 @@ namespace utils
 	void ParseKeywords(const std::string& keyword,
 					   const std::string& separators, 
 					   std::vector<std::string>& keywords);
-	void initListHeader(CListCtrl &listCtrl, 
-						std::vector<std::string> &headerVector,
-						std::vector<int> &headerLengthVector);
-	void refreshList(CListCtrl &listCtrl,
-					 CString &tableName);
 
 	//communication related functions
 	int initCom(HANDLE& com, CString port, int rate);
@@ -173,7 +135,6 @@ namespace utils
 	double cstr2double(CString cstr);
 
 	void showStatus(CStatic& statusStatic);
-	void setButtonStyle(CButton& button, COLORREF bgColor, CFont* pFont, bool reDraw = TRUE , bool blFlat = FALSE);
 
 	CString getCurrentDate();
 	CString getCurrentTime();
@@ -181,9 +142,7 @@ namespace utils
 
 	void printLabel(CString name, CString weigh, CString lineNumber);
 	void printVector(CString tilte, std::vector<CString>& headerList, std::vector<CString>& valueList);
-	void updateRecordValueVector(_RecordsetPtr& pRecordset, std::vector<CString>& valueList, std::vector<CString>& headerList);
 	
-
 	unsigned long time2gmt(CTime& timeparam);
 	bool isready();
 	double sumdbcol(_RecordsetPtr& pRecordset, CString key);

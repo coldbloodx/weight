@@ -99,8 +99,7 @@ void CQueryDialog::OnSelchangeQuerytableCombo()
 	{
 	case 0:
 		{
-			tempString = "MATERIALS";
-			SingletonHelper::getInstance()->setTableName(tempString);
+
 			SingletonHelper::getInstance()->setIntData(0);
 			m_QueryIndex.ResetContent();
 			m_QueryIndex.AddString("≤ƒ¡œ±‡∫≈");
@@ -112,8 +111,7 @@ void CQueryDialog::OnSelchangeQuerytableCombo()
 		break;
 	case 1:
 		{
-			tempString = "FORMULAS";
-			SingletonHelper::getInstance()->setTableName(tempString);
+
 			SingletonHelper::getInstance()->setIntData(1);
 			m_QueryIndex.ResetContent();
 			m_QueryIndex.AddString("≈‰∑Ω±‡∫≈");
@@ -124,8 +122,6 @@ void CQueryDialog::OnSelchangeQuerytableCombo()
 		break;
 	case 2:
 		{
-			tempString = "USERS";
-			SingletonHelper::getInstance()->setTableName(tempString);
 			SingletonHelper::getInstance()->setIntData(2);
 			m_QueryIndex.ResetContent();
 			m_QueryIndex.AddString("”√ªß±‡∫≈");
