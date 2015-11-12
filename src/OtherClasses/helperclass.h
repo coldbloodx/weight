@@ -21,14 +21,6 @@ private:
 	void* sepWeighWindowPtr;
 	int   intData;
 
-
-	//用户的标识，用户ID，和用户的姓名
-	CString userID;
-	CString userName;
-	CString userPass;
-	CString userRight;
-
-
 	//配方ID，配方名字，配方重量
 	CString formulaID;
 	CString formulaName;
@@ -62,17 +54,6 @@ public:
 	void setIntData(int data);
 	int getIntData();
 
-	void setUserID(CString ID);
-	CString getUserID();
-
-	void setUserName(CString &username);
-	CString getUsername();
-	
-	void setUserPass(CString &pass);
-	CString getUserPass();
-
-	void setUserRight(CString &right);
-	CString getUserRight();
 
 
 	void setMaterials(CString &materials);
@@ -120,21 +101,24 @@ private:
 namespace utils
 {
 	bool isDouble(CEdit* editControl);
-	bool isBatchNumber(CEdit* editControl);
+	bool isbatchnumber(CEdit* editControl);
 	void ParseKeywords(const std::string& keyword,
 					   const std::string& separators, 
 					   std::vector<std::string>& keywords);
 
 	//communication related functions
-	int initCom(HANDLE& com, CString port, int rate);
-	CString readCom(HANDLE comPort);
-	int closeCom(HANDLE &com);
+	int initcom(HANDLE& com, CString port, int rate);
+	CString readcom(HANDLE comPort);
+	int closecom(HANDLE &com);
 
-	CString doubleToCString(double aDouble);
-	CString intToCString(int aInt);
+
+
+	CString double2cstr(double aDouble);
+	CString int2cstr(int aInt);
 	double cstr2double(CString cstr);
+	int cstr2int(CString cstr);
 
-	void showStatus(CStatic& statusStatic);
+	bool isnumber(CString cstr);
 
 	CString getCurrentDate();
 	CString getCurrentTime();

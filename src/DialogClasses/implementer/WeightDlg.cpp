@@ -106,10 +106,7 @@ END_MESSAGE_MAP()
 BOOL CWeightDlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
-	
-	// Add "About..." menu item to system menu.
-	
-	// IDM_ABOUTBOX must be in the system command range.
+
 	ASSERT((IDM_ABOUTBOX & 0xFFF0) == IDM_ABOUTBOX);
 	ASSERT(IDM_ABOUTBOX < 0xF000);
 	
@@ -135,14 +132,11 @@ BOOL CWeightDlg::OnInitDialog()
 	ConfParser parser(std::string("config.xml"));
 	parser.load();
 
-	
-
 	//show login window
 	CLoginDialog loginDialog;
 	SingletonHelper::getInstance()->setPtrData((void*)this);
 
 
-	//cancel login
 	//点击cancel 直接退出程序
 	if (loginDialog.DoModal() == IDCANCEL)
 	{
@@ -157,7 +151,6 @@ BOOL CWeightDlg::OnInitDialog()
 	this->Invalidate();
 
 	//update main window buttons
-
     CButton* buttonArray[6] = { &m_WeighFreeButton,&m_FormulaWeighButton,&m_FormulaManagementButton,
 				 &m_FetchStuffButton,&m_OtherSettingsButton,&m_PowerOffButton };
 
@@ -166,7 +159,7 @@ BOOL CWeightDlg::OnInitDialog()
 
 	uiutils::setdlgsize(this);
 
-	utils::showStatus(m_StatusStatic);
+	showstatus(m_StatusStatic);
 	SetTimer(1000, 1000, NULL);
 	return TRUE; 
 }
@@ -184,19 +177,14 @@ void CWeightDlg::OnSysCommand(UINT nID, LPARAM lParam)
 	}
 }
 
-// If you add a minimize button to your dialog, you will need the code below
-//  to draw the icon.  For MFC applications using the document/view model,
-//  this is automatically done for you by the framework.
-
 void CWeightDlg::OnPaint() 
 {
 	if (IsIconic())
 	{
-		CPaintDC dc(this); // device context for painting
+		CPaintDC dc(this); 
 		
 		SendMessage(WM_ICONERASEBKGND, (WPARAM) dc.GetSafeHdc(), 0);
 		
-		// Center icon in client rectangle
 		int cxIcon = GetSystemMetrics(SM_CXICON);
 		int cyIcon = GetSystemMetrics(SM_CYICON);
 		CRect rect;
@@ -204,7 +192,6 @@ void CWeightDlg::OnPaint()
 		int x = (rect.Width() - cxIcon + 1) / 2;
 		int y = (rect.Height() - cyIcon + 1) / 2;
 		
-		// Draw the icon
 		dc.DrawIcon(x, y, m_hIcon);
 	}
 	else
@@ -213,8 +200,6 @@ void CWeightDlg::OnPaint()
 	}
 }
 
-// The system calls this to obtain the cursor to display while the user drags
-//  the minimized window.
 HCURSOR CWeightDlg::OnQueryDragIcon()
 {
 	return (HCURSOR) m_hIcon;
@@ -279,14 +264,12 @@ void CWeightDlg::OnFormulaManagement()
 
 void CWeightDlg::OnUsermanagement() 
 {
-	// TODO: Add your control notification handler code here
 	CUserManageDialog userManagementDialog;
 	userManagementDialog.DoModal();
 }
 
 void CWeightDlg::OnMaterialmanagementButton() 
 {
-	// TODO: Add your control notification handler code here
 	CMaterialManagementDialog materialManagementDialog;
 	materialManagementDialog.DoModal();
 }
@@ -294,14 +277,12 @@ void CWeightDlg::OnMaterialmanagementButton()
 
 void CWeightDlg::OnQueryButton() 
 {
-	// TODO: Add your control notification handler code here
 	CQueryDialog queryDialog;
 	queryDialog.DoModal();
 }
 
 void CWeightDlg::OnWightstartButton() 
 {
-	// TODO: Add your control notification handler code here
 	CFormulaSelectDialog formulaSelectDialog;
 	formulaSelectDialog.DoModal();
 }
@@ -310,7 +291,6 @@ void CWeightDlg::OnWightstartButton()
 
 void CWeightDlg::OnChangepasswordButton() 
 {
-	// TODO: Add your control notification handler code here
 	CPassChangeDialog passChangeDialog;
 	passChangeDialog.DoModal();
 }
@@ -318,22 +298,19 @@ void CWeightDlg::OnChangepasswordButton()
 
 void CWeightDlg::OnWeighfreeButton() 
 {
-	// TODO: Add your control notification handler code here
 	CFreeWeightDialog freeWeighDialog;
 	freeWeighDialog.DoModal();
 }
 
 void CWeightDlg::OnFetchstuffButton() 
 {
-	// TODO: Add your control notification handler code here
 	CFormulaDialog formulaDialog;
 	formulaDialog.DoModal();
 }
 
 void CWeightDlg::OnTimer(UINT nIDEvent) 
 {
-	// TODO: Add your message handler code here and/or call default
-	utils::showStatus(m_StatusStatic); 
+	showstatus(m_StatusStatic); 
 	CDialog::OnTimer(nIDEvent);
 }
 
@@ -351,7 +328,7 @@ BOOL CWeightDlg::PreTranslateMessage(MSG* pMsg)
 
 void CWeightDlg::OnCancel()
 {
-	if (SingletonHelper::getInstance()->getUserRight() != "管理员")
+	if (CWeightApp::getuserperm() != UTYPE_ADMIN)
 	{
 		return;
 	}
@@ -365,7 +342,20 @@ void CWeightDlg::OnCancel()
 
 void CWeightDlg::OnBnClickedOthersettingsbutton()
 {
-    // TODO: Add your control notification handler code here
     CBasicSettingsDialog dlg;
     dlg.DoModal();
+}
+
+void CWeightDlg::showstatus(CStatic& statusStatic)
+{
+	CTime curTime;
+	curTime = CTime::GetCurrentTime();
+	CString date, time;
+	date = curTime.Format("今天是：%Y年%m月%d日，");
+	time = curTime.Format("当前时间：%X。");
+	statusStatic.SetWindowText(date + time + "当前操作用户是：" + CWeightApp::getusername());
+	RECT rect;
+	statusStatic.GetWindowRect(&rect);   
+	statusStatic.GetParent()->ScreenToClient(&rect);
+	statusStatic.GetParent()->InvalidateRect(&rect, TRUE);
 }

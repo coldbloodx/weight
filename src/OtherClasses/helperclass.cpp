@@ -3,6 +3,8 @@
 #include "HelperClass.h"
 #include "winspool.h"
 #include "DBptr.h"
+#include "constants.h"
+#include "Weight.h"
 
 SingletonHelper* SingletonHelper::m_instance = NULL;
 
@@ -38,36 +40,6 @@ void SingletonHelper::setIntData(int data)
 	this->intData = data;
 }
 
-void SingletonHelper::setUserName(CString &userName)
-{
-	this->userName = userName;
-}
-
-CString SingletonHelper::getUsername()
-{
-	return this->userName;
-}
-
-void SingletonHelper::setUserPass(CString &pass)
-{
-	this->userPass = pass;
-}
-
-CString SingletonHelper::getUserPass()
-{
-	return this->userPass;
-}
-
-void SingletonHelper::setUserRight(CString &right)
-{
-	userRight = right;
-}
-
-CString SingletonHelper::getUserRight()
-{
-	return userRight;
-}
-
 
 
 void SingletonHelper::setFormulaWeigh(CString weigh)
@@ -90,15 +62,6 @@ double SingletonHelper::getWeighPerPack()
 	return this->weighPerPack;
 }
 
-void SingletonHelper::setUserID(CString id)
-{
-	this->userID = id;
-}
-
-CString SingletonHelper::getUserID()
-{
-	return this->userID;
-}
 
 void SingletonHelper::setFormulaID(CString id)
 {
@@ -267,16 +230,10 @@ void utils::ParseKeywords(const std::string& keyword,const std::string& separato
 	return;
 }
 
-int utils::initCom(HANDLE& com, CString port, int rate)
+int utils::initcom(HANDLE& com, CString port, int rate)
 {
-	com = CreateFile(port,
-		GENERIC_READ | GENERIC_WRITE,
-		0,
-		NULL,
-		OPEN_EXISTING,
-		0,
-		NULL
-		);
+	com = CreateFile(port, GENERIC_READ | GENERIC_WRITE, 0, NULL,
+		OPEN_EXISTING, 0, NULL);
 	
 	if (com == (HANDLE)(-1))
 	{
@@ -311,12 +268,12 @@ int utils::initCom(HANDLE& com, CString port, int rate)
 	return 0;
 }
 
-int utils::closeCom(HANDLE &com)
+int utils::closecom(HANDLE &com)
 {
 	return CloseHandle(com);
 }
 
-CString utils::readCom(HANDLE comPort)
+CString utils::readcom(HANDLE comPort)
 {
 	char str[8];
 	memset(str, 0, 8);
@@ -330,6 +287,7 @@ CString utils::readCom(HANDLE comPort)
 	{
 		return CString("");
 	}
+
 	PurgeComm(comPort,PURGE_TXABORT | PURGE_RXABORT | PURGE_TXCLEAR | PURGE_RXCLEAR);
 	str[7] = '\0';
 	
@@ -339,12 +297,13 @@ CString utils::readCom(HANDLE comPort)
 	{
 		result[i] = str[6-i];
 	}
+
 	result[6] = '\0';
 	CString returnValue(result);
 	return returnValue;
 }
 
-bool utils::isBatchNumber(CEdit* editControl)
+bool utils::isbatchnumber(CEdit* editControl)
 {
 	int dotFlag=0;
 	CString str;
@@ -368,33 +327,7 @@ bool utils::isBatchNumber(CEdit* editControl)
 	return true;
 }
 
-CString utils::doubleToCString(double aDouble)
-{
-	CString temp;
-	temp.Format("%lf", aDouble);
-	return temp;
-}
 
-CString utils::intToCString(int aInt)
-{
-	CString temp;
-	temp.Format("%d", aInt);
-	return temp;
-}
-
-void utils::showStatus(CStatic& statusStatic)
-{
-	CTime curTime;
-	curTime = CTime::GetCurrentTime();
-	CString date, time;
-	date = curTime.Format("今天是：%Y年%m月%d日，");
-	time = curTime.Format("当前时间：%X。");
-	statusStatic.SetWindowText(date + time + "当前操作用户是：" + SingletonHelper::getInstance()->getUsername());
-	RECT rect;
-	statusStatic.GetWindowRect(&rect);   
-	statusStatic.GetParent()->ScreenToClient(&rect);
-	statusStatic.GetParent()->InvalidateRect(&rect, TRUE);
-}
 
 
 
@@ -714,4 +647,30 @@ double utils::cstr2double(CString cstr)
 	double ret = 0.0;
 	ret = _ttol(cstr); 
 	return ret;
+}
+
+int utils::cstr2int(CString cstr)
+{
+	int ret = 0;
+	ret = _ttoi(cstr);
+	return ret;
+}
+
+CString utils::double2cstr(double aDouble)
+{
+	CString temp;
+	temp.Format("%lf", aDouble);
+	return temp;
+}
+
+CString utils::int2cstr(int aInt)
+{
+	CString temp;
+	temp.Format("%d", aInt);
+	return temp;
+}
+
+bool utils::isnumber(CString cstr)
+{
+	return cstr.TrimLeft( _T("0123456789")).IsEmpty();
 }

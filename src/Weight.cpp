@@ -32,7 +32,7 @@ END_MESSAGE_MAP()
 /////////////////////////////////////////////////////////////////////////////
 // CWeightApp construction
 
-CWeightApp::CWeightApp()
+CWeightApp::CWeightApp():puser(NULL)
 {
 	// TODO: add construction code here,
 	// Place all significant initialization in InitInstance
@@ -164,6 +164,13 @@ CWeightApp::~CWeightApp()
 
 	DBConnector::RemoveInstance();
 	SQLExecutor::RemoveInstance();
+
+	if(puser)
+	{
+		delete puser;
+		puser = NULL;
+	}
+
 	if (m_bATLInited)
 	{
 		_Module.RevokeClassObjects();
@@ -183,4 +190,29 @@ BOOL CWeightApp::PreTranslateMessage(MSG* pMsg)
 		return TRUE;
 	}
 	return CWinApp::PreTranslateMessage(pMsg);
+}
+
+CWeightApp* CWeightApp::getapp()
+{
+	return (CWeightApp*)AfxGetApp();
+}
+
+CString CWeightApp::getuserid()
+{
+	return CWeightApp::getapp()->puser->getid();
+}
+
+CString CWeightApp::getusername()
+{
+	return CWeightApp::getapp()->puser->getname();
+}
+
+CString CWeightApp::getuserpass()
+{
+	return CWeightApp::getapp()->puser->getpass();
+}
+
+USERPERM CWeightApp::getuserperm()
+{
+	return CWeightApp::getapp()->puser->getperm();
 }

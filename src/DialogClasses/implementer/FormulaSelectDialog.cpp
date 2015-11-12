@@ -35,7 +35,6 @@ CFormulaSelectDialog::~CFormulaSelectDialog()
 void CFormulaSelectDialog::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CFormulaSelectDialog)
 	DDX_Control(pDX, IDC_FORMULASELECT_COMBO, m_FormulaSelect);
 	DDX_Control(pDX, IDC_WEIGH_EDIT, m_Weigh);
 	DDX_Control(pDX, IDOK, m_ButtonOK);
@@ -52,13 +51,10 @@ void CFormulaSelectDialog::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_BUTTON0, m_Button0);
 	DDX_Control(pDX, IDC_BUTTON_COMMA, m_ButtonComma);
 	DDX_Control(pDX, IDC_BUTTON_BACK, m_ButtonBack);
-	//}}AFX_DATA_MAP
-
 }
 
 
 BEGIN_MESSAGE_MAP(CFormulaSelectDialog, CDialog)
-	//{{AFX_MSG_MAP(CFormulaSelectDialog)
 	ON_BN_CLICKED(IDC_BUTTON1, OnButton1)
 	ON_BN_CLICKED(IDC_BUTTON2, OnButton2)
 	ON_BN_CLICKED(IDC_BUTTON3, OnButton3)
@@ -83,7 +79,7 @@ void CFormulaSelectDialog::OnOK()
 {
 	//查询出配方所需要的各种材料的用量
 	
-	CString weight,formulaName,material;
+	CString weight,formulaName,material, formulaId;
 	m_FormulaSelect.GetWindowText(formulaName);
 	m_Weigh.GetWindowText(weight);
 
@@ -107,7 +103,7 @@ void CFormulaSelectDialog::OnOK()
 	}
 
 	CString sql;
-	sql.Format("select material from formulas where name = '%s'", formulaName);
+	sql.Format("select material, id from formulas where name = '%s'", formulaName);
 
 	_RecordsetPtr& m_pRecordset = SQLExecutor::getInstanceRef().execquery(sql);
 	
@@ -117,7 +113,7 @@ void CFormulaSelectDialog::OnOK()
 		_variant_t vID;
 		while(!m_pRecordset->adoEOF)
 		{
-			vMaterial = m_pRecordset->GetCollect("MATERIAL");
+			vMaterial = m_pRecordset->GetCollect("material");
 			
 		
 			if (vMaterial.vt != VT_NULL)
@@ -125,6 +121,12 @@ void CFormulaSelectDialog::OnOK()
 				material =(LPCTSTR)(_bstr_t)vMaterial;
 			}
 			
+			vID = m_pRecordset->GetCollect("id");
+			if (vID.vt != VT_NULL)
+			{
+				formulaId = (LPCTSTR)(_bstr_t)vID;
+			}
+	
 			m_pRecordset->MoveNext();
 		}
 	}
@@ -134,6 +136,7 @@ void CFormulaSelectDialog::OnOK()
 	}
 
 	//先查出配方的ID，和成分，计算所需用量
+	SingletonHelper::getInstance()->setFormulaID(formulaId);
 	SingletonHelper::getInstance()->setMaterials(material);
 	SingletonHelper::getInstance()->setFormulaName(formulaName);
 	SingletonHelper::getInstance()->setFormulaWeigh(weight);

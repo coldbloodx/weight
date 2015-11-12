@@ -46,7 +46,7 @@ void CPassChangeDialog::OnOK()
 	m_NewPassEdit.GetWindowText(newPass);
 	m_NewPassConfirmEdit.GetWindowText(confirmPass);
 
-	if (SingletonHelper::getInstance()->getUserPass() != originalPass)
+	if (CWeightApp::getuserpass() != originalPass)
 	{
 		AfxMessageBox("¾ÉÃÜÂë´íÎó£¬ÇëÖØÐÂÊäÈë");
 		return;
@@ -66,11 +66,11 @@ void CPassChangeDialog::OnOK()
 
 	CString sqlState;
 	sqlState.Format("update [users] set [password] = '%s' where [id] = %s; ", 
-		confirmPass,  SingletonHelper::getInstance()->getUserID());
+		confirmPass,  CWeightApp::getuserid());
 	
 	SQLExecutor::getInstanceRef().execquery(sqlState);
 
-	SingletonHelper::getInstance()->setUserPass(confirmPass);
+	CWeightApp::getapp()->puser->setpass(newPass);
 
 	CDialog::OnOK();
 }

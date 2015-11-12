@@ -10,6 +10,7 @@
 #include "DBptr.h"
 #include "uiFunctions.h"
 #include "Splash.h"
+#include "users.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -90,7 +91,6 @@ void CLoginDialog::OnCancel()
 
 void CLoginDialog::OnOK() 
 {
-	// TODO: Add extra validation here
 	CString userid;
 	CString password;
 	
@@ -110,75 +110,24 @@ void CLoginDialog::OnOK()
 		return;
 	}
 
-	CString sql, dbuserid, dbusername, dbpassword, dbpermission;
-    sql.Format("select id, password, permission, name from  users where id = %s", userid);
 
-    _RecordsetPtr& m_pRecordset = SQLExecutor::getInstancePtr()->execquery(sql);
-
-	try
+	User* puser = User::getuserbyid(userid);
+	if(puser == NULL || puser->getpass() != password)
 	{
-        _variant_t vtUserid;
-		_variant_t vtPassword;
-		_variant_t vtRight;
-		_variant_t vUserName;
-		int i=0;
-		int nIndex = 0;
-		
-		while(!m_pRecordset->adoEOF)
-		{
-            vtUserid = m_pRecordset->GetCollect("id");
-			vtPassword = m_pRecordset->GetCollect("password");
-			vtRight = m_pRecordset->GetCollect("permission");
-			vUserName = m_pRecordset->GetCollect("name");
-			
-            if(vtUserid.vt != VT_NULL)
-            {
-                dbuserid = (LPCTSTR)(_bstr_t)vtUserid;
-            }
-			if (vtPassword.vt != VT_NULL)
-			{
-				dbpassword = (LPCTSTR)(_bstr_t)vtPassword;
-			}
-			
-			if (vUserName.vt != VT_NULL)
-			{
-				dbusername = (LPCTSTR)(_bstr_t)vUserName;
-			}
-			
-			if (vtRight.vt != VT_NULL)
-			{
-				dbpermission =(LPCTSTR)(_bstr_t)vtRight;
-			}
-			m_pRecordset->MoveNext();
-		}
-	}
-	catch(_com_error &e)
-	{
-		AfxMessageBox(e.Description());
+		++tryTimes;
+		AfxMessageBox("用户编号，密码错误，请重新输入！");
 		return;
 	}
 	
-	SingletonHelper::getInstance()->setUserID(dbuserid);
-	SingletonHelper::getInstance()->setUserName(dbusername);
-	SingletonHelper::getInstance()->setUserPass(dbpassword);
-	SingletonHelper::getInstance()->setUserRight(dbpermission);
-	
-	//密码正确则进入程序
-	if (dbpassword == password)
+	CWeightApp::getapp()->puser = puser;
+
+	if(!puser->isadmin())
 	{
-		if (dbpermission == "普通用户")
-		{
-			CWeightDlg* controlPanel = (CWeightDlg*)(SingletonHelper::getInstance()->getPtrData());
-			controlPanel->m_OtherSettingsButton.EnableWindow(FALSE);
-			controlPanel->m_FormulaManagementButton.EnableWindow(FALSE);
-		}
-		CDialog::OnOK();
+		CWeightDlg* controlPanel = (CWeightDlg*)(SingletonHelper::getInstance()->getPtrData());
+		controlPanel->m_OtherSettingsButton.EnableWindow(FALSE);
+		controlPanel->m_FormulaManagementButton.EnableWindow(FALSE);
 	}
-	else
-	{
-		AfxMessageBox("密码错误，请重新输入！");
-		++tryTimes;
-	}
+	CDialog::OnOK();
 }
 
 void CLoginDialog::OnButton1() 

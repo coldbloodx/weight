@@ -67,7 +67,7 @@ BOOL CFreeWeightDialog::OnInitDialog()
 	parser.load();
 
 	comRate = atoi(parser.getcom1rate().c_str());
-	com1 = utils::initCom(SingletonHelper::getInstance()->com1,
+	com1 = utils::initcom(SingletonHelper::getInstance()->com1,
 		CString("COM1"),
 		comRate);
 
@@ -82,7 +82,7 @@ BOOL CFreeWeightDialog::OnInitDialog()
 	}
 
 	comRate = atoi(parser.getcom2rate().c_str());
-	com2 = utils::initCom(SingletonHelper::getInstance()->com2,
+	com2 = utils::initcom(SingletonHelper::getInstance()->com2,
 		CString("COM2"),
 		comRate);
 	
@@ -100,9 +100,7 @@ BOOL CFreeWeightDialog::OnInitDialog()
 	}
 	fwLabel.SetFont(SingletonHelper::getInstance()->simHei40, TRUE);
 
-
 	return TRUE;  
-
 }
 
 CFreeWeightDialog::~CFreeWeightDialog()
@@ -118,12 +116,12 @@ void CFreeWeightDialog::OnTimer(UINT nIDEvent)
 	CString com1Result,com2Result;
 	if (com1 >= 0)
 	{
-		com1Result = utils::readCom(SingletonHelper::getInstance()->com1);
+		com1Result = utils::readcom(SingletonHelper::getInstance()->com1);
 	}
 	
 	if (com2 >= 0)
 	{
-		com2Result = utils::readCom(SingletonHelper::getInstance()->com2);
+		com2Result = utils::readcom(SingletonHelper::getInstance()->com2);
 	}
 	
 	
@@ -149,7 +147,6 @@ void CFreeWeightDialog::OnTimer(UINT nIDEvent)
 void CFreeWeightDialog::OnDestroy()
 {
 	CDialog::OnDestroy();
-	utils::closeCom(SingletonHelper::getInstance()->com1);
-	utils::closeCom(SingletonHelper::getInstance()->com2);
-	// TODO: Add your message handler code here
+	utils::closecom(SingletonHelper::getInstance()->com1);
+	utils::closecom(SingletonHelper::getInstance()->com2);
 }

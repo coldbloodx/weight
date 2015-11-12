@@ -1,5 +1,5 @@
-#ifndef __DEVILWORKS_CONST_HEADER__
-#define __DEVILWORKS_CONST_HEADER__
+#ifndef __LA_CONST_HEADER__
+#define __LA_CONST_HEADER__
 
 enum QUERYTYPE
 {
@@ -17,6 +17,7 @@ enum TIMESECTION
 	TTYPE_BEYOND,
 	TTYPE_END
 };
+
 
 
 #endif

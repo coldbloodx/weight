@@ -128,7 +128,7 @@ void CFetchAmountInputDialog::OnOK()
 	}
 
 	//¸üÐÂformula±í
-	CString newAmount(utils::doubleToCString(dFormulaAmount - dFetchAmount));
+	CString newAmount(utils::double2cstr(dFormulaAmount - dFetchAmount));
 
 
 	sql.Format("update formulas set total = %s  where id = %s", newAmount, SingletonHelper::getInstance()->getFormulaID());
@@ -145,7 +145,7 @@ void CFetchAmountInputDialog::OnOK()
 	
 	sql.Format("insert into fetchrecords(formulaid, formulaname, operatorid, operatorname, amount, odate, otime) values('%s', '%s', '%s', '%s', %s, '%s', '%s') ", 
 		SingletonHelper::getInstance()->getFormulaID(), formulaName, 
-		SingletonHelper::getInstance()->getUserID(), SingletonHelper::getInstance()->getUsername(), 
+		CWeightApp::getuserid(), CWeightApp::getusername(), 
 		fetchAmount, date, time);
 
 	SQLExecutor::getInstanceRef().execquery(sql);
@@ -159,7 +159,7 @@ void CFetchAmountInputDialog::OnOK()
 		printVector.push_back(fetchRectordID);
 		printVector.push_back(formulaName);
 		printVector.push_back(fetchAmount + "Kg");
-		printVector.push_back(SingletonHelper::getInstance()->getUsername());
+		printVector.push_back(CWeightApp::getusername());
 		printVector.push_back(CString(""));
 		printVector.push_back(CString(""));
 		printVector.push_back(CString(""));

@@ -1,27 +1,21 @@
-// WeightDlg.h : header file
-//
-
 #if !defined(AFX_WEIGHTDLG_H__56D4B0C6_DC15_4B46_8696_E868E66A4144__INCLUDED_)
 #define AFX_WEIGHTDLG_H__56D4B0C6_DC15_4B46_8696_E868E66A4144__INCLUDED_
 
 #if _MSC_VER > 1000
 #pragma once
-#endif // _MSC_VER > 1000
+#endif
 
 #include "FormulaDialog.h"
 
-/////////////////////////////////////////////////////////////////////////////
-// CWeightDlg dialog
 
 class CWeightDlg : public CDialog
 {
-// Construction
+
 public:
-	CWeightDlg(CWnd* pParent = NULL);	// standard constructor
+	CWeightDlg(CWnd* pParent = NULL);	
 	~CWeightDlg();
 	CFormulaDialog* pFormulaDialog;
-// Dialog Data
-	//{{AFX_DATA(CWeightDlg)
+
 	enum { IDD = IDD_MAIN_DIALOG };
 	CStatic	m_StatusStatic;
 	CButton	m_FetchStuffButton;
@@ -35,23 +29,14 @@ public:
 	CButton	m_MaterialManagementButton;
 	CButton	m_FormulaManagementButton;
 	CButton	m_ChangePasswordButton;
-	//}}AFX_DATA
 
-	CBrush   m_brBk;//在public中定义  
-
-	// ClassWizard generated virtual function overrides
-	//{{AFX_VIRTUAL(CWeightDlg)
 	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV support
-	//}}AFX_VIRTUAL
 	HICON m_hIcon;
-// Implementation
 protected:
 
-
-	// Generated message map functions
-	//{{AFX_MSG(CWeightDlg)
 	virtual BOOL OnInitDialog();
 	virtual BOOL PreTranslateMessage(MSG* pMsg);
+	void showstatus(CStatic& rstatic);
 	afx_msg void OnSysCommand(UINT nID, LPARAM lParam);
 	afx_msg void OnPaint();
 
@@ -74,5 +59,5 @@ public:
     afx_msg void OnBnClickedOthersettingsbutton();
 };
 
-#endif // !defined(AFX_WEIGHTDLG_H__56D4B0C6_DC15_4B46_8696_E868E66A4144__INCLUDED_)
+#endif 
 

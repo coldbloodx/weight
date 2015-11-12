@@ -18,9 +18,6 @@
 static char THIS_FILE[] = __FILE__;
 #endif
 
-/////////////////////////////////////////////////////////////////////////////
-// CUserAddDialog dialog
-
 CUserAddDialog::CUserAddDialog(CWnd* pParent /*=NULL*/)
 	: CDialog(CUserAddDialog::IDD, pParent)
 {
@@ -45,13 +42,13 @@ END_MESSAGE_MAP()
 
 void CUserAddDialog::OnOK() 
 {
-	CString userID, userName, userRight;
+	CString userID, userName, perm;
 	
 	m_UserID.GetWindowText(userID);
 	m_UserName.GetWindowText(userName);
-	m_UserRight.GetWindowText(userRight);
+	m_UserRight.GetWindowText(perm);
 
-	if (userID.IsEmpty() || userName.IsEmpty() || userRight.IsEmpty())
+	if (userID.IsEmpty() || userName.IsEmpty() || perm.IsEmpty())
 	{
 		CString msg("人员编号，人员姓名，人员权限为必填选项！");
 		AfxMessageBox(msg);
@@ -60,7 +57,7 @@ void CUserAddDialog::OnOK()
 	
 	CString sql;
 	sql.Format("insert into [users] ([id], [name], [password], [permission]) values(%s, '%s', %s, '%s'); ", 
-		userID, userName, "123456", userRight);
+		userID, userName, "123456", perm);
 
 	SQLExecutor::getInstanceRef().execquery(sql);
 
@@ -73,7 +70,6 @@ void CUserAddDialog::OnOK()
 BOOL CUserAddDialog::OnInitDialog() 
 {
 	CDialog::OnInitDialog();
-	
 	uiutils::setdlgsize(this, &m_ButtonCancel, &m_ButtonOK);
 	return TRUE; 
 }

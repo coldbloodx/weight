@@ -143,11 +143,11 @@ BOOL CQueryResultDialog::OnInitDialog()
 
 		double sum = utils::sumdbcol(dbptr, "amount");
 
-		sSum.SetWindowText(csSum + utils::doubleToCString(sum));
+		sSum.SetWindowText(csSum + utils::double2cstr(sum));
 	}
 	else
 	{
-		sSum.SetWindowText(csSum + utils::doubleToCString(0.0));
+		sSum.SetWindowText(csSum + utils::double2cstr(0.0));
 	}
 	return TRUE;
 }

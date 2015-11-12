@@ -113,7 +113,7 @@ void CWeighPerPackDialog::OnOK()
 	{
 		formulaSepWeighDialog->bIsMultiPackFlag = FALSE;
 		formulaSepWeighDialog->m_IsMultiPackNeeded.SetWindowText("否");
-		formulaSepWeighDialog->m_WeighNeeded.SetWindowText(utils::doubleToCString(
+		formulaSepWeighDialog->m_WeighNeeded.SetWindowText(utils::double2cstr(
 			materialWeigh + atof(grossWeight.GetBuffer(0))));
 		formulaSepWeighDialog->dWeightNeeded = materialWeigh /*+ atof(grossWeight.GetBuffer(0))*/;
 		formulaSepWeighDialog->updateMultiTimes();
@@ -139,18 +139,18 @@ void CWeighPerPackDialog::OnOK()
 		double neededWeigh = rest * weighPerPack;
 		formulaSepWeighDialog->m_WeightPerPack.SetWindowText(weighPerPackCString+"Kg");
 		//更新包数
-		formulaSepWeighDialog->m_PackNeeded.SetWindowText(utils::intToCString(packCount) +"包");
+		formulaSepWeighDialog->m_PackNeeded.SetWindowText(utils::int2cstr(packCount) +"包");
 		formulaSepWeighDialog->iTotalPacks = packCount;
 
 		//更新已经称量过的重量
-		formulaSepWeighDialog->m_AlreadyWeighed.SetWindowText(utils::doubleToCString(packCount * weighPerPack));
+		formulaSepWeighDialog->m_AlreadyWeighed.SetWindowText(utils::double2cstr(packCount * weighPerPack));
 		formulaSepWeighDialog->dAlreadyWeighed = packCount * weighPerPack;
 		formulaSepWeighDialog->dWeightNeeded = formulaSepWeighDialog->dWeightNeeded - packCount * weighPerPack;
 		
 
 		//跟新
-		formulaSepWeighDialog->m_WeighNeeded.SetWindowText(utils::doubleToCString(neededWeigh  + gross)+"Kg");
-		formulaSepWeighDialog->m_RestNeeded.SetWindowText(utils::doubleToCString(neededWeigh) + "Kg");
+		formulaSepWeighDialog->m_WeighNeeded.SetWindowText(utils::double2cstr(neededWeigh  + gross)+"Kg");
+		formulaSepWeighDialog->m_RestNeeded.SetWindowText(utils::double2cstr(neededWeigh) + "Kg");
 		formulaSepWeighDialog->dRestWeight = neededWeigh;
 
 	}

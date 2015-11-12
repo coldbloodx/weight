@@ -39,8 +39,7 @@ public:
 
 	void refreshWeighedFlag();
 	bool isWeighFinished();
-// Dialog Data
-	//{{AFX_DATA(CFormulaWeighDialog)
+
 	enum { IDD = IDD_FORMULAWEIGH_DIALOG };
 	CButton	m_ButtonOK;
 	CButton	m_ButtonCancel;
@@ -56,20 +55,13 @@ public:
 	CButton	m_Button0;
 	CButton	m_ButtonComma;
 	CButton	m_ButtonBack;
-	CStatic		m_MissionStatic;
-	//}}AFX_DATA
-	CBrush 	  m_brBk;   
+	CStatic	m_MissionStatic;
 	std::vector<CString> printVector;
 
-// Overrides
-	// ClassWizard generated virtual function overrides
-	//{{AFX_VIRTUAL(CFormulaWeighDialog)
 	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
+	virtual void DoDataExchange(CDataExchange* pDX); 
 	virtual BOOL OnCommand(WPARAM wParam, LPARAM lParam);
-	//}}AFX_VIRTUAL
 
-// Implementation
 protected:
 
 	virtual BOOL OnInitDialog();
@@ -97,8 +89,4 @@ public:
 	CStatic sRatio;
 	CStatic sRealWeight;
 };
-
-//{{AFX_INSERT_LOCATION}}
-// Microsoft Visual C++ will insert additional declarations immediately before the previous line.
-
-#endif // !defined(AFX_FORMULAWEIGHDIALOG_H__89671AE4_8C16_45F8_B048_A8309DB1B28D__INCLUDED_)
+#endif

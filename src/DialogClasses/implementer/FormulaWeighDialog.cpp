@@ -143,8 +143,8 @@ BOOL CFormulaWeighDialog::OnInitDialog()
 
 	m_MissionStatic.SetWindowText(SingletonHelper::getInstance()->getFormulaName());
 	m_WeightStatic.SetWindowText(SingletonHelper::getInstance()->getFormulaWeigh() + "公斤");
-	sRatio.SetWindowText(utils::doubleToCString(dRatio) + "%");
-	sRealWeight.SetWindowText(utils::doubleToCString(totalWeigh * dRatio / 100) +  "公斤");
+	sRatio.SetWindowText(utils::double2cstr(dRatio) + "%");
+	sRealWeight.SetWindowText(utils::double2cstr(totalWeigh * dRatio / 100) +  "公斤");
 	
 	int materialNameStaticID = 10000;
 	int materialWeighStaticID = 20000;
@@ -201,7 +201,7 @@ BOOL CFormulaWeighDialog::OnInitDialog()
 
 		//创建材料重量static控件
 		materialWeighStatic = new CStatic;
-		CString test1 = utils::doubleToCString(newComposition.percentage * totalWeigh / 100);
+		CString test1 = utils::double2cstr(newComposition.percentage * totalWeigh / 100);
 		test1 += "Kg";
 		materialWeighStatic->Create(test1, WS_VISIBLE | ES_LEFT, rect,
 			this, materialWeighStaticID++);
@@ -209,7 +209,7 @@ BOOL CFormulaWeighDialog::OnInitDialog()
 		materialWeighStatic->ShowWindow(SW_SHOW);
 		materialWeighVector.push_back(materialWeighStatic);
 
-		dbmweigh.push_back(utils::doubleToCString(newComposition.percentage * totalWeigh / 100));
+		dbmweigh.push_back(utils::double2cstr(newComposition.percentage * totalWeigh / 100));
 
 		//调整控件位置
 		rect.left = rect.right + 2;
@@ -423,7 +423,6 @@ BOOL CFormulaWeighDialog::OnCommand(WPARAM wParam, LPARAM lParam)
 //处理对话框的ok按钮，这一部分逻辑比较复杂，验证的内容比较多，要注意
 void CFormulaWeighDialog::OnOK() 
 {
-	// TODO: Add extra validation here
 	//首先判断批号输入的合法性，如果批号输入不合法，则直接退出到称量界面。
 	CString batchNumber;
 	std::vector<CString> batchNumberVector;
@@ -436,7 +435,7 @@ void CFormulaWeighDialog::OnOK()
 	{
 		//输入批号验证
 		batchNumberEditVector[i]->GetWindowText(batchNumber);
-		if (batchNumber.IsEmpty() || !utils::isBatchNumber(batchNumberEditVector[i]))
+		if (batchNumber.IsEmpty() || !utils::isbatchnumber(batchNumberEditVector[i]))
 		{
 			batchNumberVector.clear();
 			AfxMessageBox("批号只能是数字和逗号的组合");
@@ -455,7 +454,7 @@ void CFormulaWeighDialog::OnOK()
 		}
 		if (lineNumber != lineNumberOld[i] )
 		{
-			AfxMessageBox("第"+utils::intToCString(i+1)+"个材料的条码不匹配，请检查！");
+			AfxMessageBox("第"+utils::int2cstr(i+1)+"个材料的条码不匹配，请检查！");
 		}
 		lineNumberVector.push_back(lineNumber);
 		//输入条码验证结束
@@ -508,8 +507,8 @@ void CFormulaWeighDialog::OnOK()
 	dbweigh = SingletonHelper::getInstance()->getFormulaWeigh();
 	dbfname = SingletonHelper::getInstance()->getFormulaName();
 	dbfid = SingletonHelper::getInstance()->getFormulaID();
-	dbusername = SingletonHelper::getInstance()->getUsername();
-	dbuserid = SingletonHelper::getInstance()->getUserID();
+	dbusername = CWeightApp::getusername();
+	dbuserid = CWeightApp::getuserid();
 	
 	unsigned long gmttime = utils::time2gmt(currentTime);
 
@@ -541,7 +540,7 @@ void CFormulaWeighDialog::OnOK()
 		printVector.push_back(fbatchnumber);
 		printVector.push_back(SingletonHelper::getInstance()->getFormulaName());
 		printVector.push_back(SingletonHelper::getInstance()->getFormulaWeigh() + "Kg");
-		printVector.push_back(SingletonHelper::getInstance()->getUsername());
+		printVector.push_back(CWeightApp::getusername());
 		printVector.push_back(date);
 		printVector.push_back(time);
 		printVector.push_back(CString(""));
@@ -594,7 +593,6 @@ bool CFormulaWeighDialog::isWeighFinished()
 //处理对话框的cancel按钮
 void CFormulaWeighDialog::OnCancel() 
 {
-	// TODO: Add extra cleanup here
 	//给出提示，要不要放弃任务
 	CString msg("您确定要放弃这次称重任务？");
 	CString caption("放弃称重任务");

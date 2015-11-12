@@ -380,6 +380,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\users.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\users.h"
+				>
+			</File>
+			<File
 				RelativePath=".\DialogClasses\implementer\WeighManagementDialog.cpp"
 				>
 			</File>

@@ -35,8 +35,8 @@ iTotalPacks(0)
 
 CFormulaSepWeighDialog::~CFormulaSepWeighDialog()
 {
-	utils::closeCom(SingletonHelper::getInstance()->com1);
-	utils::closeCom(SingletonHelper::getInstance()->com2);
+	utils::closecom(SingletonHelper::getInstance()->com1);
+	utils::closecom(SingletonHelper::getInstance()->com2);
 }
 
 void CFormulaSepWeighDialog::DoDataExchange(CDataExchange* pDX)
@@ -109,14 +109,14 @@ BOOL CFormulaSepWeighDialog::OnInitDialog()
 	//所需重量	
 	dFormulaWeight = atof(SingletonHelper::getInstance()->getFormulaWeigh().GetBuffer(SingletonHelper::getInstance()->getFormulaWeigh().GetLength()));
 	dMaterialWeight = dFormulaWeight * SingletonHelper::getInstance()->compositions[SingletonHelper::getInstance()->getIntData()]->percentage / 100;
-	m_MaterialTotal.SetWindowText(utils::doubleToCString(dMaterialWeight) + "Kg");
-	materialWeigh = utils::doubleToCString(dMaterialWeight) + "Kg";
+	m_MaterialTotal.SetWindowText(utils::double2cstr(dMaterialWeight) + "Kg");
+	materialWeigh = utils::double2cstr(dMaterialWeight) + "Kg";
 
 	//已经完成重量
 	m_AlreadyWeighed.SetWindowText("0");
 
 	//待称重量
-	m_WeighNeeded.SetWindowText(utils::doubleToCString(dMaterialWeight) + "Kg");
+	m_WeighNeeded.SetWindowText(utils::double2cstr(dMaterialWeight) + "Kg");
 	dWeightNeeded = dMaterialWeight;
 	dRestWeight = dMaterialWeight;
 
@@ -143,13 +143,13 @@ BOOL CFormulaSepWeighDialog::OnInitDialog()
 	parser.load();
 
 	//init comPort;
-	com1 = utils::initCom(SingletonHelper::getInstance()->com1, CString("COM1"), atoi(parser.getcom1rate().c_str()));
+	com1 = utils::initcom(SingletonHelper::getInstance()->com1, CString("COM1"), atoi(parser.getcom1rate().c_str()));
 	if (com1 < 0 || utils::isready())
 	{
 		AfxMessageBox("com1初始化失败，请确认称的连接情况，然后关闭对话框重试！");
 	}
 
-	com2 = utils::initCom(SingletonHelper::getInstance()->com2, CString("COM2"), atoi(parser.getcom2rate().c_str()));
+	com2 = utils::initcom(SingletonHelper::getInstance()->com2, CString("COM2"), atoi(parser.getcom2rate().c_str()));
 	if (com2 < 0 || utils::isready())
 	{
 		AfxMessageBox("com2初始化失败，请确认称的连接情况，然后关闭对话框重试！");
@@ -180,12 +180,12 @@ void CFormulaSepWeighDialog::OnTimer(UINT nIDEvent)
 	CString com1Result, com2Result;
 	if (com1 >= 0)
 	{
-		com1Result = utils::readCom(SingletonHelper::getInstance()->com2);
+		com1Result = utils::readcom(SingletonHelper::getInstance()->com2);
 	}
 
 	if (com2 >= 0)
 	{
-		com2Result = utils::readCom(SingletonHelper::getInstance()->com1);
+		com2Result = utils::readcom(SingletonHelper::getInstance()->com1);
 	}
 
 	com1Result = com1Result.IsEmpty() ? "0000.0" : com1Result;
@@ -264,7 +264,7 @@ void CFormulaSepWeighDialog::OnBnClickedPributton()
 		return;
 	}
 
-	CString priWeigh = utils::readCom(SingletonHelper::getInstance()->com1);
+	CString priWeigh = utils::readcom(SingletonHelper::getInstance()->com1);
 	
 	//读数有可能出现错误
 	if (priWeigh.IsEmpty())
@@ -310,7 +310,7 @@ void CFormulaSepWeighDialog::OnBnClickedSecbutton()
 		AfxMessageBox("皮重输入有误，请输入皮重");
 		return;
 	}
-	CString secWeigh = utils::readCom(SingletonHelper::getInstance()->com2);
+	CString secWeigh = utils::readcom(SingletonHelper::getInstance()->com2);
 
 	//读数有可能出现错误
 	if (secWeigh.IsEmpty())
@@ -362,18 +362,18 @@ void CFormulaSepWeighDialog::updateMultiTimes()
 
 	RECT rect;
 	//跟新上面的总的称重
-	m_WeighNeeded.SetWindowText(utils::doubleToCString(dWeightNeeded + dPackWeight));
+	m_WeighNeeded.SetWindowText(utils::double2cstr(dWeightNeeded + dPackWeight));
 	m_WeighNeeded.GetParent()->GetWindowRect(&rect);   
 	m_WeighNeeded.GetParent()->ScreenToClient(&rect);
 	m_WeighNeeded.GetParent()->InvalidateRect(&rect, TRUE);
 
 	//更新下面待称重
-	m_RestNeeded.SetWindowText(utils::doubleToCString(dRestWeight));
+	m_RestNeeded.SetWindowText(utils::double2cstr(dRestWeight));
 	m_RestNeeded.GetParent()->GetWindowRect(&rect);   
 	m_RestNeeded.GetParent()->ScreenToClient(&rect);
 	m_RestNeeded.GetParent()->InvalidateRect(&rect, TRUE);
 
-	m_AlreadyWeighed.SetWindowText(utils::doubleToCString(dAlreadyWeighed));
+	m_AlreadyWeighed.SetWindowText(utils::double2cstr(dAlreadyWeighed));
 	m_AlreadyWeighed.GetParent()->GetWindowRect(&rect);   
 	m_AlreadyWeighed.GetParent()->ScreenToClient(&rect);
 	m_AlreadyWeighed.GetParent()->InvalidateRect(&rect, TRUE);
