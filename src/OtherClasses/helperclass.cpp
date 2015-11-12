@@ -164,6 +164,12 @@ void SingletonHelper::deleteFonts()
 		delete simhei80;
 		simhei80 = NULL;
 	}
+
+	if (simHei30)
+	{
+		delete simHei30;
+		simHei30 = NULL;
+	}
 }
 
 
