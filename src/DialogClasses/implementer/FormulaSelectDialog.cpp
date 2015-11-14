@@ -96,7 +96,7 @@ void CFormulaSelectDialog::OnOK()
 		return;
 	}
 
-	if (! utils::isDouble(&m_Weigh))
+	if (! utils::isdouble(&m_Weigh))
 	{
 		AfxMessageBox("重量输入错误，请重新输入！");
 		return;

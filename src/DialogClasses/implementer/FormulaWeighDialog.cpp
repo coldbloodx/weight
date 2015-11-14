@@ -79,7 +79,7 @@ BOOL CFormulaWeighDialog::OnInitDialog()
 	std::vector<std::string> materialVector;
 	std::string separator(",;");
 
-	utils::ParseKeywords(SingletonHelper::getInstance()->getMaterials(), separator, materialVector);
+	utils::parsekeywords(SingletonHelper::getInstance()->getMaterials(), separator, materialVector);
 	totalWeigh = atof(SingletonHelper::getInstance()->getFormulaWeigh().GetBuffer(SingletonHelper::getInstance()->getFormulaWeigh().GetLength()));
 	
 	composition *tempComposition = NULL;

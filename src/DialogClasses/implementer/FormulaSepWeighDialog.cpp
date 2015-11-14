@@ -15,9 +15,6 @@
 static char THIS_FILE[] = __FILE__;
 #endif
 
-/////////////////////////////////////////////////////////////////////////////
-// CFormulaSepWeighDialog dialog
-
 CFormulaSepWeighDialog::CFormulaSepWeighDialog(CWnd* pParent /*=NULL*/)
 : CDialog(CFormulaSepWeighDialog::IDD, pParent),
 dFormulaWeight(0.0),
@@ -29,8 +26,6 @@ dRestWeight(0.0),
 dAlreadyWeighed(0.0),
 iTotalPacks(0)
 {
-	//{{AFX_DATA_INIT(CFormulaSepWeighDialog)
-	//}}AFX_DATA_INIT
 }
 
 CFormulaSepWeighDialog::~CFormulaSepWeighDialog()
@@ -230,7 +225,6 @@ void CFormulaSepWeighDialog::OnBnClickedOk()
 		std::stringstream ss(sgap);
 		ss >> threshold;
 	}
-
 
 	if (dWeightNeeded > threshold || dWeightNeeded < -1.0 * threshold)
 	{

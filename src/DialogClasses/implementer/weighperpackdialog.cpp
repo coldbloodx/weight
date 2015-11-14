@@ -87,7 +87,7 @@ void CWeighPerPackDialog::OnOK()
 		AfxMessageBox("请输入皮重！");
 		return;
 	}
-	if (!utils::isDouble(&m_GrossWeight))
+	if (!utils::isdouble(&m_GrossWeight))
 	{
 		AfxMessageBox("皮重输入有误，请重新输入！");
 		return;
@@ -101,7 +101,7 @@ void CWeighPerPackDialog::OnOK()
 
 	//处理分包相关问题
 	m_WeighPerPack.GetWindowText(weighPerPackCString);
-	if (!utils::isDouble(&m_WeighPerPack))
+	if (!utils::isdouble(&m_WeighPerPack))
 	{
 		AfxMessageBox("包重输入错误，请重新输入");
 		return;

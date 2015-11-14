@@ -26,10 +26,7 @@ private:
 	CString formulaName;
 	CString formulaWeigh;
 
-
 	std::string materials;
-
-	double      weighPerPack;
 
 	//ЬѕТы
 	CString lineNumber;
@@ -62,8 +59,7 @@ public:
 	void setFormulaWeigh(CString weight);
 	CString getFormulaWeigh();
 
-	void setWeighPerPack(double weigh);
-	double getWeighPerPack();
+
 
 	void setSepWeighWindowPtr(void* ptr);
 	void* getSepWieghWindowPtr();
@@ -100,9 +96,9 @@ private:
 
 namespace utils
 {
-	bool isDouble(CEdit* editControl);
+	bool isdouble(CEdit* editControl);
 	bool isbatchnumber(CEdit* editControl);
-	void ParseKeywords(const std::string& keyword,
+	void parsekeywords(const std::string& keyword,
 					   const std::string& separators, 
 					   std::vector<std::string>& keywords);
 

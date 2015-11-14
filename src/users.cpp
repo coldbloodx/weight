@@ -66,11 +66,11 @@ User* User::getuserbyid(CString userid)
 	}
 	catch(_com_error& e)
 	{
+		CString errmsg((LPCTSTR)(_bstr_t)e.Description());
 		return NULL;
 	}
 
 	if(dbptr->adoEOF) return NULL;
-
 
 	_variant_t dbname = dbptr->GetCollect(_variant_t("name"));
 	_variant_t dbpass = dbptr->GetCollect(_variant_t("password"));

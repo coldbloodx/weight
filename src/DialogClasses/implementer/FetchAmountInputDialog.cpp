@@ -71,7 +71,7 @@ END_MESSAGE_MAP()
 
 void CFetchAmountInputDialog::OnOK() 
 {
-	if (!utils::isDouble(&m_FetchAmount))
+	if (!utils::isdouble(&m_FetchAmount))
 	{
 		AfxMessageBox("«Î»∑»œ ‰»Î£°");
 		return;

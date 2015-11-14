@@ -52,16 +52,6 @@ CString SingletonHelper::getFormulaWeigh()
 	return this->formulaWeigh;
 }
 
-void SingletonHelper::setWeighPerPack(double weigh)
-{
-	this->weighPerPack = weigh;
-}
-
-double SingletonHelper::getWeighPerPack()
-{
-	return this->weighPerPack;
-}
-
 
 void SingletonHelper::setFormulaID(CString id)
 {
@@ -102,8 +92,6 @@ void* SingletonHelper::getSepWieghWindowPtr()
 {
 	return this->sepWeighWindowPtr;
 }
-
-
 
 CString SingletonHelper::getLineNumber()
 {
@@ -193,7 +181,7 @@ void SingletonHelper::removeInstance()
 	
 }
 
-bool utils::isDouble(CEdit* editControl)
+bool utils::isdouble(CEdit* editControl)
 {
 	int dotFlag=0;
 	CString str;
@@ -216,7 +204,7 @@ bool utils::isDouble(CEdit* editControl)
 	return true;
 }
 
-void utils::ParseKeywords(const std::string& keyword,const std::string& separators, std::vector<std::string>& keywords)
+void utils::parsekeywords(const std::string& keyword,const std::string& separators, std::vector<std::string>& keywords)
 {
 	
 	char* temp = _strdup(keyword.c_str());
